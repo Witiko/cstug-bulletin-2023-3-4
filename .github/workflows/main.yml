@@ -1,0 +1,45 @@
+name: Typeset CSTUG Bulletin
+on:
+- push
+permissions:
+  contents: write
+env:
+  DEBIAN_FRONTEND: noninteractive
+jobs:
+  build:
+    name: Typeset CSTUG Bulletin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+      - name: Install requirements
+        run: |
+          set -e
+          sudo apt update
+          sudo apt install -y ghostscript libxml2-utils moreutils parallel poppler-utils python3-pdfminer
+      - name: Validate metadata
+        run: make test-xml
+      - name: Build Docker images
+        run: make images
+      - name: Typeset CSTUG Bulletin
+        run: make all
+      - name: Validate PDF documents
+        run: make test
+      - name: Upload PDF documents as build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: |
+            bul.pdf
+            bul-web.pdf
+      - name: Upload PDF documents as a release
+        if: github.ref == 'refs/heads/main'
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          title: The latest version
+          automatic_release_tag: latest
+          prerelease: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            bul.pdf
+            bul-web.pdf

@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+
+<!-- 
+This schema defines the structure for the CSTUG Bulletin meta information. It has twofold purpose.
+It is used to build both the web pages as well as the meta files for CrossRef. The files intended
+for the internal web pages only allow loose content.
+-->
+<grammar 
+  xmlns="http://relaxng.org/ns/structure/1.0"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  
+  <!-- Subset of languages -->
+  <define name="attr.language">
+    <attribute name="language">
+      <choice>
+        <value>cs</value>
+        <value>sk</value>
+        <value>en</value>
+      </choice>
+    </attribute>
+  </define>
+  
+  <!-- Publication type -->
+  <define name="attr.pub.type">
+    <attribute name="publication_type">
+      <choice>
+        <value>abstract_only</value>
+        <value>full_text</value>
+        <value>bibliographic_record</value>
+      </choice>
+    </attribute>
+  </define>
+  
+  <!-- Media type -->
+  <define name="attr.media.type">
+    <attribute name="media_type">
+      <choice>
+        <value>print</value>
+        <value>electronic</value>
+      </choice>
+    </attribute>
+  </define>
+  
+  <!-- Links to other objects -->
+  <define name="contents.link">
+    <attribute name="url">
+      <data type="anyURI"/>
+    </attribute>
+    <text/>
+  </define>
+  
+  <!-- Link to the previous issue -->
+  <define name="elem.prevlink">
+    <element name="prevlink">
+      <ref name="contents.link"/>
+    </element>
+  </define>
+  
+  <!-- Link to the next issue -->
+  <define name="elem.nextlink">
+    <element name="nextlink">
+      <ref name="contents.link"/>
+    </element>
+  </define>
+  
+  <!-- Attributes for linking a PDF file -->
+  <define name="attr.link">
+    <attribute name="pdfurl">
+      <data type="anyURI"/>
+    </attribute>
+    <attribute name="pdfsize">
+      <data type="decimal"/>
+    </attribute>
+    <attribute name="unit">
+      <choice>
+        <value>KiB</value>
+        <value>MiB</value>
+        <value>KB</value>
+        <value>MB</value>
+      </choice>
+    </attribute>
+  </define>
+  
+  <!-- Any link -->
+  <define name="elem.link">
+    <element name="link">
+      <ref name="attr.link"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  
+  <!-- Links section -->
+  <define name="elem.links">
+    <element name="links">
+      <optional>
+        <choice>
+          <attribute name="title"/>
+          <ref name="attr.link"/>
+        </choice>
+      </optional>
+      <zeroOrMore>
+        <ref name="elem.link"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="elem.nextlink"/>
+      </optional>
+      <optional>
+        <ref name="elem.prevlink"/>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- Definition of the list contents -->
+  <define name="list.contents">
+    <oneOrMore>
+      <element name="li">
+        <ref name="text"/>
+      </element>
+    </oneOrMore>
+  </define>
+  
+  <!-- Acronyms (empty elements) -->
+  <define name="Acronyms">
+    <zeroOrMore>
+      <element name="CSTUG">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="CSplain">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="Xe">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="La">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="TeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="LaTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="XeTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="XeLaTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="encTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="pdfTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="pdfLaTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="LuaTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="LuaLaTeX">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="ConTeXt">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="Han">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="The">
+        <empty/>
+      </element>
+    </zeroOrMore>
+    <zeroOrMore>
+      <element name="Thanh">
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </define>
+  
+  <!-- Text for the Zpravodaj internal use -->
+  <define name="text">
+    <zeroOrMore>
+      <choice>
+        <text/>
+        <ref name="Acronyms"/>
+        <zeroOrMore>
+          <element name="i">
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="b">
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="code">
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="em">
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="tt">
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="a">
+            <attribute name="href"/>
+            <ref name="text"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="ol">
+            <ref name="list.contents"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="ul">
+            <ref name="list.contents"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="br">
+            <empty/>
+          </element>
+        </zeroOrMore>
+      </choice>
+    </zeroOrMore>
+  </define>
+  
+  <!-- Text for DOI -->
+  <define name="face.markup">
+    <zeroOrMore>
+      <choice>
+        <text/>
+        <ref name="Acronyms"/>
+        <zeroOrMore>
+          <element name="b">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="i">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="u">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="ovl">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="sup">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="sub">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="scp">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="tt">
+            <ref name="face.markup"/>
+          </element>
+        </zeroOrMore>
+      </choice>
+    </zeroOrMore>
+  </define>
+  
+  <!-- For additional content -->
+  <define name="elem.para">
+    <element name="para">
+      <ref name="text"/>
+    </element>
+  </define>
+  
+  <define name="elem.abstract">
+    <element name="abstract">
+      <zeroOrMore>
+        <ref name="elem.para"/>
+      </zeroOrMore>
+      <optional>
+        <element name="keywords">
+          <ref name="text"/>
+        </element>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- Contains an abstract and optionaly a translation of a title and an abstract -->
+  <define name="additional-content">
+    <element name="additional-content">
+      <ref name="elem.abstract"/>
+      <optional>
+        <ref name="elem.title"/>
+        <ref name="elem.abstract"/>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- String for DOI -->
+  <define name="data.string">
+    <data type="string"/>
+  </define>
+  
+  <!-- Person name, contents used in various elements -->
+  <define name="cont.person_name">
+    <optional>
+      <element name="given_name">
+        <text/>
+      </element>
+    </optional>
+    <element name="surname">
+      <text/>
+    </element>
+    <optional>
+      <element name="suffix">
+        <text/>
+      </element>
+    </optional>
+    <optional>
+      <element name="affiliaton">
+        <text/>
+      </element>
+    </optional>
+  </define>
+  
+  <!-- first person -->
+  <define name="attr.first.person">
+    <attribute name="sequence">
+      <value>first</value>
+    </attribute>
+  </define>
+  
+  <!-- additional person -->
+  <define name="attr.additional.person">
+    <attribute name="sequence">
+      <value>additional</value>
+    </attribute>
+  </define>
+  
+  <!-- Person name for authors, editors also allowed -->
+  <define name="cont.person_name.author">
+    <attribute name="contributor_role">
+      <choice>
+        <value>author</value>
+        <value>translator</value>
+        <value>editor</value>
+      </choice>
+    </attribute>
+    <ref name="cont.person_name"/>
+  </define>
+  
+  <!-- Person name for editors -->
+  <define name="cont.person_name.editor">
+    <attribute name="contributor_role">
+      <value>editor</value>
+    </attribute>
+    <ref name="cont.person_name"/>
+  </define>
+  
+  <!-- Contributors (authors and translators) -->
+  <define name="elem.contributors">
+    <element name="contributors">
+      <element name="person_name">
+        <ref name="attr.first.person"/>
+        <ref name="cont.person_name.author"/>
+      </element>
+      <zeroOrMore>
+        <element name="person_name">
+          <ref name="attr.additional.person"/>
+          <ref name="cont.person_name.author"/>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+  
+  <!-- Editors -->
+  <define name="elem.editors">
+    <element name="editors">
+      <element name="person_name">
+        <ref name="attr.first.person"/>
+        <ref name="cont.person_name.editor"/>
+      </element>
+      <zeroOrMore>
+        <element name="person_name">
+          <ref name="attr.additional.person"/>
+          <ref name="cont.person_name.editor"/>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+  
+  <!-- Base attribute produced by XInclude -->
+  <define name="attr.base">
+    <attribute name="xml:base">
+      <data type="string"/>
+    </attribute>
+  </define>
+  
+  <!-- DOI part, the full doi will be built by XSLT -->
+  <define name="attr.doi">
+    <attribute name="doi">
+      <data type="positiveInteger"/>
+    </attribute>
+  </define>
+  
+  <!-- Article contents for web only -->
+  <define name="content.article.bulletin">
+    <optional>
+      <ref name="attr.doi"/>
+    </optional>
+    <ref name="text"/>
+  </define>
+  
+  <!-- Title for DOI meta data -->
+  <define name="elem.title">
+    <element name="title">
+      <ref name="face.markup"/>
+    </element>
+  </define>
+  
+  <!-- Subtitle for DOI meta data -->
+  <define name="elem.subtitle">
+    <element name="subtitle">
+      <ref name="face.markup"/>
+    </element>
+  </define>
+  
+  <!-- Original language title for DOI meta data -->
+  <define name="elem.orig.lang.title">
+    <element name="original_language_title">
+      <ref name="attr.language"/>
+      <ref name="face.markup"/>
+    </element>
+  </define>
+  
+  <!-- Titles for DOI meta data -->
+  <define name="elem.titles">
+    <element name="titles">
+      <ref name="elem.title"/>
+      <optional>
+        <ref name="elem.subtitle"/>
+      </optional>
+      <optional>
+        <ref name="elem.orig.lang.title"/>
+        <optional>
+          <ref name="elem.subtitle"/>
+        </optional>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- Pages for DOI meta data -->
+  <define name="elem.pages">
+    <element name="pages">
+      <element name="first_page">
+        <text/>
+      </element>
+      <optional>
+        <element name="last_page">
+          <text/>
+        </element>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- ISBN -->
+  <define name="elem.isbn">
+    <element name="isbn">
+      <ref name="attr.media.type"/>
+      <data type="string">
+        <param name="pattern">(978-)?\d[\d \-]+[\dX]</param>
+      </data>
+    </element>
+  </define>
+  
+  <!-- ISSN -->
+  <define name="elem.issn">
+    <element name="issn">
+      <ref name="attr.media.type"/>
+      <data type="string">
+        <param name="pattern">\d{4}-?\d{3}[\dX]</param>
+      </data>
+    </element>
+  </define>
+  
+  <!-- Additional citation content for Bulletin only -->
+  <define name="elem.additional.content">
+    <element name="additionalcontent">
+      <oneOrMore>
+        <element name="url">
+          <optional>
+            <attribute name="cited">
+              <data type="date"/>
+            </attribute>
+          </optional>
+          <data type="anyURI"/>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+  
+  <!-- Citation for DOI meta data, key will be created by XSLT -->
+  <define name="elem.citation">
+    <element name="citation">
+      <optional>
+        <ref name="elem.issn"/>
+      </optional>
+      <optional>
+        <element name="journal_title">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <!-- CrossRef wishes just the surname of the first athor, we wish all -->
+        <choice>
+          <element name="author">
+            <ref name="data.string"/>
+          </element>
+          <ref name="elem.contributors"/>
+        </choice>
+      </optional>
+      <optional>
+        <element name="volume">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="issue">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="first_page">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="cYear">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="doi">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <ref name="elem.isbn"/>
+      </optional>
+      <optional>
+        <element name="series_title">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="volume_title">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="edition_number">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="component_number">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="article_title">
+          <ref name="data.string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="unstructured_citation">
+          <ref name="face.markup"/>
+        </element>
+      </optional>
+      <optional>
+        <ref name="elem.additional.content"/>
+      </optional>
+    </element>
+  </define>
+  
+  <!-- Citation list -->
+  <define name="elem.citation.list">
+    <element name="citation_list">
+      <optional>
+        <ref name="attr.base"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="elem.citation"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  
+  <!-- Article contents for DOI meta data, DOI is now madatory -->
+  <define name="content.article.doi">
+    <ref name="attr.doi"/>
+    <ref name="attr.language"/>
+    <ref name="attr.pub.type"/>
+    <oneOrMore>
+      <ref name="elem.titles"/>
+    </oneOrMore>
+    <optional>
+      <ref name="elem.contributors"/>
+    </optional>
+    <optional>
+      <ref name="elem.pages"/>
+    </optional>
+    <optional>
+      <ref name="additional-content"/>
+    </optional>
+    <optional>
+      <ref name="elem.citation.list"/>
+    </optional>
+  </define>
+  
+  <!-- Article, selection between two models -->
+  <define name="elem.article">
+    <element name="article">
+      <group>
+        <optional>
+          <ref name="attr.base"/>
+        </optional>
+        <choice>
+          <ref name="content.article.bulletin"/>
+          <ref name="content.article.doi"/>
+        </choice>
+      </group>
+    </element>
+  </define>
+  
+  <!-- Bulletin, DOI base has a fixed value, will be used for the generation of DOI -->
+  <define name="elem.bulletin">
+    <element name="bulletin">
+      <optional>
+        <ref name="attr.base"/>
+      </optional>
+      <optional>
+        <attribute name="reported">
+          <choice>
+            <value>true</value>
+            <value>false</value>
+          </choice>
+        </attribute>
+      </optional>
+      <attribute name="year">
+        <data type="positiveInteger">
+          <param name="minInclusive">1991</param>
+        </data>
+      </attribute>
+      <attribute name="issue">
+        <choice>
+          <data type="positiveInteger">
+            <param name="minInclusive">1</param>
+            <param name="maxInclusive">4</param>
+          </data>
+          <data type="string">
+            <param name="pattern">[1-3]-[2-4]</param>
+          </data>
+        </choice>
+      </attribute>
+      <optional>
+        <attribute name="doi-base">
+          <value>10.5300</value>
+        </attribute>
+      </optional>
+      <attribute name="svnId">
+        <data type="string">
+          <param name="pattern">$Id.*$</param>
+        </data>
+      </attribute>
+      <optional>
+        <ref name="elem.editors"/>
+      </optional>
+      <oneOrMore>
+        <ref name="elem.article"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <element name="p">
+          <ref name="text"/>
+        </element>
+      </zeroOrMore>
+      <ref name="elem.links"/>
+    </element>
+  </define>
+  
+  <!-- Grammar start -->
+  <start>
+    <choice>
+      <ref name="elem.bulletin"/>
+      <ref name="elem.article"/>
+      <ref name="elem.citation.list"/>
+    </choice>
+  </start>
+</grammar>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="file:./bulletin.rng" type="xml"?>
+<bulletin year="2023" issue="3-4" doi-base="10.5300" reported="false" svnId="$Id$"
+          xmlns:xi="http://www.w3.org/2001/XInclude">
+  <editors>
+    <person_name contributor_role="editor" sequence="first">
+      <given_name>Jan</given_name>
+      <surname>Šustek</surname>
+    </person_name>
+    <person_name contributor_role="editor" sequence="additional">
+      <given_name>Vít</given_name>
+      <surname>Starý Novotný</surname>
+    </person_name>
+  </editors>
+  <xi:include href="Sojka-uvodnik/article.xml"/>
+  <links pdfurl="pdf/2023-3-4.pdf" pdfsize="999.9" unit="MiB">
+    <prevlink url="bul2023-1-2.shtml">1-2/2023</prevlink>
+  </links>
+</bulletin>

@@ -1,0 +1,180 @@
+\ifx \ExplSyntaxOn \undefined
+  \input expl3-generic
+\fi
+\ExplSyntaxOn
+
+\tl_new:N
+  \l_randomnames_min_context_size_tl
+\tl_new:N
+  \l_randomnames_max_context_size_tl
+\tl_new:N \l_randomnames_seed_tl
+\tl_gset:Nn \l_randomnames_min_context_size_tl { nil }
+\tl_gset:Nn \l_randomnames_max_context_size_tl { nil }
+\tl_gset:Nn \l_randomnames_seed_tl { nil }
+
+\keys_define:nn
+  { randomnames / new_model }
+  {
+    min_context_size .code:n =
+      {
+        \tl_set:Nn
+          \l_randomnames_min_context_size_tl
+          { tonumber(" \lua_escape:e { #1 } ") }
+      },
+    max_context_size .code:n =
+      {
+        \tl_set:Nn
+          \l_randomnames_max_context_size_tl
+          { tonumber(" \lua_escape:e { #1 } ") }
+      },
+    context_size .meta:n =
+      {
+        min_context_size = { #1 },
+        max_context_size = { #1 },
+      },
+    seed .code:n =
+      {
+        \tl_set:Nn
+          \l_randomnames_seed_tl
+          { tonumber(" \lua_escape:e { #1 } ") }
+      },
+  }
+
+\cs_new:Nn
+  \randomnames_new_model:nn
+  {
+    \group_begin:
+    \keys_set:nn
+      { randomnames / new_model }
+      { #1 }
+    \lua_now:e
+      {
+        local~randomnames =
+          require("randomnames")
+        randomnames.new_model(
+          " \lua_escape:e { #2 } ",
+          \l_randomnames_min_context_size_tl,
+          \l_randomnames_max_context_size_tl,
+          \l_randomnames_seed_tl
+        )
+      }
+    \group_end:
+  }
+
+\cs_new:Nn
+  \randomnames_add_name:nn
+  {
+    \lua_now:e
+      {
+        local~randomnames =
+          require("randomnames")
+        randomnames.add_name(
+          " \lua_escape:e { #1 } ",
+          " \lua_escape:e { #2 } "
+        )
+      }
+  }
+
+\cs_new:Nn
+  \randomnames_input_names:nn
+  {
+    \lua_now:e
+      {
+        local~randomnames =
+          require("randomnames")
+        randomnames.input_names(
+          " \lua_escape:e { #1 } ",
+          " \lua_escape:e { #2 } "
+        )
+      }
+  }
+
+\tl_new:N
+  \l_randomnames_graph_type_tl
+\tl_new:N
+  \l_randomnames_affix_tl
+\tl_gset:Nn \l_randomnames_graph_type_tl { nil }
+\tl_gset:Nn \l_randomnames_affix_tl { nil }
+
+\bool_new:N
+  \l_randomnames_save_bool
+\bool_gset_false:N
+  \l_randomnames_save_bool
+\tl_new:N \l_randomnames_save_tl
+
+\keys_define:nn
+  { randomnames / take_random_walk }
+  {
+    graph_type .code:n =
+      {
+        \tl_set:Nn
+          \l_randomnames_graph_type_tl
+          { " \lua_escape:e { #1 } " }
+      },
+    affix .code:n =
+      {
+        \tl_set:Nn
+          \l_randomnames_affix_tl
+          { " \lua_escape:e { #1 } " }
+      },
+    save .code:n =
+      {
+        \bool_set_true:N
+          \l_randomnames_save_bool
+        \tl_set:Nn \l_randomnames_save_tl { #1 }
+      },
+    prefix .meta:n =
+      {
+        graph_type = { forward },
+        affix = { #1 },
+      },
+    suffix .meta:n =
+      {
+        graph_type = { reverse },
+        affix = { #1 },
+      },
+  }
+\keys_define:nn
+  { randomnames }
+  {
+    take_random_walk .inherit:n =
+      { randomnames / new_model },
+  }
+
+\cs_new:Nn
+  \randomnames_take_random_walk:nn
+  {
+    \group_begin:
+    \keys_set:nn
+      {
+        randomnames /
+        take_random_walk
+      }
+      { #1 }
+    \lua_now:e
+      {
+        local~randomnames =
+          require("randomnames")
+        local~result = randomnames.take_random_walk(
+          " \lua_escape:e { #2 } ",
+          \l_randomnames_graph_type_tl,
+          \l_randomnames_affix_tl,
+          \l_randomnames_seed_tl,
+          \l_randomnames_min_context_size_tl,
+          \l_randomnames_max_context_size_tl
+        )
+        token.set_macro(
+          "l_tmpa_tl", result)
+      }
+    \bool_if:NT
+      \l_randomnames_save_bool
+      {
+        \cs_gset:cpx
+          \l_randomnames_save_tl
+          { \l_tmpa_tl }
+      }
+    \tl_use:N \l_tmpa_tl
+    \group_end:
+  }
+
+\ExplSyntaxOff
