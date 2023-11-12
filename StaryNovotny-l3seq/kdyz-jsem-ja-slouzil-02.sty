@@ -1,0 +1,93 @@
+
+% Globální proměnné
+\seq_new:N \g_kdyzjsemjaslouzil_ctvrte_pady_seq
+\seq_new:N \g_kdyzjsemjaslouzil_popisy_seq
+
+% Lokální proměnné
+\int_new:N \l_kdyzjsemjaslouzil_aktualni_sloka_int
+\int_new:N \l_kdyzjsemjaslouzil_posledni_sloka_int
+\bool_new:N \l_kdyzjsemjaslouzil_posledni_sloka_bool
+\seq_new:N \l_kdyzjsemjaslouzil_popisy_pozpatku_seq
+
+% Funkce pro sazbu textu celé písně
+\cs_new:Nn
+  \kdyzjsemjaslouzil_vysazej_pisnicku:
+  {
+    % Nastav počáteční hodnoty proměnných i a N.
+    \int_set:Nn \l_kdyzjsemjaslouzil_aktualni_sloka_int { 1 }
+    \int_set:Nn \l_kdyzjsemjaslouzil_posledni_sloka_int {
+      \seq_count:N \g_kdyzjsemjaslouzil_popisy_seq }
+    % Současně procházej hodnoty polí čtvrté_pády a popisy a volej
+    % nad nimi pomocnou funkci pro sazbu textu jedné sloky.
+    \seq_map_pairwise_function:NNN
+      \g_kdyzjsemjaslouzil_ctvrte_pady_seq
+      \g_kdyzjsemjaslouzil_popisy_seq
+      \kdyzjsemjaslouzil_vysazej_sloku:nn
+    % Vymaž pomocné pole s popisy v opačném pořadí.
+    \seq_clear:N \l_kdyzjsemjaslouzil_popisy_pozpatku_seq
+  }
+
+% Funkce pro sazbu textu jedné sloky
+\cs_new:Nn
+  \kdyzjsemjaslouzil_vysazej_sloku:nn
+  { % Nastav pomocnou proměnnou na pravdivostní hodnotu i = N,
+    % která udává, jestli sázíme poslední sloku.
+    \bool_set:Nn
+      \l_kdyzjsemjaslouzil_posledni_sloka_bool
+      {
+        \int_compare_p:nNn
+          { \l_kdyzjsemjaslouzil_aktualni_sloka_int }
+          =
+          { \l_kdyzjsemjaslouzil_posledni_sloka_int }
+      }
+    % Vysázej rok služby a obdrženou odměnu.
+    Když~jsem~já~sloužil~
+    \bool_if:NTF
+      \l_kdyzjsemjaslouzil_posledni_sloka_bool
+      { poslední~léto }
+      {
+        to~
+        \int_use:N
+          \l_kdyzjsemjaslouzil_aktualni_sloka_int
+        .~léto
+      }
+    , \\ vysloužil~jsem~si~#1~za~to. \\
+
+    % Vysázej popisy odměn za dosavadní roky služby.
+    \seq_put_left:Nn
+      \l_kdyzjsemjaslouzil_popisy_pozpatku_seq
+      { #2 }
+    \seq_map_indexed_inline:Nn
+      \l_kdyzjsemjaslouzil_popisy_pozpatku_seq
+      {
+        % Při popisu odměny pro současný rok začni verzálkou.
+        \int_compare:nTF
+          { ##1 = 1 }
+          {
+            % V poslední sloce vynech počáteční spojku „a“.
+            \bool_if:NTF
+              \l_kdyzjsemjaslouzil_posledni_sloka_bool
+              {
+                \str_uppercase:f { \tl_head:n { ##2 } }
+                \tl_tail:n { ##2 }
+              }
+              { A~##2 }
+          }
+          { a~##2 }
+        % Při popisu odměny pro první rok přidej čárku.
+        \int_compare:nNnT
+          { ##1 }
+          =
+          { \l_kdyzjsemjaslouzil_aktualni_sloka_int }
+          { , } \\
+      }
+    % Vysázej vypravěčovu domněnku o aktivitách partnerky.
+    má~panenka~
+    \bool_if:NTF
+      \l_kdyzjsemjaslouzil_posledni_sloka_bool
+      { stele~postel~ }
+      { pláče~doma~ }
+    v~komoře. \par
+    \int_incr:N
+      \l_kdyzjsemjaslouzil_aktualni_sloka_int
+  }

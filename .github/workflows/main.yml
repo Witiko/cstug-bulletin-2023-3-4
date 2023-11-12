@@ -23,8 +23,6 @@ jobs:
         run: make images
       - name: Typeset CSTUG Bulletin
         run: make all
-      - name: Validate PDF documents
-        run: make test
       - name: Upload PDF documents as build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -32,6 +30,8 @@ jobs:
           path: |
             bul.pdf
             bul-web.pdf
+      - name: Validate PDF documents
+        run: make test
       - name: Upload PDF documents as a release
         if: github.ref == 'refs/heads/main'
         uses: marvinpinto/action-automatic-releases@latest

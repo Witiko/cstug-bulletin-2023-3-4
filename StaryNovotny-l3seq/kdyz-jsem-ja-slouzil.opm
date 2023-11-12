@@ -1,0 +1,71 @@
+\_codedecl
+\sequence {Balíček pro sazbu textu lidové písně ,,Když jsem já
+  sloužil`` <1.0.0>}
+\_namespace {kdyzjsemjaslouzil}
+
+% Lokální proměnné
+\newcount \.pocetslok
+\newcount \.cislosloky
+\newcount \.cisloradku
+% Pomocné funkce pro práci se seznamy, které jsou zde
+% implementovány jako hašová tabulka.
+\def \.sdef #1{\expandafter \def \csname #1\endcsname}
+\def \.suse #1{\csname #1\endcsname}
+% Pomocná funkce pro změnu prvního písmene na verzálku.
+\def \.prvnivelke #1{\uppercase \expandafter {#1}}
+
+% Funkce pro uložení jedné sloky
+\def \sloka #1#2{%
+  \advance \.pocetslok 1
+  \.sdef {čtvrtý pád:\the \.pocetslok}{#1}%
+  \.sdef {popis:\the \.pocetslok}{#2}%
+}
+
+% Funkce pro sazbu textu celé písně
+\def \vysazej_pisnicku {%
+  \loop
+  \ifnum \.cislosloky < \.pocetslok
+    % Vysázej rok služby a obdrženou odměnu.
+    \advance \.cislosloky 1
+    Když jsem já sloužil
+    \ifnum \.cislosloky = \.pocetslok
+      poslední
+    \else
+      to \the \.cislosloky.~%
+    \fi
+    léto,\nl
+    vysloužil jsem si
+    \.suse {čtvrtý pád:\the \.cislosloky}
+    za to.\nl
+    % Vysázej popisy odměn za dosavadní roky služby.
+    {%
+      \.cisloradku = \.cislosloky
+      \loop
+      % Při popisu odměny pro současný rok začni verzálkou.
+      \ifnum \.cisloradku = \.cislosloky
+        % V poslední sloce vynech počáteční spojku „A“.
+        \ifnum \.cislosloky < \.pocetslok A \else
+          \expandafter \expandafter \expandafter
+          \expandafter \expandafter
+          \.prvnivelke
+        \fi
+      \else a \fi
+      \.suse {popis:\the \.cisloradku}%
+      % Při popisu odměny pro první rok přidej čárku.
+      \ifnum \.cisloradku = 1 , \fi \nl
+      \advance \.cisloradku -1
+      \ifnum \.cisloradku > 0 \repeat
+    }%
+    % Vysázej vypravěčovu domněnku o aktivitách partnerky.
+    má panenka
+    \ifnum \.cislosloky = \.pocetslok
+      stele postel
+    \else
+      pláče doma
+    \fi
+    v~komoře.
+    \par \medskip
+  \repeat
+}%
+\_endnamespace
+\_endcode

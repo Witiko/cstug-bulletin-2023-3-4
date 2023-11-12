@@ -1,0 +1,17 @@
+\NewDocumentEnvironment
+  { kdyz-jsem-ja-slouzil }
+  { }
+  {
+    \NewDocumentCommand
+      \sloka
+      { m m }
+      {
+        \seq_put_right:Nn
+          \g_kdyzjsemjaslouzil_ctvrte_pady_seq
+          { ##1 }
+        \seq_put_right:Nn
+          \g_kdyzjsemjaslouzil_popisy_seq
+          { ##2 }
+      }
+  }
+  { \kdyzjsemjaslouzil_vysazej_pisnicku: }
