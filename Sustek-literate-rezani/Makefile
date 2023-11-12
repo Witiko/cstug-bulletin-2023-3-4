@@ -9,4 +9,5 @@ all: FORCE
 	! grep -F '\csbul@webtrue' literate.info || $(DOCKER) $(IMAGE) pdfannotextractor literate.pdf
 	! grep -F '\csbul@webtrue' rezani.info || $(DOCKER) $(IMAGE) pdfannotextractor rezani.pdf
 
-clear: $(DOCUMENT)
+clear:
+	true
