@@ -1,0 +1,506 @@
+\input opmac
+\typosize[8.5/10]
+\topskip10pt
+
+\setbox9\hbox{\tt p}
+\output{\shipout\vbox to\vsize{\vss\box255\vskip5pt\vss}}
+
+\tt
+\pdffontexpand\font 0 200 2 autoexpand
+\pdfadjustspacing2
+\hyphenchar\font-1
+
+% \hsize u Zpravodaje je 27cc, okraje rámu jsou 3mm, platí 27cc-6mm=329.61116pt
+\let\oribegtt\begtt
+\eoldef\begtt#1{\par\break
+  \margins/1 (329.61116, \the\numexpr#1*10\relax) (0,0,0,0)pt
+  \oribegtt}
+\ttindent0pt
+
+\def\tthook{\catcode`\^=14 \catcode`\/=0 }
+\def\bylo(#1){{\localcolor\setcmykcolor{0 0 0 0.4}\setbox0\hbox{#1}\vrule height2.4pt depth-2pt width\wd0 \hskip-\wd0 \box0}}
+\def\nove(#1){{\localcolor\Green#1}}
+\def\nowe(#1){{\localcolor\Magenta#1}}
+\def\Nove[#1]{\nove(#1)}
+\def\Nowe[#1]{\nowe(#1)}
+
+
+\begtt13
+Procedure PridejDoMenu;
+  Begin
+  inc(Podnabidek[M]);
+  if Poz=Nakonec then
+    begin
+    Nabidka[M,Podnabidek[M]]:=Text;
+    if M<>Hlavni then Proc[M,Podnabidek[M]]:=Procedura;
+    end
+  else
+    begin
+    ...
+    end;
+  End;
+\endtt
+
+\begtt12
+\def\nacislo#1 #2{\ifx-#1#20\else
+    #2#1 \ifnum#2>99 \ifnum#2<200 \advance#2-100\fi\fi\fi}
+\def\radeknabody#1;#2;#3;#4;#5;{%
+  \def\no{#1}\def\bodyA{#2}\def\bodyB{#3}\def\bodyC{#4}\def\bodyD{#5}%
+  \nacislo#2 \bodycA \nacislo#3 \bodycB
+  \nacislo#4 \bodycC \nacislo#5 \bodycD}
+\def\nvzpracujradek{%
+  \ea\radeknabody\radek
+  \sumac\bodycA \advance\sumac\bodycB
+  \advance\sumac\bodycC \advance\sumac\bodycD
+  \ifnum\bodycA=\bodyDQ
+    \counta99 \sumac0
+^  \else
+^    \ifnum\bodycA=\bodyDNS
+^      \counta99 \sumac0
+^    \else
+^      \counta90 \advance\counta-\sumac
+^    \fi
+^  \fi
+^  \ifnum\sumac>0
+^    \ea\advance\csname pocetnenul\kategorie\endcsname1
+^  \fi
+^  \getpartid
+^  \Writeout{\the\counta:\surnameNA:\no:%
+^    \bodyA:\bodyB:\bodyC:\bodyD:\the\sumac:}
+^  \advance\countb1}
+\endtt
+
+\begtt16
+% Makro |\radeknabody| zpracuje řádek a jednotlivé položky uloží
+% do příslušných maker a čítačů.
+/nove(%    \begin{macrocode})
+\def\radeknabody#1;#2;#3;#4;#5;{%
+  \def\no{#1}\def\bodyA{#2}\def\bodyB{#3}\def\bodyC{#4}\def\bodyD{#5}%
+  \nacislo#2 \bodycA \nacislo#3 \bodycB
+  \nacislo#4 \bodycC \nacislo#5 \bodycD}
+/nove(%    \end{macrocode})
+% Pokud je některý soutěžící diskvalifikován, do tabulky s~počtem bodů
+% se mu zapíše z~prvního příkladu 666~bodů. Jeho součet bodů se nastaví
+% na nulu a v~souboru \soub{results.srt?} bude uveden až na konci.
+/nove(%    \begin{macrocode})
+\def\nvzpracujradek{%
+  \ea\radeknabody\radek
+^  \sumac\bodycA \advance\sumac\bodycB
+^  \advance\sumac\bodycC \advance\sumac\bodycD
+^  \ifnum\bodycA=\bodyDQ
+^    \counta99 \sumac0
+^  \else
+^    \counta90 \advance\counta-\sumac
+^  \fi
+^  \ifnum\sumac>0
+^    \ea\advance\csname pocetnenul\kategorie\endcsname1
+^  \fi
+^  \getpartid
+^  \Writeout{\the\counta:\surnameNA:\no:%
+^    \bodyA:\bodyB:\bodyC:\bodyD:\the\sumac:}
+^  \advance\countb1}
+...
+/nove(%    \end{macrocode})
+\endtt
+
+\begtt16
+/nove(% \begin{macro}{\nvzpracujradek})
+% Pokud je některý soutěžící diskvalifikován, do tabulky s~počtem bodů
+% se mu zapíše z~prvního příkladu 666~bodů. Jeho součet bodů se nastaví
+% na nulu a v~souboru \soub{results.srt?} bude uveden až na konci.
+^% \changes{100307}{100307}{Ošetření diskvalifikací}
+/nove(% \changes{100908}{100908}{Pročištění})
+/nove(% \changes{140314}{140314}{Logika diskvalifikací})
+/nove(% \changes{140314}{140314}{Přidáno top competitors})
+^% \changes{140315}{140315}{Označení makra}
+%    \begin{macrocode}
+\def\nvzpracujradek{%
+  \ea\radeknabody\radek
+  \sumac\bodycA \advance\sumac\bodycB
+  \advance\sumac\bodycC \advance\sumac\bodycD
+  \ifnum\bodycA=\bodyDQ
+^    \counta99 \sumac0
+^  \else
+^    \counta90 \advance\counta-\sumac
+^  \fi
+^  \ifnum\sumac>0
+^    \ea\advance\csname pocetnenul\kategorie\endcsname1
+^  \fi
+^  \getpartid
+^  \Writeout{\the\counta:\surnameNA:\no:%
+^    \bodyA:\bodyB:\bodyC:\bodyD:\the\sumac:}
+^  \advance\countb1}
+...
+%    \end{macrocode}
+/nove(% \end{macro})
+\endtt
+
+{
+\def\tthook{\catcode`\^=14 \catcode`\/=0 \def\){)} \advance\rightskip0.2pt}
+\begtt24
+^if eqtb[5847].int<>0 then eqworddefine(5847,0);
+^if eqtb[5304].int<>1 then eqworddefine(5304,1);
+^if eqtb[3412].hh.rh<>0 then eqdefine(3412,118,0);end;
+{:1070}/nove({1075:}procedure boxend(boxcontext:integer/);var p:halfword;)
+/nove(begin if boxcontext<1073741824 then){1076:}begin if curbox<>0 then begin
+mem[curbox+4].int:=boxcontext;
+if abs(curlist.modefield)=1 then begin appendtovlist(curbox);
+if adjusttail<>0 then begin if 29995<>adjusttail then begin mem[curlist.
+tailfield].hh.rh:=mem[29995].hh.rh;curlist.tailfield:=adjusttail;end;
+adjusttail:=0;end;if curlist.modefield>0 then buildpage;
+end else begin if abs(curlist.modefield)=102 then curlist.auxfield.hh.lh
+:=1000 else begin p:=newnoad;mem[p+1].hh.rh:=2;mem[p+1].hh.lh:=curbox;
+curbox:=p;end;mem[curlist.tailfield].hh.rh:=curbox;
+curlist.tailfield:=curbox;end;end;
+end{:1076}/nove(else if boxcontext<1073742336 then){1077:}if boxcontext<
+1073742080 then eqdefine(-1073738146+boxcontext,119,curbox)else
+geqdefine(-1073738402+boxcontext,119,curbox){:1077}/nove(else if curbox<>0)
+/nove(then if boxcontext>1073742336 then){1078:}begin{404:}repeat getxtoken;
+until(curcmd<>10)and(curcmd<>0){:404};
+if((curcmd=26)and(abs(curlist.modefield)<>1))or((curcmd=27)and(abs(
+curlist.modefield)=1))then begin appendglue;
+mem[curlist.tailfield].hh.b1:=boxcontext-(1073742237);
+mem[curlist.tailfield+1].hh.rh:=curbox;
+end else begin begin if interaction=3 then;printnl(262);print(1065);end;
+begin helpptr:=3;helpline[2]:=1066;helpline[1]:=1067;helpline[0]:=1068;
+end;backerror;flushnodelist(curbox);end;end{:1078}/nove(else shipout(curbox/);)
+/nove(end;{:1075}){1079:}procedure beginbox(boxcontext:integer);label 10,30;
+^var p,q:halfword;m:quarterword;k:halfword;n:eightbits;
+^begin case curchr of 0:begin scaneightbitint;
+^curbox:=eqtb[3678+curval].hh.rh;eqtb[3678+curval].hh.rh:=0;end;
+\endtt
+
+\begtt14
+^@ The global variable |cur_box| will point to a newly made box. If the box
+^is void, we will have |cur_box=null|. Otherwise we will have
+^|type(cur_box)=hlist_node| or |vlist_node| or |rule_node|; the |rule_node|
+^case can occur only with leaders.
+^
+^@<Glob...@>=
+^@!cur_box:pointer; {box to be placed into its context}
+^
+/nove(@) The |box_end| procedure does the right thing with |cur_box|, if
+|box_context| represents the context as explained above.
+
+/nove(@<Declare act...@>=)
+procedure box_end(@!box_context:integer);
+var p:pointer; {|ord_noad| for new box in math mode}
+begin if box_context<box_flag then /nove(@<Append box |cur_box| to the current list,)
+    /nove(shifted by |box_context|@>)
+else if box_context<ship_out_flag then /nove(@<Store \(c/)|cur_box| in a box register@>)
+else if cur_box<>null then
+  if box_context>ship_out_flag then /nove(@<Append a new leader node that)
+      /nove(uses |cur_box|@>)
+  else ship_out(cur_box);
+end;
+\endtt
+\break
+}
+
+{
+\def\tthook{\catcode`\/=0 \def\/{/}}
+\begtt20
+\input opmac
+\input gensrc
+/nove(\SRCFILENAME) style.tex
+\activettchar"
+Format of the page is~A4 with~2cm~margins.
+The basic font size is set to 12\,pt.
+/nove(\BEGSRC)
+\margins//1 a4 (2,2,2,2)cm
+\typosize[12//14]
+/nove(\ENDSRC)
+Macro "\safedef" defines a control sequence which is not yet defined.
+If it is already defined then its new definition is ignored.
+/nove(\BEGSRC)
+\def\safedef#1{\ifdefined#1\begingroup\afterassignment\endgroup\fi\def#1}
+/nove(\ENDSRC)
+Sections are defined in the same way as in~\OPmac.
+/nove(\BEGSRC)
+\safedef\section{\sec}
+/nove(\ENDSRC)
+\bye
+\endtt
+\break
+}
+
+\begtt22
+\input gensrc
+\def\SRChook{\longlocalcolor\Red}
+\SRCFILENAME program.txt
+Here we define a block which will be inserted to another place.
+/nove(\BEGSRC<InternalLabel>{Displayed label})
+second line
+  /nowe(|<InnerBlock>)
+/nove(\ENDSRC)
+A block can be defined by parts.
+/nove(\BEGSRC<InternalLabel>)
+fourth line
+/nove(\ENDSRC)
+And here we insert the block.
+\BEGSRC
+first line
+    /nove(|<InternalLabel>)
+\ENDSRC
+Finally we define the inner block.
+/nowe(\BEGSRC<InnerBlock>{Inner block})
+third line
+/nowe(\ENDSRC)
+\bye
+\endtt
+
+\begtt4
+first line
+    second line
+      third line
+    fourth line
+\endtt
+
+\begtt8
+1190 let ra=15: gosub /nove(2080): input a 
+1200 let ra=16: gosub /nove(2080): input b
+1210 if b<a then let c=a: let a=b: let b=c
+1220 let x=a: gosub /nove(3100): let d=f
+1230 let x=b: gosub /nove(3100)
+1240 if sgn(f)*sgn(d)<0 then /nove(1270)
+1250 let ra=17: gosub /nove(2270)
+1260 goto /nove(1390)
+\endtt
+
+
+\begtt20
+\seccc Bisekce
+
+Na začátku bisekce uživatel zadá krajní body do proměnných "A", "B".
+\BEGSRC<bisekce>{Bisekce}
+|vypisretezec(15): INPUT A |LL(bisekce)
+|vypisretezec(16): INPUT B
+\ENDSRC
+Ze slušnosti je zařízeno, aby platilo "A"${}<{}$"B".
+\BEGSRC<bisekce>
+IF B<A THEN LET C=A: LET A=B: LET B=C
+\ENDSRC
+Pokud nejsou v~krajních bodech různá znaménka, vypíše se chybové hlášení a metoda se ukončí.
+\BEGSRC<bisekce>
+LET X=A: GOSUB |RR(deffce): LET D=F
+LET X=B: GOSUB |RR(deffce)
+IF SGN(F)*SGN(D)<0 THEN |RR(bis1)
+|vypisretezecln(17)
+GOTO |RR(bis0)
+\ENDSRC
+\endtt
+
+\begtt6
+\BEGSRC<SDR>{Concat solutions}
+/nowe(SDRout)=/nove(SDRin2).clone();
+if (/nove(SDRin1).max > /nove(SDRin2).max) {/nowe(SDRout).max = /nove(SDRin1).max;}
+else {/nowe(SDRout).max = /nove(SDRin2).max;}
+/nowe(SDRout).position = /nove(SDRin1).position.concat(/nove(SDRin2).position);}
+\ENDSRC
+\endtt
+
+\begtt9
+\BEGSRC
+/nove(SDRin1)=mainsolution.clone();
+/nove(SDRin1).position=mainsolution.position.clone();
+/nove(SDRin2)=ZPRout.clone();
+/nove(SDRin2).position=ZPRout.position.clone();
+|<SDR>
+mainsolution=/nowe(SDRout).clone();
+mainsolution.position=/nowe(SDRout).position.clone();
+\ENDSRC
+\endtt
+
+\begtt2
+\SRConeline{second line}
+\SRCblock{  }{InnerBlock}
+\endtt
+
+\begtt1
+\SRConeline{fourth line}
+\endtt
+
+\begtt2
+\SRConeline{first line}
+\SRCblock{    }{InternalLabel}
+\endtt
+
+\begtt1
+\SRConeline{third line}
+\endtt
+
+\begtt10
+\DEFSRC {InternalLabel}{Displayed label}
+\SRCbeginline :second line\SRCendline
+\SRCreadblock {  }{InnerBlock}
+\ENDDEFSRC 
+\ADDSRC {InternalLabel}
+\SRCbeginline :fourth line\SRCendline 
+\ENDDEFSRC 
+\DEFSRC {InnerBlock}{Inner block}
+\SRCbeginline :third line\SRCendline 
+\ENDDEFSRC 
+\endtt
+
+\begtt1
+first line
+\endtt
+
+\begtt10
+\expandafter\def\csname SRCtit:InternalLabel\endcsname{%
+  Displayed label}
+\expandafter\def\csname SRCcon:InternalLabel\endcsname{%
+  \SRConeline{second line}%
+  \SRCblock{  }{InnerBlock}%
+  \SRConeline{fourth line}}
+\expandafter\def\csname SRCtit:InnerBlock\endcsname{%
+  Inner block}
+\expandafter\def\csname SRCcon:InnerBlock\endcsname{%
+  \SRConeline{third line}}
+\endtt
+
+\begtt1
+\SRCcontent
+\endtt
+
+\begtt2
+\SRConeline{first line}
+\SRCblock{    }{InternalLabel}
+\endtt
+
+\begtt2
+\SRCwriteline{first line}
+\SRCwriteblock{    }{InternalLabel}
+\endtt
+
+\begtt6
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni first line}
+\begingroup
+\addto\SRCodsazeni{    }
+\csname SRCcon:InternalLabel\endcsname
+\endgroup
+\endtt
+
+\begtt8
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni first line}
+\begingroup
+\addto\SRCodsazeni{    }
+\SRConeline{second line}
+\SRCblock{  }{InnerBlock}
+\SRConeline{fourth line}
+\endgroup
+\endtt
+
+\begtt14
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni first line}
+\begingroup
+\addto\SRCodsazeni{    }
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni second line}
+\begingroup
+\addto\SRCodsazeni{  }
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni third line}
+\endgroup
+\csname SRCwritehook\endcsname
+\immediate\write\SRCfile{\SRCodsazeni fourth line}
+\endgroup
+\endtt
+
+\begtt24
+\SRCFILENAME programA.txt
+\BEGSRC
+|<A>
+\ENDSRC
+\SRCFILENAME programB.txt
+\BEGSRC
+|<B>
+\ENDSRC
+\BEGSRC<A>{Program A}
+|<firstpart>
+in the first
+|<secondpart>
+\ENDSRC
+\BEGSRC<B>{Program B}
+|<firstpart>
+in the second
+|<secondpart>
+\ENDSRC
+\BEGSRC<firstpart>{First part}
+This will be
+\ENDSRC
+\BEGSRC<secondpart>{Second part}
+program.
+\ENDSRC
+\endtt
+
+\begtt24
+\SRCFILENAME programA.txt
+\aBEGSRC
+|<A>
+\ENDSRC
+\SRCFILENAME programB.txt
+\bBEGSRC
+|<B>
+\ENDSRC
+\aBEGSRC<A>{Program A}
+|<firstpart>
+in the first
+|<secondpart>
+\ENDSRC
+\bBEGSRC<B>{Program B}
+|<firstpart>
+in the second
+|<secondpart>
+\ENDSRC
+\BEGSRC<firstpart>{First part}
+This will be
+\ENDSRC
+\BEGSRC<secondpart>{Second part}
+program.
+\ENDSRC
+\endtt
+
+{\def\tthook{\catcode`\:=0 }
+\begtt7
+\SRCFILENAME program\version.txt
+\BEGSRC
+select cast(NN/p as @:Nove[integer]@@), st+1
+from FindN1,
+    (select @:Nove[rownum]@:Nowe[p]@ r, p from SmallFactors) a
+where st=r
+\ENDSRC
+\endtt
+\break
+}
+
+{\def\tthook{}
+\begtt4
+select cast(NN/p as number(38)), st+1
+from FindN1,
+    (select rownum r, p from SmallFactors) a
+where st=r
+\endtt
+
+\begtt4
+select cast(NN/p as decimal(38)), st+1
+from FindN1,
+    (select (row_number() over (order by p)) r, p from SmallFactors) a
+where st=r
+\endtt
+\break  
+}
+
+\begtt6
+pdfcsplain soubor
+pdfcsplain soubor
+mv soubor.pdf souborOR.pdf
+pdfcsplain '\def\version{MS}\input soubor'
+pdfcsplain '\def\version{MS}\input soubor'
+mv soubor.pdf souborMS.pdf
+\endtt
+
+\end

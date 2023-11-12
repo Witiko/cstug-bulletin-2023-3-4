@@ -1,0 +1,1166 @@
+\let\orilooseness\looseness
+\documentclass[oldcsbabel]{csbulletin}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+\usepackage{color}
+% \setcounter{page}{8}
+\usepackage{shapepar}
+
+% Hack for hyperref
+\mubytein 0
+% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
+%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
+\usepackage{url}
+
+\DefineShortVerb\|
+%\def\soub#1{{\sc#1}}
+\usepackage[utf8]{inputenc}
+
+% \def\ts#1{{\tt\char`\\name\char`\{ts#1$i$\char`\}}}
+{\catcode`\^=12\gdef\ss{^^}}
+\fvset{numbers=left,firstnumber=last,numbersep=3pt,
+  xleftmargin=15pt}
+
+\def\p#1{\texttt{\char`\\#1}}
+\def\uv#1{\char18 #1\char16 }
+\def\={\discretionary{-}{-}{-}}
+\let\phi\varphi
+\def\eqref#1{{\rm(\ref{#1})}}
+\def\emph#1{{\sl#1\/}}
+\def\soub#1{{\sf#1}}
+
+% následující makra musejí být definována stajně jako v souboru zdrojaky.tex
+\def\bylo(#1){{\color[cmyk]{0,0,0,0.4}\setbox0\hbox{#1}\vrule height2.4pt depth-2pt width\wd0 \hskip-\wd0 \box0}}
+\def\nove(#1){{\color[cmyk]{1,0,1,0}#1}}
+\def\nowe(#1){{\color[cmyk]{0,1,0,0}#1}}
+\def\Nove[#1]{\nove(#1)}
+\def\Nowe[#1]{\nowe(#1)}
+
+%\input supp-pdf
+
+\clubpenalty10000 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% fancyvrb hack - JS
+\makeatletter
+\def\FV@ListVSpace{%
+  \@topsepadd\medskipamount % \topsep
+  % z nejakeho duvodu se uvnitr Verbatim nuluje \topsep
+  \if@noparlist\advance\@topsepadd\partopsep\fi
+  \if@inlabel
+    \vskip\parskip
+  \else
+    \if@nobreak
+      \vskip\parskip
+      \clubpenalty\@M
+    \else
+      \addpenalty\@beginparpenalty
+      \@topsep\@topsepadd
+      \advance\@topsep\parskip
+      \addvspace\@topsep
+    \fi
+  \fi
+  \global\@nobreakfalse
+  \global\@inlabelfalse
+  \global\@minipagefalse
+  \global\@newlistfalse}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\casopis#1{{\sl#1\/}}
+\def\clanek#1{{\sl#1\/}}
+\def\balicek#1{{\sf#1\/}}
+\def\<#1>{$\langle\hbox{\rm#1\/}\rangle$}
+\def\blok#1#2{\<\rm#1 \dots\ \scriptsize#2>}
+
+\def\[{\begingroup\def\do##1{\catcode`##1=12 }\dospecials
+  \tokenA}
+{\catcode`|=0 \catcode`\\=12
+  |gdef|tokenA#1\]{|lower2pt|hbox{|frame{|tt|,#1|,|vrule height8.5pt depth2.5pt width0pt|relax}}|endgroup|tokenB}}
+\def\tokenB#1 {\ifx$#1$\else\lower3pt\hbox{\scriptsize\,\tt#1}\hskip\fontdimen2\font\fi}
+
+\def\WEB{\texttt{WEB}}
+
+\def\JSvfil{\vfil}
+\def\JSvss{\vskip0ptminus12pt}
+\def\JSbreak{\break}
+
+\let\PRESKOC\iffalse
+\let\COKSERP\fi
+
+\def\TODO#1{{\color{red}\footnote{\color{red}{\bf TODO:} \ignorespaces#1}}}
+
+
+\font\logo=manfnt % font used for the METAFONT logo
+\font\logod=logod10 % my demibold version of logo10
+\font\ninerm=cmr9
+\font\slbf=cmbxsl10
+\def\MF{{\logo META}\-{\logo FONT}\spacefactor1000\relax}
+\def\slMF{{\logo 89:;}\-{\logo <=>:}} % slanted version
+\def\bfMF{{\logod META}\-{\logod FONT}\spacefactor1000\relax}
+
+
+
+\input rezani/rezani.tex
+\def\zdr{ukazky/zdrojaky.pdf}
+\def\uka{ukazky/ukazky.pdf}
+\def\barvaramu{\color[cmyk]{0,0,0,0.4}}
+ %\ladenitrue
+
+\begin{document}
+
+\title{Generování dokumentovaného zdrojového souboru po blocích v~\TeX u}
+\EnglishTitle{On generating documented source code by blocks in \TeX}
+\author{Jan Šustek}
+\podpis{Jan Šustek, \url{jan.sustek@seznam.cz}}
+%\podpis{Jan Šustek, \url{jan.sustek@osu.cz}\\*
+%  Ostravská univerzita, Přírodovědecká fakulta,
+%  Katedra matematiky\\*
+%  30.~dubna~22,
+%  CZ-701~03 Ostrava, Czech Republic}
+
+\maketitle[3pt]
+
+\begin{narrower}
+
+{\hfil\bf Abstrakt}\medskip
+
+Článek popisuje problematiku psaní programů a dokumentace k~nim. Ukazuje autorův balíček \soub{gensrc} nad OPmacem, který umožňuje psát program i~dokumentaci k~němu v~jediném \TeX ovém souboru.
+Jsou ukázány další možnosti a aplikace tohoto balíčku.
+
+\medskip\noindent
+{\bf Klíčová slova:}
+Dokumentace, dokumentované programování, OPmac, \soub{gensrc}.
+
+\bigskip
+\end{narrower}
+
+\section{Úvod}
+
+Představme si, že píšeme počítačový program, který je delší než na několik řádků. Potom nutně musíme k~jednotlivým částem programu psát také komentáře. V~opačném případě bude program špatně čitelný a špatně pochopitelný, a~to jak pro druhou osobu, tak i~pro nás samotné, pokud se na program podíváme po nějakém čase.
+
+Zejména u složitějších programů používajících hlubší myšlenky pak musí být dokumentace k~programu důkladnější.
+V~následující ukázce je část zdrojového kódu programu\footnote{Z~důvodu jednoduššího vyjadřování budu nadále namísto pojmu \uv{zdrojový kód programu} psát pouze \uv{program}. Přitom vůbec není nutné, aby výsledkem byl nějaký program, a může se jednat o~libovolný text, který chceme vygenerovat.} a příslušná část souboru s~dokumentací.
+
+\dily13
+\Ram{3,8}{\zdr}{1}
+
+\Ram{37,58}{\uka}{1}
+
+Na problém narazíme v~případě, že se program vyvíjí. Potom musíme udržovat dokumentaci k~programu kompatibilní s~programem samotným. Každá změna v~programu se musí projevit v~dokumentaci. To znamená, že změnu musíme evidovat na dvou místech~-- v~souboru s~programem a v~souboru s~dokumentací. Přitom je vhodné a výhodné, když se každá změna eviduje pouze na jednom místě. 
+
+V~tomto článku jsou nejprve ukázána některá existující řešení uvedeného problému, konkrétně v~sekci~\ref{DEKsek} řešení od Donalda Knutha, které použil při psaní samotného \TeX u, a v~sekci~\ref{Sdoc} řešení pro \LaTeX.
+V~sekcích \ref{jedOP} až~\ref{impl} je popsán autorův balíček \soub{gensrc} pracující nad OPmacem. Implementaci balíčku popsanou v~sekci~\ref{impl} ocení spíše programátoři maker než běžní uživatelé \TeX u.
+Sekce~\ref{aplik} pak ukazuje reálné situace, ve kterých se balíček využil.
+
+Cílem balíčku \soub{gensrc} nebylo kopírovat nebo napodobovat některá existující řešení. Ani nebylo cílem, aby balíček byl dokonalý a uměl vše. Balíček naopak dodržuje všechny tři hlavní zásady OPmacu~\cite{opmac}:
+\begin{itemize}
+\item V jednoduchosti je síla.
+\item Makra nejsou univerzální, ale jsou čitelná a srozumitelná.
+\item Uživatel si makra může snadno předefinovat k obrazu svému. 
+\end{itemize}
+Opravdu původním cílem bylo plnit pracovní úkoly. A~při plnění těchto úkolů se \TeX\ a jeho makra ukázaly jako účinní a užiteční pomocníci.
+
+Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku~\cite{rezani} tohoto Zpravodaje.}
+Pokud není uvedeno jinak, jsou v~ukázkách použity kousky autorových vlastních programů.
+
+Článek navazuje na autorovy přednášky na konferenci OSS~Conf~2019 v~Žilině a na konferenci TUG~2023 v~Bonnu.
+
+\section{DEK a \WEB}
+\label{DEKsek}
+
+Začátkem 80.~let přišel Donald Knuth~\cite{DEKlit} s~myšlenkou, že by se měly programy psát jiným způsobem, než bylo do té doby obvyklé. Namísto psaní programu jako posloupnosti instrukcí pro počítač, Knuth navrhl psát program tak, jako bychom druhému člověkovi vysvětlovali, co chceme, aby počítač prováděl.
+
+Pro psaní programů Knuth vyvinul jazyk \WEB. Vstupní soubor jazyka \WEB\ v~sobě obsahuje dokumentaci proloženou kousky programu. Tento soubor se
+\begin{itemize}
+\item zpracuje programem \soub{weave}, čímž se vygeneruje \TeX ový soubor s~dokumentací, který se pak může \TeX em vysázet.
+Dále se vstupní soubor
+\item zpracuje programem \soub{tangle}, čímž se vygeneruje program v~jazyce Pascal, který se poté může zkompilovat a spustit.
+\end{itemize}
+Původní varianta jazyka \WEB\ byla vytvořena pro jazyky \TeX\ a Pascal.
+Později byly vytvořeny varianty i~pro jiné kombinace dokumentačního a programovacího jazyka.
+
+Pro ukázku použití Knuthova dokumentovaného programování jsem použil dokumentovaný zdrojový kód \TeX u\footnote{Autor tohoto článku předpokládá, že by uživateli \TeX u mohlo přijít zajímavé vidět takovéto vnitřnosti svého oblíbeného programu. :-)}~\cite{DEKtp} a konkrétně kód jeho nejdůležitější procedury |main_control|. Tato procedura řídí celý běh \TeX u a v~\cite{tbn} se označuje jako \uv{hlavní procesor}. Procedura se spouští ihned po spuštění \TeX u po úvodních formalitách (inicializace interních proměnných, inicializace tabulky primitivů, kontrola konzistence atd.). Po dokončení této procedury už následují pouze závěrečné formality (kontrola neuzavřených skupin při ukončení, závěrečný zápis do souboru \soub{\p{jobname}.log}, uzavření souborů atd.) a samotné ukončení \TeX u.
+
+\Ram{111,137,163,189,215,272,326,43,456,534,612,742,794,873,899}{\uka}{5}
+
+Pro zpřehlednění logické struktury procedury jsou použity \<bloky>, které jsou definovány v~dalších sekcích dokumentace.
+Procedura |main_control| je definována v~sekci~1030 a v~jejím těle se používají některé další procedury, které musejí být (dle syntaxe jazyka Pascal) definovány dříve než procedura |main_control|.
+Proto bylo nutné blok \blok{Declare}{1043} vložit před definici procedury |main_control|.
+Na druhou stranu kvůli logickým návaznostem v~dokumentaci tyto další procedury mohou být definovány až v~sekci~1043.
+
+Uvedený blok není definován celý najednou, ale postupně v~57~částech, jednu proceduru po druhé. Jedna z~těchto částí je v~sekci~1075 a jak je vidět, i~uvnitř bloku se mohou vyskytovat další vnořené bloky.
+
+\Ram{43,675}{\uka}{6}
+
+Tyto vnořené bloky pak jsou definovány v~dalších sekcích dokumentace.
+
+Použitý mechanismus má navíc výhodu, že bloky mohou být použity opakovaně na více místech. Například blok \blok{Get}{404} je použit na 8~místech programu.
+
+\Ram{27,61}{\uka}{7}
+
+V~ukázce sekce~1030 můžeme vidět také definice maker jazyka \WEB. Knuth do jazyka \WEB\ zavedl mechanismus maker kvůli zpřehlednění a zjednodušení dokumentace, ale také kvůli odstínění některých nedokonalostí tehdejších kompilátorů jazyka Pascal.
+Makra jazyka \WEB\ mohou mít nula nebo jeden parametr.
+
+Soubor, z~něhož byla programem \soub{weave} vygenerována výše uvedená dokumentace, má název \soub{tex.web}. V~následující ukázce je zdrojový kód sekce~1075. Jsou zvýrazněny příkazy pro práci s~bloky a sekcemi.
+
+\dily14
+\Ram{3,6,8,9,10}{\zdr}{6}
+
+Zpracováním souboru \soub{tex.web} programem \soub{tangle} se vygeneruje program \soub{tex.pas}. V~ukázce je zvýrazněna ta část programu, která odpovídá sekci~1075.
+
+\dily24\ud
+\Ram{\zdr}{5}
+
+\section{Program \soub{docstrip}}
+\label{Sdoc}
+
+Pro~\LaTeX\ je k~dispozici program \soub{docstrip}~\cite{docstrip}, který umožňuje do~jednoho zdrojového souboru psát program i~dokumentaci k~němu. Podobně jako v~případě jazyka \WEB\ i~zde můžeme jedním zpracováním zdrojového souboru vygenerovat program a druhým zpracováním vysázet dokumentaci.
+Balíček má i~další dovednosti.
+
+\subsection{Základní použití}
+
+Program a dokumentace se zapisují do textového souboru, který mívá příponu~\soub{dtx}. V~tomto souboru jsou řádky programu vloženy do prostředí |macrocode|, které musí začínat a končit na řádcích, které na začátku mají znak procenta a přesně čtyři mezery. Řádky mimo toto prostředí tvoří dokumentaci a musejí začínat znakem procenta. Pokud si odmyslíme tato procenta, píše se dokumentace stejně jako libovolný jiný \LaTeX ový dokument.\footnote{V~ukázkách je použita část programu používaného při Mezinárodní matematické soutěži Vojtěcha Jarníka. Soutěž je pořádaná Ostravskou univerzitou a bližší informace k~ní lze nalézt na stránkách~\url{https://vjimc.osu.cz/}.}
+
+\dily16
+\Ram{2,8,11}{\zdr}{3}
+
+Pro vygenerování souboru \soub{pdf} s~dokumentací vytvoříme nový \LaTeX ový soubor. V~něm mimo jiných použijeme balíček \soub{doc}. Soubor \soub{dtx} pak načteme makrem |\DocInput|. \LaTeX ový soubor zpracujeme běžným způsobem \LaTeX em.
+
+\Ram{23,34,55,72}{\uka}{2}
+
+Pro vygenerování programu vytvoříme další \LaTeX ový soubor. V~něm mimo jiné použijeme balíček \soub{docstrip}. Dále použijeme makro |\generateFile|, jímž načteme vstupní soubor~\soub{dtx} a vygenerujeme program s~daným názvem. \LaTeX ový soubor stačí jednou zpracovat \LaTeX em.
+
+\dily12
+\Ram{2,6}{\zdr}{2}
+
+Detaily jednotlivých \LaTeX ových souborů a maker se čtenář dozví v~dokumentaci~\cite{docdoc} a~\cite{docdocstrip}.
+
+\subsection{Další funkce}
+
+V~souboru \soub{dtx} mimo prostředí |macrocode| lze využít další funkce balíčku \soub{docstrip}. Prostředí |macro| označuje, že část programu a dokumentace se týká definice konkrétního příkazu.\footnote{Balíček \soub{docstrip} je uzpůsoben ke generování \LaTeX ových balíčků a zřejmě proto pro účely tohoto balíčku jsou části programu označeny jako \uv{macro}. Zde, opět z~důvodu srozumitelnosti, budu používat pojem \uv{příkaz}.}
+Makro |\changes| označuje, že na daném místě došlo v~dané verzi programu k~určité změně.
+
+\dily16
+\Ram{4,7,13}{\zdr}{4}
+
+Při použití výše uvedených maker lze v~dokumentaci makrem |\PrintChanges| vygenerovat seznam všech změn v~jednotlivých verzích programu. Jestliže ke změně došlo uvnitř prostředí |macro|, přiřadí se změna přímo ke konkrétnímu příkazu. Pro zaznamenávání změn je třeba v~preambuli souboru použít makro |\RecordChanges|.
+
+\Ram{165,33,55,775}{\uka}{3}
+
+Podobně lze v~dokumentaci makrem |\PrintIndex| vytvořit rejstřík všech příkazů\footnote{Jako příkazy se v~programu vyhledají všechny názvy začínající znakem~\p{}, případně jiným nastaveným znakem.} použitých v~programu. V~rejstříku je u~konkrétního příkazu možné zobrazit číslo stránky nebo řádku,\footnote{Čísla řádků v~rejstříku odpovídají číslům řádků v~dokumentaci. Tato čísla se však mohou lišit od čísel řádků ve vygenerovaném programu.} na němž je příkaz použit. Podtržení čísla znamená, že na daném místě je příkaz definován.
+Pro umožnění tvorby rejstříku je třeba v~preambuli souboru použít makro |\PageIndex| nebo |\CodelineIndex|.
+
+\Ram{32,57,815}{\uka}{4}
+
+\section{Jednoduché řešení v~OPmacu}
+\label{jedOP}
+
+Autor článku namísto \LaTeX u raději pracuje v~Plainu s~balíkem OPmac~\cite{opmac}.
+Cílem této sekce je vytvořit nad OPmacem soubor \soub{gensrc.tex}\footnote{Soubor \soub{gensrc.tex} tvoří řádky \ref{gs1} až~\ref{gs2} na následujících stranách, přičemž je třeba vymazat šedý text. Navíc při použití řádků \ref{gs3} až~\ref{gs2} je možné dále vymazat řádky \ref{gs4} až~\ref{gs5}.} a v~něm nadefinovat makra
+\begin{itemize}
+\item \p{SRCFILENAME} udávající název vygenerovaného programu,
+\item \p{BEGSRC} a \p{ENDSRC} ohraničující řádky programu.
+\end{itemize}
+S~balíčkem \soub{gensrc.tex} se pak v~jediném průchodu \TeX em vytvoří jak program, tak dokumentace.
+Jak bude tento program a dokumentace vypadat, to si zajisté čtenář snadno domyslí.\footnote{Zvídavému \TeX istovi doporučuji si prozkoumat, jak funguje definice makra \p{safedef} uvedená v~ukázce.}
+
+\dily20
+\Ram{4,6,10,12,15,16}{\zdr}{7}
+
+\subsection{Základní použití}
+
+Součástí dokumentace jsou i~části programu. Proto není divu, že základem souboru \soub{gensrc.tex} bude makro pro sazbu verbatim textu. K~tomu je v~OPmacu následujícím způsobem definováno makro |\begtt|. Detailní popis jednotlivých v~něm použitých triků čtenář najde v~\cite[sekce~1.3]{tbn}.
+
+\begin{Verbatim}
+\def\begtt{\par\ttskip\bgroup \wipeepar
+  \setverb\adef{ }{ }
+  \ifx\savedttchar\undefined \else \catcode\savedttchar=12 \fi
+  \parindent=\ttindent \vskip\parskip \parskip=0pt
+  \tthook\relax
+  \ifnum\ttline<0 \else
+    \tenrm \thefontscale[700]\let\sevenrm=\thefont
+    \everypar={\global\advance\ttline by1
+      \llap{\sevenrm\the\ttline\kern.9em}}\fi
+  \def\par##1{\endgraf\ifx##1\egroup\else
+    \penalty\ttpenalty\leavevmode\fi ##1}
+  \obeylines \startverb}
+\def\setverb{\frenchspacing\def\do##1{\catcode`##1=12}\dospecials
+  \catcode`\*=12 }
+{\catcode`\|=0 \catcode`\\=12
+|gdef|startverb#1\endtt{|tt#1|egroup|par|ttskip|testparA}}
+\end{Verbatim}
+
+Jednoduchými úpravami výše uvedených maker lze vytvořit makro |\BEGSRC|. Konkrétně se jedná o~následující kosmetické úpravy, přičemž pouze první dva body jsou opravdu potřebné.
+\begin{itemize}
+\item Řídicí sekvence |\begtt|, |\setverb|, |\tthook|, |\ttline|, |\startverb|, |\endtt| jsou přejmenovány.
+\item Registr |\everypar| se nastaví nezávisle na podmínce |\SRCline<0|. Toto nastavení je lokální uvnitř prostředí |\BEGSRC|\penalty0 |...\ENDSRC|.\footnote{Pro přehlednost budu dále používat text \uv{prostředí \p{BEGSRC}}.}
+\item Makro |\wipeepar| globálně promazává registr |\everypar|. Toto není potřeba, a proto zde makro |\wipeepar| není nutné.
+\item Je použito |\csname| pro případ, že by háček |\SRChook| nebyl definován.
+\item Namísto makra |\leavevmode| je použit primitiv |\quitvmode|, který v~daném místě neexpanduje registr |\everypar|. Navíc příkaz |\expandafter| zajistí, že \TeX\ na token |\fi| narazí ještě ve vertikálním módu.
+\end{itemize}
+Další úpravou je přidání jedné definice.
+\begin{itemize}
+\item Makro |\SRCFILENAME| nemá analogii v~případě makra |\begtt|. Makro otevře pro zápis soubor |\SRCfile|. V~případě, že je makro použito podruhé (tj.~z~jednoho zdrojového souboru začínáme generovat další program), je aktuální soubor nejprve uzavřen. Tento krok v~případě prvního použití makra nenahlásí chybu.
+\end{itemize}
+A samozřejmě je nutná i~jedna funkční úprava.
+\begin{itemize}
+\item Na začátku každého řádku programu je zavoláno makro |\SRCgetline|. Makro načte argument až po znak konce řádku\footnote{V~makru \p{BEGSRC} je použito makro \p{obeylines}, které nastaví znak konce řádku jako aktivní. Proto je nutný onen trik s~vlnovkou na řádcích \ref{gs6} a~\ref{gs7}.} (tj.~načte jeden řádek), tento argument vysází a zapíše jej do souboru.
+\end{itemize}
+Více úprav není třeba.
+Všechny výše uvedené úpravy jsou barevně vyznačeny.
+
+\begin{Verbatim}[commandchars=/!?]
+\def/nove(\BEGSRC){\par\ttskip\bgroup /bylo(\wipeepar)/label!gs1?
+  /nove(\setSRC)\adef{ }{ }
+  \ifx\savedttchar\undefined \else \catcode\savedttchar=12 \fi
+  \parindent=\ttindent \vskip\parskip \parskip=0pt
+  /nove(\csname SRChook\endcsname)\relax
+  /bylo(\ifnum\ttline<0 \else)
+    \tenrm \thefontscale[700]\let\sevenrm=\thefont
+    \everypar={\global\advance/nove(\SRCline) by1
+      \llap{\sevenrm\the/nove(\SRCline)\kern.9em}/nowe(\SRCgetline)}/bylo(\fi)
+  \def\par##1{\endgraf\ifx##1\egroup\else
+    \penalty\ttpenalty/nove(\expandafter\quitvmode)\fi ##1}
+  \obeylines /nove(\startSRC)}/label!gs8?
+\def/nove(\setSRC){\frenchspacing\def\do##1{\catcode`##1=12}\dospecials/label!gs4?
+  \catcode`\*=12 }
+{\catcode`\|=0 \catcode`\\=12
+|gdef/nove(|startSRC#1\ENDSRC){|tt#1|egroup|par|ttskip|testparA}}/label!gs5?
+/nowe(\begingroup\lccode`\~13)/label!gs6?
+  /nowe(\lowercase{\endgroup\def\SRCgetline#1~}%)/label!gs7?
+    /nowe({#1\immediate\write\SRCfile{#1}\par})
+/nove(\def\SRCFILENAME{\immediate\closeout\SRCfile)
+  /nove(\immediate\openout\SRCfile=})
+/nove(\newcount\SRCline \newwrite\SRCfile)
+\end{Verbatim}
+
+\subsection{Snadná vylepšení}
+
+Změnou definice makra |\startSRC| umožníme uživateli použít háček |\endSRChook|, který se expanduje v~místě |\ENDSRC|.
+Pomocí |\csname| opět umožníme bezchybnou expanzi v~případě, že háček není definován.
+
+\begin{Verbatim}[commandchars=/!?]
+{\catcode`\|=0 \catcode`\\=12/label!gs3?
+  |gdef|startSRC#1\ENDSRC{|tt#1|egroup|par|ttskip
+    /nove(|csname endSRChook|endcsname)|testparA}}
+\end{Verbatim}
+
+Některé textové editory odsazují řádky pomocí tabulátoru, jiné pomocí mezer. To například v~jazyce Python může činit problém. Definicí aktivního tabulátoru expandujícího se na posloupnost několika mezer tento problém vyřešíme. Při definování musíme opatrně měnit kategorie znaků tabulátoru a mezery.
+
+\begin{Verbatim}[commandchars=/!?]
+/nove({\catcode9=12)
+  \/nove(g)def\setSRC{\def\do##1{\catcode`##1=12}\dospecials
+    \catcode`\*=12 /nove(\adef{^^I}{\SRCtab})}/nove(})
+/nove({\catcode32=13 \gdef\SRCtab{    }})/label!gs2?
+\end{Verbatim}
+
+
+
+\section{Generování po blocích}
+\label{S5}
+
+V~této sekci si naplánujeme vylepšení souboru \soub{gensrc.tex} po vzoru sekce~\ref{DEKsek}. Navíc součástí tohoto vylepšení bude práce s~lokálně aditivním odsazením řádků, což velmi pomůže při generování programů například v~jazyce Python.
+Oproti sekci~\ref{DEKsek} se omezíme na situaci, kdy na řádku s~vkládaným blokem není kromě bloku a odsazení žádný další text.
+
+V~sekci~\ref{S5} pouze popíšeme, jaká makra budeme používat a co tato makra budou dělat. Implementace těchto maker bude následovat v~sekci~\ref{impl}.
+Doporučuji čtenáři, aby si po přečtení sekce~\ref{impl} znovu přečetl podsekce~\ref{S5.3} a~\ref{S5.4}.
+
+Nový soubor \soub{gensrc.tex} tvoří řádky~\ref{412a} až~\ref{412z} na stranách~\pageref{412a} až~\pageref{412z}.
+Soubor je ke stažení na adrese~\cite{gensrcweb}.
+
+\subsection{Syntaxe}
+\label{pripravaukazka}
+
+Makro |\BEGSRC| je možné volat následujícími způsoby.\footnote{V~dalším textu se často budu na uvedené číslování odkazovat.}
+\begin{enumerate}
+\item \label{bsiz}|\BEGSRC<InterniNazev>{Zobrazený název}|
+\item \label{bsi}|\BEGSRC<InterniNazev>|
+\item \label{bs}|\BEGSRC|
+\end{enumerate}
+Přesná syntaxe je patrná z~následující ukázky. Každý blok má svůj (jednoduchý) interní název a dále název, který se zobrazí v~dokumentaci. V~této ukázce je navíc použit háček |\SRChook|, který způsobí, že řádky programu budou v~dokumentaci vysázeny červeně.
+
+\dily22
+\Ram{3,8,12,17}{\zdr}{8}
+
+Pro správné vysázení dokumentace jsou nutné dva průchody \TeX em, protože v~prvním průchodu ještě nejsou známy zobrazené názvy bloků.
+
+{\let\orivodorovna\vodorovna
+\def\vodorovna{\orivodorovna\label{s13}\let\vodorovna\orivodorovna}
+\Ram{3,55,79}{\uka}{8}
+}
+
+Z~podobného důvodu jsou nutné dva průchody \TeX em pro správné vygenerování programu. Tyto dva průchody však již máme za sebou, když jsme vysázeli dokumentaci. Výsledek je dle očekávání následující.
+
+{\let\orivodorovna\vodorovna
+\def\vodorovna{\orivodorovna\label{s14}\let\vodorovna\orivodorovna}
+\Ram{}{\zdr}{9}
+}
+
+\subsection{Přenos informací}
+
+Dále v~textu budeme předpokládat, že máme vstupní soubor \soub{dokumentace.tex}, ze kterého chceme vytvořit dokumentaci v~souboru \soub{dokumentace.pdf} a vygenerovat program v~souboru \soub{program.txt}. Makra budou využívat soubor \soub{\p{jobname}.ds},\footnote{Písmena \uv{ds} vznikla ze slov \uv{dočasný soubor}.} v~našem případě tedy soubor \soub{dokumentace.ds}.\footnote{Pro zpřehlednění textu budeme dále jednotlivé soubory označovat pouze jako \uv{\soub{tex}}, \uv{\soub{pdf}}, \uv{\soub{ds}}, \uv{\soub{txt}}, přičemž budeme vynechávat i~slovo \uv{soubor}.} Graf\label{s15o}
+{\expandafter\def\csname @secondoftwo\endcsname#1#2#3#4#5{#2}%
+\ifnum 
+    \the\numexpr 0\csname @secondoftwo\expandafter\expandafter\expandafter\endcsname
+      \csname r@s15o\endcsname\relax <
+    \the\numexpr 0\csname @secondoftwo\expandafter\expandafter\expandafter\endcsname
+      \csname r@s15\endcsname\relax
+  na straně~\pageref{s15}
+\fi}%
+ukazuje, jak se u~jednotlivých způsobů volání makra |\BEGSRC| přenášejí informace mezi soubory. V~rámečcích u~šipek jsou uvedena makra, která příslušnou informaci přenášejí.
+
+\begin{figure}[t]
+\pdfximage{graf-1.pdf}\label{s15}
+\centerline{\pdfrefximage\pdflastximage}
+\end{figure}
+
+
+\subsection{První průchod}
+\label{S5.3}
+
+V~ukázce v~podsekci~\ref{pripravaukazka} je čtyřikrát použito prostředí |\BEGSRC|. Vnitřek jednotlivých prostředí se ukládá do makra |\SRCcontent|. Toto makro má v~místech |\ENDSRC| postupně následující obsah.
+
+\dily2
+\Ram{}{\zdr}{14}
+
+\dily1
+\Ram{}{\zdr}{15}
+
+\dily2
+\Ram{}{\zdr}{16}
+
+\dily1
+\Ram{}{\zdr}{17}
+
+Makro |\doSRC| definuje příslušná makra a do~\soub{ds} postupně zapíše následující text.
+
+\dily10
+\Ram{4,7}{\zdr}{18}
+
+Makra |\csname SRCtit:\SRCid\endcsname| obsahují zobrazené názvy bloků a ty ještě v~prvním průchodu nejsou známy, proto tato makra expand procesor interpretuje jako |\relax| a v~dokumentaci se namísto názvů bloků zobrazí prázdné závorky~\<>.
+
+\Ram{3,55,79}{\uka}{10}
+
+Podobně makra |\csname SRCcon:\SRCid\endcsname| obsahují text jednotlivých bloků, který ale také v~prvním průchodu není znám. Onen |\relax| způsobí, že se do~\soub{txt} příslušné řádky nezapíšou a že v~\soub{txt} bude pouze následující obsah.
+
+\dily1
+\Ram{}{\zdr}{19}
+
+\subsection{Druhý průchod}
+\label{S5.4}
+
+Na začátku druhého průchodu se načte~\soub{ds}. Makra z~podsekce~\ref{s6.7} způsobí, že se interně provedou následující definice.
+
+\dily10
+\Ram{2,6,8}{\zdr}{20}
+
+Druhý průchod poté pokračuje stejně jako první průchod, až na dva rozdíly.
+
+Prvním rozdílem je, že po těchto definicích již \TeX\ zná vše potřebné a dokumentaci vysází správně, jak je na straně~\pageref{s13}.
+
+Druhým rozdílem je, že se správně vygeneruje i~\soub{txt}. Podívejme se, jak probíhá ono generování.
+
+Pouze ve třetím případě je makro |\BEGSRC| voláno třetím způsobem, tj.~způsobem, kdy se zapisuje do~\soub{txt}. Makro |\SRCcontent| se postupně expanduje takto.
+
+\dily1
+\Ram{}{\zdr}{21}
+
+\dily2
+\Ram{}{\zdr}{22}
+
+\dily2
+\Ram{}{\zdr}{23}
+
+\dily6
+\Ram{2}{\zdr}{24}
+
+\dily8
+\Ram{2,4,5}{\zdr}{25}
+
+Po několika dalších expanzích se dostaneme na následující příkazy.
+
+{\let\orivodorovna\vodorovna
+\def\vodorovna{\orivodorovna\label{s27}\let\vodorovna\orivodorovna}
+\dily14
+\Ram{2,4,6,8,11}{\zdr}{26}
+}
+
+
+
+Tyto příkazy způsobí, že se do~\soub{txt} zapíše správný text, který je uvedený na straně~\pageref{s14}.
+
+
+
+\section{Implementace}
+\label{impl}
+
+\subsection{Začátek}
+
+Protože se v~souboru \soub{gensrc.tex} opakovaně používají makra OPmacu, je OPmac načten přímo v~tomto souboru.\footnote{Na konferenci TUG~2023 zazněl námět, aby makra fungovala také v~\LaTeX u. Jak je vidět v~sekci~4 následujícího článku~\cite{rezani} tohoto Zpravodaje, je možné udělat balíček, který by fungoval jak v~Plainu, tak v~\LaTeX u, pokud byl balíček původně naprogramován v~Plainu. V~tom případě by se v~\LaTeX ové větvi samozřejmě OPmac nenačítal, musela by se ale nadefinovat všechna používaná OPmacová makra a na všech místech, kde \LaTeX\ používá jiné mechanismy (například práce s~fonty), by se musela použít makra, jejichž expanze by závisela na použitém formátu \TeX u.}\TODO{Podle skutečnosti aktualizovat odkaz na článek i~sekci.}
+
+\begin{Verbatim}[commandchars=/()]
+\input opmac/label(412a)
+\end{Verbatim}
+
+Pro označení bloků kódu v~\soub{pdf} je použito makro |\SRCangle| a uvnitř něj přepínač fontu |\sl|. Přitom je nutné font |\tensl| registrovat, aby se správně škálovala jeho velikost.
+
+\begin{Verbatim}
+\regfont\tensl
+\def\SRCangle#1{{$\langle$\sl#1\/$\rangle$}}
+\end{Verbatim}
+
+Stejně jako dříve se název generovaného souboru zadá makrem |\SRCFILENAME|. Interně bude tento soubor reprezentován řídicí sekvencí |\SRCfile|. Při opakovaném použití |\SRCFILENAME| se soubor nejdříve zavře a začne se generovat nový.
+\begin{Verbatim}
+\newwrite\SRCfile
+\def\SRCFILENAME{\immediate\closeout\SRCfile
+  \immediate\openout\SRCfile=}
+\end{Verbatim}
+
+Prostředí |\BEGSRC| interně používá přepínače |\ifsaveSRC|, |\ifaddingSRC| a |\ifprintSRC|, aby se v~různých situacích chovalo správně.
+
+Pokud je nastaveno |\saveSRCtrue|, znamená to, že se definuje blok a ten se zapíše do~\soub{ds}. Pokud je nastaveno |\saveSRCfalse|, pak se přímo zapisuje do~\soub{txt}.
+
+Pokud je nastaveno |\addingSRCtrue|, znamená to, že se přidávají řádky k~již definovanému bloku. Pokud je nastaveno |\addingSRCfalse|, je příslušný blok vynulován a řádky jsou uloženy přidáním k~takto vynulovanému bloku.
+
+Pokud je nastaveno |\printSRCtrue|, bude se aktuální prostředí |\BEGSRC| sázet do~\soub{pdf}. V~případě, že je nastaveno |\printSRCfalse|, se bude sázet do boxu |\nonprintbox|, který se nevytiskne. Implicitní hodnota je |\printSRCtrue|.
+\begin{Verbatim}
+\newif\ifsaveSRC
+\newif\ifaddingSRC
+\newif\ifprintSRC \printSRCtrue
+\newbox\nonprintbox
+\end{Verbatim}
+
+Makro |\SRCensurehmode\token| zajistí, že se ve vertikálním módu bude |\token| chovat tak, že bezpečně přejde do horizontálního módu a tam zůstane neexpandovaný.
+\begin{Verbatim}
+\def\SRCensurehmode#1{\def#1{\quitvmode\noexpand#1}}
+\end{Verbatim}
+
+Uvnitř prostředí |\BEGSRC| má znak \texttt{\char`\|} kategorii~0. Pro jeho sazbu a export se použije řídicí sekvence~\texttt{\char`\|\char`\|}.
+\begin{Verbatim}[commandchars=/()]
+\def\|{|}/label(57)
+\end{Verbatim}
+
+Může se stát, že prostředí |\BEGSRC| zavoláme uvnitř prostředí |\begitems|, v~němž je hvězdička aktivním znakem. Proto ji musíme na všech potřebných místech deaktivovat. To uděláme nejjednodušeji tak, že ji zařadíme mezi znaky, které OPmac interně považuje za speciální.
+\begin{Verbatim}
+\addto\dospecials{\do\*}
+\end{Verbatim}
+
+\subsection{Makro \p{BEGSRC}}
+
+Makro |\BEGSRC| nejdříve přes |\futurelet| zjistí, jak je voláno, a nastaví příslušné přepínače. Pak se uloží (vizte podsekci~\ref{getline}) jednotlivé řádky prostředí |\BEGSRC| dovnitř maker |\SRConeline| a |\SRCblock| a všechny řádky se takto postupně vloží do makra |\SRCcontent|. V~místě |\ENDSRC| (vizte podsekci~\ref{endsrc}) se pak v~závislosti na jednotlivých přepínačích nadefinují makra |\SRConeline| a |\SRCblock| a expanduje se makro |\SRCcontent|.
+
+Již v~makru |\BEGSRC| a jeho větvích jsou opatrně měněny kategorie znaků, aby se případný první token prostředí načetl do |\futurelet| s~kategorií platnou uvnitř prostředí, ale aby uvnitř argumentů maker |\BEGSRCb| a |\BEGSRCd| byly kategorie ještě původní.
+
+\begin{Verbatim}
+\def\BEGSRC{\ifprintSRC\par\ttskip\fi
+  \bgroup
+  \catcode`\|=0 \catcode`\\=12
+  \futurelet\BEGSRCt\BEGSRCa}
+\end{Verbatim}
+
+Makro |\BEGSRCa| zjistí, kterým způsobem je makro |\BEGSRC| voláno, a podle toho buď zavolá další makro |\BEGSRCb| (první dva způsoby), nebo zavolá přímo makro |\BEGSRCz| (třetí způsob). Zároveň nastaví přepínač |\ifsaveSRC|.
+\begin{Verbatim}
+\def\BEGSRCa{\ifx<\BEGSRCt
+    \saveSRCtrue
+    \catcode`\|=12 \catcode`\\=0
+    \expandafter\BEGSRCb
+  \else
+    \saveSRCfalse
+    \expandafter\BEGSRCz
+  \fi}
+\end{Verbatim}
+
+Makro |\BEGSRCb| uloží |InterniNazev| bloku pro další použití do makra |\SRCid| a zavolá rozhodovací makro |\BEGSRCc|.
+\begin{Verbatim}
+\def\BEGSRCb<#1>{\def\SRCid{#1}%
+  \catcode`\|=0 \catcode`\\=12
+  \futurelet\BEGSRCt\BEGSRCc}
+\end{Verbatim}
+
+Makro |\BEGSRCc| zjistí, kterým způsobem je makro |\BEGSRC| voláno, a podle toho buď zavolá další makro |\BEGSRCd| (první způsob), nebo zavolá přímo makro |\BEGSRCz| (druhý způsob). Zároveň nastaví přepínač |\ifaddingSRC|.
+\begin{Verbatim}
+\def\BEGSRCc{\ifx\bgroup\BEGSRCt
+    \addingSRCfalse
+    \catcode`\|=12 \catcode`\\=0
+    \expandafter\BEGSRCd
+  \else
+    \addingSRCtrue
+    \expandafter\BEGSRCz
+  \fi}
+\end{Verbatim}
+
+Makro |\BEGSRCd| uloží |Zobrazený název| bloku pro další použití do makra |\csname SRCtit:\SRCid\endcsname| a zavolá makro |\BEGSRCz|.
+\begin{Verbatim}
+\def\BEGSRCd#1{\sdef{SRCtit:\SRCid}{#1}\BEGSRCz}
+\end{Verbatim}
+
+Makro |\BEGSRCz| je analogií makra |\BEGSRC| z~řádků \ref{gs1} až~\ref{gs8}, přičemž již respektuje nastavené přepínače.
+Na začátku prostředí |\BEGSRC| je možné použít háček |\SRChook|, na konci prostředí háček |\endSRChook|. Na začátku každého řádku je možné použít háček |\SRClinehook|. Každý řádek je načten a zpracován makrem |\SRCgetline|. Makro |\<| mimo |\SRCgetline| nedělá nic a v~horizontálním módu na něj expand procesor nenarazí. Je však třeba makro |\<| nadefinovat, ať ve vertikálním módu bezpečně přejde do horizontálního módu a v~něm ať zůstane neexpandované.
+
+\begin{Verbatim}[commandchars=/()]
+\def\BEGSRCz{\ifprintSRC\else\setbox\nonprintbox\vbox\bgroup\fi
+  \ifsaveSRC
+    \noindent\SRCangle{\csname SRCtit:\SRCid\endcsname}%
+      ${}\ifaddingSRC\mathrel{{+}{\equiv}}\else\equiv\fi$%
+    \par\nobreak
+  \fi
+  \def\SRCcontent{}%
+  \setSRC
+  \SRCensurehmode\<%
+  \SRCensurehmode\label
+  \parindent\ttindent
+  \csname SRChook\endcsname
+  \tenrm\thefontscale[700]\let\sevenrm\thefont
+  \everypar{\SRCgetline}%/label(111)
+  \def\par##1{\endgraf\ifx##1\egroup\else\penalty\ttpenalty
+    \fi##1}%
+  \obeylines\startSRC}/label(98)
+\end{Verbatim}
+
+\subsection{Makro \p{setSRC}}
+
+Se sazbou znaků uvnitř verbatim prostředí, které je vybaveno nějakou přidanou hodnotou, nutně souvisejí následující problémy.
+\begin{itemize}
+\item Co nejvíce znaků musí být přímo tisknutelných, tj.~musejí mít kategorii 11 nebo~12. To zajistí makro |\dospecials| a definice makra |\do|.
+\item Kdyby měla mezera kategorii~10 (jako obvykle), pak by více mezer za sebou splynulo do jedné. Výhodné je nastavit mezeru jako aktivní znak a ten pak expandovat na normální mezeru.
+\item Některý znak musí mít kategorii 0 nebo~13, aby uvnitř prostředí |\BEGSRC| bylo možné zavolat makro, které zařídí onu přidanou hodnotu. V~našem případě to je znak~\texttt{\char`\|}, který bude uvozovat řídicí sekvence.
+\item Znak uvedený v~předchozím bodě musí být možné také vytisknout. To jsme již zajistili na řádku~\ref{57}.
+\end{itemize}
+
+Uvnitř prostředí |\BEGSRC| se navíc tabulátor expanduje na posloupnost mezer. A~jestliže uživatel makrem |\activettchar| nastavil znak pro přechod do odstavcového verbatim módu, nastaví se tomuto znaku kategorie~12.
+
+\begin{Verbatim}[commandchars=;()]
+{\catcode9=12
+  \gdef\setSRC{\def\do##1{\catcode`##1=12}\dospecials
+    \ifx\savedttchar\undefined\else\catcode\savedttchar=12 \fi
+    \adef{ }{\ }%;label(ssrc1)
+    \catcode`\|=0 \adef{^^I}{\SRCtab}}}
+{\catcode32=13 \gdef\SRCtab{    }}
+\end{Verbatim}
+
+\subsection{Makro \p{SRCgetline}}
+\label{getline}
+
+Makro |\SRCscan| zjistí, zda argument makra |\SRCgetline| obsahuje |\<popisek>| a jaké je před ním odsazení.\footnote{Jako odsazení se chápe text (zpravidla posloupnost mezer) před prvním výskytem \p{<...>}.} Oboje uloží do příslušných maker. V~argumentu mají mezery kategorii~13 a vlnky kategorii~12. V~níže použitém testu mají vlnky kategorii~13, proto nemůže dojít k~chybnému testu. Jestliže je odsazení nulové, platí |#1=\noexpand| dle definice makra |\SRCensurehmode|. V~tom případě se |\SRCods| opraví na nic.
+\begin{Verbatim}
+\def\SRCnoex{\noexpand}
+\def\SRCscan#1\<#2>#3\SRCend{%
+  \ifx~#3~%
+    \let\SRCnaz\relax
+  \else
+    \def\SRCods{#1}%
+    \ifx\SRCods\SRCnoex
+      \def\SRCods{}%
+    \fi
+    \def\SRCnaz{#2}%
+  \fi}
+\end{Verbatim}
+
+Makro |\SRCgetline| načte a vytiskne jeden řádek.
+\begin{itemize}
+\item Pokud řádek obsahuje |\<popisek>|, uloží se |popisek| do makra |\SRCnaz| a odsazení před ním do makra |\SRCods|. Případný další text za \p{<...>} se ignoruje. Do makra |\SRCcontent| se přidá |\SRCblock{odsazení}{popisek}|.
+\item V~opačném případě se do makra |\SRCcontent| přidá |\SRConeline{#1}|.
+\end{itemize}
+Oddělovačem makra |\SRCgetline| je token \hbox{\[^^M\]13 }, který se vytvoří díky makru |\obeylines| použitému na řádku~\ref{98}.
+
+\begin{Verbatim}[commandchars=/()]
+\begingroup\lccode`\~13
+    \lowercase{\endgroup\def\SRCgetline#1~}{%
+  \SRCscan#1\<>\SRCend
+  \ifx\SRCnaz\relax
+    \addto\SRCcontent{\SRConeline{#1}}%
+    \SRCprintline{#1}%
+  \else
+    \expandafter\expandafter\expandafter\addto
+      \expandafter\expandafter\expandafter\SRCcontent
+      \expandafter\expandafter\expandafter{%
+        \expandafter\expandafter\expandafter\SRCblock
+        \expandafter\expandafter\expandafter{%
+        \expandafter\SRCods\expandafter}\expandafter{\SRCnaz}}%/label(150)
+    \SRCprintblock{\SRCods}{\SRCnaz}%
+  \fi\par}
+\end{Verbatim}
+
+Makro |\SRCprintline| vysází jeden řádek programu. Čísla vysázených řádků jsou uložena v~registru |\SRClinenum|. Pokud je |\SRClinenum<0|, pak se číslo nevysází. Na začátku každého řádku je možné použít |\SRClinehook|.
+\begin{Verbatim}[commandchars=/()]
+\newcount\SRClinenum
+\def\SRCprintline#1{\SRCprintlinenum#1\par}
+\def\SRCprintlinenum{\ifprintSRC
+    \ifnum\SRClinenum<0 \else
+      \global\advance\SRClinenum1
+    \fi
+  \fi
+  \csname SRClinehook\endcsname
+  \quitvmode
+  \ifnum\SRClinenum<0 \else
+    \llap{\sevenrm\the\SRClinenum\kern.9em}%/label(141)
+  \fi}
+\end{Verbatim}
+
+Makro |\SRCprintblock| vysází odkaz na blok. Mezery v~odsazení mají kategorii~13 a chovají se jako ostatní mezery uvnitř prostředí |\BEGSRC|.
+\begin{Verbatim}
+\def\SRCprintblock#1#2{\SRCprintlinenum
+  #1\SRCangle{\csname SRCtit:#2\endcsname}\par}
+\end{Verbatim}
+
+\subsection{\uv{Makro} \p{ENDSRC}}
+\label{endsrc}
+
+Makra definovaná v~této podsekci se budou provádět v~místě použití |\ENDSRC|. Proto má podsekce tento název. Ve skutečnosti ale žádná sekvence |\ENDSRC| není definována. Načtení řádků až po tokeny \[\\]12 \[E\]11 \[N\]11 \[D\]11 \[S\]11 \[R\]11 \[C\]11 řeší makro |\startSRC|. Pokud je nastaveno |\printSRCfalse|, pak je teoreticky možné uvolnit paměť nastavením |\nonprintbox| na prázdný vbox. Nicméně toto uděláno není, což umožňuje pomocí háčku |\endSRChook| obsah |\nonprintbox| dále zpracovat.
+
+Samotné vysázení jednotlivých řádků je vyřešeno expanzí \texttt{\char`\|}|tt#1| na řádku~\ref{180}, kdy se prostřednictvím |\everypar| (vizte řádek~\ref{111}) volá makro |\SRCgetline| a to se expanduje na |\SRCprintline| nebo na |\SRCprintblock|.
+
+\begin{Verbatim}[commandchars=/()]
+{\catcode`\|=0 \catcode`\\=12
+  |gdef|startSRC#1\ENDSRC{|tt#1|doSRC/label(180)
+    |ifprintSRC
+      |egroup|par|ttskip
+    |else
+      |egroup|egroup
+    |fi
+    |csname endSRChook|endcsname|testparA}}
+\end{Verbatim}
+
+Makro |\doSRC| zajistí, že řádky a bloky budou dále zpracovány v~závislosti na způsobech volání makra |\BEGSRC|.
+\begin{itemize}
+\item U~prvního způsobu se do \soub{ds} zapíše řádek 
+\begin{verbatim}
+\DEFSRC {InterniPopisek}{Formátovaný popisek}
+\end{verbatim}
+\item U~druhého způsobu se do \soub{ds} zapíše řádek
+\begin{verbatim}
+\ADDSRC {InterniPopisek}
+\end{verbatim}
+\item V~obou případech se pak zavolá háček |\SRCdshook|, v~němž se například mohou lokálně nadefinovat další makra. Dále se jednotlivé řádky obsažené v~|\SRCcontent| zapíšou do~\soub{ds} makrem |\SRCwritedsline| a bloky makrem |\SRCreadblock|.\footnote{\label{fn14}Trik na řádcích~\ref{dosrc1} a~\ref{dosrc2} způsobí, že se token \p{SRCblock} zapíše do~\soub{ds} jako neexpandovaný token \p{SRCreadblock} a za ním budou následovat původní \uv{argumenty} makra \p{SRCblock} vložené na řádku~\ref{150}.}
+Po ukončení bloku se do~\soub{ds} zapíše token |\ENDDEFSRC|.
+\item U~třetího způsobu se pak pomocí maker |\SRCwriteline| a |\SRCwriteblock| zapíše obsah |\SRCcontent| přímo do~\soub{txt}.
+\end{itemize}
+
+\begin{Verbatim}[commandchars=;()]
+\def\doSRC{\everypar{}%
+  \def\ { }%;label(192)
+  \ifsaveSRC
+    \ifaddingSRC
+      \immediate\write\SRCdsfile{\noexpand\ADDSRC{\SRCid}}%
+    \else
+      \immediate\write\SRCdsfile{\noexpand\DEFSRC
+        {\SRCid}{\csname SRCtit:\SRCid\endcsname}}%
+    \fi
+    \let\SRConeline\SRCwritedsline
+    \let\SRCbeginline\relax
+    \let\SRCendline\relax
+    \def\SRCblock{\SRCreadblock}%;label(dosrc1)
+    \let\SRCreadblock\relax;label(dosrc2)
+    \csname SRCdshook\endcsname
+    \immediate\write\SRCdsfile{\SRCcontent}%
+    \immediate\write\SRCdsfile{\noexpand\ENDDEFSRC}%
+  \else
+    \let\SRConeline\SRCwriteline
+    \let\SRCblock\SRCwriteblock
+    \SRCcontent
+  \fi}
+\end{Verbatim}
+
+
+\subsection{Cesta z~\soub{tex} do \soub{ds}}
+
+Makro |\SRCwritedsline| zapíše do \soub{ds} jeden řádek ve tvaru
+
+\begin{verbatim}
+\SRCbeginline : ... \SRCendline
+\end{verbatim}
+
+Uvědomme si, že při zápisu do souboru se za název řídicí sekvence skládající se z~písmen automaticky vkládá mezera. Tato mezera a všechny bezprostředně navazující mezery jsou poté při načítání souboru pohlceny token procesorem.
+Znak dvojtečka způsobí, že případné mezery na začátku řádku programu (tj.~za touto dvojtečkou) nebudou při načítání souboru pohlceny.
+\begin{Verbatim}
+\def\SRCwritedsline#1{\SRCbeginline:#1\SRCendline}
+\end{Verbatim}
+
+Jak již bylo řečeno v~poznámce~\ref{fn14}, blok programu se do~\soub{ds} zapíše ve tvaru
+
+\begin{verbatim}
+\SRCreadblock {   }{...}
+\end{verbatim}
+
+\subsection{Cesta z~\soub{ds} do expand procesoru}
+\label{s6.7}
+
+Již víme, že uvnitř \soub{ds} jsou uloženy jednotlivé bloky programu v~následujícím tvaru.
+
+\begin{verbatim}
+\DEFSRC {InterniPopisek}{Formátovaný popisek}
+  \SRCbeginline :...\SRCendline ...\SRCreadblock {   }{...}...
+\ENDDEFSRC
+\ADDSRC {InterniPopisek}
+  \SRCbeginline :...\SRCendline ...\SRCreadblock {   }{...}...
+\ENDDEFSRC
+\end{verbatim}
+
+Makro |\DEFSRC#1#2| uloží argument |#1| do makra |\SRCid| a argument |#2| do makra |\csname SRCtit:\SRCid\endcsname|. Další obsah až po |\ENDDEFSRC| se postupně uloží do makra |\csname SRCcon:\SRCid\endcsname|.
+\begin{Verbatim}
+\def\DEFSRC#1#2{\def\SRCid{#1}\sdef{SRCtit:#1}{#2}%
+  \sdef{SRCcon:#1}{}}
+\end{Verbatim}
+
+Podobně makro |\ADDSRC#1| uloží argument |#1| do makra |\SRCid| a další obsah až po |\ENDDEFSRC| se do makra |\csname SRCcon:\SRCid\endcsname| přidá postupně.
+\begin{Verbatim}
+\def\ADDSRC#1{\def\SRCid{#1}}
+\end{Verbatim}
+
+Makro |\SRCbeginline:| načte verbatim text až po tokeny \[\\]12 \[S\]11 \[R\]11 \[C\]11 \[e\]11 \[n\]11 \[d\]11 \[l\]11 \[i\]11 \[n\]11 \[e\]11 a tento text přidá k~aktuálnímu obsahu makra |\csname SRCcon:\SRCid\endcsname| jako argument makra |\SRConeline|. Všechny mezery se načtou s~kategorií~13 (díky makru |\setSRC| a jeho řádku~\ref{ssrc1}) a pak se uvnitř makra |\doSRC| (díky řádku~\ref{192}) postupně expandují na mezery kategorie~10. Uvnitř definice |\SRCbeginlineA| je třeba s~mezerami pracovat opatrně.
+
+\begin{Verbatim}
+\def\SRCbeginline:{\bgroup\setSRC \catcode`\|=12 \SRCbeginlineA}
+{\catcode`\|=0 \catcode`\\=12
+  |gdef|SRCbeginlineA#1\SRCendline{|egroup
+    |expandafter|addto|csname SRCcon:|SRCid|endcsname
+      {|SRConeline{#1}}%
+    |ignorespaces}}
+\end{Verbatim}
+
+Makro |\SRCreadblock#1#2| přidá |\SRCblock{#1}{#2}| k~aktuálnímu obsahu makra |\csname SRCcon:\SRCid\endcsname|. Je nutné zajistit, aby se mezery z~odsazení načítaly s~kategorií~13. V~souboru \soub{ds} je za tokenem |\SRCreadblock| mezera a ta je na řádku~\ref{233} při načítání čísla pohlcena. Poté se pomocí maker |\SRCreadblockA| a |\SRCreadblockB| načtou jednotlivé argumenty.
+
+\begin{Verbatim}[commandchars=/()]
+\def\SRCreadblock{\begingroup\afterassignment\SRCreadblockA
+  \catcode32=13}/label(233)
+\def\SRCreadblockA#1{\gdef\SRCods{#1}\endgroup\SRCreadblockB}
+\def\SRCreadblockB#1{\expandafter\addto
+  \csname SRCcon:\SRCid\expandafter\endcsname\expandafter{%
+    \expandafter\SRCblock\expandafter{\SRCods}{#1}}}
+\end{Verbatim}
+
+Makro |\ENDDEFSRC| nedělá nic a je použito pouze proto, aby byl obsah souboru \soub{\p{jobname}.ds} čitelnější.
+\begin{Verbatim}
+\let\ENDDEFSRC\relax
+\end{Verbatim}
+
+
+Soubor \soub{ds} se načítá na začátku dokumentu v~průběhu načítání souboru \soub{gensrc.tex}. Pokud soubor~\soub{ds} neexistuje, nic se nestane. Pro test existence je použito makro |\softinput| z~\cite[sekce~7.1]{tbn}.
+\begin{Verbatim}
+\newread\testin
+\def\softinput #1 {\let\next=\relax \openin\testin=#1
+  \ifeof\testin \message{Warning: the file #1 does not exist}%
+  \else \closein\testin \def\next{\input #1 }\fi
+  \next}
+\softinput\jobname.ds
+\end{Verbatim}
+
+Interně bude \soub{ds} reprezentován řídicí sekvencí |\SRCdsfile|. Soubor se po svém načtení ihned otevře pro zápis.
+\begin{Verbatim}
+\newwrite\SRCdsfile
+\immediate\openout\SRCdsfile\jobname.ds
+\end{Verbatim}
+
+\subsection{Cesta z~expand procesoru do \soub{txt}}
+
+V~makru |\SRCodsazeni| je uloženo aktuální odsazení celého bloku, které je uvnitř vnořených |\SRCwriteblock| lokálně aditivní. Na začátku je odsazení prázdné.
+\begin{Verbatim}
+\def\SRCodsazeni{}
+\end{Verbatim}
+
+Makro |\SRCwriteline| zapíše do generovaného programu jeden řádek. Na začátku každého zapsaného řádku je možné použít |\SRCwritehook|.
+\begin{Verbatim}
+\def\SRCwriteline#1{\csname SRCwritehook\endcsname
+  \immediate\write\SRCfile{\SRCodsazeni#1}}
+\end{Verbatim}
+
+Makro |\SRCwriteblock| lokálně přidá nové odsazení k~aktuální hodnotě makra |\SRCodsazeni|. Mezery v~odsazení mají kategorii~13. S~tímto odsazením se pak expanduje obsah aktuálního bloku.
+
+Jelikož expand procesor provádí úplnou expanzi, jsou takto na řádku~\ref{256} expandovány i~případné vnořené bloky programu.
+
+Navíc díky použití |\csname| nedojde k~chybě v~případě, že blok s~daným názvem není definován, například v~prvním průchodu \TeX em.
+
+\begin{Verbatim}[commandchars=/()]
+\def\SRCwriteblock#1#2{\begingroup
+  \addto\SRCodsazeni{#1}%
+  \csname SRCcon:#2\endcsname/label(256)
+  \endgroup}/label(412z)
+\end{Verbatim}
+
+
+
+
+
+
+
+
+\section{Aplikace}
+\label{aplik}
+
+\subsection{Imitování podprogramů}
+
+V~balíčku \soub{gensrc} jsou bloky programu interně definovány jako makra. Proto je možné stejný blok použít na více místech a do \soub{txt} jej vyexportovat vícekrát. Takto je možné celkem přímočaře imitovat volání podprogramů v~programovacích jazycích, které volání podprogramů neumožňují.
+
+Jak se ale vyrovnat s~podprogramy, které mají argumenty? Použijeme globální proměnné, které si rezervujeme pouze pro použití uvnitř daného \uv{podprogramu}. V~našem příkladě to budou proměnné |SDRin1| a |SDRin2|, jejichž hodnotu nastavíme před voláním \uv{podprogramu} a které budou sloužit jako jeho argumenty, a~proměnná |SDRout|, do níž \uv{podprogram} uloží svou výstupní hodnotu.
+
+V~ukázkách je kousek zdrojového souboru. Jak vypadá vygenerovaný program, si lze snadno domyslet.
+
+\dily6
+\Ram{3}{\zdr}{12}
+
+\dily9
+\Ram{3,5,6}{\zdr}{13}
+
+Tímto způsobem sice není možné imitovat rekurzivní volání podprogramů, nicméně toto v~rámci řešení původního úkolu nebylo potřeba.
+
+\subsection{Koordinace více programů}
+
+Představme si situaci, kdy píšeme několik programů, třeba i~v~různých programovacích jazycích, a tyto programy mají vzájemně spolupracovat.
+Například si programy mohou předávat data, kdy výstup některé funkce jednoho programu je použit pro vstup příslušné funkce druhého programu. Při vývoji programů pak potřebujeme, aby tyto funkce byly spolu kompatibilní.
+Pro lepší údržbu a pochopení je výhodnější, když ve zdrojovém souboru a v~dokumentaci jsou tyto funkce poblíž sebe.
+
+Z~pohledu balíčku \soub{gensrc} se jedná o~situaci, kdy průběžně generujeme dva soubory \soub{txt}, přičemž se může dokonce stát, že některé kousky kódu budou společné. Soubory \soub{txt} můžeme generovat každý se svým blokem a tyto bloky poté definovat průběžně.
+
+\dily24
+\Ram{4,8,13,18,21}{\zdr}{27}
+
+Může být užitečné v~dokumentaci odlišit barvou, ke kterému generovanému souboru příslušný kousek kódu patří. K~tomu lze využít háček |\SRChook|.
+
+V~následující ukázce navíc háčky nastavíme tak, aby jejich změna byla lokální a aby se po ukončení prostředí |\BEGSRC| předefinovaly zpět na předchozí hodnotu. Rozbor ukázky přenechávám čtenáři.
+
+\begin{Verbatim}
+\def\switchSRC#1#2{%
+  \sdef{#1BEGSRC}{%
+    \let\exSRChook\SRChook
+    \def\SRChook{\longlocalcolor#2%
+      \global\let\SRChook\exSRChook}%
+    \BEGSRC}}
+\switchSRC{a}{\Red}
+\switchSRC{b}{\Green}
+\end{Verbatim}
+
+\dily24
+\Ram{4,8,13,18,21}{\zdr}{28}
+
+Příslušná dokumentace pak vypadá následovně.
+
+\Ram{2,47,73,89}{\uka}{11}
+
+
+\subsection{Křížové odkazy}
+
+V~balíčku \soub{gensrc} není implementován mechanismus maker jako v~jazyku \WEB. Pokud si ale uvědomíme, že uvnitř prostředí \p{BEGSRC} má znak \texttt{\char`\|} kategorii~0, tj. uvozuje název řídicí sekvence, pak není problém
+\begin{verbatim}
+v programu použít jednoduché |makro nebo dokonce
+použít |Makro(s jedním)(i více) argumenty
+\end{verbatim}
+pokud si řídicí sekvence |\makro| a |\Makro| předem nadefinujeme. Pouze si musíme dát pozor na to, aby v~okamžiku definování měly znaky, které oddělují argumenty, kategorii~12, případně si musíme správné načtení argumentů zajistit jiným způsobem.
+
+V~následujících ukázkách budeme používat také makra, která nebudeme definovat globálně, ale využijeme mechanismus háčků k~tomu, abychom v~různých okamžicích jejich definici měnili lokálně.
+
+Když autor článku začínal s~programováním, měl počítač Commodore~64 s~jazykem BASIC. Po třech desetiletích objevil na internetu emulátor tohoto počítače~\cite{c64} a~z~nostalgie si v~něm trochu zaprogramoval.
+
+Emulátor má jako počítač Commodore~64 stejně nízkou rychlost, stejně nízkou přesnost reálné aritmetiky a stejně nízké rozlišení obrazovky.
+Tyto nevýhody autor přetavil ve výhody a vytvořil názorný program používaný pro řešení úloh ve svém vyučovaném předmětu Numerická matematika.
+
+Pro jazyk BASIC je charakteristické, že
+\begin{itemize}
+\item program tvoří posloupnost příkazů, která nijak neodpovídá logické struktuře programu.
+\item Na začátku každého řádku je uvedeno číslo tohoto řádku. Bývá zvykem, že posloupnost čísel řádků má krok~10.
+\item Program obsahuje skoky na řádky s~daným číslem.
+\end{itemize}
+Tyto problémy jsou dobře vidět na následující ukázce kousku programu.
+
+\dily8\ud
+\Ram{\zdr}{10}
+
+S~balíčkem \soub{gensrc} je možné uvedené problémy vyřešit následovně.
+\begin{itemize}
+\item Logickou strukturu programu lze vytvořit a udržovat pomocí bloků.
+\item Číslo řádku je známo až po úplné expanzi všech bloků při zápisu do souboru~\soub{txt}. Na tom místě lze využít háček |\SRCwritehook|.
+\item Pro skoky lze použít mechanismus křížových odkazů. Přitom číslo řádku v~dokumentaci je obecně jiné než číslo řádku v~programu. V~dokumentaci pak křížové odkazy mohou být aktivní.
+\end{itemize}
+V~ukázce je příslušná část dokumentace.
+
+\Ram{36,59}{\uka}{9}
+
+Podívejme se, jak lze uvedený mechanismus čísel řádků a křížových odkazů implementovat.
+
+Pro křížové odkazy budeme používat řídicí sekvence |\LL(#1)| a |\RR(#1)|, kde oddělovače argumentů mají kategorii~12. Tyto sekvence budou na grafu na straně~\pageref{s15} cestovat všemi šipkami. Pomocí háčků budeme na jednotlivých místech definovat, jak se mají tyto sekvence expandovat nebo neexpandovat.
+
+Při sazbě dokumentace se makro |\LL(#1)| chová stejně jako |\label[S:#1]|, přičemž se odkazuje na číslo řádku |\SRClinenum|. Makro |\RR(#1)| se chová jako |\ref[S:#1]| se změnou fontu dle řádku~\ref{141}.
+
+\begin{Verbatim}
+\def\SRChook{\def\LL(##1){%
+    \immediate\write\reffile
+      {\string\Xlabel{S:##1}{\the\SRClinenum}}%
+    \dest[ref:S:##1]}%
+  \def\RR(##1){{\sevenrm\ref[S:##1]}}}
+\end{Verbatim}
+
+Při zápisu do~\soub{ds} se makra pouze přepíšou s~uvozujícím znakem~\texttt{\char`\|}. Ten má při zápisu do~\soub{ds} kategorii~12 a při opětovném načtení~\soub{ds} kategorii~0. Obě makra tak budou i~nadále fungovat jako makra.
+
+\begin{Verbatim}
+\def\SRCdshook{\def\LL(##1){|LL(##1)}%
+  \def\RR(##1){|RR(##1)}}
+\end{Verbatim}
+
+Nejsložitější je zápis do~\soub{txt}, protože při zápisu do souboru není možné provádět příkazy hlavního procesoru. V~našem případě potřebujeme příkazy pro
+\begin{itemize}
+\item zvýšení čísla řádku a
+\item zápis čísla řádku do souboru \soub{\p{jobname}.ref}, který se v~OPmacu používá pro realizaci křížových odkazů.
+\end{itemize}
+
+Háček |\SRCwritehook| nadefinujeme tak, že namísto zápisu řádku do~\soub{txt} tento řádek načte,\footnote{V~ukázce na straně~\pageref{s27} je vidět, kdy přesně se háček \p{SRCwritehook} volá a jakým způsobem lze pomocí něj načíst argument příkazu \p{write}.} dále zpracuje a sám zajistí zápis.
+Nejdříve řádek vysází do pomocného |\box0|, přičemž uvnitř tohoto boxu lokálně nadefinuje |\LL(#1)| jako |\label[B:#1]|, zatímco |\RR(#1)| ignoruje. Poté řádek zapíše do~\soub{txt}, přičemž na začátek řádku vloží jeho číslo, |\LL(#1)| ignoruje a |\RR(#1)| lokálně nadefinuje jako |\ref[B:#1]|.
+
+\begin{Verbatim}
+\newcount\cislo
+\def\SRCwritehook#1\SRCfile#2{\advance\cislo10
+  {\setbox0=\hbox{%
+    \def\LL(##1){\immediate\write\reffile
+      {\string\Xlabel{B:##1}{\the\cislo}}}%
+    \def\RR(##1){}%
+    \lowercase{#2}}}%
+  {\def\LL(##1){}%
+    \def\RR(##1){\csname lab:B:##1\endcsname}
+    \lowercase{\immediate\write\SRCfile{\the\cislo\space#2}}}}
+\end{Verbatim}
+
+Následuje ukázka příslušné části zdrojového kódu s~využitím výše uvedených maker.
+
+\dily20
+\Ram{3,7,8,11,13}{\zdr}{11}
+
+Vygenerovaný program lze programem \soub{petcat}~\cite{petcat} převést do souboru s~příponou~\soub{prg}, ve kterém je po bajtech uložen obsah paměti počítače Commodore~64, jaký by byl po načtení programu do počítače. Soubor \soub{prg} lze spustit v~emulátoru~\cite{c64}. Programem \soub{prg2wav}~\cite{prg2wav} lze dále vytvořit soubor s~příponou \soub{wav}, který odpovídá zvuku nahranému na magnetofonovou kazetu.\footnote{Dříve narozenému čtenáři se zajisté okamžitě vybavilo ono charakteristické \uv{chrrr píp pííííp pííp chrrrrr píííp}.~:-)} Soubor \soub{wav} lze dále na kazetu nahrát, nicméně autorovi článku se nepodařilo jej nahrát tak, aby jej počítač Commodore~64 načetl správně.\footnote{Pokud někdo ze čtenářů má s~nahráváním souboru \soub{wav} na kazetu zkušenosti, bude autor za předání zkušeností rád.}
+
+
+\subsection{Program ve více jazycích}
+
+V~této podsekci se zaměříme na situaci, kdy potřebujeme vytvořit stejný program v~několika podobných programovacích jazycích. V~této situaci s~úspěchem využijeme \TeX ová makra, která se v~závislosti na přepínači budou expandovat různě.
+
+V~ukázkách se bude jednat o~dva dialekty jazyka SQL, přičemž aktuální dialekt bude určovat makro |\version|. Podle něj se nastaví přepínač |\ifOR| a ten poté bude rozhodovat o~správné expanzi maker.
+
+\begin{Verbatim}
+\def\versionOR{OR}
+\unless\ifdefined\version \let\version\versionOR \fi
+\newif\ifOR
+\ifx\version\versionOR \ORtrue \fi
+\end{Verbatim}
+
+Vytvoříme makro |\variant#1#2#3|, které nadefinuje makro~|#1| s~jedním argumentem, aby se expandovalo jako~|#2|, nebo jako~|#3|.
+
+\begin{Verbatim}[commandchars=:!?]
+\def\variant:Nove[#1]#2#3{\ifOR \sdef{:Nove[#1]}:Nowe[##1]{#2}%
+  \else \sdef{:Nove[#1]}:Nowe[##1]{#3}\fi}
+\end{Verbatim}
+
+Dále nadefinujeme samotná makra s~jejich expanzí v~jednotlivých dialektech.
+
+\begin{Verbatim}[commandchars=:!?]
+\variant{:Nove[integer]}{number(38)}{decimal(38)}
+{\catcode`\_=12 \globaldefs=1
+  \variant{:Nove[rownum]}{rownum}
+    {(row_number() over (order by :Nowe[#1]))}}
+\end{Verbatim}
+
+Uvnitř prostředí |\BEGSRC| můžeme makra volat s~uvozujícím znakem~\texttt{\char`\|}. Nicméně si ukážeme, jak je možné pro volání maker využít znak kategorie~13. Znak~|@| nadefinujeme tak, aby načítal název makra až po další znak~|@| a pak načítal argument makra až po třetí znak~|@|. Znak musí být aktivní v~okamžiku definování i~uvnitř prostředí |\BEGSRC|. Případné vysázení znaku~|@| se provede pomocí~|@@@|.
+
+\begin{Verbatim}[commandchars=:!?]
+{\catcode`\@=13 \gdef@:Nove[#1]@:Nowe[#2]@{\csname:Nove[#1]\endcsname{:Nowe[#2]}}}
+\sdef{}:Nowe[#1]{@}
+\def\SRChook{\catcode`\@=13 }
+\end{Verbatim}
+
+S~těmito definicemi již můžeme psát části programu.
+
+\dily7
+\Ram{3}{\zdr}{29}
+
+Příslušný vygenerovaný program a dokumentace při nastavení |\ORtrue| jsou následující.
+
+\Ram{}{\zdr}{30}
+\Ram{}{\uka}{12}
+
+Podobně pro |\ORfalse|.
+
+\Ram{}{\zdr}{31}
+\Ram{}{\uka}{13}
+
+Jak ale zajistit, abychom vygenerovali program najednou v~obou dialektech a~nemuseli přitom ručně nastavovat |\version|? Stačí si vytvořit řídicí soubor, kterým \TeX\ spustíme dávkově.
+
+\dily6
+\Ram{3}{\zdr}{32}
+
+
+
+
+
+
+%\JSvss
+%\JSbreak
+
+
+
+\def\refname{Seznam literatury}
+\begin{thebibliography}{9}
+\selectlanguage{english}
+\raggedright
+
+\bibitem{DEKlit}
+Donald Ervin Knuth. \emph{Literate Programming}. Received September 1983. Submitted to The Computer Journal.
+\url{http://www.literateprogramming.com/knuthweb.pdf}
+
+\bibitem{DEKtp}
+Donald Ervin Knuth. \emph{\TeX: The Program} (Computers and Typesetting, Volume~B). Reading, Massachusetts: Addison-Wesley, 1986. ISBN \hbox{0-201-13437-3}.
+\url{http://tug.ctan.org/systems/knuth/dist/tex/tex.web}
+
+\bibitem{docdoc}
+Frank Mittelbach.
+\emph{The \soub{doc} and \soub{shortvrb} Packages}.
+\url{http://mirrors.ctan.org/macros/latex/base/doc.pdf}
+
+\bibitem{docdocstrip}
+Frank Mittelbach, Denys Duchier, Johannes Braams, Marcin Woliński, Mark Wooding.
+\emph{The \soub{DocStrip} program}.
+\url{http://mirrors.ctan.org/macros/latex/base/docstrip.pdf}
+
+\bibitem{tbn}
+Petr Olšák. \emph{\TeX book naruby}. Second edition, Konvoj 2001, ISBN \hbox{80-7302-007-6}.
+\url{http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf}
+
+\bibitem{opmac}
+Petr Olšák. \emph{OPmac~-- rozšiřující makra plain \TeX u}.
+\url{https://petr.olsak.net/opmac.html}
+
+\bibitem{gensrcweb}
+Jan Šustek.
+\url{https://github.com/jsustek/gensrc/blob/main/gensrc.tex}
+
+\bibitem{rezani}
+Jan Šustek. Jak umožnit stránkový zlom uvnitř vložených obrázků. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.\TODO{Aktualizovat odkaz podle skutečnosti.}
+
+\bibitem{docstrip}
+The \LaTeX\ Project Team, Frank Mittelbach.
+\emph{\soub{docstrip}~-- Remove comments from file}.
+\url{https://ctan.org/pkg/docstrip}
+
+\bibitem{prg2wav}
+tomdwaggy.
+\url{https://github.com/tomdwaggy/prg2wav}
+
+\bibitem{c64}
+\emph{C64 online emulator}.
+\url{https://virtualconsoles.com/online-emulators/c64/}
+
+\bibitem{petcat}
+\emph{VICE -- the Versatile Commodore Emulator}.
+\url{https://vice-emu.sourceforge.io/}
+
+\end{thebibliography}
+%\JSvfil
+%\JSbreak
+
+\selectlanguage{english}
+
+\section*{Summary: On generating documented source code by blocks in~\TeX}
+
+This paper concerns writing programs and their documentation. We show author's package \soub{gensrc} running on OPmac, which allows to write both program and its documentation in one \TeX\ file. We also show more possibilities and applications of this package.
+
+\medskip
+
+\noindent{\bf Key words:}
+Documentation, literate programming, OPmac, \soub{gensrc}.
+
+\end{document}
+%23456789012345678901234567890123456789012345678901234567890123
