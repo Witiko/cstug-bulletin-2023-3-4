@@ -1,0 +1,596 @@
+\let\orilooseness\looseness
+\documentclass[oldcsbabel]{csbulletin}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+\usepackage{color}
+% \setcounter{page}{8}
+
+% Hack for hyperref
+\mubytein 0
+% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
+%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
+\usepackage{url}
+
+\usepackage{tcolorbox}
+%\newcommand{\seda}[1]{\colorbox{black!20}{#1}}
+\newcommand{\seda}[1]{\colorbox[cmyk]{0,0,0,0.2}{#1}}
+
+\DefineShortVerb\|
+\usepackage[utf8]{inputenc}
+
+\fvset{numbers=none,firstnumber=last,numbersep=3pt,
+  xleftmargin=15pt}
+
+\def\p#1{\texttt{\char`\\#1}}
+\def\uv#1{\char18 #1\char16 }
+\def\={\discretionary{-}{-}{-}}
+\let\phi\varphi
+\def\eqref#1{{\rm(\ref{#1})}}
+\def\emph#1{{\sl#1\/}}
+\newcount\tmphc
+\def\soub#1{{\sffamily
+  \tmphc\hyphenchar\font
+  \hyphenchar\font-1 #1%
+  \hyphenchar\font\tmphc}}
+\def\SX{{\tt tex.sx}}
+\def\<#1>{$\langle\hbox{\sl#1\/}\rangle$}
+\makeatletter
+\DeclareRobustCommand{\La}{L\kern-.36em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }}
+\makeatother
+\def\AllTeX{(\La\kern-.075em)\kern-.075em\TeX}
+
+\clubpenalty10000 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% fancyvrb hack - JS
+\makeatletter
+\def\FV@ListVSpace{%
+  \@topsepadd\medskipamount % \topsep
+  % z nejakeho duvodu se uvnitr Verbatim nuluje \topsep
+  \if@noparlist\advance\@topsepadd\partopsep\fi
+  \if@inlabel
+    \vskip\parskip
+  \else
+    \if@nobreak
+      \vskip\parskip
+      \clubpenalty\@M
+    \else
+      \addpenalty\@beginparpenalty
+      \@topsep\@topsepadd
+      \advance\@topsep\parskip
+      \addvspace\@topsep
+    \fi
+  \fi
+  \global\@nobreakfalse
+  \global\@inlabelfalse
+  \global\@minipagefalse
+  \global\@newlistfalse}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\def\JSvfil{\vfil}
+\def\JSvss{\vskip0ptminus12pt}
+\def\JSbreak{\break}
+
+\let\PRESKOC\iffalse
+\let\COKSERP\fi
+
+
+
+\begin{document}
+
+\title
+  {Co by každý \AllTeX ový nováček měl znát}
+\author{Barbara Beeton}
+\podpis{Barbara Beeton,
+  TUGboat,
+  Providence, RI, USA
+  \url{bnb@tug.org}}
+%\podpis{Jan Šustek, \url{jan.sustek@osu.cz}\\*
+%  Ostravská univerzita, Přírodovědecká fakulta,
+%  Katedra matematiky\\*
+%  30.~dubna~22,
+%  CZ-701~03 Ostrava, Czech Republic}
+
+\maketitle[3pt]
+
+\begin{narrower}
+
+{\hfil\bf Abstrakt}\medskip
+
+O~\LaTeX u se říká, že se v~něm dají vytvořit kvalitně vypadající dokumenty,
+ale že cenou za to je, že je složitější se jej naučit.
+To je sice pravda, nicméně tyto obavy je možné zmírnit, když pochopíme několik základních principů a naučíme se vyhýbat některým technikám, které se mohou zdát jasné, avšak nevedou k~cíli. Cílem tohoto článku je ukázat začínajícím uživatelům dobré \LaTeX ové návyky dříve, než se začnou projevovat ty špatné.
+
+\medskip\noindent
+{\bf Klíčová slova:}
+\LaTeX, nováček, chyby, log soubor.
+
+\end{narrower}
+
+\makeatletter
+\def\@thefnmark{}\@footnotetext{Z~anglického originálu \cite{newbie} přeložil Jan Šustek.}
+\makeatother
+
+\section{Úvod}
+
+V~tomto článku budu popisovat situace, se kterými jsem se v~průběhu mého pracovního života často setkávala, a to zejména na dvou místech:
+\begin{itemize}
+\item při práci v~týmu \TeX nické podpory významného matematického nakladatelství, kde bylo nutné odpovídat na dotazy autorů a psát uživatelskou dokumentaci,
+\item na online \TeX ovém fóru na StackExchange~\cite{TSE}, kde uživatelé pokládají hromady dotazů od jednoduchých až po velmi pokročilé. Členové komunity sepsali na fóru seznam často odkazovaných odpovědí~\cite{2419}.
+\end{itemize}
+Několikrát zde budu opakovat obecnou radu: Přečtěte si dokumentaci.
+
+\section{Důležité pojmy}
+\label{dupo}
+
+Existuje několik pojmů, které se k~začínajícím uživatelům nedostanou, nebo se k~nim dostanou, ale jsou pro ně nesrozumitelné. Pojďme se na ně podívat.
+
+\subsection{Šablona}
+
+Mnoho nových \AllTeX ových\footnote{Když v~článku použijeme výraz \uv{\AllTeX}, týká se příslušný text jak programu \TeX, tak jeho nadstavby \LaTeX. Pokud závorky nepoužijeme, týká se text pouze \LaTeX u. (pozn.~překl.)} uživatelů si myslí, že třída dokumentu (soubor s~příponou \soub{.cls}) je šablonou pro konkrétní typ dokumentu. I~když ta myšlenka jde správným směrem, není to úplně pravda. Šablonou bývá zdrojový soubor s~příponou \soub{.tex}, který obsahuje kostru dokumentu napsaného v~daném stylu. Soubor začíná příkazem |\documentclass| a ukazuje použití základních příkazů v~dokumentu.
+Do něj je pak možné přidat vlastní definice a text dokumentu. V~ideálním případě lze šablonu zpracovat \AllTeX em bez chyb, přičemž ale výsledek zřejmě nebude nijak užitečný.
+
+\subsection{Příkazový řádek}
+
+Většina nových uživatelů v~současnosti spouští \AllTeX\ z~editoru nebo z~jiného grafického rozhraní, přičemž jej spouští neinteraktivně a čekají, dokud program neskončí (s~chybou, nebo bez) nebo se nezacyklí. Spouštění z~příkazového řádku naopak umožňuje s~programem komunikovat a v~určitých situacích opravit chybu za běhu, nebo, pokud toto není možné, ukončit program dříve, než začne vypisovat hromadu neužitečných chybových zpráv.
+
+Jedním druhem chyb opravitelných za běhu je překlep v~názvu příkazu.
+\begin{Verbatim}
+! Undefined control sequence.
+l.137 \scetion
+              {Nadpis}
+? 
+\end{Verbatim}
+Uživatel může překlep opravit napsáním
+\begin{Verbatim}
+i\section
+\end{Verbatim}
+a stiskem klávesy Enter. Samozřejmě je potom nutné chybu opravit také ve zdrojovém souboru.
+
+Na druhou stranu, překlep v~názvu prostředí takto opravit nelze. V~takovém případě uživatel napíše |x| a stiskne Enter, čímž se program ukončí. Po opravě zdrojového souboru program spustí znovu.
+
+Jestliže po neopravitelné chybě uživatel program neukončí, budou pravděpodobně následovat další chyby způsobené tím, jak se \AllTeX\ snažil ze situace zotavit. Příslušné chybové zprávy už ale budou docela matoucí. Tomu je lepší se vyhnout a program ukončit.
+
+\subsection{Soubor \soub{.log}}
+
+Vždy, když se spustí \AllTeX, vytvoří se textový soubor s~příponou \soub{.log}. Soubor se vytvoří ve stejném adresáři jako hlavní zdrojový soubor -- najděte si jej. Soubor obsahuje všechny chybové zprávy a varování, ale obsahuje také seznam všech načítaných souborů, u~načítaných tříd a balíčků navíc i~s~uvedením jejich verze, dále obsahuje čísla zpracovaných stran a informace o~použitých zdrojích. V~článku se zaměříme pouze na některé z~těchto věcí. V~dřívějším článku~\cite{debug} (a~jeho českém překladu~\cite{debugCZ}) je popsáno ladění zdrojového souboru také~ve složitějších situacích.
+
+
+%\section{Značení\dotfill?Conventions}
+%
+%Mnoho \AllTeX ových chybových zpráv má několik řádků -- na prvním řádku je samotná chybová zpráva, následuje číslo řádku s~chybou a text tohoto řádku, který je v~místě chyby zlomený na další řádek.
+%
+%I~když se zde budeme zabývat většinou detaily, mějme na paměti, že základním principem \LaTeX u je oddělení obsahu dokumentu od jeho struktury.
+
+\section{Základní struktura}
+
+V~této sekci probereme některé základní prvky \AllTeX u.
+
+\subsection{Příkazy}
+
+Jednotlivé instrukce se \AllTeX u předávají pomocí příkazů (tzv.~řídicích sekvencí), které zpravidla začínají znakem~|\| (zpětné lomítko). Existují dva typy řídicích sekvencí:
+\begin{itemize}
+\item zpětné lomítko následované jedním znakem jiným než písmeno (tzv.~řídicí znak),
+\item zpětné lomítko následované jedním nebo více písmeny (tzv.~řídicí slovo) a ta mohou být malá i~velká (přičemž na jejich velikosti záleží), avšak nemůže se jednat o~číslice ani žádné speciální znaky.\footnote{Diskuse o~kategoriích znaků a přesných pravidlech tvorby řídicích tokenů přesahuje rámec tohoto článku. Pro detaily může čtenář nahlédnout do~\cite{tbn}. (pozn.~překl.)}
+\end{itemize}
+Řídicí sekvence mohou mít jeden nebo více argumentů (|\title{...}|) nebo mohou být bez nich (|\alpha|). Řídicí slovo bývá ukončeno mezerou nebo libovolným jiným nepísmenným znakem, přičemž takovou ukončovací mezeru \TeX\ odstraní. Naopak mezeru za řídicím znakem \TeX\ neodstraní a projeví se na výstupu. V~\AllTeX u jsou některé řídicí znaky již nadefinovány tak, že vysází příslušný znak. Například |\#|, |\%|, |\$| a |\&| vysází \#, \%, \$ a~\&.
+
+Uživatel může nadefinovat vlastní příkazy nebo může předefinovat existující příkazy. \LaTeX\ nabízí příkaz |\newcommand| k~nadefinování nového příkazu. Přitom se kontroluje, jestli příkaz se stejným jménem již nebyl nadefinován dříve, a pokud byl, pak definici neprovede a vypíše chybovou zprávu. (Primitivní \TeX ový příkaz |\def| takovou kontrolu neprovádí.) Pro předefinování existujícího příkazu slouží \LaTeX ový příkaz |\renewcommand|.
+
+Při předefinování si musíte být naprosto jistí, že víte, co děláte! Například předefinování příkazu |\par| je hodně riskantní, protože \LaTeX\ používá příkaz |\par| uvnitř svých příkazů skrytě před uživatelem a jeho jiná definice snadno způsobí mnoho chyb.
+
+Řídicí slova obsahující jediné písmeno také není moc vhodné předefinovávat, protože mnoho z~nich slouží k~sazbě akcentů nebo k~sazbě různých neanglických písmen. Tato písmena se mohou vyskytnout například v~cizojazyčných jménech. Představme si, že v~článku o~komplexních číslech nadefinujeme příkaz pro imaginární jednotku a zároveň budeme citovat autora Cema Y\i ld\i r\i ma.
+\begin{Verbatim}
+\renewcommand{\i}{\ensuremath{\sqrt{-1}}}
+Cem Y\i ld\i r\i m
+\end{Verbatim}
+\penalty-1000
+Pak se nemůžeme divit, když na výstupu dostaneme
+\begingroup
+\def\i{\ensuremath{\sqrt{-1}}}%
+\def\j{\hbox{\rm Cem Y\i ld\i r\i m}}%
+\begin{Verbatim}[commandchars=/()]
+/j
+\end{Verbatim}
+\endgroup
+\penalty-1000
+
+Řídicí znaky obsahující cifru (|\0|, |\1| atd.) nejsou v~\LaTeX u nadefinovány a jsou uživatelům k~dispozici pro vlastní příkazy.
+
+\penalty-2000
+
+\subsection{Prostředí}
+
+\def\prost#1@{\<prostředí#1>}
+\def\cislo{\<číslo>}
+\def\mat#1{$#1$}
+\def\boxa{\hbox{\rm\quad a\quad}}
+
+Pro \LaTeX\ je charakteristické používání prostředí, což je blok kódu mezi
+\begin{Verbatim}[commandchars=/()]
+\begin{/prost@}/boxa\end{/prost@}
+\end{Verbatim}
+Název prostředí na začátku i~konci se musí shodovat. V~opačném případě se vypíše chybová zpráva
+\begin{Verbatim}[commandchars=/()]
+! LaTeX Error: \begin{/prost1@} on input line /cislo
+               ended by \end{/prost2@}.
+\end{Verbatim}
+Většinu prostředí je možné vnořit do jiných prostředí. Pak je ale nutné jednotlivá prostředí ukončit ve správném pořadí.
+
+K~definování příkazů \LaTeX\ obsahuje ještě příkaz |\newenvironment| a novější příkazy |\NewDocumentCommand|, |\NewDocumentEnvironment|
+a ke všem analogické příkazy pro předefinování.
+Pro jejich popis si přečtěte dokumentaci.\footnote{V~dokumentaci~\cite{tlc3} % díl II, strana 632
+se píše, že příkazy \p{NewDocumentCommand}, \p{NewDocumentEnvironment} a jim podobné byly do jádra \LaTeX u přidány až v~roce~2020, proto jejich popis v~dřívější dokumentaci asi nenajdete. (pozn.~překl.)}
+
+\subsection{Módy}
+
+Zjednodušeně řečeno, aktuální mód určuje, kde na výstupu se právě nacházíme. My se však na módy podíváme na úrovni vstupního souboru.
+
+Módy jsou tři: vertikální, horizontální a matematický.
+
+\AllTeX\ je ve vertikálním módu na začátku dokumentu, po příkazu |\par| nebo po vynechaném řádku ve vstupním souboru.
+
+Do horizontálního módu se dostaneme, když začneme psát text. Pro přechod z~vertikálního do horizontálního módu je také možné použít příkazy |\indent|, |\noindent| nebo |\leavevmode|. V~horizontálním módu se několik po sobě jdoucích mezer považuje za jedinou mezeru. Tady je důležité, že se jedná o po sobě jdoucí mezery. Na začátku řádku jsou mezery ignorovány. Konec řádku se také považuje za mezeru, i~když ve vstupním souboru není vidět. Některé editory při zalamování textu automaticky vkládají znak konce řádku, jiné ne, dále na různých operačních systémech je znak konce řádku definován různě. Tyto odchylky \TeX\ ihned na vstupu zohlední a uživatel pak nepozná rozdíl. Více si o~tom povíme později.
+
+Matematický mód je určen pro sazbu vzorců. Vzorec můžeme vložit přímo do textu odstavce nebo vycentrovat na zvláštní řádek. Vzorce v~textu vysázíme pomocí |$...$| nebo |\(...\)|. Jednořádkové nečíslované vycentrované vzorce vysázíme pomocí |$$...$$| nebo |\[...\]|. Pro víceřádkové vzorce jsou v~\LaTeX u balíčky \soub{amsmath} nebo \soub{mathtools}. (Přečtěte si dokumentaci. Balíček \soub{amsmath} se načítá uvnitř balíčku \soub{mathtools}, proto není nutné načítat oba balíčky.) Vycentrované vzorce obvykle patří k~předchozímu odstavci, proto nad vzorcem nevynechávejte prázdný řádek (to by mohlo vést i~k~nesprávnému zalomení stránky nad vzorcem).
+
+Uvnitř matematického módu není dovoleno vložit prázdný řádek. To je rozhodnutí Knutha s~cílem jednoduššího nalezení chyb ve zdrojovém souboru. Matematická sazba totiž nikdy nepokračuje do dalšího odstavce.
+
+\subsection{Skupiny}
+
+Dalším ze základních prvků je skupina. Ta umožňuje lokálně omezit platnost různých nastavení a definic.
+
+Skupinu tvoří například matematický mód. Určité symboly a operace jsou možné pouze uvnitř matematického módu a jinde nejsou povoleny. V~textu odstavce matematický mód obvykle začíná a končí znakem~|$| a tyto znaky musí být spárovány. Začátek centrovaného vzorce přeruší tok textu a na jeho konci se \TeX\ vrátí zpět do horizontálního módu, případně, pokud následuje prázdný řádek nebo příkaz |\par|, do vertikálního módu. Více si o~tom povíme později.
+
+Další možnost vytvoření skupiny je uzavřít text do složených závorek |{...}|.
+Uvnitř skupiny můžeme dočasně předefinovat příkaz a ten se po ukončení skupiny vrátí na svou původní definici. Namísto složených závorek můžeme se stejným výsledkem\footnote{Existují jasně popsané situace, ve kterých se výsledek mírně liší, jejich popis však přesahuje rámec tohoto článku. Pokročilejší čtenář může nahlédnout do~\cite{tbn}. (pozn.~překl.)} uzavřít text mezi příkazy |\begingroup| a |\endgroup|.
+
+Skupina se také automaticky vytvoří, když uzavřeme materiál do boxu. Materiál se uzavře do boxu také v~prostředí |minipage|, příkazech |\mbox|, |\parbox| nebo například v~příkazech balíčku \soub{tcolorbox}.
+
+Některá prostředí (avšak ne všechna) také vytvářejí skupiny. Například prostředí |theorem|~-- v něm se text přepíná do kurzívy a po jeho ukončení se přepne zpět.
+
+\section{Mezery v~textu}
+
+Cílem vysoce kvalitní sazby je, aby všechny mezery v~textu byly stejně široké. Toto je ale možné pouze v~případě sazby na praporek (tzn.~odstavec je zarovnaný pouze na jedné straně), kdy mezery mají svou přirozenou šířku. Obvykle se však preferuje zarovnání odstavce do bloku a \TeX\ je naprogramovaný tak, aby i~při zarovnání do bloku byly šířky mezer podobné.
+
+V~anglických dokumentech\footnote{Tato podsekce se týká zejména anglických dokumentů, případně částí dokumentů, v~nichž je jako jazyk nastavena angličtina. (pozn.~překl.)} má být mezera za koncem věty širší než ostatní mezislovní mezery. To \TeX\ dělá. V~dokumentech v~jiných jazycích je možné toto chování vypnout příkazem |\frenchspacing|.\footnote{Pokud v~\AllTeX u máme nastaveno, že aktuální jazyk je čeština nebo slovenština, pak je \p{frenchspacing} automaticky nastaveno vnitřními makry. (pozn.~překl.)} Nicméně akademické dokumenty jsou často psány anglicky a obsahují dost zkratek, a proto není vždy pro \TeX\ zřejmé, kde končí věta. Aby za zkratkou následovala normálně široká mezera, píšeme za zkratku \verb*-\ - (zpětné lomítko a mezera).
+Porovnejte
+$$
+\hbox to\hsize{\indent
+\hbox to 0.83\hsize{\nonfrenchspacing
+\verb*-abc vs. xyz-
+(abc vs. xyz)
+oproti
+\verb*-abc vs.\ xyz-
+(abc vs.\ xyz).}\hss}
+$$
+Jestliže se za zkratkou nemá zlomit řádek, použijte znak~|~| (vlnka).
+\begin{Verbatim}
+See Fig.~37 on p.~159.
+\end{Verbatim}
+
+Podobná, ale opačná situace může nastat, když tečka následuje za velkým písmenem. \TeX\ předpokládá, že se jedná o~počáteční písmeno jména, a za tečku pak vkládá normální mezislovní mezeru. Avšak někdy je velké písmeno součástí zkratky a ta se může vyskytnout na konci věty. V~\LaTeX u je definován příkaz |\@|, který se v~takových případech vkládá mezi ono velké písmeno a~tečku, aby se mezera za tečkou chovala jako mezera za koncem věty.
+\begin{Verbatim}
+I like CSTUG\@.
+\end{Verbatim}
+
+Z~předchozích odstavců dostáváme jednoduché pravidlo: S~výjimkou konce věty (a~v~menší míře také za dalšími interpunkčními znaménky nebo uvnitř matematických výrazů) mají být všechny mezery na stejném řádku stejně široké. Pokud nejsou, něco není v~pořádku.
+
+\subsection{Zavlečené mezery}
+
+Může se stát, že na výstupu dostaneme několik mezer za sebou. V~převážné většině je to důsledkem toho, že se snažíme definovat nové příkazy tak, aby definice byly dobře čitelné. Mějme například definici
+\begin{Verbatim}
+\newcommand{\abc}{
+  \emph{abc def}
+}
+\end{Verbatim}
+Potom při vstupu
+\begin{Verbatim}
+nějaký text \abc\ další text
+\end{Verbatim}
+dostaneme na výstupu
+\begingroup
+\newcommand{\abc}{
+  \emph{abc def}
+}%
+\def\abd{\hbox{\rm
+nějaký text \abc\ další text
+  \unskip}}%
+\begin{Verbatim}[commandchars=/()]
+/abd
+\end{Verbatim}
+\endgroup
+\noindent
+Mezery navíc kolem šikmého textu nesprávně vložil náš příkaz |\abc|. Jak jsme si řekli dříve, konce řádku \TeX\ považuje za mezery. Proto musíme použít znak~|%|, ten uvozuje komentář a \TeX\ ignoruje vše, co je za ním až do konce řádku, včetně znaku konce řádku.
+S~opravenou definicí
+\begin{Verbatim}
+\newcommand{\abc}{%
+  \emph{abc def}%
+}
+\end{Verbatim}
+dostaneme správný výsledek
+\begingroup
+\newcommand{\abc}{%
+  \emph{abc def}%
+}%
+\def\abd{\hbox{\rm
+nějaký text \abc\ další text
+  \unskip}}%
+\begin{Verbatim}[commandchars=/()]
+/abd
+\end{Verbatim}
+\endgroup
+
+Další příčinou zavlečených mezer může být přítomnost několika po sobě jdoucích objektů, které nejsou součástí hlavního textu, například poznámek pod čarou nebo položek v rejstříku.
+\begin{Verbatim}
+Důležitý pojem\index{pojem}
+  \index{jiný název}
+  \index{varianta názvu}
+je v~rejstříku uveden na několika místech.
+\end{Verbatim}
+V~tomto případě se každý znak konce řádku převede na mezeru a protože tyto mezery nejsou na vstupu souvislé, na výstupu do jediné mezery nesplynou.
+%\footnote{JS: Z~nějakého důvodu je mezerování nesprávně správné, zatímco v~TUGboatu je správně nesprávné. Možná za to může expanze \def\to{${}\rightarrow{}$}\p{index}\to\p{@index}\to\p{@esphack}.}
+\begingroup
+\def\x{\hbox{\rm
+Důležitý pojem\index{pojem}\
+  \index{jiný název}\
+  \index{varianta názvu}\
+je v~rejstříku uveden na několika místech.
+\unskip}}%
+\begin{Verbatim}[commandchars=/()]
+/x
+\end{Verbatim}
+\endgroup
+\noindent
+Opět je řešením použít znak |%|. Přitom ale musíme dát pozor, aby nám zůstala přesně jedna mezera.
+\begin{Verbatim}
+Důležitý pojem\index{pojem}%
+  \index{jiný název}%
+  \index{varianta názvu}
+je v~rejstříku uveden na několika místech.
+\end{Verbatim}
+
+\subsection{Ne vždy je procento řešením}
+
+Připomínám, že mezeru, která ukončuje řídicí slovo, \TeX\ odstraní a použití znaku~|%| není nutné. Na některých místech může použití znaku~|%| dokonce způsobit problémy.
+
+Při načítání číselných hodnot hlavní procesor \TeX u pokračuje ve čtení hodnoty, dokud nenarazí na jiný znak než číslici. Proto, když na konci řádku máme |\xyz=123|, neměl by následovat znak~|%|. Kdyby totiž následoval a další řádek by začínal číslicí, byla by tato číslice stále součástí načítané hodnoty.
+
+Podobně když \TeX\ načítá hodnotu pružné délky, například |\parskip=2pc|, zjišťuje, zda následují klíčová slova |plus| nebo |minus|. Je lepší načítání ukončit prázdnou skupinou |{}|. Kdybychom takto načítání neukončili a zároveň by |plus| nebo |minus| bylo součástí navazujícího textu, ohlásil by \TeX\ chybu a příslušná zpráva by pro uživatele byla dost matoucí.
+
+\subsection{Opravdu nečekané mezery}
+
+Některé situace nejsou na první pohled předvídatelné. Tato se objevila v~jednom online dotazu. Dokument používal balíček \soub{colorbox}\footnote{Stejná situace nastává s~balíčkem \soub{tcolorbox}.} a pomocí něj autor podbarvil jeden znak uprostřed slova. Je\seda{j}da! Kolem znaku se vytvořily mezery. K~podbarvení byly použity následující příkazy.
+\begin{Verbatim}
+\usepackage{colorbox}
+\newcommand{\seda}[1]{\colorbox{black!20}{#1}}
+Je\seda{j}da!
+\end{Verbatim}
+%\renewcommand{\seda}[1]{{\fboxsep=0pt \colorbox{black!20}{#1\strut}}}
+\renewcommand{\seda}[1]{{\fboxsep=0pt \colorbox[cmyk]{0,0,0,0.2}{#1\strut}}}
+Dokumentace k~balíčku nabízí jako řešení vynulovat velikost okraje |\colorbox|u. Přidala jsem k~tomuto řešení ještě |\strut|, aby barva byla zřetelná také nad a pod písmenem. Je\seda{j}da!
+\begin{Verbatim}
+\renewcommand{\seda}[1]{{\fboxsep=0pt
+  \colorbox{black!20}{#1\strut}}}
+Je\seda{j}da!
+\end{Verbatim}
+
+Přestože se nejedná úplně o~problém pro začátečníky, je dobré vědět, že i~taková situace může nastat a že je třeba se nebát a v~takových situacích se obrátit na odborníka.
+
+\section{Konce odstavců a vertikální mód}
+
+Na konci odstavce \TeX\ přechází z~horizontálního do vertikálního módu. Prázdný řádek nebo příkaz |\par| tento přechod zajistí. Je důležité vědět, v~jakém módu se aktuálně \TeX\ nachází, protože jsou činnosti, které je lepší provádět ve vertikálním módu. Nejdůležitější z~těchto činností je vkládání plovoucích objektů (obrázků, tabulek, algoritmů).
+
+{\hbadness10001
+{\huge
+Dále je třeba mít na paměti, že některá nastavení se provádějí až na konci odstavce. Jedním z~nich je vertikální vzdálenost účaří, která závisí na velikosti fontu. Příliš mnoho začátečníků se snaží ukončovat odstavce dvěma zpětnými lomítky. Tím se ale odstavec neukončí a vzdálenost účaří se nenastaví. To může vyústit ve výsledek, který je vidět v~tomto odstavci.\\}
+
+}
+
+\begin{Verbatim}
+\huge
+Dále je třeba mít na paměti, že
+...
+který je vidět v~tomto odstavci.\\
+\end{Verbatim}
+
+Problém uvedený výše nezpůsobí žádnou chybu ani varování. Řešením je v~takovém případě správně ukončit odstavec.
+Některá prostředí (avšak ne všechna) jsou definována tak, že se na jejich konci odstavec automaticky ukončí.
+
+Vertikální vzdálenost mezi odstavci je určena hodnotou |\parskip|. Tato hodnota bývá definována ve třídě dokumentu, nicméně je možné ji dle potřeby změnit. Někdy je třeba vložit vertikální mezeru ručně. K~tomu slouží příkaz |\vspace| nebo |\vskip| použitý ve vertikálním módu (tedy za prázdným řádkem nebo příkazem |\par|).
+
+\subsection{Dvě zpětná lomítka}
+
+Co opravdu neukončuje odstavec, je řídicí znak~|\\| (dvě zpětná lomítka). Tento příkaz ukončuje řádek v~tabulkách, víceřádkových vzorcích, v~básních a v~některých dalších situacích. Ale neukončuje odstavec a může vyvolat mnoho chybových zpráv nebo varování.
+
+Jestliže se příkaz |\\| vyskytne ve vertikálním módu, vypíše se chybová zpráva
+\begin{Verbatim}
+! LaTeX Error: There's no line here to end.
+\end{Verbatim}
+Jestliže se před příkazem |\\| vyskytuje vysázená mezera, vytvoří se na výstupu další prázdný řádek, který tam být nemá.
+
+Pokud je řádek končící příkazem |\\| příliš krátký, vypíše se varování
+\begin{Verbatim}[commandchars=/<>]
+Underfull \hbox (badness 10000) in paragraph
+          at lines /cislo--/cislo
+\end{Verbatim}
+To může být správně, ale je třeba to zkontrolovat.
+
+Jestliže po |\\| následuje text v~hranatých závorkách, \texttt{[který se má vysázet]}, dostaneme podivnou chybovou zprávu
+\begin{Verbatim}
+! Missing number, treated as zero.
+\end{Verbatim}
+Příkaz |\\| má totiž nepovinný parametr (ten se dává do hranatých závorek), který udává, jak velká vertikální mezera se má vložit pod příslušným řádkem. Abychom vysázeli příslušný text v~hranatých závorkách, musíme před levou závorku vložit příkaz |\relax|.
+
+K~ručnímu ukončení řádku odstavce je vhodnější použít příkaz |\newline|.
+
+\section{Změny písma}
+
+Změna písma je jednoduchým způsobem, jak v~dokumentu zvýraznit důležité pojmy nebo odlišit text se speciálním významem. Mnoho takových změn je přímo zakomponováno do tříd a balíčků. Například nadpisy se sázejí \textbf{tučně}, teorémy \textit{kurzívou} a některé časopisy nastavují popisky obrázků \textsf{bezpatkově}, aby je odlišily od okolního textu.
+
+\LaTeX\ nabízí dvě možnosti, jak změnit písmo. První typ příkazů načte svůj argument a pouze ten vysází jiným písmem. Mezi takové příkazy patří |\textbf{...}| pro \textbf{tučné písmo}, |\textit{...}| pro \textit{kurzívu} nebo |\textsf{...}| pro \textsf{bezpatkové písmo}. Druhý typ příkazů jsou přepínače, které změní aktuální písmo a tato změna platí až do další změny nebo do konce skupiny. Mezi takové příkazy patří |{\bfseries...}|, |{\itshape...}| nebo |{\sffamily...}|. K~těmto příkazům doporučuji přečíst si příslušnou dokumentaci.
+
+Několik příkazů pro změnu písma se chová různě v~závislosti na kontextu.
+Příkaz |\emph{...}| přepne do \textit{kurzívy}, pokud okolní text je antikvou, \textit{a přepne do \textup{antikvy}, pokud okolní text je kurzívou}.
+V~matematickém módu příkaz\footnote{Příkaz \p{text} je definován v~balíčku \soub{amstext}, který se načítá uvnitř balíčku \soub{amsmath}. (pozn.~překl.)} |\text{...}| vysází text ve stejném písmu, jaké bylo aktuální před začátkem matematického módu. Například uvnitř teorému příkaz |\text{...}| vysází text kurzívou. Když chceme, aby text byl vždy antikvou, použijeme příkaz |\textup|.
+
+Základní \TeX\ definoval pro většinu změn písma dvoupísmenné příkazy. Tyto příkazy jsou druhého uvedeného typu, tj.~přepínače. V~\LaTeX u bychom se těmto dvoupísmenným příkazům měli vyhnout, protože výše uvedené \LaTeX ové příkazy obsahují některá vylepšení, například provádějí hladší přechod mezi kurzívou a antikvou.
+
+\section{Matematická sazba}
+
+Matematická sazba vždy tvoří skupinu. Jestliže matematická sazba začne, musíme ji jasně ukončit. V~horizontálním módu matematická sazba začíná a končí znakem~|$|. Ke stejnému účelu jsou v~\LaTeX u definovány také příkazy |\(...\)| a prostředí |math|. Balíčky \soub{amsmath} a \soub{mathtools} nabízejí množství prostředí pro matematickou sazbu. Stojí za to se je naučit z~příslušné dokumentace.
+
+V~matematickém módu \AllTeX\ všechny mezery na vstupu ignoruje. Ve vstupním souboru je můžeme použít dle libosti, aby byl soubor dobře čitelný. Pro zvýšení čitelnosti ale v~matematickém módu nemůžeme použít prázdný řádek.
+To způsobí chybu a \TeX\ vypíše zprávu
+\begin{Verbatim}
+! Missing $ inserted.
+\end{Verbatim}
+Stejná zpráva se vypíše, pokud matematický mód neukončíme před koncem odstavce nebo pokud v~textovém módu použijeme symbol, který je možné použít pouze v~matematickém módu.
+
+Jestliže se prázdný řádek vyskytne v~některém matematickém prostředí balíčku \soub{amsmath}, způsobí to chybu a první chybová zpráva bude
+\begin{Verbatim}[commandchars=/()]
+! Paragraph ended before \/prost@ was complete.
+<to be read again>
+\end{Verbatim}
+Za touto chybovou zprávou budou následovat další, ale ty už budou docela matoucí. Všechny tyto chybové zprávy zmizí, pokud se opraví první chyba, v~našem případě pokud se odstraní prázdný řádek.
+
+Když skutečně potřebujeme prázdný řádek, abychom zvýšili čitelnost zdrojového souboru, můžeme použít řádek obsahující pouze znak~|%|.
+
+Stejně jako u všech prostředí, i~tady se musí název prostředí v~příkazu |\end| shodovat s~názvem prostředí v~příkazu |\begin|, a to ve správném pořadí.
+
+Prostředí pro sazbu víceřádkových vzorců by se neměla používat pro jednořádkové vzorce. Pro nečíslované jednořádkové vzorce můžeme použít~|$$...$$| nebo \LaTeX ové příkazy |\[...\]| nebo prostředí |displaymath|.
+
+I~když \LaTeX\ nabízí prostředí |eqnarray| pro víceřádkové zarovnané vzorce, nepoužívejte toto prostředí. Pokud je rovnice dlouhá a má své číslo, pak se rovnice a číslo vysázejí přes sebe. Namísto tohoto prostředí používejte raději příslušná prostředí z~balíčku \soub{amsmath}.
+
+\section{Tabulky, obrázky a další plovoucí objekty}
+
+Dovolený počet plovoucích objektů na stránce, jejich pozice a mezery mezi nimi jsou určeny ve třídě dokumentu. Když něco nefunguje podle očekávání, pak každý, na koho se obrátíte pro radu, bude chtít vědět, jakou třídu dokumentu používáte.
+
+Ve vstupním souboru musí být plovoucí objekt v~místě, kdy je ještě na výstupní stránce dostatek místa pro příslušný objekt. Speciálně při dvousloupcové sazbě to znamená, že prostředí |figure*| a |table*| musejí být ve vstupním souboru dříve než cokoliv jiného na aktuální stránce. Mechanismy \LaTeX ového jádra neumožňují, aby při dvousloupcové sazbě byly objekty přes celou šířku stránky vysázeny jinde než na horním okraji stránky. Existují balíčky, které tyto mechanismy vylepšují, nicmíně o nich zde psát nebudeme.
+
+Základní třída \soub{article} nastavuje následující hodnoty:
+\begin{itemize}
+\item maximální počet plovoucích objektů na stránce obsahující text:~3
+\item maximální počet plovoucích objektů na horním okraji stránky:~2\\
+  maximální pokrytí stránky těmito objekty:~70\,\%
+\item maximální počet plovoucích objektů na dolním okraji stránky:~2\\
+  maximální pokrytí stránky těmito objekty:~30\,\%
+\item minimální pokrytí stránky textem:~20\,\%
+\item minimální pokrytí stránky objekty vysázenými na samostatnou stránku: 50\,\%~výšky sazby\footnote{Do výšky sazby se nezapočítávají záhlaví a zápatí.}
+\end{itemize}
+
+Jestliže je vkládaný objekt malý, má být vložen na přesně dané místo a vleze se tam, pak jej nevkládejte jako plovoucí objekt. Je lepší jej vložit přímo příkazem |\includegraphics| nebo příkazem pro vysázení tabulky, případně můžeme příkaz zapouzdřit do |\begin{center}...\end{center}|.\footnote{V~plovoucím prostředí pro vycentrování používejte příkaz \p{centering}.}
+
+Balíček \soub{wrapfig} umožňuje obtékání textu kolem vložených obrázků. Pro detaily si přečtěte dokumentaci k~balíčku.
+
+Je zvykem psát popisky nad tabulky, ale pod obrázky. Pokud vložený objekt není plovoucí, nemůžeme použít obvyklý příkaz \p{caption}. Namísto něj použijte balíček \soub{caption} a příkaz \p{captionof}.
+
+\section{Třída dokumentu a preambule}
+
+Když začínáte psát nový dokument, nejdříve si zvolte třídu dokumentu. Jestliže píšete článek do konkrétního časopisu, přečtěte si pokyny redakce a zjistěte si, jakou třídu a případně další soubory máte použít. Často používané třídy pro různé časopisy jsou k~dispozici na CTAN~\cite{ctansearch}.
+
+Jestliže píšete nějaký projekt nebo diplomovou práci, zjistěte si příslušné požadavky a když vaše instituce má k~dispozici konkrétní šablonu, použijte ji. Pokuste se zjistit, jestli se ta šablona průběžně vyvíjí a jestli je k~ní dostupná technická podpora. Přečtěte si dokumentaci.
+
+Třída dokumentu musí definovat základní strukturu a důležité příkazy používané v~dokumentu. Jestliže se připravovaný dokument výrazně liší od dokumentů, pro které je určená příslušná třída, je právě teď nejlepší čas obrátit se na někoho zkušenějšího.
+
+Ne všechny věci jsou ve třídě dokumentu přímo definovány. Například styl bibliografie může být ponechán na výběr autorovi. Pro tyto situace byly v~\LaTeX u vytvořeny balíčky.
+
+\subsection{Příprava dokumentu}
+
+Většina balíčků se načítá v~preambuli dokumentu, což je ta část zdrojového souboru, která se nachází mezi |\documentclass| a |\begin{document}|.
+Výjimkou jsou balíčky načítané příkazem |\RequirePackage|, který se obvykle používá před |\documentclass|~-- může se stát, že na tomto místě bude nutné načíst některá speciální nastavení.
+
+Někteří autoři si vytvoří preambuli, která je vhodná pro jeden konkrétní dokument, a poté tuto preambuli používají pro další dokumenty, přičemž přidají další balíčky, a tak dále. A potom přijde nějaký nováček, který si vezme tuto preambuli jako základní šablonu a bez jejího pochopení tuto preambuli používá. Nedělejte to!
+
+Začněte s~použitím vhodné třídy dokumentu a další balíčky, volby a definice přidávejte, až když je budete potřebovat. Načítání balíčků si uspořádejte do logických bloků (například všechny fontové balíčky dejte k~sobě) a pečlivě si hlídejte, abyste žádný balíček nenačetli více než jednou. Jestliže některý balíček načítáte s~volbami, pak při jeho dalším načtení jsou jeho nové volby ignorovány.
+Některé balíčky interně načítají další balíčky. Například balíček \soub{mathtools} načítá \soub{amsmath} a balíček \soub{amssymb} načítá \soub{amsfonts}. Důležité je také pořadí balíčků. Balíček \soub{hyperref} musí být načítaný téměř poslední -- těch pár balíčků, co se mohou načítat až po \soub{hyperref}, je dobře zdokumentováno.
+
+Přečtěte si dokumentaci.
+
+\section{Zpracování dokumentu}
+
+Jakmile máme vytvořený zdrojový soubor, je na čase jej zpracovat \AllTeX em a vygenerovat výstupní soubor. Je několik programů, ze kterých si podle potřeby můžeme vybrat, například pdf\LaTeX, \XeLaTeX nebo Lua\LaTeX. Tyto programy můžeme spustit z~příkazového řádku nebo prostřednictvím textového editoru. Někdy musíme zdrojový soubor zpracovat \AllTeX em vícekrát. Kolikrát, to závisí na tom, jak je nutné přesouvat různé informace a jak se tyto informace mění.
+
+Informace o křížových odkazech se zapisují do souboru \soub{.aux}, informace o sekcích se zapisují do souboru \soub{.toc}. Dokument může obsahovat i~další seznamy. Seznam literatury se někdy zpracovává dalším programem (v~tom případě je potřebné zkontrolovat, jestli ten program nenahlásil chybu) a přeformátovaná data o~jednotlivých záznamech jsou uložena do dalšího souboru. Potom je nutné \LaTeX\ spustit ještě minimálně dvakrát -- jednou pro načtení souboru \soub{.aux} a dalších vedlejších souborů (pro správné nastavení křížových odkazů) a podruhé pro správné nastavení čísel stran (jelikož například vložení obsahu nebo seznamu literatury v~předchozím spuštění \LaTeX u mohlo text dokumentu posunout).
+
+\def\znak{\<znak>}
+\def\pismo{\<název>}
+Předchozí odstavce předpokládají, že ve zdrojovém souboru nejsou chyby. Případné chyby jsou zaznamenány v~souboru~\soub{.log}. Zjistěte si, kde se tento soubor nachází, a zvykněte si jej kontrolovat. Například varování o~znacích chybějících v~nějakém fontu se za běhu \AllTeX u nezobrazí a jsou pouze v~souboru~\soub{.log}.
+\begin{Verbatim}[commandchars=/()]
+Missing character: There is no /znak in font /pismo!
+\end{Verbatim}
+
+Někdy soubor \soub{.log} obsahuje skupinu chyb majících čísla řádku blízko sebe. V~takovém případě první číslo řádku je to, na kterém \AllTeX\ narazil na problém, zatímco na dalších uvedených řádcích ve skutečnosti chyba vůbec nemusí být. Opravte první chybu a spusťte \AllTeX\ znovu. Často se stane, že ty další chyby už se znovu neobjeví.
+
+Přeji hodně štěstí. Časem se to naučíte.
+
+A ještě\dots\ Nezapomeňte si přečíst dokumentaci.
+
+
+
+
+%\JSbreak
+
+\section{Poděkování}
+
+Autorka děkuje samcarter, Mikaelovi Sundquistovi a (jako vždy) Karlu Berrymu za nápady a za nalezení a odstranění mých překlepů. Dokážu překlepy najít u cizích článků, ale ne u svých.
+
+
+
+\def\refname{Seznam literatury}
+\begin{thebibliography}{9}
+\selectlanguage{english}
+\raggedright
+
+\bibitem{debug} Barbara Beeton. Debugging \LaTeX\ files -- Illegitimi non carborundum. \emph{TUGboat}, 38(2):159--164, 2017.
+
+\bibitem{debugCZ}
+Barbara Beeton. Ladění \LaTeX ových souborů. [Debugging \LaTeX\ Files]. Zpravodaj Československého sdružení uživatelů \TeX u, 31(1):63--75, 2021.
+DOI: 10.5300/2021-1-4/63
+
+\bibitem{newbie}
+Barbara Beeton. What every \AllTeX\ newbie should know. \emph{TUGboat}, 44(2):164--169, 2023.
+
+\bibitem{tlc3}
+Frank Mittelbach, Ulrike Fischer. \emph{The \LaTeX\ Companion}. 3rd~edition. Addison-Wesley Professional. 2023.
+
+\bibitem{2419}
+\emph{Often referenced questions}.
+\url{https://tex.meta.stackexchange.com/q/2419}
+
+\bibitem{tbn}
+Petr Olšák. \emph{\TeX book naruby}. Konvoj, 2001.
+
+\bibitem{TSE}
+\url{https://tex.stackexchange.com}
+
+\bibitem{ctansearch}
+\url{https://ctan.org/search}
+\end{thebibliography}
+
+\selectlanguage{english}
+
+\section*{Summary}
+
+\LaTeX\ has a reputation for producing excellent results, but at the
+cost of a steep learning curve.  That's true, but by understanding a
+few basic principles, and learning how to avoid some techniques that
+may seem obvious but often lead one into the weeds, it's possible to
+avoid some of that pain.  Our goal here	is to encourage good habits
+before bad habits have had a chance to develop.
+
+\medskip
+
+\noindent{\bf Key words:}
+\LaTeX, newbie, errors, log file.
+
+\end{document}
+%23456789012345678901234567890123456789012345678901234567890123
