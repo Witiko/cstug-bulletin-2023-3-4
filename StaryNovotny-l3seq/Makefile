@@ -2,7 +2,7 @@
 
 DOCKER = docker run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
 IMAGE = texlive/texlive:TL2022-historic-with-cache
-LATEXMK = latexmk -lualatex -f
+LATEXMK = latexmk -lualatex -shell-escape -f
 DOCUMENT = main.tex
 
 all: $(basename $(DOCUMENT)).pdf
