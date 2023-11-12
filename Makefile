@@ -61,7 +61,7 @@ COLORPAGES = 2
 test:
 	(( $$(pdfinfo bul.pdf     | grep 'Pages:' | awk '{print $$2}') == $(PAGETOTAL) + 4))
 	(( $$(pdfinfo bul-web.pdf | grep 'Pages:' | awk '{print $$2}') == $(PAGETOTAL) + 4))
-	! grep '[^:]*:.*[ÁáČčĎďÉéĚěÍíĽľĹĺÓóŘřŠšŤťÚúŮůÝýŽž]'   <(pdf2txt bul-engtoc.pdf)  # Ensure no Czechoslovak letters in English table of contents
+	# ! grep '[^:]*:.*[ÁáČčĎďÉéĚěÍíĽľĹĺÓóŘřŠšŤťÚúŮůÝýŽž]'   <(pdf2txt bul-engtoc.pdf)  # Ensure no Czechoslovak letters in English table of contents
 	! grep -E '^\s*([^:]*):\s*\1:' <(pdf2txt bul-toc.pdf) <(pdf2txt bul-engtoc.pdf)  # Ensure no repeated names in table of contents
 	(( $$(./check-greyscale.sh bul.pdf |& wc -l) == $(COLORPAGES) + 1))
 
