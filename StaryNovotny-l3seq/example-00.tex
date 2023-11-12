@@ -1,0 +1,28 @@
+\ExplSyntaxOn
+\cs_if_exist:NF
+  \seq_map_pairwise_function:NNN
+  {
+    \cs_new:Npn \seq_map_pairwise_function:NNN #1#2#3
+      { \exp_after:wN \seq_map_pairwise_function:wNN #2 \s__seq_stop #1 #3 }
+    \cs_new:Npn \seq_map_pairwise_function:wNN \s__seq #1 \s__seq_stop #2#3
+      {
+        \exp_after:wN \seq_map_pairwise_function:wNw #2 \s__seq_stop #3
+          #1 { ? \prg_break: } { }
+        \prg_break_point:
+      }
+    \cs_new:Npn \seq_map_pairwise_function:wNw \s__seq #1 \s__seq_stop #2
+      {
+        \seq_map_pairwise_function:Nnnwnn #2
+          #1 { ? \prg_break: } { }
+        \s__seq_stop
+      }
+    \cs_new:Npn \seq_map_pairwise_function:Nnnwnn #1#2#3#4 \s__seq_stop #5#6
+      {
+        \use_none:n #2
+        \use_none:n #5
+        #1 {#3} {#6}
+        \seq_map_pairwise_function:Nnnwnn #1 #4 \s__seq_stop
+      }
+    \cs_generate_variant:Nn \seq_map_pairwise_function:NNN { Nc , c , cc }
+  }
+\ExplSyntaxOff

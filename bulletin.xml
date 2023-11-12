@@ -14,6 +14,8 @@
   </editors>
   <xi:include href="Sojka-uvodnik/article.xml"/>
   <!-- <xi:include href="StaryNovotny-tug/article.xml"/> -->
+  <!-- <xi:include href="StaryNovotny-markdown/article.xml"/> -->
+  <!-- <xi:include href="StaryNovotny-l3seq/article.xml"/> -->
   <links pdfurl="pdf/2023-3-4.pdf" pdfsize="999.9" unit="MiB">
     <prevlink url="bul2023-1-2.shtml">1-2/2023</prevlink>
   </links>
