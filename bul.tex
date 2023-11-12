@@ -30,6 +30,17 @@
 % Macros in the .toc output files
 \def\boolfalse#1{}
 \def\defcounter#1#2{}
+\makeatletter
+\DeclareRobustCommand{\La}{L\kern-.36em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }}
+\makeatother
+\def\AllTeX{(\La\kern-.075em)\kern-.075em\TeX}
 
 \usepackage{alltt}
 \errorcontextlines 999
@@ -108,6 +119,7 @@ standardních součástí \TeX~Live).
 \PDFclanek[Sojka-uvodnik]{uvodnik}
 \PDFclanek[StaryNovotny-tug]{main}
 \PDFclanek[StaryNovotny-markdown]{main}
+\PDFclanek[Beeton-newbie]{newbie}
 \PDFclanek[StaryNovotny-l3seq]{main}
 
 % tiráž
