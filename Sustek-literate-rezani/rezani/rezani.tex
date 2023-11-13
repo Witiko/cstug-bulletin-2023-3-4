@@ -1,0 +1,119 @@
+\unless\ifdefined\OPmac
+  \csname newcount\endcsname\tmpnum
+  \def\sdef#1{\expandafter\def\csname#1\endcsname}
+  \def\sxdef#1{\expandafter\xdef\csname#1\endcsname}
+  {\lccode`\?=`\p \lccode`\!=`\t \lowercase{\gdef\ignorept#1?!{#1}}}
+  \def\localcolor{}
+  \def\Grey{\color[gray]{0.5}}
+\fi
+\newdimen\hodstup \hodstup=3mm
+\newdimen\vodstup \vodstup=2mm
+\newdimen\tloustkaramu \tloustkaramu=0.4pt
+\newskip\okoliramu \okoliramu\medskipamount
+\def\barvaramu{\localcolor\Grey}
+\newif\ifladeni
+\def\svisleokraje#1{\hbox to\hsize{\svisla\hss#1\hss\svisla}%
+  \nointerlineskip}
+\def\svisla{{\barvaramu\vrule width\tloustkaramu}}
+\def\vodorovna{{\barvaramu\hrule height\tloustkaramu}}
+\def\svislekousky{\svisleokraje{\vbox to\vodstup{\vss}}}
+\def\ram#1#2{\ramA{#1}{}{#2}}
+\def\Ram#1#2#3{\ramA{#1}{page#3}{#2}}
+\newcount\pocetrezu
+\newbox\obrbox
+\newdimen\vyskaobrazkuBP
+\newdimen\sirkaobrazkuBP
+\newcount\dily
+\def\ramA#1#2#3{\relax
+  \pocetrezu=0
+  \ifx@#1@%
+    \nactirezy0,\konec
+  \else
+    \nactirezy0,#1,\konec
+  \fi
+  %\vypisrezy
+  \dily=0
+  \ifvoid\obrbox
+    \pdfximage width \dimexpr\hsize-2\hodstup\relax #2{#3}%
+    \setbox\obrbox\hbox{\pdfrefximage\pdflastximage}%
+  \else
+    \ifvbox\obrbox
+      \setbox\obrbox\hbox{\box\obrbox}%
+    \fi
+  \fi
+  \vyskaobrazkuBP=0.996264\ht\obrbox
+  \sirkaobrazkuBP=0.996264\wd\obrbox
+  \vskip\okoliramu
+  \vodorovna
+  \svislekousky
+  \tmpnum=0
+  \ht\obrbox=0pt \dp\obrbox=0pt \wd\obrbox=0pt
+  \loop
+    \ifnum\tmpnum<\pocetrezu \advance\tmpnum1
+    \edef\ramXB{\eitd{\sirkaobrazkuBP} }%
+    \edef\ramYA{\eitd{\vyskaobrazkuBP-
+      \csname rez:\the\numexpr\tmpnum+1\endcsname
+        \vyskaobrazkuBP} }%
+    \edef\ramYB{\eitd{\vyskaobrazkuBP-
+      \csname rez:\the\tmpnum\endcsname
+        \vyskaobrazkuBP} }%
+    \svisleokraje{\hbox{%
+      \vrule height \dimexpr\ramYB bp-\ramYA bp\relax width0pt%
+      \pdfliteral{q 1 0 0 1 0 -\ramYA cm q
+        0 \ramYA m \ramXB \ramYA l \ramXB \ramYB l 0 \ramYB l
+        h W n}%
+      \copy\obrbox
+      \pdfliteral{Q Q}%
+      \hskip\ramXB bp}}
+    \ifnum\tmpnum<\pocetrezu
+      \ifladeni \nobreak \vskip-\tloustkaramu \vodorovna \fi
+      \penalty100
+      \ifladeni \vskip-\tloustkaramu \vodorovna \fi
+    \fi
+  \repeat
+  \svislekousky
+  \vodorovna
+  \vskip\okoliramu
+  {\setbox0\hbox{\box\obrbox}}}
+\def\eitd#1{\expandafter\ignorept\the\dimexpr#1\relax}
+\def\nactirezy#1,#2\konec{%
+  \advance\pocetrezu1
+  \ifnum\dily>0
+    \sxdef{rez:\the\pocetrezu}{\eitd{#1pt/\dily}}%
+  \else
+    \sxdef{rez:\the\pocetrezu}{0.#1}%
+  \fi
+  \ifx:#2:%
+    \sdef{rez:\the\numexpr\pocetrezu+1}{1}%
+    \let\next\relax
+  \else
+    \def\next{\nactirezy#2\konec}%
+  \fi\next}
+\newcount\udpreskoc \udpreskoc2
+\def\udbezcarky#1,\udbc{#1}
+\def\ud#1{\def\poud{#1}%
+  \def\seznamud{}%
+  \tmpnum\udpreskoc
+  \loop
+    \ifnum\tmpnum<\numexpr\dily-\udpreskoc-1\relax
+    \advance\tmpnum1
+    \edef\seznamud{\seznamud\the\tmpnum,}%
+  \repeat
+  \expandafter\expandafter\expandafter\poud
+    \expandafter\expandafter\expandafter{%
+    \expandafter\udbezcarky\seznamud\udbc}}
+\def\vypisrezy{{\tmpnum=0
+  \loop
+    \ifnum\tmpnum<\pocetrezu \advance\tmpnum1
+    \csname rez:\the\tmpnum\endcsname,
+  \repeat
+  \csname rez:\the\numexpr\pocetrezu+1\endcsname}}
+\endinput
+%\ladenitrue
+\ram{15,47,48,49,5,51,52,53}{nasirku.pdf}
+bla bla
+\vskip5cm
+\ram{15,80}{nasirku.pdf}
+\dily20\ud
+\Ram{nasirku.pdf}{1}
+\Ram{04,15,80}{nasirku.pdf}{1}

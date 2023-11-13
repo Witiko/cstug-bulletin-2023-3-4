@@ -1,0 +1,488 @@
+\let\orilooseness\looseness
+\documentclass[oldcsbabel]{csbulletin}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+\usepackage{color}
+% \setcounter{page}{8}
+\usepackage{shapepar}
+
+% Hack for hyperref
+\mubytein 0
+% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
+%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
+\usepackage{url}
+
+\DefineShortVerb\|
+%\def\soub#1{{\sc#1}}
+\usepackage[utf8]{inputenc}
+
+% \def\ts#1{{\tt\char`\\name\char`\{ts#1$i$\char`\}}}
+{\catcode`\^=12\gdef\ss{^^}}
+\fvset{numbers=left,firstnumber=last,numbersep=3pt,
+  xleftmargin=15pt}
+
+\def\p#1{\texttt{\char`\\#1}}
+\def\uv#1{\char18 #1\char16 }
+\def\={\discretionary{-}{-}{-}}
+\let\phi\varphi
+\def\eqref#1{{\rm(\ref{#1})}}
+\def\emph#1{{\sl#1\/}}
+\def\soub#1{{\sf#1}}
+
+% následující makra musejí být definována stajně jako v souboru zdrojaky.tex
+\def\bylo(#1){{\color[cmyk]{0,0,0,0.4}\setbox0\hbox{#1}\vrule height2.4pt depth-2pt width\wd0 \hskip-\wd0 \box0}}
+\def\nove(#1){{\color[cmyk]{1,0,1,0}#1}}
+\def\nowe(#1){{\color[cmyk]{0,1,0,0}#1}}
+\def\Nove[#1]{\nove(#1)}
+\def\Nowe[#1]{\nowe(#1)}
+
+%\input supp-pdf
+
+\clubpenalty10000 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% fancyvrb hack - JS
+\makeatletter
+\def\FV@ListVSpace{%
+  \@topsepadd\medskipamount % \topsep
+  % z nejakeho duvodu se uvnitr Verbatim nuluje \topsep
+  \if@noparlist\advance\@topsepadd\partopsep\fi
+  \if@inlabel
+    \vskip\parskip
+  \else
+    \if@nobreak
+      \vskip\parskip
+      \clubpenalty\@M
+    \else
+      \addpenalty\@beginparpenalty
+      \@topsep\@topsepadd
+      \advance\@topsep\parskip
+      \addvspace\@topsep
+    \fi
+  \fi
+  \global\@nobreakfalse
+  \global\@inlabelfalse
+  \global\@minipagefalse
+  \global\@newlistfalse}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\casopis#1{{\sl#1\/}}
+\def\clanek#1{{\sl#1\/}}
+\def\balicek#1{{\sf#1\/}}
+\def\<#1>{$\langle\hbox{\rm#1\/}\rangle$}
+\def\blok#1#2{\<\rm#1 \dots\ \scriptsize#2>}
+
+\def\[{\begingroup\def\do##1{\catcode`##1=12 }\dospecials
+  \tokenA}
+{\catcode`|=0 \catcode`\\=12
+  |gdef|tokenA#1\]{|lower2pt|hbox{|frame{|tt|,#1|,|vrule height8.5pt depth2.5pt width0pt|relax}}|endgroup|tokenB}}
+\def\tokenB#1 {\ifx$#1$\else\lower3pt\hbox{\scriptsize\,\tt#1}\hskip\fontdimen2\font\fi}
+
+\def\WEB{\texttt{WEB}}
+
+\def\JSvfil{\vfil}
+\def\JSvss{\vskip0ptminus12pt}
+\def\JSbreak{\break}
+
+\let\PRESKOC\iffalse
+\let\COKSERP\fi
+
+\def\TODO#1{{\color{red}\footnote{\color{red}{\bf TODO:} \ignorespaces#1}}}
+\def\mTODO#1{\marginpar{\hbox{\color{red}\hskip-1cm\bf TODO\hskip3cm\bf TODO}}}
+
+
+\font\logo=manfnt % font used for the METAFONT logo
+\font\logod=logod10 % my demibold version of logo10
+\font\ninerm=cmr9
+\font\slbf=cmbxsl10
+\def\MF{{\logo META}\-{\logo FONT}\spacefactor1000\relax}
+\def\slMF{{\logo 89:;}\-{\logo <=>:}} % slanted version
+\def\bfMF{{\logod META}\-{\logod FONT}\spacefactor1000\relax}
+
+
+
+\input rezani/rezani.tex
+\def\zdr{ukazky/zdrojaky.pdf}
+\def\uka{ukazky/ukazky.pdf}
+\def\barvaramu{\color[cmyk]{0,0,0,0.4}}
+ %\ladenitrue
+
+\begin{document}
+
+\title{Jak umožnit stránkový zlom uvnitř vložených obrázků}
+\EnglishTitle{How to Enable Page Breaks in Embedded Images}
+\author{Jan Šustek}
+\podpis{Jan Šustek, \url{jan.sustek@seznam.cz}}
+%\podpis{Jan Šustek, \url{jan.sustek@osu.cz}\\*
+%  Ostravská univerzita, Přírodovědecká fakulta,
+%  Katedra matematiky\\*
+%  30.~dubna~22,
+%  CZ-701~03 Ostrava, Czech Republic}
+
+\maketitle[3pt]
+
+\def\JSvvvskip{\vskip-24ptplus6ptminus6pt\vbox{}\vskip0pt}
+
+\JSvvvskip
+
+\begin{narrower}
+
+{\hfil\bf Abstrakt}\medskip
+
+V~článku jsou definována a popsána makra \TeX u pro vložení objektů, které jsou natolik vysoké, že komplikují stránkový zlom. Může se jednat o~obrázky, vysázený text nebo obecně o~obsah boxu. Makra vloží objekt na aktuální místo sazby a umožní uvnitř objektu provést stránkový zlom.
+
+\medskip\noindent
+{\bf Klíčová slova:}
+Rámečky, obrázky, řezání, stránkový zlom.
+
+\bigskip
+\end{narrower}
+
+\JSvvvskip
+\JSvvvskip
+
+\section{Úvod}
+
+Při psaní předchozího článku~\cite{literate} tohoto Zpravodaje autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+
+Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
+
+Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footnote{Podporovány jsou všechny formáty obrázků, které lze vložit primitivem \p{pdfximage}, tj.~\soub{jbig2}, \soub{jpeg}, \soub{png} a \soub{pdf}.} nebo obsah \TeX ového boxu a nastavit seznam míst, v~nichž je možné provést stránkový zlom. Interně se provede to, že pomocí operátorů jazyka pdf se vložený obrázek ořeže v~daných místech na nevysoké kousky, tyto kousky se poskládají pod sebe a mezi nimi se umožní stránkový zlom.
+
+\JSvvvskip
+
+\section{Použití}
+
+Použití maker ukážeme na grafu ze strany~\mTODO{aktualizovat podle skutečnosti}{\bf??} tohoto Zpravodaje.
+
+\ladenitrue
+\ram{095,35,495,64,72,9}{graf-1.pdf}
+
+\noindent
+Graf jsme vložili pomocí příkazů
+\begin{Verbatim}[numbers=none]
+\input rezani
+\ladenitrue
+...
+\ram{095,35,495,64,72,9}{graf-1.pdf}
+\end{Verbatim}
+\noindent
+Parametry určují, že ve vkládaném souboru \soub{graf-1.pdf} umožníme stránkový zlom na souřadnicích 9,5\,\%, 35\,\%, 49,5\,\%, 64\,\%, 72\,\% a 90\,\% (měřeno od horního okraje obrázku). Při nastaveném |\ladenitrue| se navíc zobrazí místa možných řezů, abychom snadněji mohli určit jejich souřadnice.
+
+\def\nastavobrbox{\setbox\obrbox\vbox\bgroup
+  \hsize\dimexpr\hsize-2\hodstup\relax}
+\def\endnastavobrbox{\egroup}
+
+Uvedená makra je také možné použít pro stránkový zlom uvnitř |\vbox|u, v~němž může být vysázen například verbatim výpis. Použijeme ukázku ze strany~\mTODO{aktualizovat podle skutečnosti}{\bf??} tohoto Zpravodaje. Ukázka je v~OPmacu, ale s~ohledem na šablonu Zpravodaje použijeme pro sazbu ukázky \LaTeX. Přitom je použito prostředí |Verbatim| z~balíčku \soub{fancyvrb}, které umožňuje uvnitř verbatim výpisu volat makra, například k~barevnému zvýraznění textu.
+
+\def\begVer{\char`\\begin}
+\def\comCha{/()}
+\def\endVer{\char`\\end}
+\begin{Verbatim}[commandchars=@QW,numbers=none]
+\def\zelena#1{\textcolor[cmyk]{1,0,1,0}{#1}}
+\def\fialova#1{\textcolor[cmyk]{0,1,0,0}{#1}}
+\nastavobrbox
+\vskip-\medskipamount
+\vskip0pt
+@begVer{Verbatim}[commandchars=@comCha,numbers=none]
+\input gensrc
+\def\SRChook{\longlocalcolor\Red}
+\SRCFILENAME program.txt
+Here we define a block which will be inserted to another
+  place.
+/zelena(\BEGSRC<InternalLabel>{Displayed label})
+second line
+  /fialova(|<InnerBlock>)
+/zelena(\ENDSRC)
+...
+@endVer{Verbatim}
+\vskip-\medskipamount
+\endnastavobrbox
+\dily23 \ram{3,5,9,13,18}{}
+\end{Verbatim}
+
+\noindent
+Makra |\nastavobrbox| a |\endnastavobrbox| jsou definována v~sekci~\ref{secSyn} a pomocí nich se vytvoří |\vbox|, do nějž je pak vložen obsah prostředí |Verbatim|. Tento box pak rozřežeme na 23~stejných dílů a umožníme stránkový zlom po 3,~5,~9,~13 a~18~dílech. Přitom musíme odstranit mezeru |\medskipamount|, kterou prostředí |Verbatim| vkládá nad a pod svůj obsah.
+
+\def\zelena#1{\textcolor[cmyk]{1,0,1,0}{#1}}
+\def\fialova#1{\textcolor[cmyk]{0,1,0,0}{#1}}
+\nastavobrbox
+\vskip-\medskipamount
+\vskip0pt
+\begin{Verbatim}[commandchars=/(),numbers=none]
+\input gensrc
+\def\SRChook{\longlocalcolor\Red}
+\SRCFILENAME program.txt
+Here we define a block which will be inserted to another
+  place.
+/zelena(\BEGSRC<InternalLabel>{Displayed label})
+second line
+  /fialova(|<InnerBlock>)
+/zelena(\ENDSRC)
+A block can be defined by parts.
+/zelena(\BEGSRC<InternalLabel>)
+fourth line
+/zelena(\ENDSRC)
+And here we insert the block.
+\BEGSRC
+first line
+    /zelena(|<InternalLabel>)
+\ENDSRC
+Finally we define the inner block.
+/fialova(\BEGSRC<InnerBlock>{Inner block})
+third line
+/fialova(\ENDSRC)
+\bye
+\end{Verbatim}
+\vskip-\medskipamount
+\endnastavobrbox
+\dily23 \ram{3,5,9,13,18}{}
+
+
+\section{Syntaxe}
+\label{secSyn}
+
+Je možné použít některou z~následujících syntaxí.
+\begin{itemize}
+\item |\ram{}{obrázek}| vloží obrázek do rámečku, který se nezlomí.
+\item |\ram{1,23,4567,89}{obrázek}| vloží obrázek do rámečku a umožní stránkový zlom na souřadnicích~10\,\%, 23\,\%, 45,67\,\% a~89\,\% (měřeno od horního okraje obrázku).
+\item |\dily11 \ram{3,5,7,8}{obrázek}| podobně umožní stránkový zlom na souřadnicích~$\frac{3}{11}$, $\frac{5}{11}$, $\frac{7}{11}$ a~$\frac{8}{11}$. Tato syntaxe je výhodná, když víme, že v~ukázce je zdrojový kód, který má ekvidistantní řádky, v~tomto případě~11.
+\item |\dily11 \ud \ram{obrázek}| umožní stránkový zlom na stejných souřadnicích jako |\dily11 \ram{3,4,5,6,7,8}{obrázek}|. Jinými slovy místa řezů nastaví rovnoměrně,\footnote{Název makra \p{ud} vznikl ze zkratky \uv{u.d.}${}={}$\uv{uniformly distributed}.} přičemž vynechá řezy u~horního a dolního okraje obrázku.
+\item |\Ram{}{obrázek}{strana}| u~vícestránkových obrázků vloží do rámečku danou stranu obrázku.
+\item Podobně se pro makro |\Ram| použijí i zbývající výše uvedené syntaxe.
+\item |\setbox\obrbox\vbox{...} \ram{1,23,4567,89}{}| nevloží do rámečku obrázek, ale obsah boxu |\obrbox|.\footnote{Aby mohl uživatel do rámečku vložit také verbatim výpisy nebo jiný delší text, je praktičtější i přehlednější si tento obsah rámečku předem připravit do boxu a ten pak použít.} V~tomto případě se samozřejmě název souboru nezadává, i~tak ale složené závorky ohraničující druhý argument makra |\ram| musejí zůstat.
+
+Pokud bychom chtěli mít vnitřek rámečku s~|\obrbox|em stejně široký jako u~rámečků s~obrázkem, musíme si zajistit, že uvnitř |\vbox|u bude správně nastavená šířka sazby, například pomocí maker
+\begin{Verbatim}[numbers=none]
+\def\nastavobrbox{\setbox\obrbox\vbox\bgroup
+  \hsize\dimexpr\hsize-2\hodstup\relax}
+\def\endnastavobrbox{\egroup}
+\end{Verbatim}
+a použitím konstrukce
+\begin{Verbatim}[numbers=none]
+\nastavobrbox
+\begin{verbatim}
+...
+\end{verbatim}
+\endnastavobrbox
+\dily11 \ud \ram{}
+\end{Verbatim}
+\item Také v~případě |\setbox\obrbox| je možné použít všechny výše uvedené syntaxe.
+\end{itemize}
+
+Pokud bychom kolem obrázku nechtěli kreslit rámeček, stačí předem provést následující nastavení.
+\begin{Verbatim}[numbers=none]
+\hodstup=0pt
+\vodstup=0pt
+\tloustkaramu=0pt
+\end{Verbatim}
+
+Makra jsou definována a odladěna v~OPmacu. Přitom byl soubor s~makry beze změny použit v~článku~\cite{literate}, který je vysázen v~\LaTeX u. Soubor se jmenuje \soub{rezani.tex} a je ke stažení na adrese~\cite{rezaniweb}.
+
+
+\section{Implementace}
+\label{S81}
+
+Nejdříve nadefinujeme některá OPmacová makra pro případ, že používáme \LaTeX.
+
+\begin{Verbatim}[firstnumber=auto]
+\unless\ifdefined\OPmac
+  \csname newcount\endcsname\tmpnum
+  \def\sdef#1{\expandafter\def\csname#1\endcsname}
+  \def\sxdef#1{\expandafter\xdef\csname#1\endcsname}
+  {\lccode`\?=`\p \lccode`\!=`\t
+    \lowercase{\gdef\ignorept#1?!{#1}}}
+  \def\localcolor{}
+  \def\Grey{\color[gray]{0.5}}
+\fi
+\end{Verbatim}
+
+Definujeme základní parametry, které budou postupně vysvětleny dále v~textu.
+\begin{Verbatim}
+\newdimen\hodstup \hodstup=3mm
+\newdimen\vodstup \vodstup=2mm
+\newdimen\tloustkaramu \tloustkaramu=0.4pt
+\newskip\okoliramu \okoliramu\medskipamount
+\def\barvaramu{\localcolor\Grey}
+\end{Verbatim}
+
+Přepínač |\ifladeni| určí, zda se v~rámečcích mají zobrazovat místa řezů.
+\begin{Verbatim}
+\newif\ifladeni
+\end{Verbatim}
+
+Makro |\svisleokraje| vycentruje svůj argument do |\hbox|u šířky |\hsize| a kolem něj vysází svislé linky.
+\begin{Verbatim}
+\def\svisleokraje#1{\hbox to\hsize{\svisla\hss#1\hss\svisla}%
+  \nointerlineskip}
+\def\svisla{{\barvaramu\vrule width\tloustkaramu}}
+\def\vodorovna{{\barvaramu\hrule height\tloustkaramu}}
+\def\svislekousky{\svisleokraje{\vbox to\vodstup{\vss}}}
+\end{Verbatim}
+
+Makro |\eitd| provede aritmetický výpočet, jehož výsledkem je délková hodnota v~jednotkách~|pt|, a na úrovni expand procesoru tuto hodnotu bez jednotky~|pt| vrátí.
+\begin{Verbatim}
+\def\eitd#1{\expandafter\ignorept\the\dimexpr#1\relax}
+\end{Verbatim}
+
+Makro |\nactirezy| načte seznam souřadnic oddělených čárkou a jednotlivá čísla uloží do maker |\csname rez:|$n$|\endcsname|. Formát souřadnic je následující.
+\begin{itemize}
+\item Jestliže je |\dily|${}=0$, pak jsou hodnoty dány jako zlomkové části čísel z~intervalu~$(0,1)$, a to bez uvedení desetinné tečky.
+\item Jestliže je |\dily|${}>0$, pak jsou hodnoty dány jako čitatelé zlomků, jejichž jmenovatel je roven |\dily|.
+\end{itemize}
+
+
+\begin{Verbatim}
+\def\nactirezy#1,#2\konec{%
+  \advance\pocetrezu1
+  \ifnum\dily>0
+    \sxdef{rez:\the\pocetrezu}{\eitd{#1pt/\dily}}%
+  \else
+    \sxdef{rez:\the\pocetrezu}{0.#1}%
+  \fi
+  \ifx:#2:%
+    \sdef{rez:\the\numexpr\pocetrezu+1}{1}%
+    \let\next\relax
+  \else
+    \def\next{\nactirezy#2\konec}%
+  \fi\next}
+\end{Verbatim}
+
+Makro |\ram{seznam}{obrázek}| vysází rámeček s~daným obrázkem. Rámeček je na celou šířku |\hsize|. Horizontální a vertikální odstup rámečku od obrázku jsou dány registry |\hodstup| a |\vodstup|. V~seznamu jsou čárkou oddělené hodnoty souřadnic, v~nichž je možné provést stránkový zlom.
+\begin{Verbatim}
+\def\ram#1#2{\ramA{#1}{}{#2}}
+\end{Verbatim}
+Makro |\Ram{seznam}{obrázek}{strana}| funguje zcela stejně, přičemž se do rámečku vloží daná strana obrázku.
+\begin{Verbatim}
+\def\Ram#1#2#3{\ramA{#1}{page#3}{#2}}
+\end{Verbatim}
+
+Makro |\ramA{seznam}{parametr}{obrázek}| je společným jádrem maker |\ram| a |\Ram|.
+V~registrech |\vyskaobrazkuBP| a |\sirkaobrazkuBP| je uvedena hodnota příslušného rozměru obrázku v~jednotkách~|bp|, pronásobená jednotkou~|pt|. V~makru se obrázek načte do registru |\obrbox|, pokud je tento registr prázdný. Pokud je neprázdný, pouze se zajistí, že |\obrbox| je |\hbox|. Pak se v~cyklu spočítají hodnoty potřebné uvnitř příkazů jazyka~pdf, které obrázek ořežou a posunou na správné místo. V~jednotlivých místech řezů je umožněn stránkový zlom s~penaltou~100.
+\begin{Verbatim}
+\newcount\pocetrezu
+\newbox\obrbox
+\newdimen\vyskaobrazkuBP
+\newdimen\sirkaobrazkuBP
+\newcount\dily
+\def\ramA#1#2#3{\relax
+  \pocetrezu=0
+  \ifx@#1@%
+    \nactirezy0,\konec
+  \else
+    \nactirezy0,#1,\konec
+  \fi
+  %\vypisrezy
+  \dily=0
+  \ifvoid\obrbox
+    \pdfximage width \dimexpr\hsize-2\hodstup\relax #2{#3}%
+    \setbox\obrbox\hbox{\pdfrefximage\pdflastximage}%
+  \else
+    \ifvbox\obrbox
+      \setbox\obrbox\hbox{\box\obrbox}%
+    \fi
+  \fi
+  \vyskaobrazkuBP=0.996264\ht\obrbox
+  \sirkaobrazkuBP=0.996264\wd\obrbox
+  \vskip\okoliramu
+  \vodorovna
+  \svislekousky
+  \tmpnum=0
+  \ht\obrbox=0pt \dp\obrbox=0pt \wd\obrbox=0pt
+  \loop
+    \ifnum\tmpnum<\pocetrezu \advance\tmpnum1
+    \edef\ramXB{\eitd{\sirkaobrazkuBP} }%
+    \edef\ramYA{\eitd{\vyskaobrazkuBP-
+      \csname rez:\the\numexpr\tmpnum+1\endcsname
+        \vyskaobrazkuBP} }%
+    \edef\ramYB{\eitd{\vyskaobrazkuBP-
+      \csname rez:\the\tmpnum\endcsname
+        \vyskaobrazkuBP} }%
+    \svisleokraje{\hbox{%
+      \vrule height \dimexpr\ramYB bp-\ramYA bp\relax width0pt%
+      \pdfliteral{q 1 0 0 1 0 -\ramYA cm q
+        0 \ramYA m \ramXB \ramYA l \ramXB \ramYB l 0 \ramYB l
+        h W n}%
+      \copy\obrbox
+      \pdfliteral{Q Q}%
+      \hskip\ramXB bp}}
+    \ifnum\tmpnum<\pocetrezu
+      \ifladeni \nobreak \vskip-\tloustkaramu \vodorovna \fi
+      \penalty100
+      \ifladeni \vskip-\tloustkaramu \vodorovna \fi
+    \fi
+  \repeat
+  \svislekousky
+  \vodorovna
+  \vskip\okoliramu
+  {\setbox0\hbox{\box\obrbox}}}
+\end{Verbatim}
+
+Makro |\ud#1| se expanduje na |#1{seznam}|, kde v~závorce je seznam přirozených čísel od $($|\udpreskoc|${}+1)$ do $($|\dily|${}-{}$|\udpreskoc|${}-1)$.
+\begin{Verbatim}
+\newcount\udpreskoc \udpreskoc2
+\def\udbezcarky#1,\udbc{#1}
+\def\ud#1{\def\poud{#1}%
+  \def\seznamud{}%
+  \tmpnum\udpreskoc
+  \loop
+    \ifnum\tmpnum<\numexpr\dily-\udpreskoc-1\relax
+    \advance\tmpnum1
+    \edef\seznamud{\seznamud\the\tmpnum,}%
+  \repeat
+  \expandafter\expandafter\expandafter\poud
+    \expandafter\expandafter\expandafter{%
+    \expandafter\udbezcarky\seznamud\udbc}}
+\end{Verbatim}
+
+Makro |\vypisrezy| vypíše seznam jednotlivých řezů. Toto makro je použito pouze pro účely ladění.
+\begin{Verbatim}
+\def\vypisrezy{{\tmpnum=0
+  \loop
+    \ifnum\tmpnum<\pocetrezu \advance\tmpnum1
+    \csname rez:\the\tmpnum\endcsname,
+  \repeat
+  \csname rez:\the\numexpr\pocetrezu+1\endcsname}}
+\end{Verbatim}
+
+
+
+
+
+
+
+%\JSvss
+%\JSbreak
+
+
+\def\refname{Seznam literatury}
+\begin{thebibliography}{9}
+\selectlanguage{english}
+\raggedright
+
+\bibitem{literate}
+Jan Šustek. Generování dokumentovaného zdrojového souboru po blocích v~\TeX u. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.\TODO{Aktualizovat odkaz podle skutečnosti.}
+
+\bibitem{rezaniweb}
+Jan Šustek.
+\url{https://github.com/jsustek/rezani/blob/main/rezani.tex}
+
+\end{thebibliography}
+
+%\JSvfil
+%\JSbreak
+
+\selectlanguage{english}
+
+\section*{Summary: How to break pages in the middle of an inserted image}
+
+The paper defines and describes \TeX\ macros for inserting objects which are so high that the page breaking is difficult. These objects can be images, text examples or generally a content of a box. The macros insert the object on the current position and they allow page break in the middle of the object.
+
+\medskip
+
+\noindent{\bf Key words:}
+Frames, images, cutting, page break.
+
+\end{document}
+%23456789012345678901234567890123456789012345678901234567890123
+

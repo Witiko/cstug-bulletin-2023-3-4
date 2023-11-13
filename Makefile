@@ -30,6 +30,7 @@ endef
 images: FORCE
 	$(DOCKER) build . -f Dockerfile.TL2020 -t texlive/texlive:TL2020-historic-with-cache
 	$(DOCKER) build . -f Dockerfile.TL2022 -t texlive/texlive:TL2022-historic-with-cache
+	$(DOCKER) build . -f Dockerfile.TL2023 -t texlive/texlive:TL2023-historic-with-cache
 
 bul.pdf: bul.tex $(FONTS) FORCE
 	$(LATEXMK) -c $<
@@ -55,8 +56,8 @@ bul-toc.pdf: bul.pdf
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
-PAGETOTAL = 44
-COLORPAGES = 2
+PAGETOTAL = 90
+COLORPAGES = 24
 
 test:
 	(( $$(pdfinfo bul.pdf     | grep 'Pages:' | awk '{print $$2}') == $(PAGETOTAL) + 4))
