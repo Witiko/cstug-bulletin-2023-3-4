@@ -30,6 +30,7 @@ endef
 images: FORCE
 	$(DOCKER) build . -f Dockerfile.TL2020 -t texlive/texlive:TL2020-historic-with-cache
 	$(DOCKER) build . -f Dockerfile.TL2022 -t texlive/texlive:TL2022-historic-with-cache
+	$(DOCKER) build . -f Dockerfile.TL2023 -t texlive/texlive:TL2023-historic-with-cache
 
 bul.pdf: bul.tex $(FONTS) FORCE
 	$(LATEXMK) -c $<
