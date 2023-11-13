@@ -1,22 +1,30 @@
-\let\orilooseness\looseness
-\documentclass[oldcsbabel]{csbulletin}
+\documentclass{csbulletin}
+\selectlanguage{czech}
+\usepackage{titlesec}
+\titlelabel{\thetitle\enspace}
 \usepackage[utf8]{inputenc}
-\setcounter{secnumdepth}{3}
-\usepackage{color}
-% \setcounter{page}{8}
-
-% Hack for hyperref
-\mubytein 0
-% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
-%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
-\usepackage{url}
+\usepackage[all]{nowidow}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=iso-numeric,
+  sortlocale=cs,
+  autolang=other,
+  bibencoding=UTF8,
+  mincitenames=2,
+  maxcitenames=2,
+  doi=false,
+  isbn=false,
+  shortnumeration=true,
+]{biblatex}
+\renewcommand\multicitedelim{\addsemicolon\space}
+\addbibresource{newbie.bib}
+\usepackage[implicit=false,hidelinks]{hyperref}
 
 \usepackage{tcolorbox}
-%\newcommand{\seda}[1]{\colorbox{black!20}{#1}}
 \newcommand{\seda}[1]{\colorbox[cmyk]{0,0,0,0.2}{#1}}
 
 \DefineShortVerb\|
-\usepackage[utf8]{inputenc}
 
 \fvset{numbers=none,firstnumber=last,numbersep=3pt,
   xleftmargin=15pt}
@@ -82,8 +90,6 @@
 \let\PRESKOC\iffalse
 \let\COKSERP\fi
 
-
-
 \begin{document}
 
 \title
@@ -93,7 +99,7 @@
 \author{Barbara Beeton}
 \podpis{Barbara Beeton,
   TUGboat,
-  Providence, RI, USA
+  Providence, RI, USA,
   \url{bnb@tug.org}}
 %\podpis{Jan Šustek, \url{jan.sustek@osu.cz}\\*
 %  Ostravská univerzita, Přírodovědecká fakulta,
@@ -103,19 +109,12 @@
 
 \maketitle[3pt]
 
-\begin{narrower}
-
-{\hfil\bf Abstrakt}\medskip
-
+\begin{abstract}
 O~\LaTeX u se říká, že se v~něm dají vytvořit kvalitně vypadající dokumenty,
 ale že cenou za to je, že je složitější se jej naučit.
 To je sice pravda, nicméně tyto obavy je možné zmírnit, když pochopíme několik základních principů a naučíme se vyhýbat některým technikám, které se mohou zdát jasné, avšak nevedou k~cíli. Cílem tohoto článku je ukázat začínajícím uživatelům dobré \LaTeX ové návyky dříve, než se začnou projevovat ty špatné.
-
-\medskip\noindent
-{\bf Klíčová slova:}
-\LaTeX, nováček, chyby, log soubor.
-
-\end{narrower}
+\end{abstract}
+\klicovaslova: \LaTeX, nováček, chyby, log soubor
 
 \makeatletter
 \def\@thefnmark{}\@footnotetext{Z~anglického originálu \cite{newbie} přeložil Jan Šustek.}
@@ -545,8 +544,7 @@ A ještě\dots\ Nezapomeňte si přečíst dokumentaci.
 
 Autorka děkuje samcarter, Mikaelovi Sundquistovi a (jako vždy) Karlu Berrymu za nápady a za nalezení a odstranění mých překlepů. Dokážu překlepy najít u cizích článků, ale ne u svých.
 
-
-
+\iffalse
 \def\refname{Seznam literatury}
 \begin{thebibliography}{9}
 \selectlanguage{english}
@@ -577,22 +575,20 @@ Petr Olšák. \emph{\TeX book naruby}. Konvoj, 2001.
 \bibitem{ctansearch}
 \url{https://ctan.org/search}
 \end{thebibliography}
+\fi
 
-\selectlanguage{english}
+\begingroup
+\sloppy
+\printbibliography
+\endgroup
 
-\section*{Summary}
-
+\begin{summary}
 \LaTeX\ has a reputation for producing excellent results, but at the
 cost of a steep learning curve.  That's true, but by understanding a
 few basic principles, and learning how to avoid some techniques that
 may seem obvious but often lead one into the weeds, it's possible to
 avoid some of that pain.  Our goal here	is to encourage good habits
 before bad habits have had a chance to develop.
-
-\medskip
-
-\noindent{\bf Key words:}
-\LaTeX, newbie, errors, log file.
-
+\keywords: \LaTeX, newbie, errors, log file
+\end{summary}
 \end{document}
-%23456789012345678901234567890123456789012345678901234567890123
