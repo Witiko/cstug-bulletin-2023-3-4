@@ -74,7 +74,18 @@
 % definovaná v csbulobalka.sty
 %
 
-\Obalka
+\Obalka[%
+  \centering
+  \begin{minipage}{64mm}%
+    \raisebox{0mm}{%
+      \includegraphics[
+        width=\linewidth,
+        trim={1.65cm 0 0.9cm 0},
+        clip,
+      ]{Sustek-literate-rezani/graf-1}%
+    }%
+  \end{minipage}%
+]
 
 \begingroup
 \hyphenpenalty=10000
