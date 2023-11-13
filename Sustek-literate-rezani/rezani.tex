@@ -1,20 +1,29 @@
 \let\orilooseness\looseness
-\documentclass[oldcsbabel]{csbulletin}
+\documentclass{csbulletin}
+\selectlanguage{czech}
+\usepackage{titlesec}
+\titlelabel{\thetitle\enspace}
 \usepackage[utf8]{inputenc}
-\setcounter{secnumdepth}{3}
-\usepackage{color}
-% \setcounter{page}{8}
-\usepackage{shapepar}
-
-% Hack for hyperref
-\mubytein 0
-% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
-%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
-\usepackage{url}
+\usepackage[all]{nowidow}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=iso-numeric,
+  sortlocale=cs,
+  autolang=other,
+  bibencoding=UTF8,
+  mincitenames=2,
+  maxcitenames=2,
+  doi=false,
+  isbn=false,
+  shortnumeration=true,
+]{biblatex}
+\renewcommand\multicitedelim{\addsemicolon\space}
+\addbibresource{main.bib}
+\usepackage[implicit=false,hidelinks]{hyperref}
 
 \DefineShortVerb\|
 %\def\soub#1{{\sc#1}}
-\usepackage[utf8]{inputenc}
 
 % \def\ts#1{{\tt\char`\\name\char`\{ts#1$i$\char`\}}}
 {\catcode`\^=12\gdef\ss{^^}}
@@ -109,6 +118,8 @@
 
 \begin{document}
 
+\shorthandoff{-}
+
 \title{Jak umožnit stránkový zlom uvnitř vložených obrázků}
 \EnglishTitle{How to Enable Page Breaks in Embedded Images}
 \author{Jan Šustek}
@@ -125,25 +136,17 @@
 
 \JSvvvskip
 
-\begin{narrower}
-
-{\hfil\bf Abstrakt}\medskip
-
+\begin{abstract}
 V~článku jsou definována a popsána makra \TeX u pro vložení objektů, které jsou natolik vysoké, že komplikují stránkový zlom. Může se jednat o~obrázky, vysázený text nebo obecně o~obsah boxu. Makra vloží objekt na aktuální místo sazby a umožní uvnitř objektu provést stránkový zlom.
-
-\medskip\noindent
-{\bf Klíčová slova:}
-Rámečky, obrázky, řezání, stránkový zlom.
-
-\bigskip
-\end{narrower}
+\end{abstract}
+\klicovaslova: Rámečky, obrázky, řezání, stránkový zlom
 
 \JSvvvskip
 \JSvvvskip
 
 \section{Úvod}
 
-Při psaní předchozího článku~\cite{literate} tohoto Zpravodaje autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+Při psaní předchozího článku tohoto Zpravodaje autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
 
 Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
 
@@ -277,7 +280,7 @@ Pokud bychom kolem obrázku nechtěli kreslit rámeček, stačí předem provés
 \tloustkaramu=0pt
 \end{Verbatim}
 
-Makra jsou definována a odladěna v~OPmacu. Přitom byl soubor s~makry beze změny použit v~článku~\cite{literate}, který je vysázen v~\LaTeX u. Soubor se jmenuje \soub{rezani.tex} a je ke stažení na adrese~\cite{rezaniweb}.
+Makra jsou definována a odladěna v~OPmacu. Přitom byl soubor s~makry beze změny použit v~předchozím článku tohoto Zpravodaje, který je vysázen v~\LaTeX u. Soubor se jmenuje \soub{rezani.tex} a je ke stažení na adrese~\cite{rezaniweb}.
 
 
 \section{Implementace}
@@ -454,7 +457,7 @@ Makro |\vypisrezy| vypíše seznam jednotlivých řezů. Toto makro je použito 
 %\JSvss
 %\JSbreak
 
-
+\iffalse
 \def\refname{Seznam literatury}
 \begin{thebibliography}{9}
 \selectlanguage{english}
@@ -468,21 +471,18 @@ Jan Šustek.
 \url{https://github.com/jsustek/rezani/blob/main/rezani.tex}
 
 \end{thebibliography}
+\fi
+
+\begingroup
+\sloppy
+\printbibliography
+\endgroup
 
 %\JSvfil
 %\JSbreak
 
-\selectlanguage{english}
-
-\section*{Summary: How to break pages in the middle of an inserted image}
-
+\begin{summary}
 The paper defines and describes \TeX\ macros for inserting objects which are so high that the page breaking is difficult. These objects can be images, text examples or generally a content of a box. The macros insert the object on the current position and they allow page break in the middle of the object.
-
-\medskip
-
-\noindent{\bf Key words:}
-Frames, images, cutting, page break.
-
+\keywords: Frames, images, cutting, page break
+\end{summary}
 \end{document}
-%23456789012345678901234567890123456789012345678901234567890123
-

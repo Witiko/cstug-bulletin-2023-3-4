@@ -1,20 +1,28 @@
-\let\orilooseness\looseness
-\documentclass[oldcsbabel]{csbulletin}
+\documentclass{csbulletin}
+\selectlanguage{czech}
+\usepackage{titlesec}
+\titlelabel{\thetitle\enspace}
 \usepackage[utf8]{inputenc}
-\setcounter{secnumdepth}{3}
-\usepackage{color}
-% \setcounter{page}{8}
-\usepackage{shapepar}
-
-% Hack for hyperref
-\mubytein 0
-% \usepackage[pdftitle=Sazba odstavcu do textovych oblasti,
-%   pdfauthor=Jan Sustek,bookmarks=false]{hyperref}
-\usepackage{url}
+\usepackage[all]{nowidow}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=iso-numeric,
+  sortlocale=cs,
+  autolang=other,
+  bibencoding=UTF8,
+  mincitenames=2,
+  maxcitenames=2,
+  doi=false,
+  isbn=false,
+  shortnumeration=true,
+]{biblatex}
+\renewcommand\multicitedelim{\addsemicolon\space}
+\addbibresource{main.bib}
+\usepackage[implicit=false,hidelinks]{hyperref}
 
 \DefineShortVerb\|
 %\def\soub#1{{\sc#1}}
-\usepackage[utf8]{inputenc}
 
 % \def\ts#1{{\tt\char`\\name\char`\{ts#1$i$\char`\}}}
 {\catcode`\^=12\gdef\ss{^^}}
@@ -127,19 +135,11 @@
 
 \maketitle[3pt]
 
-\begin{narrower}
-
-{\hfil\bf Abstrakt}\medskip
-
+\begin{abstract}
 Článek popisuje problematiku psaní programů a dokumentace k~nim. Ukazuje autorův balíček \soub{gensrc} nad OPmacem, který umožňuje psát program i~dokumentaci k~němu v~jediném \TeX ovém souboru.
 Jsou ukázány další možnosti a aplikace tohoto balíčku.
-
-\medskip\noindent
-{\bf Klíčová slova:}
-Dokumentace, dokumentované programování, OPmac, \soub{gensrc}.
-
-\bigskip
-\end{narrower}
+\end{abstract}
+\klicovaslova: Dokumentace, dokumentované programování, OPmac, \soub{gensrc}
 
 \section{Úvod}
 
@@ -167,7 +167,7 @@ Cílem balíčku \soub{gensrc} nebylo kopírovat nebo napodobovat některá exis
 \end{itemize}
 Opravdu původním cílem bylo plnit pracovní úkoly. A~při plnění těchto úkolů se \TeX\ a jeho makra ukázaly jako účinní a užiteční pomocníci.
 
-Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku~\cite{rezani} tohoto Zpravodaje.}
+Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku tohoto Zpravodaje.}
 Pokud není uvedeno jinak, jsou v~ukázkách použity kousky autorových vlastních programů.
 
 Článek navazuje na autorovy přednášky na konferenci OSS~Conf~2019 v~Žilině a na konferenci TUG~2023 v~Bonnu.
@@ -503,7 +503,7 @@ Tyto příkazy způsobí, že se do~\soub{txt} zapíše správný text, který j
 
 \subsection{Začátek}
 
-Protože se v~souboru \soub{gensrc.tex} opakovaně používají makra OPmacu, je OPmac načten přímo v~tomto souboru.\footnote{Na konferenci TUG~2023 zazněl námět, aby makra fungovala také v~\LaTeX u. Jak je vidět v~sekci~4 následujícího článku~\cite{rezani} tohoto Zpravodaje, je možné udělat balíček, který by fungoval jak v~Plainu, tak v~\LaTeX u, pokud byl balíček původně naprogramován v~Plainu. V~tom případě by se v~\LaTeX ové větvi samozřejmě OPmac nenačítal, musela by se ale nadefinovat všechna používaná OPmacová makra a na všech místech, kde \LaTeX\ používá jiné mechanismy (například práce s~fonty), by se musela použít makra, jejichž expanze by závisela na použitém formátu \TeX u.}\TODO{Podle skutečnosti aktualizovat odkaz na článek i~sekci.}
+Protože se v~souboru \soub{gensrc.tex} opakovaně používají makra OPmacu, je OPmac načten přímo v~tomto souboru.\footnote{Na konferenci TUG~2023 zazněl námět, aby makra fungovala také v~\LaTeX u. Jak je vidět v~sekci~4 následujícího článku tohoto Zpravodaje, je možné udělat balíček, který by fungoval jak v~Plainu, tak v~\LaTeX u, pokud byl balíček původně naprogramován v~Plainu. V~tom případě by se v~\LaTeX ové větvi samozřejmě OPmac nenačítal, musela by se ale nadefinovat všechna používaná OPmacová makra a na všech místech, kde \LaTeX\ používá jiné mechanismy (například práce s~fonty), by se musela použít makra, jejichž expanze by závisela na použitém formátu \TeX u.}\TODO{Podle skutečnosti aktualizovat odkaz na článek i~sekci.}
 
 \begin{Verbatim}[commandchars=/()]
 \input opmac/label(412a)
@@ -1097,8 +1097,7 @@ Jak ale zajistit, abychom vygenerovali program najednou v~obou dialektech a~nemu
 %\JSvss
 %\JSbreak
 
-
-
+\iffalse
 \def\refname{Seznam literatury}
 \begin{thebibliography}{9}
 \selectlanguage{english}
@@ -1155,19 +1154,18 @@ tomdwaggy.
 \url{https://vice-emu.sourceforge.io/}
 
 \end{thebibliography}
+\fi
+
+\begingroup
+\sloppy
+\printbibliography
+\endgroup
+
 %\JSvfil
 %\JSbreak
 
-\selectlanguage{english}
-
-\section*{Summary: On generating documented source code by blocks in~\TeX}
-
+\begin{summary}
 This paper concerns writing programs and their documentation. We show author's package \soub{gensrc} running on OPmac, which allows to write both program and its documentation in one \TeX\ file. We also show more possibilities and applications of this package.
-
-\medskip
-
-\noindent{\bf Key words:}
-Documentation, literate programming, OPmac, \soub{gensrc}.
-
+\keywords: Documentation, literate programming, OPmac, \soub{gensrc}
+\end{summary}
 \end{document}
-%23456789012345678901234567890123456789012345678901234567890123
