@@ -1,6 +1,6 @@
 .PHONY: all clear FORCE
 
-DOCKER = docker run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
+DOCKER = docker run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD"/..:/workdir -w /workdir/"$$(basename "$$PWD")"
 IMAGE = texlive/texlive:TL2023-historic-with-cache
 
 all: FORCE

@@ -103,6 +103,13 @@
 \input rezani/rezani.tex
 \def\zdr{ukazky/zdrojaky.pdf}
 \def\uka{ukazky/ukazky.pdf}
+\makeatletter
+\ifcsbul@web
+  \def\Uka{ukazky/ukazky.pdf}
+\else
+  \def\Uka{ukazky/ukazky-sede.pdf}
+\fi
+\makeatother
 \def\barvaramu{\color[cmyk]{0,0,0,0.4}}
  %\ladenitrue
 
@@ -144,7 +151,7 @@ V~následující ukázce je část zdrojového kódu programu\footnote{Z~důvodu
 \dily13
 \Ram{3,8}{\zdr}{1}
 
-\Ram{37,58}{\uka}{1}
+\Ram{37,58}{\Uka}{1}
 
 Na problém narazíme v~případě, že se program vyvíjí. Potom musíme udržovat dokumentaci k~programu kompatibilní s~programem samotným. Každá změna v~programu se musí projevit v~dokumentaci. To znamená, že změnu musíme evidovat na dvou místech~-- v~souboru s~programem a v~souboru s~dokumentací. Přitom je vhodné a výhodné, když se každá změna eviduje pouze na jednom místě. 
 
