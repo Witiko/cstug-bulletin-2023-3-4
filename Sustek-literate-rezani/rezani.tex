@@ -45,6 +45,9 @@
 }
 \makeatother
 
+\usepackage{xr}
+\externaldocument[literate-]{literate}
+
 \def\p#1{\texttt{\char`\\#1}}
 \def\uv#1{\char18 #1\char16 }
 \def\={\discretionary{-}{-}{-}}
@@ -111,9 +114,6 @@
 \let\PRESKOC\iffalse
 \let\COKSERP\fi
 
-\def\TODO#1{{\color{red}\footnote{\color{red}{\bf TODO:} \ignorespaces#1}}}
-\def\mTODO#1{\marginpar{\hbox{\color{red}\hskip-1cm\bf TODO\hskip3cm\bf TODO}}}
-
 
 \font\logo=manfnt % font used for the METAFONT logo
 \font\logod=logod10 % my demibold version of logo10
@@ -161,7 +161,7 @@ V~článku jsou definována a popsána makra \TeX u pro vložení objektů, kter
 
 \section{Úvod}
 
-Při psaní předchozího článku tohoto Zpravodaje na straně \strankasclankem{Sustek-literate-rezani}{literate} autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+Při psaní předchozího článku tohoto Zpravodaje na straně~\strankasclankem{Sustek-literate-rezani}{literate} autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
 
 Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
 
@@ -171,7 +171,7 @@ Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footno
 
 \section{Použití}
 
-Použití maker ukážeme na grafu ze strany~\mTODO{aktualizovat podle skutečnosti}{\bf??} tohoto Zpravodaje.
+Použití maker ukážeme na grafu ze strany~\pageref{literate-s15} tohoto Zpravodaje.
 
 \ladenitrue
 \ram{095,35,495,64,72,9}{graf-1.pdf}
@@ -191,7 +191,7 @@ Parametry určují, že ve vkládaném souboru \soub{graf-1.pdf} umožníme str�
   \hsize\dimexpr\hsize-2\hodstup\relax}
 \def\endnastavobrbox{\egroup}
 
-Uvedená makra je také možné použít pro stránkový zlom uvnitř |\vbox|u, v~němž může být vysázen například verbatim výpis. Použijeme ukázku ze strany~\mTODO{aktualizovat podle skutečnosti}{\bf??} tohoto Zpravodaje. Ukázka je v~OPmacu, ale s~ohledem na šablonu Zpravodaje použijeme pro sazbu ukázky \LaTeX. Přitom je použito prostředí |Verbatim| z~balíčku \soub{fancyvrb}, které umožňuje uvnitř verbatim výpisu volat makra, například k~barevnému zvýraznění textu.
+Uvedená makra je také možné použít pro stránkový zlom uvnitř |\vbox|u, v~němž může být vysázen například verbatim výpis. Použijeme ukázku ze strany~\label{literate-pripravaukazka} tohoto Zpravodaje. Ukázka je v~OPmacu, ale s~ohledem na šablonu Zpravodaje použijeme pro sazbu ukázky \LaTeX. Přitom je použito prostředí |Verbatim| z~balíčku \soub{fancyvrb}, které umožňuje uvnitř verbatim výpisu volat makra, například k~barevnému zvýraznění textu.
 
 \def\begVer{\char`\\begin}
 \def\comCha{/()}
@@ -479,7 +479,7 @@ Makro |\vypisrezy| vypíše seznam jednotlivých řezů. Toto makro je použito 
 \raggedright
 
 \bibitem{literate}
-Jan Šustek. Generování dokumentovaného zdrojového souboru po blocích v~\TeX u. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.\TODO{Aktualizovat odkaz podle skutečnosti.}
+Jan Šustek. Generování dokumentovaného zdrojového souboru po blocích v~\TeX u. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.
 
 \bibitem{rezaniweb}
 Jan Šustek.

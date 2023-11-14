@@ -44,6 +44,9 @@
 }
 \makeatother
 
+\usepackage{xr}
+\externaldocument[rezani-]{rezani}
+
 \def\p#1{\texttt{\char`\\#1}}
 \def\uv#1{\char18 #1\char16 }
 \def\={\discretionary{-}{-}{-}}
@@ -109,9 +112,6 @@
 
 \let\PRESKOC\iffalse
 \let\COKSERP\fi
-
-\def\TODO#1{{\color{red}\footnote{\color{red}{\bf TODO:} \ignorespaces#1}}}
-
 
 \font\logo=manfnt % font used for the METAFONT logo
 \font\logod=logod10 % my demibold version of logo10
@@ -184,7 +184,7 @@ Cílem balíčku \soub{gensrc} nebylo kopírovat nebo napodobovat některá exis
 \end{itemize}
 Opravdu původním cílem bylo plnit pracovní úkoly. A~při plnění těchto úkolů se \TeX\ a jeho makra ukázaly jako účinní a užiteční pomocníci.
 
-Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku tohoto Zpravodaje na straně \strankasclankem{Sustek-literate-rezani}{rezani}.}
+Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku tohoto Zpravodaje na straně~\strankasclankem{Sustek-literate-rezani}{rezani}.}
 Pokud není uvedeno jinak, jsou v~ukázkách použity kousky autorových vlastních programů.
 
 Článek navazuje na autorovy přednášky na konferenci OSS~Conf~2019 v~Žilině a na konferenci TUG~2023 v~Bonnu.
@@ -520,7 +520,7 @@ Tyto příkazy způsobí, že se do~\soub{txt} zapíše správný text, který j
 
 \subsection{Začátek}
 
-Protože se v~souboru \soub{gensrc.tex} opakovaně používají makra OPmacu, je OPmac načten přímo v~tomto souboru.\footnote{Na konferenci TUG~2023 zazněl námět, aby makra fungovala také v~\LaTeX u. Jak je vidět v~sekci~4 následujícího článku tohoto Zpravodaje, je možné udělat balíček, který by fungoval jak v~Plainu, tak v~\LaTeX u, pokud byl balíček původně naprogramován v~Plainu. V~tom případě by se v~\LaTeX ové větvi samozřejmě OPmac nenačítal, musela by se ale nadefinovat všechna používaná OPmacová makra a na všech místech, kde \LaTeX\ používá jiné mechanismy (například práce s~fonty), by se musela použít makra, jejichž expanze by závisela na použitém formátu \TeX u.}\TODO{Podle skutečnosti aktualizovat odkaz na článek i~sekci.}
+Protože se v~souboru \soub{gensrc.tex} opakovaně používají makra OPmacu, je OPmac načten přímo v~tomto souboru.\footnote{Na konferenci TUG~2023 zazněl námět, aby makra fungovala také v~\LaTeX u. Jak je vidět v~sekci~\ref{rezani-S81} na straně~\pageref{rezani-S81} následujícího článku tohoto Zpravodaje, je možné udělat balíček, který by fungoval jak v~Plainu, tak v~\LaTeX u, pokud byl balíček původně naprogramován v~Plainu. V~tom případě by se v~\LaTeX ové větvi samozřejmě OPmac nenačítal, musela by se ale nadefinovat všechna používaná OPmacová makra a na všech místech, kde \LaTeX\ používá jiné mechanismy (například práce s~fonty), by se musela použít makra, jejichž expanze by závisela na použitém formátu \TeX u.}
 
 \begin{Verbatim}[commandchars=/()]
 \input opmac/label(412a)
@@ -1151,7 +1151,7 @@ Jan Šustek.
 \url{https://github.com/jsustek/gensrc/blob/main/gensrc.tex}
 
 \bibitem{rezani}
-Jan Šustek. Jak umožnit stránkový zlom uvnitř vložených obrázků. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.\TODO{Aktualizovat odkaz podle skutečnosti.}
+Jan Šustek. Jak umožnit stránkový zlom uvnitř vložených obrázků. Zpravodaj Československého sdružení uživatelů \TeX u, 33(3--4):XX--YY, 2023.
 
 \bibitem{docstrip}
 The \LaTeX\ Project Team, Frank Mittelbach.
