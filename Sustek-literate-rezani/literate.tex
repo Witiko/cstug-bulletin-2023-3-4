@@ -30,6 +30,20 @@
 \fvset{numbers=left,firstnumber=last,numbersep=3pt,
   xleftmargin=15pt}
 
+\makeatletter
+\def\strankasclankem#1#2{%
+  \begingroup
+  \def\csbul@start@page##1{%
+    ##1%
+    \endinput
+    \ignorespaces
+  }%
+  \makeatletter
+  \IfFileExists{../#1/#2.info}{\input ../#1/#2.info\relax}{\textbf{???}}%
+  \endgroup
+}
+\makeatother
+
 \def\p#1{\texttt{\char`\\#1}}
 \def\uv#1{\char18 #1\char16 }
 \def\={\discretionary{-}{-}{-}}
@@ -170,7 +184,7 @@ Cílem balíčku \soub{gensrc} nebylo kopírovat nebo napodobovat některá exis
 \end{itemize}
 Opravdu původním cílem bylo plnit pracovní úkoly. A~při plnění těchto úkolů se \TeX\ a jeho makra ukázaly jako účinní a užiteční pomocníci.
 
-Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku tohoto Zpravodaje.}
+Pro názornost obsahuje článek větší množství ukázek programů a dokumentace k~nim. Aby ukázky byly dostatečně graficky odlišeny od textu článku, jsou vloženy do rámečků.\footnote{O~sazbě těchto rámečků se čtenář dočte v~následujícím článku tohoto Zpravodaje na straně \strankasclankem{Sustek-literate-rezani}{rezani}.}
 Pokud není uvedeno jinak, jsou v~ukázkách použity kousky autorových vlastních programů.
 
 Článek navazuje na autorovy přednášky na konferenci OSS~Conf~2019 v~Žilině a na konferenci TUG~2023 v~Bonnu.

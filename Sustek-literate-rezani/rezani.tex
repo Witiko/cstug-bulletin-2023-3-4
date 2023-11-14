@@ -31,6 +31,20 @@
 \fvset{numbers=left,firstnumber=last,numbersep=3pt,
   xleftmargin=15pt}
 
+\makeatletter
+\def\strankasclankem#1#2{%
+  \begingroup
+  \def\csbul@start@page##1{%
+    ##1%
+    \endinput
+    \ignorespaces
+  }%
+  \makeatletter
+  \IfFileExists{../#1/#2.info}{\input ../#1/#2.info\relax}{\textbf{???}}%
+  \endgroup
+}
+\makeatother
+
 \def\p#1{\texttt{\char`\\#1}}
 \def\uv#1{\char18 #1\char16 }
 \def\={\discretionary{-}{-}{-}}
@@ -147,7 +161,7 @@ V~článku jsou definována a popsána makra \TeX u pro vložení objektů, kter
 
 \section{Úvod}
 
-Při psaní předchozího článku tohoto Zpravodaje autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+Při psaní předchozího článku tohoto Zpravodaje na straně \strankasclankem{Sustek-literate-rezani}{literate} autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
 
 Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
 
