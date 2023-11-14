@@ -11,3 +11,4 @@ mptopdf graf
 pdflatex -interaction=nonstopmode literate || true
 latexmk -pdflatex -f literate
 latexmk -pdflatex -f rezani
+pdflatex literate
