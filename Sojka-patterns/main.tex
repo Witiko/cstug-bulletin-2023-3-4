@@ -1,0 +1,1405 @@
+\PassOptionsToPackage{greek,latin,french,english}{babel}
+ 
+\documentclass{csbulletin}
+\selectlanguage{english}
+\usepackage[utf8]{inputenc}
+\usepackage[all]{nowidow}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=iso-numeric,
+  sortlocale=en,
+  autolang=other,
+  bibencoding=UTF8,
+  mincitenames=2,
+  maxcitenames=2,
+]{biblatex}
+\addbibresource{sojkaglobal.bib}
+\usepackage[
+  implicit=false,
+  hidelinks,
+]{hyperref}
+
+\iffalse
+TODOs Must have:
+* PS: Hotovo (UCS-2->UTF-16)
+From Karl Berry:
+For now, let me just mention that I was somewhat perplexed by mentioning UCS-2 specifically.  (I slightly reworded one instance.) I thought it had been replaced, both in theory and in practice, by UTF-16. And furthermore, it seems to me that what's important for this purpose is not necessarily having 16-bit characters (as XeTeX) does, but supporting Unicode natively (as you no doubt know, LuaTeX is implemented using UTF-8). Is there something specific about UCS-2 that makes it desirable,
+as opposed to UTF-16 or, more broadly, "native Unicode"?
+
+> kde? kam poznamky? proc to zminovat? nechapu zadani. OS
+* OS či PS: pridat poznamky k indickym jazykum podle 
+https://thottingal.in/blog/2022/02/18/indian-language-hyphenation/ , https://bugzilla.mozilla.org/show_bug.cgi?id=1240277
+
+
+* OS či JM: opravit CJK dikci dle https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages
+a CJK článků W. Lemberga https://www.semanticscholar.org/author/Werner-Lemberg/21297367, např. http://ajt.ktug.org/2008/0201lemberg.pdf tak, aby v článku předjímané možnosti vzorů odpovídaly problému
+
+
+* OS či PS: popiska Table 1 rozsirit tak, aby byla ideálně tabulka samoobsažná
+
+
+* OS a PS: upřesnit zdroj wordlistů a přidat poděkování Lexical Computing
+
+
+* OS, PS: compound words support extensions: přečíst si pořádně https://repo.or.cz/wortliste.git a podporu dělení složených slov a potřeby či nepotřeby rozšíření patgenu či TeXu (zda šestá otázka a návrh v článku dává smysl). Dle repa vypadá, že https://repo.or.cz/wortliste.git/commit/e67ef612db4f5a8bda541c66ec1e79790134baaf
+již řešení dělení slož. slov umožňuje?
+
+
+TODOs: Nice to have
+* PS: doplnit motta ke každé sekci
+
+* JM: zpřesnit preferovaný/reálný plán s UniPatgenem v sekci 5.
+
+* ?: zjistit co znamena \syllablehyphenationmodecode a dalsi veci se slozenymi slovy v LuaTeXu https://meeting.contextgarden.net/2020/talks/2020-09-07-hans-concepts/context-2020-concepts.pdf#page=13
+* ?: zjistit co umi https://github.com/topics/hyphenation-algorithm
+* ?: zjistit, co dela \hyphenpenaltymode a další primitiva dostupná pouze v LuaTeXu https://cs.overleaf.com/learn/latex/TeX_primitives_listed_by_TeX_engine 
+
+---------------
+
+Links:
+[Harmonogram přípravy]: https://gitlab.fi.muni.cz/xsojka/univ-patterns/-/issues/1
+with some important links
+[TUG 2021 paper]: https://www.overleaf.com/project/60ed995425d2186590ce0e39   
+[ltugboat style docs]: https://mirrors.nic.cz/tex-archive/macros/latex/contrib/tugboat/ltubguid.pdf
+[slides]: https://www.overleaf.com/project/649c33490a94b9e047a2ddbd 
+\fi
+
+\usepackage{xspace,booktabs,tabularx}
+\usepackage[LGR,T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{csquotes}
+\usepackage{varioref}
+\usepackage{unicode}
+%\usepackage[greek,latin,french,english]{babel}
+\usepackage{bxtexlogo} % TeX logos
+\usepackage{enumitem}
+
+% paper macros
+%\newcommand{\etal}{\unskip~et\penalty100\ al.\xspace}
+\bgroup % underscore in text mode after \works typesets enspace (space of the width of the cipher)
+  \catcode`\_=\active
+  \gdef\works{\catcode`_=\active
+      \def_{\setbox0=\hbox{0}\hspace*{\wd0}\relax}}
+\egroup
+\let\stress=\emph
+\let\program=\textrm % since capitalized
+\let\file=\texttt
+\let\acro\relax
+\providecommand\CSabbr{\ensuremath{\cal C}\kern-.1667em\lower.5ex\hbox{$\cal S$}}
+\providecommand\CSTUG{\CSabbr TUG\xspace}
+\providecommand\TUG{TUG\xspace}
+\providecommand\HTML{HTML\xspace}
+\providecommand\CSS{CSS\xspace}
+\providecommand\ASCII{ASCII\xspace}
+\providecommand\Dash{---}
+\providecommand\hyph{\discretionary{-}{-}{-}}
+\providecommand{\etal}{et al.\xspace}
+\newcommand{\ORCID}[1]{ORCID \texttt{#1}\xspace}
+\newcommand{\package}[1]{\texttt{#1}\xspace}
+\newcommand{\word}[1]{\textit{#1}\xspace}
+\newcommand{\patword}[1]{\texttt{#1}\xspace}
+\newcommand{\Patgen}{\program{Patgen}\xspace}
+\newcommand{\XPatgen}{\program{UniPatgen}\xspace}
+\newcommand\motto[3]{\vspace{#1\baselineskip}\pagebreak[3]
+\begin{flushright}\small#3
+\end{flushright}%
+\vspace*{#2\baselineskip}%
+}
+\def\bs{\char`\\}
+\newcommand\tableskip{\medskip}
+\DeclareUnicodeCharacter{1E17}{\textacutemacron{e}}
+\DeclareUnicodeCharacter{02D0}{\textlengthmark}
+\DeclareUnicodeCharacter{025B}{\textepsilon}
+\DeclareUnicodeCharacter{030C}{\v{\textepsilon}}
+% hyperref is the last package loaded, as it redefines a lot
+%\usepackage{hyperref}
+\makeatletter
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \def\@thefnmark{}%
+  \@footnotetext{#1}%
+  \endgroup
+}
+\makeatother
+
+\begin{document}
+\renewcommand{\topfraction}{.9}  % don't go to a float page so soon:
+\renewcommand{\bottomfraction}{.7}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\floatpagefraction}{.8}
+\selectlanguage{english}
+\shorthandoff{:}
+%\setcounter{page}{1} % for [pre/post]print generation
+\setcounter{secnumdepth}{2}
+
+% 'local global' changes
+\hyphenation{Czecho-slovak Znoj-mo Java-Script}
+\widowpenalty 10000
+\clubpenalty 10000
+%\emergencystretch=2dd
+
+%%% Start of metadata %%%
+%\title{Universal Syllabic Pattern Generation}%
+%\title{Universal Syllabic Pattern Generation -- a Roadmap}
+\title{A Roadmap for Universal Syllabic Segmentation}
+\blfootnote{This is an updated and enriched version of the paper~\cite{tex:sojkasmaca2023universal} published in \TUG 2023 proceedings issue journal TUGboat.}
+\EnglishTitle{A Roadmap for Universal Syllabic Segmentation}
+%\title{Steps Towards Universal Syllabic Pattern Generation}
+%\title{Universal Syllabic Pattern Generation -- Progress Update}%
+%\title{Universal Syllabic Pattern Generation Revisited}%
+
+\author{Ondřej Sojka, Petr Sojka, Jakub Máca}
+\podpis{%
+  Ondřej Sojka,
+  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  454904 (at) mail dot muni dot cz, \ORCID{0000-0003-2048-9977}
+  \\[\smallskipamount]
+  Petr Sojka,
+  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  sojka (at) fi dot muni dot cz, \ORCID{0000-0002-5768-4007}
+%    \personalURL{https://www.fi.muni.cz/usr/sojka/}
+  \\[\smallskipamount]
+  Jakub Máca,
+  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  514024 (at) mail dot muni dot cz, \ORCID{0009-0008-1583-3183}
+}
+\maketitle[1ex]
+
+% abstract structure by Herout: Jak psat abstrakt, https://www.herout.net/blog/2013/12/jak-psat-abstrakt/
+\begin{abstract}
+% jaky se resi problem? jake je tema? jaky je cil textu?
+Space- and time-effective segmentation (word hyphenation) of natural languages remains at the core of every document rendering system, be it \TeX, web browser, or mobile operating system.
+In most languages, segmentation mimicking syllabic pronunciation is a pragmatic preference today.
+
+% jak je problem vyresen? cil naplnen?
+As language switching is often not marked in rendered texts, the typesetting engine needs \emph{universal syllabic segmentation}. 
+In this article, we show the feasibility of this idea by offering a prototype solution to two main problems: 
+\begin{enumerate}[leftmargin=1.075cm, rightmargin=0.5cm]
+    \raggedright
+    \item[A)] Using \Patgen{} to generate patterns for several languages
+    at once; and
+    \item[B)] lack of Unicode support in tools like \Patgen{} or \TeX\ (patterns in \mbox{UTF-16} encoding) is missing.
+    % https://ctan.mines-albi.fr/info/knuth-pdf/other/patgen.pdf#page=8
+\end{enumerate}
+
+% jake jsou konkretni vysledky? jak dobre je problem vyresen?
+For A), we have applied it to generating universal syllabic patterns from wordlists of nine syllabic, as opposed to etymology-based, languages
+(namely, Czech, Slovak, Georgian, Greek, Polish, Russian, Turkish, Turkmen, and Ukraini\-an).
+%(cz, sk, ka, el, pl, ru, tr, tk a ua) 
+For B), we have created a version of \Patgen that uses the 
+\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array} data structure and compared its effectiveness with the trie implementation.
+
+% takze co? cim je to uzitecne Vede a ctenari?
+With the data from these nine languages,
+we show that:
+\begin{enumerate}[leftmargin=1.075cm, rightmargin=0.5cm]
+    \raggedright
+    \item[A)] developing universal, up-to-date, high\hyph coverage, and
+    highly generalized universal syllabic segmentation patterns are
+    possible, with a high impact on virtually all typesetting engines,
+    including web page renderers; and
+  \item[B)] bringing wide character support into the hyphenation part of
+    the \TeX\ suite of programs is possible by using Judy arrays.
+\end{enumerate}
+
+\keywords: syllabification, hyphenation, universal syllabic patterns preparation
+\end{abstract}
+
+
+\section{Motivation}
+% Dělení slov je stále "otevřený" důležitý problém!
+\stress{Justified alignment} achieved with a quality hyphenation algorithm is both optically pleasing and saves time to read, in addition to saving trees.
+%
+Only \stress{quality hyphenation} allows interword spaces to be as uniform as possible, close to Gutenberg's ideal of spaces of fixed width.
+%
+A high coverage, space- and time-effective hyphenation (segmentation) algorithm of all natural languages is badly needed\footnote{\url{https://bugzilla.mozilla.org/show_bug.cgi?id=672320}} as it remains at the core of every document rendering system, be it \TeX, web browsers supporting \HTML\ with \CSS3, or an operating system providing text rendering for mobile applications.
+
+% Proč univerzální dělení?
+In most languages, segmentation mimicking syllabic pronunciation is pragmatically preferred today.
+%
+As language switching is often not marked in texts, and cannot be safely guessed from the words themselves, language-agnostic orthographic syllabification, is needed.
+We call this task \stress{universal syllabic segmentation}, or in short, the syllabification problem.
+
+The syllabification problem has been tackled by several finite
+state~\cite{tex:haralambous06} or, more recently, machine learning
+techniques~\cite{nlp:bartlett-etal-2008-automatic,tex:marchandetal2007,nlp:Shao2018,nlp:trogkanis-elkan-2010-conditional}.
+Bartlett \etal~\cite{nlp:bartlett-etal-2008-automatic} uses structured
+support vector machines (\acro{SVM}) to solve syllabification as a
+tagging problem. Krantz \etal~\cite{nlp:Krantz2019} leverage modern
+neural network techniques with long short-term memory (\acro{LSTM})
+cells, a convolutional component, and a conditional random field
+(\acro{CRF}) output layer, and demonstrated cross-linguistic
+generalizability, syllabifying English, Dutch, Italian, French,
+Manipuri, and Basque data\-sets together.
+
+% Popis problému neexistence interní podpory širokých znaků v TeX suite.
+From an orthographic viewpoint (hyphenation), universal language solutions today should reflect the Unicode standard~\cite{text:Unicode:Unicode15.1}.
+Internal support for full (multibyte) Unicode, a must in today's operating systems and applications, \stress{is missing} in the \TeX{} family of programs, e.g.\ in \Patgen and \TeX{} itself.
+%
+The internal processing is thus limited by the internal one-byte representation of language characters and is hardwired into the optimized code of these programs.
+%
+Therefore, processing CJK (Chinese, Japanese, Korean) languages or sets of languages whose character representations need multibyte handling is close to impossible. 
+%
+Special ``hacks'' are needed for character and font encodings both on the input side (package \package{inputenc}) and output side (packages \package{fontenc} or \package{fontspec}) are not backed by internal wide character support.
+
+% Příklady problémů, rozvedení přínosu unihyph 
+%The problem arises both in typesetting texts in these languages that need automated hyphenation for words using wide character representation.
+Since both {\TeX} and % https://ctan.mines-albi.fr/info/knuth-pdf/other/patgen.pdf#page=8
+\Patgen{} have hardwired \mbox{8-bit} character representations,
+to develop practically useable universal syllabic hyphenation, one needs to overcome these constraints.
+
+
+
+% Popis způsobu řešení těchto problémů pro univerzální slabičné dělení
+In this paper we 
+\textrm{a)}~constructively show the feasibility of preparation of universal syllabic patterns, 
+\textrm{b)}~demonstrate a version of \Patgen{} with wide character support, and 
+\textrm{c)}~discuss further steps to do in the \TeX{} program suite to make language hyphenation Unicode-compliant.
+
+% Popis členění článku.
+The paper is structured as follows.
+%
+In Section~\ref{sec:2} we define the terminology and describe the language data we have used in our experiments.
+%
+Section~\ref{sec:patterns} reminds the reader about the principles of the hyphenation algorithm in \TeX{} and of \Patgen-based pattern generation and pattern representation possibilities.
+%
+Section~\ref{sec:evaluation} evaluates the experiments with universal pattern generation.
+%
+In Section~\ref{sec:future} we elaborate on possible routes towards wide character support in the typesetting engines and \Patgen. 
+%
+As usual, we sum up and conclude in the final Section~\ref{sec:conclusion}.
+
+
+
+\motto{1}{-2}{``The concept of the syllable is cross-linguistic, though formal definitions\\ are rarely agreed upon, even within a language.
+In response, data-driven\\ syllabification methods have been developed to learn from syllabified examples. \ldots\\
+Syllabification can be considered a sequence labeling task where each label delineates\\ the existence or absence of a syllable boundary.''~\cite{nlp:Krantz2019}}
+
+\section{Syllabification}
+\label{sec:2}
+
+% Co je slabika?
+% https://en.wikipedia.org/wiki/Syllable
+% https://core-docs.s3.amazonaws.com/documents/asset/uploaded_file/786454/PHONICS.pdf
+Human beings convey meaning by pronouncing words as sequences of phonemes. 
+% Phonetics is the study of the production and perception of speech sounds, and phonology concerns the study of more complex and abstract sound patterns and structures (syllables, intonation, etc.).
+Phonology studies the structure of phonemes we are able to pronounce as syllables~\cite{nlp:maddieson2013}.
+%syllable (n.)
+%late 14c., from Anglo-French sillable, alteration of Old French silabe "syllable" (12c., Modern French syllabe), from Latin syllaba, from Greek syllabē "that which is held together; a syllable, several sounds or letters taken together," i.e. "a taking together" of letters; from syllambanein "take or put together, collect, gather," from assimilated form of syn- "together" (see syn-) + stem of lambanein "to take" (see lemma). The unetymological -le apparently is by analogy with participle and principle.
+%also from late 14c.
+%%%%%%%%%%
+Etymologically, a syllable is an Anglo-Norman variation of Old French \foreignlanguage{french}{sillabe}, from Latin \foreignlanguage{latin}{syllaba}, from Greek %\protect\foreignlanguage{greek}{συλλαβή}
+(syllabē), ``that which is held together; a syllable, several sounds or letters taken together'' to make a single sound.~\cite{nlp:harperdouglas}
+
+When we delineate boundaries in the orthographic representation of words, we speak about \stress{hyphenation} of words as sequences of \stress{characters}. 
+
+
+\subsection{Hyphenation as syllabification}
+
+There are subtle differences between syllabification and hyphenation, though.
+Let us take the Czech word \word{sestra}.
+The Czech language authorities~\cite{nlp:UJCprirucka2023} allow hyphenations as
+\word{se-s-t-ra}, while agreeing that there are only two syllables based on \textbf{C}on\-so\-nant and \textbf{V}\kern-.07em owel sequencing:
+either \word{se-stra} (\acro{CV-CCCV}), 
+or \word{ses-tra} (\acro{CVC-CCV}), 
+or \word{sest-ra} (\acro{CVCC-CV}).
+As with hyphenation, defining segments for syllabification is full of exceptions. 
+The Czech sentence \word{Strč prst skrz krk} or word \word{scvrnkls} (\acro{CCCCCCCC}) contain consonants-only syllables.
+
+There are also rare cases where word segmentation should differ in different contexts.
+It may be necessary within one language (different hyphenation \word{re-cord} and \word{rec-ord} depending on its part of speech), or between different languages. 
+% TODO doplnit priklady z generování
+When developing universal syllabic patterns, these theoretically possible segmentations should not be allowed in the input hyphenated wordlist used for training.
+But this should not matter, as e.g.\ Liang's \file{hyphen.tex} patterns do not cover more than 10\% of positions~\cite{tex:Liang83:thesis} and few complain about this coverage.
+
+
+
+%% bb -- Why is alphabet "Russian" listed for Russian, while "Cyrillic"
+%%       is listed for Ukrainian?  They should be the same, shouldn't they?
+\begin{table}[tbh]
+\centering
+\tabcolsep2.5dd
+\caption{Language resources and patterns used in pattern development experiments.
+% Co je a není slovo jazyka (pro patgen)
+All data was converted to \acro{UTF}-8 and contains lowercase alphabetic characters only.
+Alphabet size (\# chars) counts characters appearing in the language wordlist collected. 
+Languages were chosen for diversity of size of patterns and syllables.} %, and alphabets.}
+\label{tab:wordlists}
+\smallskip
+\works
+\begin{tabularx}{\textwidth}{@{}l@{}rccrX@{}}
+\toprule
+Language & \#words & \#chars & \#patterns & \#syllables & source, alphabet
+% TODO word length average (in chars)
+\\ \midrule
+Czech+Slovak (cz+sk) % czech and slovak
+  & 606,499 %words
+  & 47 %chars
+  & 8,231 %patterns
+  & 2,288,413%syllables
+  & \cite{tex:sojkas2021czechoslovak}, %correct optimized parameters, 
+  Latin %source
+  \\
+Georgian (ka)  %  georgian (1,2)   T8M     LPPL    Levan Shoshiashvili
+  & 50,644%words
+  & 33%chars
+  & 2,110%patterns
+  & 224,799%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Georgian%source
+  \\ 
+%German (de) % ngerman          
+%  & %words
+%  & %chars
+%  & %patterns
+%  & %syllables
+%  & \cite{nlp:Germantrennmuster}, Latin %source
+%  \\ 
+Greek (el-monoton) % monogreek (1,1)           LPPL    Dimitrios Filippou
+  & 10,432%words
+  & 48%chars
+  & 1,208%patterns
+  & _37,736%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Greek %source\
+  \\
+Panjabi (pa) % panjabi (1,1)
+  & __\hphantom{,}892%words
+  & 52%chars
+  & _\hphantom{,}_60%patterns
+  & __2,579%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Gurmukhi %source
+  \\
+Polish (pl) % polish pl (2,2)   QX      public  Hanna Kołodziejska Bogusław Jackowski Marek Ryćko
+  & 20,490%words
+  & 34%chars
+  & 4,053%patterns
+  & _65,510%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Latin%source
+  \\
+Russian (ru) % russian (2,2)   T2A     LPPL Alexander I. Lebedev Werner Lemberg Vladimir Volovich
+  & 19,698%words
+  & 33%chars
+  & 4,808%patterns
+  & _75,532%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Cyrillic %source
+  \\
+%Sanskrit (sa) % sanskrit (1,3)           free    Yves Codet
+%  & %words
+%  & %chars
+%  & %patterns
+%  & %syllables
+%  & \cite{tex:hyphenationweb-2023-07-05} tex-hyphen repo %source
+%  \\
+%Slovak (sk) % slovak (1,1)
+%  & %words
+%  & 44 %chars
+%  & %patterns
+%  & %syllables
+%  & \cite{tex:sojkas2021czechoslovak} tex-hyphen repo %source  
+%\\ 
+Tamil (ta) % tamil (1,1)
+  & 46,526%words
+  & 48%chars
+  & _\hphantom{,}_71%patterns
+  & _209,380%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Tamil %source
+  \\
+Telugu (te) % telugu (1,1)
+  & 28,849%words
+  & 66%chars
+  & _\hphantom{,}_72%patterns
+  & _125,508%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Telugu 
+   % (Dravid language) %source
+  \\
+Thai (th) % thai (2,3)   LTH     LPPL    Theppitak Karoonboonyanan
+  & __\hphantom{,}757%words
+  & 64%chars
+  & 4,342%patterns
+  & ___1,185%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Thai %(Brahmi script) %source
+  \\
+Turkish (tr) % turkish (2,2)   EC      LPPL    P. A. MacKay H. Turgut Uyar S. Ekin Kocabas Mojca Miklavec
+  & 24,634%words
+  & 32%chars
+  & _\hphantom{,}597%patterns
+  & _103,989%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Latin %source
+  \\
+Turkmen (tk) % turkmen (2,2)   EC      public  Nazar Annagurban
+  & _9,262%words
+  & 30%chars
+  & 2,371%patterns
+  & __33,080%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Latin %source
+  \\
+Ukrainian (ua) % ukrainian (2,2)   T2A     LPPL    Maksym Polyakov Werner Lemberg Vladimir Volovich
+  & 17,007%words
+  & 33%chars
+  & 1,990%patterns
+  & __65,099%syllables
+  & \cite{tex:hyphenationweb-2023-07-05}, Cyrillic %source
+  \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%% bb -- What was the reason to leave out German (de)?  Just curious.
+%% ps -- German wordlist is too big compared to the "new" languages - it would slow down the computation of experiments (it needs more levels and our parameter sets would need adjustments) and distort the stats for patgen  
+\begin{table}[b]
+\centering
+\tabcolsep3dd
+\caption{Language alphabet overlaps.
+Cells contain a number of lowercase letters that overlap between languages.
+In total, 13~languages contain in total 412~different lowercase letters, more than \Patgen is capable of digesting.}
+\label{tab:characters}
+\smallskip 
+\begin{tabular}{lrrrrrrrrrrrrrr}%rr}
+\toprule
+Language & cz+sk & ka %& de 
+& el & pa & pl & ru %& sa & sk 
+& ta & te & th & tr & tk & ua 
+\\ \midrule
+Czech+Slovak (cz+sk) % czech
+  & 47%cz 
+  & 0%ka
+%  & %de 
+  & 0%el 
+  & 0%pa
+  & 26%pl
+  & 0%ru
+%  & %sa 
+%  & 44%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 25%tr
+  & 28%tk
+  & 0%ua 
+  \\
+Georgian (ka)  %  georgian (1,2)   T8M     LPPL    Levan Shoshiashvili
+  & 0%cz 
+  & 33%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+ % & %sa 
+ % & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\ 
+%German (de) % ngerman          
+% & %cz 
+%  & %ka
+%  & %de 
+%  & %el 
+%  & %pa
+%  & %pl
+%  & %ru
+%  & %sa 
+%  & %sk 
+% & %ta
+%  & %te 
+%  & %th
+%  & %tr
+%  & %tk
+%  & %ua
+%  \\ 
+Greek (el-monoton) % monogreek (1,1)           LPPL    Dimitrios Filippou
+  & 0%cz 
+  & 0%ka
+%  & %de 
+  & 48%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & %sa 
+%  & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Panjabi (pa) % panjabi (1,1)
+  & 0%cz 
+  & 0%ka
+%  & %de 
+  & 0%el 
+  & 52%pa
+  & 0%pl
+  & 0%ru
+%  & %sa 
+%  & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua 
+  \\
+Polish (pl) % polish pl (2,2)   QX      public  Hanna Kołodziejska Bogusław Jackowski Marek Ryćko
+  & 26%cz+sk 
+  & 0%ka
+%  & %de 
+  & 0%el 
+  & 0%pa
+  & 34%pl
+  & 0%ru
+%  & %sa 
+%  & 26%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 23%tr
+  & 22%tk
+  & 0%ua 
+  \\
+Russian (ru) % russian (2,2)   T2A     LPPL Alexander I. Lebedev Werner Lemberg Vladimir Volovich
+  & 0%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 33%ru
+ % & %sa 
+ % & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 29%ua
+  \\
+%Sanskrit (sa) % sanskrit (1,3)           free    Yves Codet
+%  & %cz 
+%  & %ka
+%  & %de 
+%  & %el 
+%  & %pa
+%  & %pl
+%  & %ru
+%  & %sa 
+%  & %sk 
+%  & %ta
+%  & %te 
+%  & %th
+%  & %tr
+%  & %tk
+%  & %ua
+%  \\
+%Slovak (sk) % slovak (1,1)
+%  & 44%cz 
+%  & 0%ka
+%%  & %de 
+%  & 0%el 
+%  & 0%pa
+%  & 26%pl
+%  & 0%ru
+%  & %sa 
+%%  & 48%sk 
+%  & 0%ta
+%  & 0%te 
+%  & 0%th
+%  & 25%tr
+%  & 28%tk
+%  & 0%ua
+%\\ 
+Tamil (ta) % tamil (1,1)
+  & 0%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+ % & %sa 
+ %& 0%sk 
+  & 48%ta
+  & 0 % PS: bylo 1!!!%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Telugu (te) % telugu (1,1)
+  & 0%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+ % & %sa 
+ % & 0%sk 
+  & 0% PS: bylo 1!!! %ta
+  & 66%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Thai (th) % thai (2,3)   LTH     LPPL    Theppitak Karoonboonyanan
+  & 0%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+ % & %sa 
+ % & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 64%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Turkish (tr) % turkish (2,2)   EC      LPPL    P. A. MacKay H. Turgut Uyar S. Ekin Kocabas Mojca Miklavec
+  & 25%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 23%pl
+  & 0%ru
+ % & %sa 
+ % & 25%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 32%tr
+  & 25%tk
+  & 0%ua
+  \\
+Turkmen (tk) % turkmen (2,2)   EC      public  Nazar Annagurban
+  & 28%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 22%pl
+  & 0%ru
+ % & %sa 
+ % & 28%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 25%tr
+  & 30%tk
+  & 0%ua 
+  \\
+Ukrainian (ua) % ukrainian (2,2)   T2A     LPPL    Maksym Polyakov Werner Lemberg Vladimir Volovich
+  & 0%cz 
+  & 0%ka
+ % & %de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 29%ru
+ % & %sa 
+ % & 0%sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 33%ua 
+  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Příprava seznamu slov
+% Výběr prahu pro eliminaci překlepů, čištění wordlistů
+\subsection{Data preparation}
+To show the feasibility of universal pattern generation, we have collected wordlists for a dozen languages, as shown in Table~\ref{tab:wordlists}. 
+The chosen languages \textrm{a)}~have a wide diversity in alphabets and syllables and \textrm{b)}~have existing hyphenation patterns as an approximation for syllable segments.
+The wordlists were collected from public sources or provided for our research as stratified dictionaries from TenTen corpora~\cite{nlp:Jakubicek2013TTC} by Lexical Computing.
+We used wordlists sorted by frequency and cut at below 5\% of word occurrences, to eliminate typos appearing in documents.
+Each tenth word was taken into a wordlist \Dash a stratified sampling technique inspired by Knuth~\cite{tex:knuth91} that was already used successfully in pattern generation~\cite{tex:sojka95b}.
+Wordlists were hyphenated by legacy patterns, mostly taken from~\cite{tex:hyphenationweb-2023-07-05}.
+
+% Char: widechar, unicode, UCS-2 a jeho podpora v TeXu a patgenu
+Alphabet analysis and statistics are shown in Table~\ref{tab:characters}.
+The total number of letters appearing in all languages exceeds 245, the maximum number of letters that current \Patgen can support.
+This is why wide-character representation (Unicode \mbox{\acro{UTF-16}}) support in \Patgen (and then in the hyphenator library in a typesetting engine) would be needed to extend our generation to more languages.
+
+% sojka@hador: wc -l *
+%  11831 eltenten19_tt3.frqwl.c095.x10
+%  69240 georgianwac.frqwl.c095.x10
+%   1120 pantenten21.frqwl.c095.x10
+%  21313 pltenten19_rft1.frqwl.c095.x10
+%  20981 rutenten11_8.frqwl.c095.x10
+%  49588 tatenten21.frqwl.c095.x10
+%  30750 tetenten21.frqwl.c095.x10
+%    896 thtenten18.frqwl.c095.x10
+%  26125 trtenten20_tm2.frqwl.c095.x10
+%  10283 turkic_tm.frqwl.c095.x10
+%  18428 uktenten20_rft1.frqwl.c095.x10
+% 260555 total
+\iffalse
+Chat GPT:
+Panžábi (Pandžábština): Panžábi se obvykle zapisuje gurmukhi abecedou, která je odvozena od šrí gurmukhi písma. Existuje však také možnost psát panžábi pomočí šáhmuḫího písma, které se používá v Pákistánu.
+
+Tamilština: Tamilština používá tamilskou abecedu, která je jednou z nejstarších žijících abeced na světě. Má 12 samohlásek a 18 souhlásek.
+
+Telugu: Telugu se zapisuje teluguskou abecedou, která je písmem drávidského jazyka. Má 16 samohlásek a 36 souhlásek.
+
+Tajština: Tajština se zapisuje tajskou abecedou, která je psacím systémem písmene, založeným na brahmínském písmu. Má 44 souhlásek a 15 samohlásek.
+
+Turkmenština: Turkmenština se zapisuje cyrilskou abecedou, která se stala oficiálním psacím systémem během sovětské éry. Nicméně, v Turkmenistánu se stále používá také latinská abeceda, která byla používána před sovětskou érou.
+\fi
+
+
+\section{Pattern development}
+\label{sec:patterns}
+
+% Stručné shrnutí základních pojmů a SOTA
+The idea of squeezing the hyphenated wordlist into the set of patterns was originated  in the dissertation of Frank Liang~\cite{tex:Liang83:thesis}, supervised by Donald Knuth.
+For the automated generation of patterns from a wordlist, Liang wrote the \Patgen program.
+\Patgen was one of the very first programs that harnessed the power of data with supervised machine learning. 
+Programmed originally to support English and \ASCII, it was later extended to be usable for 8-bit characters and for wordlists that contain at most 245 characters~\cite{tex:patgen99}.
+It is capable of efficient lossy or lossless \stress{compression} of hyphenated dictionaries, with several orders of magnitude compression ratio.
+Generated patterns have minimal length, e.g., the shortest context possible, which results in their \stress{generalization} properties.
+    
+In general, \stress{exact lossless} pattern \stress{minimization is non-polynomial} by reduction to the minimum set cover problem~\cite{nlp:Sojka2005:thesis}.
+For Czech, \stress{exact lossless} pattern generation \stress{is feasible}~\cite{tex:sojkas2019unreasonable}, while reaching \stress{100\% coverage \emph{and simultaneously} no errors}.
+Strict pattern minimality (size) is not an issue nowadays.
+
+\begin{figure}[tb]
+\centering
+\begin{minipage}[c]{.46\textwidth}
+\begin{verbatim}
+    h y p h e n a t i o n
+p1           1n a
+p1               1t i o n
+p2            n2a t
+p2                 2i o
+p2        h e2n
+p3  h y3p h
+p4        h e n a4
+p5        h e n5a t
+    h0y3p0h0e2n5a4t2i0o0n
+\end{verbatim}
+\end{minipage}%
+~
+\begin{minipage}[c]{.45\textwidth}
+hy-phen-ation $\rightarrow$ 2 6\\
+\ldots $\rightarrow$ \ldots \\
+\ldots $\rightarrow$ \ldots \\
+key $\rightarrow$ data\\[2mm]
+Solution to the dictionary problem:\\
+For key part (the word) to store\\
+the data part (its division)
+\end{minipage}
+
+\caption{Eight patterns ``compete'' how to hyphenate \word{hyphenation}. 
+    Winners are patterns \patword{hy3ph} and \patword{hen5at} generated at the highest covering level (odd numbers) generation. 
+    The level hierarchy allows for storing exceptions, exceptions to exceptions, exceptions to exceptions to exceptions, \ldots, with character contexts as parameters.~\protect\cite{tex:Liang83:thesis}
+    }
+    \label{fig:competingpatterns}
+\end{figure}
+
+This idea and its realization is a programming pearl.
+Motivated by space and time constraints, instead of the classical solution of dictionary problem in the logarithmic time of dictionary size, the word hyphenation is computed from patterns in constant time, where the constant is given by \stress{word} length. 
+% kb - duplicated above
+%It is capable of efficient lossy or lossless \stress{compression} of hyphenated dictionary with a compression ratio of several orders of magnitude.
+%Generated patterns have minimal length, e.g., the shortest context possible, which results in their \stress{generalization} properties.
+%
+%Generally, \stress{exact lossless} pattern \stress{minimization is non-polynomial} by reduction to the minimum set cover problem~\cite{nlp:Sojka2005:thesis}.
+%For Czech, \stress{exact lossless} pattern generation \stress{is feasible}~\cite{tex:sojkas2019unreasonable}, while reaching \stress{100\% coverage \emph{and simultaneously} no errors}.
+%Strict pattern minimality (size) is not an issue nowadays.
+
+Space needed for patterns in the \stress{packed trie} data structure is typically in tens of kB, which is several orders of magnitude smaller than the wordlist size.
+With fine-tuned parameters of pattern generation in the so-called \stress{levels}, one can prepare patterns with zero errors and almost full coverage of hyphenation points from the input dictionary.
+
+For practical use, patterns are collected in the repository maintained by the \TeX\ community~\cite{tex:hyphenationweb-2023-07-05}. 
+It is no surprise that most if not all leading typesetting engines deploy this ``competing pattern engineering technology''~\cite{nlp:sojka2000competing}.
+
+
+\subsection{Patterns}
+% Vzory v Contextu http://www.pragma-ade.nl/general/manuals/mpattern.pdf
+
+The patterns ``compete'' with each other whether to split the word at a position, given varying characters in both side contexts; see Figure~\ref{fig:competingpatterns}.
+
+% generování vzorů patgenem, prahy, tra soubor
+We have shown how effective and powerful the technique is,
+and that its power depends on the \emph{parameters} of pattern generation~\cite{tex:sojkas2019unreasonable}.
+The key is the proper setting of \Patgen parameters for pattern generation.
+% úspěšný vývoj vzorů pro více jazyků (československé vzory)
+The idea of universal segmentation with \Patgen has been proposed already in \cite{nlp:SojkaetSojkaraslan2019}.
+There, we demonstrated the techniques for the development of two languages together, Czech and Slovak, and developed a joint wordlist and patterns~\cite{tex:sojkas2021czechoslovak}.
+
+We wanted to extend the technique to other Slavic and syllabic languages.
+The bottleneck for adding new languages was \Patgen and \TeX's constraint of one-byte character support only for storing patterns in tries.
+We thought of using a modern data structure that would allow wide character trie representation. 
+That was the task for a bachelor's thesis: use a Judy array \cite{tex:Maca-bachelor2023fortugboat}.
+
+\subsection{Judy arrays}
+% co to je
+The Judy array, also known as simply Judy, is a data structure that implements a sparse dynamic array, allowing for versatile applications such as dynamically sized arrays and associative arrays. 
+Judy is internally implemented as a tree structure, where every internal node has 256 ancestor nodes.
+The most interesting thing about this structure is that it tries to be as memory-efficient as possible by effectively using the available cache, avoiding unnecessary access to the main memory.
+As a result, Judy is both fast and memory-efficient.
+
+%* co se ukázalo v BP
+The feasibility of utilizing the Judy structure for storing hyphenation patterns is demonstrated in the thesis~\cite{tex:Maca-bachelor2023fortugboat}.
+In Chapter~4, it is shown that Judy has the potential to be faster and more memory-efficient compared to the original trie when working with patterns.
+Further, Chapter~5 explores the potential integration of Judy into \Patgen and the consequent impact on \Patgen's generation process.
+The results from this chapter indicate that rewriting \Patgen with Judy is possible but would require an almost complete overhaul of \Patgen's code and algorithms.
+%* pros a cons Judy, úspěšné použití Judy array pro uložení vzorů
+This redevelopment would yield a \Patgen version capable of handling input of any kind, enabling the generation of patterns composed of arbitrary alphabets.
+However, it is important to note that the generation process would be approximately four times slower than the current implementation.
+This is due to the hiding of access to the inner nodes of stored tries in Judy.
+As this access is not needed in \TeX\ for the hyphenation of individual words, using some variant of Judy in a \TeX\ successor would make hyphenation faster.
+
+\begin{table}[tbh]
+\tabcolsep4dd
+\centering
+\caption{Different word hyphenation overlaps.
+Cells contain a number of the same words that are segmented differently between languages.
+Differences are caused typically by suboptimal coverage patterns used to hyphenate the wordlist (\word{vi-bram} vs.\ \word{vib-ram}, 
+\word{up-gra-de} vs.\ \word{upg-ra-de}).
+We remove the differently hyphenated words when joining wordlists for the final syllabic generation.}
+\label{tab:colisions}
+\smallskip 
+\begin{tabular}{lrrrrrrrrrrrrrr}
+\toprule
+Language & cz+sk & ka & el & pa & pl & ru %& sk 
+& ta & te & th & tr & tk & ua 
+\\ \midrule
+Czech+Slovak (cz+sk)  % czech
+  & 9 %cz+sk 
+  & 0 %ka
+ % & %de 
+  & 0 %el 
+  & 0 %pa
+  & 388%pl
+  & 0 %ru
+% & %sa 
+% & %sk 
+  & 0 %ta
+  & 0%te 
+  & 0 %th
+  & 640 %tr
+  & 69 %tk
+  & 0 %ua 
+  \\
+Georgian (ka)   %  georgian (1,2)   T8M     LPPL    Levan Shoshiashvili
+  & 0 %cz 
+  & 0%ka
+% & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\ 
+%German (de) & % ngerman          
+%  & %cz 
+%  & %ka
+%  & %de 
+%  & %el 
+%  & %pa
+%  & %pl
+%  & %ru
+%  & %sa 
+%  & %sk 
+%  & %ta
+%  & %te 
+%  & %th
+%  & %tr
+%  & %tk
+%  & %ua
+%  \\ 
+Greek (el-monoton) % monogreek (1,1)           LPPL    Dimitrios Filippou
+  & 0 %cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Panjabi (pa)  % panjabi (1,1)
+  & 0%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Polish (pl) % polish pl (2,2)   QX      public  Hanna Kołodziejska Bogusław Jackowski Marek Ryćko
+  & 388%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 187%tr
+  & 9%tk
+  & 0%ua
+  \\
+Russian (ru) % russian (2,2)   T2A     LPPL Alexander I. Lebedev Werner Lemberg Vladimir Volovich
+  & 0%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 125%ua
+  \\
+%Sanskrit (sa) % sanskrit (1,3)           free    Yves Codet
+%  & %cz 
+%  & %ka
+%  & %de 
+%  & %el 
+%  & %pa
+%  & %pl
+%  & %ru
+%  & %sa 
+%  & %sk 
+%  & %ta
+%  & %te 
+%  & %th
+%  & %tr
+%  & %tk
+%  & %ua
+%  \\
+%Slovak (sk) % slovak (1,1)
+%  & %cz 
+%  & %ka
+%  & %de 
+%  & %el 
+% & %pa
+%  & %pl
+%  & %ru
+%  & %sa 
+%  & %sk 
+%  & %ta
+%  & %te 
+%  & %th
+%  & %tr
+% & %tk
+%  & %ua
+%\\ 
+Tamil (ta) % tamil (1,1)
+  & 0%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Telugu (te) % telugu (1,1)
+  & 0 %cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Thai (th) % thai (2,3)   LTH     LPPL    Theppitak Karoonboonyanan
+  & 0 %cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+Turkish (tr) % turkish (2,2)   EC      LPPL    P. A. MacKay H. Turgut Uyar S. Ekin Kocabas Mojca Miklavec
+  & 640 %cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 187%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 80%tk
+  & 0%ua
+  \\
+Turkmen (tk) % turkmen (2,2)   EC      public  Nazar Annagurban
+  & 69%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 9%pl
+  & 0%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 80%tr
+  & 0%tk
+  & 0%ua
+  \\
+Ukrainian (ua) % ukrainian (2,2)   T2A     LPPL    Maksym Polyakov Werner Lemberg Vladimir Volovich
+  & 0%cz 
+  & 0%ka
+%  & 0%de 
+  & 0%el 
+  & 0%pa
+  & 0%pl
+  & 125%ru
+%  & 0%sa 
+%  & %sk 
+  & 0%ta
+  & 0%te 
+  & 0%th
+  & 0%tr
+  & 0%tk
+  & 0%ua
+  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[tbh]
+\tabcolsep4dd\centering\works
+\caption{Statistics from the generation of universal patterns for cz+sk, ka, el, pl, ru, tr, tk, ua with \emph{custom} parameters and 
+\texttt{\bs lefthyphenmin=2}, \texttt{\bs righthyphenmin=2}.
+Generation took 33.23 seconds, 11,238 patterns, 77\,kB.
+}
+\label{tab:unipatternscustom}
+\smallskip
+\begin{tabular}{crrrrcc}
+\toprule
+Level& Patterns & Good & Bad    & Missed  & Lengths & Params\tabularnewline
+\midrule 
+1 &	2,407 &	2,066,410 &	280,020 &  70,588 &	1 _3 &	1_ 3 12\tabularnewline
+2 &	2,375 &	2,025,245 &	  8,866 & 111,753 &	2 _4 &	1_ 1 _5\tabularnewline
+3 &	4,626 &	2,118,063 &	 19,213 &  18,935 &	3 _6 &	1_ 2 _4\tabularnewline
+4 & 2,993 &	2,117,739 &   5,920 &  19,259 &	3 _7 &	1_ 4 _2\tabularnewline
+%CSSK :
+% 1 &   830 & 2,819,833 & 470,649 &  35,908 & 1 _3    & 1_ 3 12\tabularnewline
+% 2 & 1,590 & 2,748,581 &   3,207 & 107,160 & 2 _4    & 1_ 1 _5\tabularnewline
+% 3 & 2,766 & 2,852,334 &  12,197 &   3,407 & 3 _6    & 1_ 2 _4\tabularnewline
+% 4 & 1,285 & 2,851,931 &     986 &   3,810 & 3 _7    & 1_ 4 _2\tabularnewline
+\bottomrule
+\end{tabular}
+\tableskip
+
+\caption{Statistics from the generation of universal patterns for cz+sk, ka, el, pl, ru, tr, tk, ua with \emph{correct optimized} parameters and 
+\texttt{\bs lefthyphenmin=2}, \texttt{\bs righthyphenmin=2}.
+Generation took 35.43 seconds, 29,742 patterns, 219\,kB.\hbadness=1300}
+\label{tab:unipatternscorrect}
+\smallskip
+\begin{tabular}{crrrrcc}
+\toprule
+Level& \ Patterns & Good &   Bad & Missed & Lengths & Params\tabularnewline
+\midrule 
+1 &	 7,188 & 2,049,375 & 164,224 & 87,623 & 1 _3 &	1_ 5 _1\tabularnewline
+2 &	 4,108 & 2,042,249 &  14,094 & 94,749 &	1 _3 &	1_ 5 _1\tabularnewline
+3 &	15,010 & 2,134,692 &  20,544 &	2,306 &	2 _6 &	1_ 3 _1\tabularnewline
+4 &	 6,920 & 2,133,458 &	 815 &	3,540 &	2 _7 &	1_ 3 _1\tabularnewline
+%CSSK
+% 1 & TBA 2,032 & 2,800,136 & 242,962 & 55,605  & 1 _3  & 1_ 5 _1\tabularnewline
+% 2 & TBA 2,009 & 2,791,326 &  10,343 & 64,415  & 1 _3  & 1_ 5 _1\tabularnewline
+% 3 & TBA 3,704 & 2,855,554 &  11,970 &    187  & 2 _6  & 1_ 3 _1\tabularnewline
+% 4 & TBA 1,206 & 2,854,794 &      33 &    947  & 2 _7  & 1_ 3 _1\tabularnewline
+\bottomrule
+\end{tabular}
+\tableskip
+
+\caption{Statistics from the generation of universal patterns for cz+sk, ka, el, pl, ru, tr, tk, ua with \emph{size optimized} parameters and 
+\texttt{\bs lefthyphenmin=2}, \texttt{\bs righthyphenmin=2}.
+Generation took 29.75 seconds, 14,321 patterns, 101\,kB.
+}
+\label{tab:unipatternssize}
+\smallskip
+\begin{tabular}{crrrrcc}
+\toprule
+Level& \ Patterns & Good &  Bad & Missed  & Lengths & Params\tabularnewline
+\midrule
+1 &	_1,201 & 2,092,928 &	598,321 &  44,070 &	 1 _3 &	1_ 2 20\tabularnewline
+2 &	_2,695 &	1,736,372 &	  5,274 & 400,626 &	 2 _4 &	2_ 1 _8\tabularnewline
+3 &	_4,835 &	2,102,803 &	 20,094 &  34,195 &	 3 _5 &	1_ 4 _7\tabularnewline
+4 &	_6,508 &	2,099,607 &	    210 &  37,391 &	 4 _7 &	3_ 2 _1\tabularnewline
+%CSSK
+% 1 &    419 & 2,833,402 & 667,031 &  22,339 & 1 _3  & 1_ 2 20\tabularnewline
+% 2 &  1,506 & 2,430,120 &   1,188 & 425,621 & 2 _4  & 2_ 1 _8\tabularnewline
+% 3 &  3,579 & 2,846,112 &  15,881 &   9,629 & 3 _5  & 1_ 4 _7\tabularnewline
+% 4 &  2,401 & 2,843,657 &       4 &  12,084 & 4 _7  & 3_ 2 _1\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbh]
+\centering\works
+\caption{Comparison of the efficiency of different approaches to pattern generation of Czechoslovak and of universal patterns.
+Note that the size of universal patterns grows sublinearly with the number of languages.
+The generalization ability of universal patterns is only slightly worse than that of Czechoslovak ones.
+The experience from the development of Czechoslovak patterns shows that performance could be improved by consistent markup of wordlist data.}
+\label{tab:uniresults}
+\smallskip\tabcolsep2.9dd
+\begin{tabular}{llllllc}
+\toprule
+Wordlist & Parameters & Good & Bad & Missed & Size & Patterns \tabularnewline
+\midrule 
+%Czech & correctopt~\cite{tex:sojkas2019unreasonable} & 99.76\% & 2.94\% & 0.24\% & 30 kB & 5,593\tabularnewline
+%Czech & sizeopt~\cite{tex:sojkas2019unreasonable} & 98.95\% & 2.80\% & 1.05\% & 19 kB & 3,816 \tabularnewline
+%Slovak & \cite[Table 1]{tex:SojkaSKhyp04beng} & 99.94\% & 0.01\% & 0.06\% & 56 kB & 2,347 \tabularnewline
+%Czechoslovak & sizeopt & 99.67\% & 0.00\% & 0.33\% & 40 kB & 7,417 \tabularnewline
+%Czechoslovak & correctopt & 99.99\% & 0.00\% & 0.01\% & 45 kB & 8,231 \tabularnewline
+%Czechoslovak & custom & 99.87\% & 0.03\% & 0.13\% & 32 kB & 5,907 \tabularnewline
+Czechoslovak & custom     & 99.87\% & 0.03\% & 0.13\% & _32 kB & _5,907 \tabularnewline
+Czechoslovak & correctopt & 99.99\% & 0.00\% & 0.01\% & _45 kB & _8,231 \tabularnewline
+Czechoslovak & sizeopt    & 99.67\% & 0.00\% & 0.33\% & _40 kB & _7,417 \tabularnewline
+Universal    & custom     & 99.10\% & 0.28\% & 0.90\% & _77 kB & 11,238 \tabularnewline
+Universal    & correctopt & 99.83\% & 0.04\% & 0.17\% & 219 kB & 29,742 \tabularnewline
+Universal    & sizeopt    & 98.25\% & 0.01\% & 1.75\% & 101 kB & 14,321 \tabularnewline
+\bottomrule
+\end{tabular}
+\tableskip
+
+\caption{Results of 10-fold cross-validation (learning on 90\%, and testing on remaining 10\%).
+Generalization properties (performance on words not seen during training) are compared with Czechoslovak patterns.
+By adding 7~languages, the generalization abilities of universal patterns are only slightly worse.}
+\label{tab:10kresults}
+\smallskip
+\begin{tabular}{lllll}
+\toprule
+Wordlist & Parameters & Good & Bad & Missed
+\tabularnewline
+\midrule
+Czechoslovak & custom     & 99.64\% & 0.22\% & 0.14\% \tabularnewline
+Czechoslovak & correctopt & 99.81\% & 0.15\% & 0.04\% \tabularnewline
+Czechoslovak & sizeopt    & 99.41\% & 0.18\% & 0.40\% \tabularnewline
+Universal    & custom     & 97.99\% & 1.06\% & 0.95\% \tabularnewline
+Universal    & correctopt & 98.10\% & 1.28\% & 0.62\% \tabularnewline
+Universal    & sizeopt    & 97.50\% & 0.94\% & 1.56\% \tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Universal pattern generation}
+
+To pursue the idea of universal syllabic pattern generation, we have checked whether the legacy patterns hyphenate the same valid word in different languages differently.
+The result with a short discussion is in Table~\ref{tab:colisions}.
+The expectation that syllable-forming principles are universal, as phonology theory suggests, is confirmed. The errors we have found were due to the difference between hyphenation and syllabification caused by inconsistent markup rather than a principled difference in word morphology, e.g.\ a compound word segmented in one language, and given as a single word in the other.\footnote{Compound words can evolve in perception into single words even within one language.
+Examples are the evolution of \word{e-mail} into \word{email} or
+\word{roz-um} into syllabic \word{ro-zum} in Czech.}
+
+
+
+
+
+We removed all colliding words when joining wordlists into
+the wordlist universal pattern generation. As mentioned earlier, we collected words for nine languages (cz, sk, ka, el, pl, ru, tr, tk, ua).
+
+We generated universal patterns with the same three sets of \Patgen parameters (custom, correct optimized, and size optimized) as when generating Czechoslovak patterns.
+The results are shown in Tables~\ref{tab:unipatternscustom} (custom), \ref{tab:unipatternscorrect} (correct optimized) and~\ref{tab:unipatternssize} (size optimized).
+The results are comparable with generation for two languages and confirm the feasibility of universal pattern development.
+
+We did not pursue 100\% coverage at all costs because the source data is noisy, and we do not want the patterns to learn all the typos and inconsistencies.
+Also, the size of the new languages was rather small, compared to Czechoslovak.
+% We expand on this in the Jupyter notebook~\cite{tensojka:cshyphenrepo}.
+% Gentle readers may also find the scripts used there.
+
+
+\section{Evaluation}
+\label{sec:evaluation}
+We evaluated the quality of developed patterns by two metrics.
+\stress{Coverage} of hyphenation points in the training wordlist tells how the patterns correctly predicted hyphenation points used in training. 
+\stress{Generalization} means how the patterns behave on unseen data, on words not available in the data used during \Patgen training.
+The methodology is the same as we used in the development of Czechoslovak patterns~\cite{tex:sojkas2021czechoslovak}.
+
+In Table~\ref{tab:uniresults}, we compare the efficiency of different approaches to hyphenating 2~languages and 9~languages from one pattern set.
+We see that the performance of universal patterns is comparable in size and quality to double- or single-language ones\Dash there is only a negligible difference.
+Table~\ref{tab:10kresults} shows that generalization qualities, given the small input size wordlists, are very good, and comparable to the fine-tuned Czechoslovak results.
+Investing in the purification and consistency of input wordlists (as we did for Czech and Slovak) would result in near-perfect syllabic patterns with almost 100\% coverage and no errors.  
+
+ 
+\section{Future work} %?{Tools development}
+\label{sec:future}
+
+A natural further step is to merge further languages where the syllabic principle is used for hyphenation.  
+For that, one would need a version of \Patgen we provisionally call \XPatgen. 
+% In https://tug.org/interviews/kew.html Jonathan Kew, author of XeTeX says:
+%The name was chosen to imply an eXtended version of eTeX, along with an association with MacOSX (which was initially the only target platform). As one of the intended uses was for typesetting right-to-left scripts, a palindromic name seemed like fun; and the properly-typeset version is supposed to use the Unicode character U+018A LATIN CAPITAL LETTER REVERSED E for the first lowered “E”, hinting at support of much more than the basic Western character set. 
+%...
+%There are further complications, of course; for example, hyphenation may require such “word nodes” to be taken apart and reassembled after finding possible break positions. But the fundamental idea is to collect runs of characters and hand them as complete units to a font rendering library that understands how to handle layout at the level of the individual glyphs. 
+This version would support Unicode not only in \acro{I/O} but also internally as a wide character (\mbox{\acro{UTF-16}}) character encoded in the pattern representation in either a packed trie or Judy array.
+This would allow merging more languages \emph{without} increasing the computational complexity of hyphenation, and only a sublinear increase of pattern size.
+We believe that coverage may differ from 100\% only by words that should be hyphenated differently in different languages\Dash our estimate is in small, single-digit percents, while, as mentioned above, the widely-used \file{hyphen.tex} patterns do not cover 10+\%!
+
+%https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/ 
+% For the latest version of CityDesk, the web site management software published by my company, we decided to do everything internally in UCS-2 (two byte) Unicode, which is what Visual Basic, COM, and Windows NT/2000/XP use as their native string type. In C++ code we just declare strings as wchar_t (“wide char”) instead of char and use the wcs functions instead of the str functions (for example wcscat and wcslen instead of strcat and strlen). To create a literal UCS-2 string in C code you just put an L before it as so: L"Hello".
+
+Another possible extension in pattern development is the support of a specific hyphenation penalty for compound word borders.
+This extension, discussed already 30~years ago~\cite{tex:sojka95b}, would generate patterns first for compound words, and only after fixing them continue with pattern generation for all other hyphenation points.
+The \TeX\ engine would then set the hyphenation penalties depending on level ranges in patterns found for the hyphenated word.
+This extension is orthogonal with support for universal patterns but might require increasing the maximal number of levels allowed in patterns to two digits. 
+
+There are several open questions for the \TeX\ development community:
+\begin{enumerate}
+% 1 ma to vubec smysl?
+    \item Should the universal syllabic patterns ever be developed?
+% 2 pokud ano, jak znaky reprezentovat ve vzorech a programech, ktere  nimi pracuji?
+    \item % Should joint patterns be generated for syllabic languages?
+    If so, should the needed \stress{internal} wide character representations be added to the \TeX\ suite of programs?
+    %https://cs.overleaf.com/learn/latex/TeX_primitives_listed_by_TeX_engine
+    That is, to \TeX-based engines not yet supporting it\footnote{\raggedright\url{https://cs.overleaf.com/learn/latex/TeX_primitives_listed_by_TeX_engine}} and \Patgen or \XPatgen.
+% 3 samostatny segmenter?
+    \item If not, should it be handled by external segmenters on \TeX's input, based on \Patgen's proposed successor, \XPatgen?
+% 4 Unipatgen jako sam. program do distribuce?
+    \item If \XPatgen was developed, should it be added to the distribution, together with Unicode patterns included and supported in repositories like~\cite{tex:hyphenationweb-2023-07-05}?
+% 5 A (Lua)TeX se vzory v Judy?
+    \item Should \XPatgen, and \LuaTeX, add a dependency on a Judy library, or should a more conservative solution be sought and implemented?
+    With a conservative solution, which data structure to use for storing patterns?
+    Should the memory be allocated dynamically, to overcome the abundant explosion of format size that stores the patterns, as output by ini\TeX? 
+% 6 Compound word support? 
+    \item Should \XPatgen (and \TeX\ engines) additionally and orthogonally support patterns and different hyphenation penalty for compound word borders, currently available in e.g.\ the German wordlist~\cite{nlp:Germantrennmuster}?
+\end{enumerate}
+We would appreciate qualified opinions on these decisions being sent to authors.
+
+
+
+\motto{1}{-2.2}{\hfill``All we are saying, give patterns a chance.\rlap{''}\newline
+Our paraphrase of John Lennon's protest song refrain}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Preparation of language-agnostic, i.e.\ universal, syllabic segmentation patterns could be done! 
+We have demonstrated this possibility by generating patterns based on the wordlists of nine languages with current \Patgen.
+They have superb generalization qualities, high coverage of hyphenation points (more than most legacy patterns), and virtually no errors.
+Their use could have a high impact on virtually all typesetting engines including web page renderers.
+
+Supporting wide characters in \Patgen is a critical requirement for adding more languages.
+We have shown that bringing \href{https://en.wikipedia.org/wiki/Wide_character}{wide character} support into the hyphenation part of the \TeX\ suite of programs is possible by using the \href{https://en.wikipedia.org/wiki/Judy_array}{Judy array}.
+It will allow generating and deploying patterns for the whole Unicode character set. 
+We have discussed a possible roadmap to make this a reality in typesetting engines including \TeX\ successors.
+
+\vspace{-2pt}
+
+\subsection*{Acknowledgments}
+% This work has been partly supported by the Ministry of Education of CR within the LINDAT-Clarin infrastructure LM2015071. 
+We are indebted to Don Knuth for questioning the common properties of Czech and Slovak hyphenation during our presentation of~\cite{tex:sojkas2019unreasonable} at \acro{TUG}~2019, which has led us in this research direction.
+We also thank everyone on whose shoulders we build our work, e.g.\ for wordlists by Lexical Computing, and to all who commented on our work at \acro{TUG}~2021~\cite{tex:sojkas2021czechoslovak} and \acro{TUG}~2023. 
+We thank \CSTUG\ for \acro{TUG} travel support.
+
+\begingroup
+\sloppy
+\printbibliography
+\endgroup
+
+\section*{Plán pro univerzální slabičnou segmentaci}
+\begin{otherlanguage}{czech}
+% jaky se resi problem? jake je téma? jaky je cil textu?
+Prostorově a časově efektivní segmentace (dělení slov) přirozených jazyků zůstává jádrem každého sázecího systému, ať už jde o \TeX, webový prohlížeč nebo mobilní operační systém.
+Ve většině jazyků je dnes pragmaticky preferováno slabičné dělení reflektující výslovnost při čtení.
+
+% jak je problém vyresen? cil naplnen?
+Vzhledem k~tomu, že přepínání jazyků často není v~textech označeno, renderovací stroj (webový prohlížeč či \TeX) potřebuje \emph{univerzální} slabikovou segmentaci.
+V~tomto článku ukazujeme proveditelnost této myšlenky tím, že nabízíme prototypové řešení dvou hlavních problémů:
+\begin{enumerate}
+     \item[A)] použití \Patgen{}u ke generování vzorů pro několik jazyků najednou; a
+     \item[B)] neexistence podpory Unicode v~nástrojích jako \Patgen{} nebo \TeX\ (vzory v~kódování \mbox{UTF-16}).
+     % https://ctan.mines-albi.fr/info/knuth-pdf/other/patgen.pdf#page=8
+\end{enumerate}
+
+% jake jsou konkretni vysledky? jak dobre je problem vyresen?
+Pro A) jsme použili na generování univerzálních slabičných vzorů seznamy slov devíti slabičných jazyků
+(čeština, slovenština, gruzínština, řečtina, polština, ruština, turečtina, turkmenština a ukrajinština).
+%(cz, sk, ka, el, pl, ru, tr, tk a ua)
+Pro B) jsme vytvořili verzi \Patgen, která používá
+\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array} datovou strukturu a porovnali její efektivitu s~implementací trie.
+
+% takze co? cim je to uzitecne Vede a ctenari?
+S údaji z těchto devíti jazyků ukazujeme, že:
+\begin{enumerate}
+     \item[A)] vyvinutí univerzálních, obecných, slabičných vzorů s~vysokým pokrytím je
+     možné, s~velkým dopadem na prakticky všechny sázecí stroje,
+     včetně webových prohlížečů; a
+   \item[B)] široká podporu Unicode znaků do části dělení slov
+     v~programech \TeX\ a~\Patgen je možná pomocí polí Judy.
+\end{enumerate}
+\end{otherlanguage}
+\klicovaslova: slabikování, dělení slov, příprava univerzálních slabičných vzorů
+\end{document}

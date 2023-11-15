@@ -56,7 +56,7 @@ bul-toc.pdf: bul.pdf
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
-PAGETOTAL = 90
+PAGETOTAL = 104
 COLORPAGES = 19
 
 test:
