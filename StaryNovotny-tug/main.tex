@@ -36,8 +36,8 @@
 \makeatletter
 \newcommand\blfootnote[1]{%
   \begingroup
-  \renewcommand\@makefntext[1]{\leftskip=0pt\relax#1}%
-  \footnotetext{#1}%
+  \def\@thefnmark{}%
+  \@footnotetext{#1}%
   \endgroup
 }
 \def\strankasclankem#1#2{%
