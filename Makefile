@@ -56,8 +56,8 @@ bul-toc.pdf: bul.pdf
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
-PAGETOTAL = $$(( 3 + 2 + 36 + 9 + 14 + 14 + 14 + 12 ))
-COLORPAGES = 19
+PAGETOTAL = $$(( 2 + 3 + 36 + 9 + 14 + 14 + 14 + 12 ))
+COLORPAGES = 20
 
 test:
 	(( $$(pdfinfo bul.pdf     | grep 'Pages:' | awk '{print $$2}') == $(PAGETOTAL) + 4))
