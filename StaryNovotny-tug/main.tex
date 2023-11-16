@@ -10,6 +10,7 @@
 \titlelabel{\thetitle\enspace}
 \usepackage{luavlna}
 \usepackage[strict]{lua-widow-control}
+\usepackage{ragged2e}
 \usepackage{csquotes}
 \usepackage[
   backend=biber,
@@ -63,24 +64,47 @@
 \podpis{Vít Starý Novotný, witiko@mail.muni.cz}
 \maketitle
 
-\vspace*{-0.75cm}
-
-\blfootnote{Tento článek byl původně zveřejněn jako zpráva na webu sdružení \CSTUG~\cite{starynovotny2023cstug}.}
-
-\begin{figure}[b!]
-\vspace*{-0.125cm}
+\begin{figure}[p]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/20230715_182848}
-\vspace*{-0.125cm}
-\caption{Petr Sojka (vlevo), Vítek Starý Novotný (uprostřed) a Honza Šustek (vpravo) na recepci konferenčního hotelu TUGu 2023}
+\includegraphics[width=0.8\linewidth]{figs/20230715_182848}
+\caption{Petr Sojka (vlevo), Vítek Starý Novotný (uprostřed) a Honza Šustek na recepci konferenčního hotelu TUGu 2023}
 \label{fig:cstug-attendees}
 \end{figure}
 
+\begin{figure}[p]
+\centering
+\begin{minipage}[t]{0.425\textwidth}%
+\centering
+\includegraphics[height=0.35\paperheight]{figs/7366698c-df83-4af8-87bb-c65762f4b63a}%
+\caption{\TeX oví maskoti}
+\end{minipage}%
+\quad
+\begin{minipage}[t]{0.525\textwidth}%
+\centering
+\includegraphics[trim={12cm 0 35cm 0}, clip, height=0.35\paperheight]{figs/IMG_9434}%
+\RaggedRight
+\caption{Ondřej Sojka (vlevo), Petr~Sojka (uprostřed) a Jakub Máca}
+\label{fig:syllabic-universalists}
+\end{minipage}%
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[trim={0 5cm 0 10cm}, clip, width=0.7\linewidth]{figs/IMG_9395}%
+\caption{Honza Šustek přednáší o literárním programování.}
+\label{fig:honza-sustek}
+\end{figure}
+
+\vspace*{-0.5cm}
+
+\blfootnote{Tento článek byl původně zveřejněn jako zpráva na webu sdružení \CSTUG~\cite{starynovotny2023cstug}.}
+
 Od pátku 14.\,července do neděle 16.\,července se v německém Bonnu konala konference TUG 2023. Konference se s podporou sdružení \CSTUG{} zúčastnili tři jeho členové: předseda Petr Sojka, technický redaktor Zpravodaje Vítek Starý Novotný a šéfredaktor Zpravodaje Honza Šustek, vizte Obrázek~\ref{fig:cstug-attendees}.
 
-V pátek ráno představil Honza Šustek svůj makrobalík pro literární programování pomocí maker OPmac v přednášce nazvané \emph{On generating documented source code by blocks in \TeX{}}~\cite{sustek2023on}. Během přednášky položil Honza obecenstvu několik otázek. Tři šťastní řešitelé si po přednášce mohli připravit bylinný Čaj pro Ostravu. Článek o Honzově přednášce si můžete přečíst na straně \strankasclankem{Sustek-literate-rezani}{literate}.
+\oldlooseness=-1
+V pátek ráno představil Honza Šustek svůj makrobalík pro literární programování pomocí maker OPmac v přednášce nazvané \emph{On generating documented source code by blocks in \TeX{}}~\cite{sustek2023on}, vizte Obrázek~\ref{fig:honza-sustek}. Během přednášky položil Honza obecenstvu několik otázek. Tři šťastní řešitelé si po přednášce mohli připravit bylinný Čaj pro Ostravu. Článek o Honzově přednášce si můžete přečíst na straně \strankasclankem{Sustek-literate-rezani}{literate}.
 
-Téhož dne večer představili Petr Sojka, Ondřej Sojka a Jakub Máca novinky z projektu univerzálních vzorů dělení slov v přednášce nazvané \emph{Universal syllabic pattern generation}~\cite{sojka2023roadmapa, sojka2023roadmapb}. V první části představil Ondřej Sojka technické a jazykové aspekty automatického dělení slov. V druhé části popsal Petr Sojka výsledky přípravy univerzálních vzorů pro devět jazyků a technická omezení programu Patgen, která zamezují generování vzorů pro více jazyků. V závěrečné části představil Jakub Máca datovou strukturu Judy, které se věnoval ve své bakalářské práci~\cite{maca2023judy} a kterou lze použít místo trií pro urychlení generování vzorů. Článek o přednášce Petra, Ondřeje a Jakuba si můžete přečíst na straně \strankasclankem{Sojka-patterns}{main}.
+Téhož dne večer představili Petr Sojka, Ondřej Sojka a Jakub Máca (vizte Obrázek~\ref{fig:syllabic-universalists}) novinky z projektu univerzálních vzorů dělení slov v přednášce nazvané \emph{Universal syllabic pattern generation}~\cite{sojka2023roadmapa, sojka2023roadmapb}. V první části představil Ondřej Sojka technické a jazykové aspekty automatického dělení slov. V druhé části popsal Petr Sojka výsledky přípravy univerzálních vzorů pro devět jazyků a technická omezení programu Patgen, která zamezují generování vzorů pro více jazyků. V závěrečné části představil Jakub Máca datovou strukturu Judy, které se věnoval ve své bakalářské práci~\cite{maca2023judy} a kterou lze použít místo trií pro urychlení generování vzorů. Článek o přednášce Petra, Ondřeje a Jakuba si můžete přečíst na straně \strankasclankem{Sojka-patterns}{main}.
 
 V sobotu ráno představil Vítek Starý Novotný třetí verzi makrobalíku pro přípravu dokumentů ve značkovacím jazyce Markdown v přednášce nazvané \emph{Markdown 3: What's new, what's next?}~\cite{novotny2023markdowna, novotny2023markdownb}. V první části přednášky Vítek představil nové funkce, které do balíku přibyly během posledních dvou let. V druhé části přednášky se zaměřil na nedostatky, které je třeba vyřešit před vydáním stabilní verze 3.0.0, a na nové funkce, které jsou plánovány po vydání verze 3.0.0. Článek o Vítkově přednášce si můžete přečíst na straně \strankasclankem{StaryNovotny-markdown}{main}.
 
