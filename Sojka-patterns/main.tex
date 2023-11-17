@@ -1,3 +1,9 @@
+% TODO
+%!- strana 9 - nesedí mi ty tabulky. V tabulce 7 platí, že Good+Missed=100%,
+%zatímco v tabulce 8 platí Good+Bad+Missed=100%. Zřejmě se při počítání
+%procent zvolil jiný základ. Nebo to je správně, že to je počítáno podle
+%různé "metodiky"?
+
 \PassOptionsToPackage{greek,latin,french,english}{babel}
  
 \documentclass{csbulletin}
@@ -72,7 +78,6 @@ with some important links
 \usepackage{csquotes}
 \usepackage{varioref}
 \usepackage{unicode}
-%\usepackage[greek,latin,french,english]{babel}
 \usepackage{bxtexlogo} % TeX logos
 \usepackage{enumitem}
 
@@ -93,10 +98,10 @@ with some important links
 \providecommand\HTML{HTML\xspace}
 \providecommand\CSS{CSS\xspace}
 \providecommand\ASCII{ASCII\xspace}
-\providecommand\Dash{---}
+\providecommand\Dash{\unskip---}
 \providecommand\hyph{\discretionary{-}{-}{-}}
 \providecommand{\etal}{et al.\xspace}
-\newcommand{\ORCID}[1]{ORCID \texttt{#1}\xspace}
+\newcommand{\ORCID}[1]{ORCID~\href{https://orcid.org/#1}{\texttt{#1}}}
 \newcommand{\package}[1]{\texttt{#1}\xspace}
 \newcommand{\word}[1]{\textit{#1}\xspace}
 \newcommand{\patword}[1]{\texttt{#1}\xspace}
@@ -153,16 +158,16 @@ with some important links
 \author{Ondřej Sojka, Petr Sojka, Jakub Máca}
 \podpis{%
   Ondřej Sojka,
-  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  Fakulta informatiky Masarykovy univerzity, Brno, ČR\\
   454904 (at) mail dot muni dot cz, \ORCID{0000-0003-2048-9977}
   \\[\smallskipamount]
   Petr Sojka,
-  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  Fakulta informatiky Masarykovy univerzity, Brno, ČR\\
   sojka (at) fi dot muni dot cz, \ORCID{0000-0002-5768-4007}
 %    \personalURL{https://www.fi.muni.cz/usr/sojka/}
   \\[\smallskipamount]
   Jakub Máca,
-  Faculty of Informatics, Masaryk Univ., Brno, Czech Republic\\
+  Fakulta informatiky Masarykovy univerzity, Brno, ČR\\
   514024 (at) mail dot muni dot cz, \ORCID{0009-0008-1583-3183}
 }
 \maketitle[1ex]
@@ -197,7 +202,7 @@ we show that:
 \begin{enumerate}[leftmargin=1.075cm, rightmargin=0.5cm]
     \raggedright
     \item[A)] developing universal, up-to-date, high\hyph coverage, and
-    highly generalized universal syllabic segmentation patterns are
+    highly generalized universal syllabic segmentation patterns is
     possible, with a high impact on virtually all typesetting engines,
     including web page renderers; and
   \item[B)] bringing wide character support into the hyphenation part of
@@ -1334,7 +1339,7 @@ There are several open questions for the \TeX\ development community:
     With a conservative solution, which data structure to use for storing patterns?
     Should the memory be allocated dynamically, to overcome the abundant explosion of format size that stores the patterns, as output by ini\TeX? 
 % 6 Compound word support? 
-    \item Should \XPatgen (and \TeX\ engines) additionally and orthogonally support patterns and different hyphenation penalty for compound word borders, currently available in e.g.\ the German wordlist~\cite{nlp:Germantrennmuster}?
+    \item Should \XPatgen (and \TeX\ engines) additionally and orthogonally support patterns and a different hyphenation penalty for compound word borders, currently available in e.g.\ the German wordlist~\cite{nlp:Germantrennmuster}?
 \end{enumerate}
 We would appreciate qualified opinions on these decisions being sent to authors.
 
@@ -1378,7 +1383,7 @@ Ve většině jazyků je dnes pragmaticky preferováno slabičné dělení refle
 % jak je problém vyresen? cil naplnen?
 Vzhledem k~tomu, že přepínání jazyků často není v~textech označeno, renderovací stroj (webový prohlížeč či \TeX) potřebuje \emph{univerzální} slabikovou segmentaci.
 V~tomto článku ukazujeme proveditelnost této myšlenky tím, že nabízíme prototypové řešení dvou hlavních problémů:
-\begin{enumerate}
+\begin{enumerate}[leftmargin=.525cm]
      \item[A)] použití \Patgen{}u ke generování vzorů pro několik jazyků najednou; a
      \item[B)] neexistence podpory Unicode v~nástrojích jako \Patgen{} nebo \TeX\ (vzory v~kódování \mbox{UTF-16}).
      % https://ctan.mines-albi.fr/info/knuth-pdf/other/patgen.pdf#page=8
@@ -1387,18 +1392,17 @@ V~tomto článku ukazujeme proveditelnost této myšlenky tím, že nabízíme p
 % jake jsou konkretni vysledky? jak dobre je problem vyresen?
 Pro A) jsme použili na generování univerzálních slabičných vzorů seznamy slov devíti slabičných jazyků
 (čeština, slovenština, gruzínština, řečtina, polština, ruština, turečtina, turkmenština a ukrajinština).
-%(cz, sk, ka, el, pl, ru, tr, tk a ua)
-Pro B) jsme vytvořili verzi \Patgen, která používá
-\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array} datovou strukturu a porovnali její efektivitu s~implementací trie.
+Pro B) jsme vytvořili verzi \Patgen, která používá datovou strukturu
+\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array} a porovnali její efektivitu s~implementací trie.
 
 % takze co? cim je to uzitecne Vede a ctenari?
 S údaji z těchto devíti jazyků ukazujeme, že:
-\begin{enumerate}
+\begin{enumerate}[leftmargin=.525cm]
      \item[A)] vyvinutí univerzálních, obecných, slabičných vzorů s~vysokým pokrytím je
      možné, s~velkým dopadem na prakticky všechny sázecí stroje,
      včetně webových prohlížečů; a
-   \item[B)] široká podporu Unicode znaků do části dělení slov
-     v~programech \TeX\ a~\Patgen je možná pomocí polí Judy.
+   \item[B)] podpora Unicode znaků ve~vzorech dělení slov
+     v~programech \TeX\ a~\Patgen je možná pomocí Judy array.
 \end{enumerate}
 \end{otherlanguage}
 \klicovaslova: slabikování, dělení slov, příprava univerzálních slabičných vzorů
