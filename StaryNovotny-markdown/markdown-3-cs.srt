@@ -692,11 +692,11 @@
 
 174
 00:13:21,740 --> 00:13:25,140
-<font size="20">byla nedávno přidána podpora pro nové formáty</font>
+<font size="20">byla nedávno přidána podpora pro nové formáty,</font>
 
 175
 00:13:25,140 --> 00:13:26,540
-<font size="20">kromě plain TeXu, LaTeXu a ConTeXtu.</font>
+<font size="20">nejen plain TeX, LaTeX a ConTeXt.</font>
 
 176
 00:13:26,880 --> 00:13:31,420
@@ -1360,7 +1360,7 @@
 
 341
 00:26:31,640 --> 00:26:34,880
-<font size="20">Doufám, že jste přednášku shledali zajímavou</font>
+<font size="20">Doufám, že jste přednášku shledali zajímavou,</font>
 
 342
 00:26:34,880 --> 00:26:39,080
