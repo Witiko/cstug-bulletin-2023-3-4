@@ -161,11 +161,11 @@ V~článku jsou definována a popsána makra \TeX u pro vložení objektů, kter
 
 \section{Úvod}
 
-Při psaní předchozího článku tohoto Zpravodaje na straně~\strankasclankem{Sustek-literate-rezani}{literate} autor narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+Když autor psal předchozí článek tohoto Zpravodaje začínající na straně~\strankasclankem{Sustek-literate-rezani}{literate}, narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
 
 Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
 
-Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footnote{Podporovány jsou všechny formáty obrázků, které lze vložit primitivem \p{pdfximage}, tj.~\soub{jbig2}, \soub{jpeg}, \soub{png} a \soub{pdf}.} nebo obsah \TeX ového boxu a nastavit seznam míst, v~nichž je možné provést stránkový zlom. Interně se provede to, že pomocí operátorů jazyka pdf se vložený obrázek ořeže v~daných místech na nevysoké kousky, tyto kousky se poskládají pod sebe a mezi nimi se umožní stránkový zlom.
+Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footnote{Podporovány jsou všechny formáty obrázků, které lze vložit primitivem \p{pdfximage}, tj.~\soub{jbig2}, \soub{jpeg}, \soub{pdf} a \soub{png}.} nebo obsah \TeX ového boxu a nastavit seznam míst, v~nichž je možné provést stránkový zlom. Interně se provede to, že pomocí operátorů jazyka pdf se vložený obrázek ořeže v~daných místech na nevysoké kousky, tyto kousky se poskládají pod sebe a mezi nimi se umožní stránkový zlom.
 
 \JSvvvskip
 
