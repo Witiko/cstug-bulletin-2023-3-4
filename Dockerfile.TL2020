@@ -1,4 +1,6 @@
 FROM texlive/texlive:TL2020-historic
+COPY --from=texlive/texlive:latest /usr/local/texlive/2023/texmf-dist/tex/latex/csbulletin/* /usr/local/texlive/2020/texmf-dist/tex/latex/csbulletin/
+RUN sed -i s/,nopatch=item// /usr/local/texlive/2020/texmf-dist/tex/latex/csbulletin/csbulletin.cls
 RUN luaotfload-tool -u || true
 RUN cp "$(find /usr/local/texlive -name texlive-fontconfig.conf)" /etc/fonts/conf.d/09-texlive-fonts.conf || true
 RUN fc-cache -fsv
