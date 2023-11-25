@@ -30,7 +30,7 @@
 TODOs Must have:
 * PS: Hotovo (UCS-2->UTF-16)
 From Karl Berry:
-For now, let me just mention that I was somewhat perplexed by mentioning UCS-2 specifically.  (I slightly reworded one instance.) I thought it had been replaced, both in theory and in practice, by UTF-16. And furthermore, it seems to me that what's important for this purpose is not necessarily having 16-bit characters (as XeTeX) does, but supporting Unicode natively (as you no doubt know, LuaTeX is implemented using UTF-8). Is there something specific about UCS-2 that makes it desirable,
+For now, let me just mention that I was somewhat perplexed by mentioning UCS-2 specifically.  (I slightly reworded one instance.) I thought it had been replaced, both in theory and in practice, by UTF-16. Furthermore, it seems to me that what's important for this purpose is not necessarily having 16-bit characters (as XeTeX) does, but supporting Unicode natively (as you no doubt know, LuaTeX is implemented using UTF-8). Is there something specific about UCS-2 that makes it desirable,
 as opposed to UTF-16 or, more broadly, "native Unicode"?
 
 > kde? kam poznamky? proc to zminovat? nechapu zadani. OS
@@ -500,7 +500,7 @@ Georgian (ka)  %  georgian (1,2)   T8M     LPPL    Levan Shoshiashvili
   & 0%tk
   & 0%ua
   \\ 
-%German (de) % ngerman          
+%German (de) % ngerman           
 % & %cz 
 %  & %ka
 %  & %de 
@@ -1252,12 +1252,12 @@ By adding 7~languages, the generalization abilities of universal patterns are on
 Wordlist & Parameters & Good & Bad & Missed
 \tabularnewline
 \midrule
-Czechoslovak & custom     & 99.64\% & 0.22\% & 0.14\% \tabularnewline
-Czechoslovak & correctopt & 99.81\% & 0.15\% & 0.04\% \tabularnewline
-Czechoslovak & sizeopt    & 99.41\% & 0.18\% & 0.40\% \tabularnewline
-Universal    & custom     & 97.99\% & 1.06\% & 0.95\% \tabularnewline
-Universal    & correctopt & 98.10\% & 1.28\% & 0.62\% \tabularnewline
-Universal    & sizeopt    & 97.50\% & 0.94\% & 1.56\% \tabularnewline
+Czechoslovak & custom     & 99.85\% & 0.22\% & 0.15\% \tabularnewline
+Czechoslovak & correctopt & 99.95\% & 0.15\% & 0.05\% \tabularnewline
+Czechoslovak & sizeopt    & 99.58\% & 0.18\% & 0.42\% \tabularnewline
+Universal    & custom     & 99.04\% & 1.07\% & 0.96\% \tabularnewline
+Universal    & correctopt & 99.37\% & 1.30\% & 0.63\% \tabularnewline
+Universal    & sizeopt    & 98.42\% & 0.95\% & 1.56\% \tabularnewline
 \bottomrule
 \end{tabular}
 \end{table}
