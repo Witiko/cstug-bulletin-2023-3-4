@@ -149,7 +149,7 @@ with some important links
 %\title{Universal Syllabic Pattern Generation}%
 %\title{Universal Syllabic Pattern Generation -- a Roadmap}
 \title{A Roadmap for Universal Syllabic Segmentation}
-\blfootnote{This is an updated and enriched version of the paper~\cite{tex:sojkasmaca2023universal} published in \TUG 2023 proceedings issue journal TUGboat.}
+\blfootnote{This is an updated and enriched version of the paper~\cite{tex:sojkasmaca2023universal} published in the \TUG 2023 proceedings issue of the TUGboat journal.}
 \EnglishTitle{A Roadmap for Universal Syllabic Segmentation}
 %\title{Steps Towards Universal Syllabic Pattern Generation}
 %\title{Universal Syllabic Pattern Generation -- Progress Update}%
@@ -1382,7 +1382,7 @@ Ve většině jazyků je dnes pragmaticky preferováno slabičné dělení refle
 
 % jak je problém vyresen? cil naplnen?
 Vzhledem k~tomu, že přepínání jazyků často není v~textech označeno, renderovací stroj (webový prohlížeč či \TeX) potřebuje \emph{univerzální} slabikovou segmentaci.
-V~tomto článku ukazujeme proveditelnost této myšlenky tím, že nabízíme prototypové řešení dvou hlavních problémů:
+V~předloženém článku ukazujeme proveditelnost této myšlenky tím, že nabízíme prototypové řešení dvou hlavních problémů:
 \begin{enumerate}[leftmargin=.525cm]
      \item[A)] použití \Patgen{}u ke generování vzorů pro několik jazyků najednou; a
      \item[B)] neexistence podpory Unicode v~nástrojích jako \Patgen{} nebo \TeX\ (vzory v~kódování \mbox{UTF-16}).
@@ -1390,16 +1390,16 @@ V~tomto článku ukazujeme proveditelnost této myšlenky tím, že nabízíme p
 \end{enumerate}
 
 % jake jsou konkretni vysledky? jak dobre je problem vyresen?
-Pro A) jsme použili na generování univerzálních slabičných vzorů seznamy slov devíti slabičných jazyků
+Pro A) jsme ke generování univerzálních slabičných vzorů použili seznamy slov devíti slabičných jazyků
 (čeština, slovenština, gruzínština, řečtina, polština, ruština, turečtina, turkmenština a ukrajinština).
 Pro B) jsme vytvořili verzi \Patgen, která používá datovou strukturu
-\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array} a porovnali její efektivitu s~implementací trie.
+\href{https://en.wikipedia.org/wiki/Judy_array}{Judy array}, a porovnali její efektivitu s~implementací trie.
 
 % takze co? cim je to uzitecne Vede a ctenari?
 S údaji z těchto devíti jazyků ukazujeme, že:
 \begin{enumerate}[leftmargin=.525cm]
-     \item[A)] vyvinutí univerzálních, obecných, slabičných vzorů s~vysokým pokrytím je
-     možné, s~velkým dopadem na prakticky všechny sázecí stroje,
+     \item[A)] vyvinutí univerzálních, obecných slabičných vzorů s~vysokým pokrytím je
+     možné, a~to s~velkým dopadem na prakticky všechny sázecí stroje
      včetně webových prohlížečů; a
    \item[B)] podpora Unicode znaků ve~vzorech dělení slov
      v~programech \TeX\ a~\Patgen je možná pomocí Judy array.
