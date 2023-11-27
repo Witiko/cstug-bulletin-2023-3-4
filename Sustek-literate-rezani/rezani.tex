@@ -152,32 +152,32 @@
 % \JSvvvskip
 
 \begin{abstract}
-V~článku jsou definována a popsána makra \TeX u pro vložení objektů, které jsou natolik vysoké, že komplikují stránkový zlom. Může se jednat o~obrázky, vysázený text nebo obecně o~obsah boxu. Makra vloží objekt na aktuální místo sazby a umožní uvnitř objektu provést stránkový zlom.
+V~článku jsou definována a~popsána makra \TeX u pro vložení objektů, které jsou natolik vysoké, že komplikují stránkový zlom. Může se jednat o~obrázky, vysázený text nebo obecně o~obsah boxu. Makra vloží objekt na aktuální místo sazby a~umožní uvnitř objektu provést stránkový zlom.
 \end{abstract}
-\klicovaslova: Rámečky, obrázky, řezání, stránkový zlom
+\klicovaslova: rámečky, obrázky, řezání, stránkový zlom
 
 % \JSvvvskip
 % \JSvvvskip
 
 \section{Úvod}
 
-Když autor psal předchozí článek tohoto Zpravodaje začínající na straně~\strankasclankem{Sustek-literate-rezani}{literate}, narazil na problém, že článek obsahuje velké množství ukázek a ty bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
+Když autor psal předchozí článek tohoto Zpravodaje začínající na straně~\strankasclankem{Sustek-literate-rezani}{literate}, narazil na problém, že článek obsahuje velké množství ukázek, které bylo nutné opticky oddělit od okolního textu. Autor se rozhodl ukázky vložit do šedých rámečků. Rámečky však musejí být vysoké, jinak by ukázky nemohly ukázat vše potřebné. To samozřejmě velmi komplikuje stránkový zlom. Přitom využití plovoucích objektů by zhoršilo plynulost textu a~odkazy na plovoucí objekty by zhoršily srozumitelnost vět.
 
-Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
+Proto se autor rozhodl umisťovat rámečky přímo k~příslušnému textu a~v~rámečcích umožnit stránkový zlom. Ten ale nelze provést v~libovolném místě rámečku. Mohlo by se totiž stát, že se zlom provede uprostřed řádku. Ukázky přitom pocházejí z~vnějších souborů a~do těch autor článku často nemohl snadno zasáhnout.\orilooseness-1
 
-Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footnote{Podporovány jsou všechny formáty obrázků, které lze vložit primitivem \p{pdfximage}, tj.~\soub{jbig2}, \soub{jpeg}, \soub{pdf} a \soub{png}.} nebo obsah \TeX ového boxu a nastavit seznam míst, v~nichž je možné provést stránkový zlom. Interně se provede to, že pomocí operátorů jazyka pdf se vložený obrázek ořeže v~daných místech na nevysoké kousky, tyto kousky se poskládají pod sebe a mezi nimi se umožní stránkový zlom.
+Níže definovaná makra umožní do rámečku vložit soubor s~obrázkem\footnote{Podporovány jsou všechny formáty obrázků, které lze vložit primitivem \p{pdfximage}, tj.~\soub{jbig2}, \soub{jpeg}, \soub{pdf} a~\soub{png}.} nebo obsah \TeX ového boxu a~nastavit seznam míst, v~nichž je možné provést stránkový zlom. Interně se provede to, že pomocí operátorů jazyka pdf se vložený obrázek ořeže v~daných místech na nevysoké části, tyto části se poskládají pod sebe a~mezi nimi se umožní stránkový zlom.
 
 \JSvvvskip
 
 \section{Použití}
 
-Použití maker ukážeme na grafu ze strany~\pageref{literate-s15} tohoto Zpravodaje.
+Použití maker ukážeme na grafu ze strany~\pageref{literate-s15} tohoto Zpravodaje:
 
 \ladenitrue
 \ram{095,35,495,64,72,9}{graf-1.pdf}
 
 \noindent
-Graf jsme vložili pomocí příkazů
+Graf jsme vložili pomocí následujících příkazů:
 \begin{Verbatim}[numbers=none]
 \input rezani
 \ladenitrue
@@ -185,7 +185,7 @@ Graf jsme vložili pomocí příkazů
 \ram{095,35,495,64,72,9}{graf-1.pdf}
 \end{Verbatim}
 \noindent
-Parametry určují, že ve vkládaném souboru \soub{graf-1.pdf} umožníme stránkový zlom na souřadnicích 9,5\,\%, 35\,\%, 49,5\,\%, 64\,\%, 72\,\% a 90\,\% (měřeno od horního okraje obrázku). Při nastaveném |\ladenitrue| se navíc zobrazí místa možných řezů, abychom snadněji mohli určit jejich souřadnice.
+Parametry určují, že ve vkládaném souboru \soub{graf-1.pdf} umožníme stránkový zlom na souřadnicích 9,5\,\%, 35\,\%, 49,5\,\%, 64\,\%, 72\,\% a~90\,\% (měřeno od horního okraje obrázku). Při nastaveném |\ladenitrue| se navíc zobrazí místa možných řezů, abychom snadněji mohli určit jejich souřadnice.
 
 \def\nastavobrbox{\setbox\obrbox\vbox\bgroup
   \hsize\dimexpr\hsize-2\hodstup\relax}
@@ -206,7 +206,7 @@ Uvedená makra je také možné použít pro stránkový zlom uvnitř |\vbox|u, 
 \input gensrc
 \def\SRChook{\longlocalcolor\Red}
 \SRCFILENAME program.txt
-Here we define a block which will be inserted to another
+Here we define a~block which will be inserted to another
   place.
 /zelena(\BEGSRC<InternalLabel>{Displayed label})
 second line
@@ -220,7 +220,7 @@ second line
 \end{Verbatim}
 
 \noindent
-Makra |\nastavobrbox| a |\endnastavobrbox| jsou definována v~sekci~\ref{secSyn} a pomocí nich se vytvoří |\vbox|, do nějž je pak vložen obsah prostředí |Verbatim|. Tento box pak rozřežeme na 23~stejných dílů a umožníme stránkový zlom po 3,~5,~9,~13 a~18~dílech. Přitom musíme odstranit mezeru |\medskipamount|, kterou prostředí |Verbatim| vkládá nad a pod svůj obsah.
+Makra |\nastavobrbox| a~|\endnastavobrbox| jsou definována v~sekci~\ref{secSyn} a~pomocí nich se vytvoří |\vbox|, do nějž je pak vložen obsah prostředí |Verbatim|. Tento box pak rozřežeme na 23~stejných dílů a~umožníme stránkový zlom po 3,~5,~9,~13 a~18~dílech. Přitom musíme odstranit mezeru |\medskipamount|, kterou prostředí |Verbatim| vkládá nad a~pod svůj obsah.
 
 \def\zelena#1{\textcolor[cmyk]{1,0,1,0}{#1}}
 \def\fialova#1{\textcolor[cmyk]{0,1,0,0}{#1}}
@@ -231,13 +231,13 @@ Makra |\nastavobrbox| a |\endnastavobrbox| jsou definována v~sekci~\ref{secSyn}
 \input gensrc
 \def\SRChook{\longlocalcolor\Red}
 \SRCFILENAME program.txt
-Here we define a block which will be inserted to another
+Here we define a~block which will be inserted to another
   place.
 /zelena(\BEGSRC<InternalLabel>{Displayed label})
 second line
   /fialova(|<InnerBlock>)
 /zelena(\ENDSRC)
-A block can be defined by parts.
+A~block can be defined by parts.
 /zelena(\BEGSRC<InternalLabel>)
 fourth line
 /zelena(\ENDSRC)
@@ -260,23 +260,23 @@ third line
 \section{Syntaxe}
 \label{secSyn}
 
-Je možné použít některou z~následujících syntaxí.
+Je možné použít některou z~následujících syntaxí:
 \begin{itemize}
 \item |\ram{}{obrázek}| vloží obrázek do rámečku, který se nezlomí.
-\item |\ram{1,23,4567,89}{obrázek}| vloží obrázek do rámečku a umožní stránkový zlom na souřadnicích~10\,\%, 23\,\%, 45,67\,\% a~89\,\% (měřeno od horního okraje obrázku).
+\item |\ram{1,23,4567,89}{obrázek}| vloží obrázek do rámečku a~umožní stránkový zlom na souřadnicích~10\,\%, 23\,\%, 45,67\,\% a~89\,\% (měřeno od horního okraje obrázku).
 \item |\dily11 \ram{3,5,7,8}{obrázek}| podobně umožní stránkový zlom na souřadnicích~$\frac{3}{11}$, $\frac{5}{11}$, $\frac{7}{11}$ a~$\frac{8}{11}$. Tato syntaxe je výhodná, když víme, že v~ukázce je zdrojový kód, který má ekvidistantní řádky, v~tomto případě~11.
-\item |\dily11 \ud \ram{obrázek}| umožní stránkový zlom na stejných souřadnicích jako |\dily11 \ram{3,4,5,6,7,8}{obrázek}|. Jinými slovy místa řezů nastaví rovnoměrně,\footnote{Název makra \p{ud} vznikl ze zkratky \uv{u.d.}${}={}$\uv{uniformly distributed}.} přičemž vynechá řezy u~horního a dolního okraje obrázku.
+\item |\dily11 \ud \ram{obrázek}| umožní stránkový zlom na stejných souřadnicích jako |\dily11 \ram{3,4,5,6,7,8}{obrázek}|. Jinými slovy místa řezů nastaví rovnoměrně,\footnote{Název makra \p{ud} vznikl ze zkratky \uv{u.d.}${}={}$\uv{uniformly distributed}.} přičemž vynechá řezy u~horního a~dolního okraje obrázku.
 \item |\Ram{}{obrázek}{strana}| u~vícestránkových obrázků vloží do rámečku danou stranu obrázku.
-\item Podobně se pro makro |\Ram| použijí i zbývající výše uvedené syntaxe.
-\item |\setbox\obrbox\vbox{...} \ram{1,23,4567,89}{}| nevloží do rámečku obrázek, ale obsah boxu |\obrbox|.\footnote{Aby mohl uživatel do rámečku vložit také verbatim výpisy nebo jiný delší text, je praktičtější i přehlednější si tento obsah rámečku předem připravit do boxu a ten pak použít.} V~tomto případě se samozřejmě název souboru nezadává, i~tak ale složené závorky ohraničující druhý argument makra |\ram| musejí zůstat.
+\item Podobně se pro makro |\Ram| použijí i~zbývající výše uvedené syntaxe.
+\item |\setbox\obrbox\vbox{...} \ram{1,23,4567,89}{}| nevloží do rámečku obrázek, ale obsah boxu |\obrbox|.\footnote{Aby mohl uživatel do rámečku vložit také verbatim výpisy nebo jiný delší text, je praktičtější i~přehlednější si tento obsah rámečku předem připravit do boxu a~ten pak použít.} V~tomto případě se samozřejmě název souboru nezadává, i~tak ale složené závorky ohraničující druhý argument makra |\ram| musejí zůstat.
 
-Pokud bychom chtěli mít vnitřek rámečku s~|\obrbox|em stejně široký jako u~rámečků s~obrázkem, musíme si zajistit, že uvnitř |\vbox|u bude správně nastavená šířka sazby, například pomocí maker
+Pokud bychom chtěli mít vnitřek rámečku s~|\obrbox|em stejně široký jako u~rámečků s~obrázkem, musíme si zajistit, že uvnitř |\vbox|u bude správně nastavená šířka sazby, například pomocí následujících maker:
 \begin{Verbatim}[numbers=none]
 \def\nastavobrbox{\setbox\obrbox\vbox\bgroup
   \hsize\dimexpr\hsize-2\hodstup\relax}
 \def\endnastavobrbox{\egroup}
 \end{Verbatim}
-a použitím konstrukce
+a~použitím následující konstrukce:
 \begin{Verbatim}[numbers=none]
 \nastavobrbox
 \begin{verbatim}
@@ -288,14 +288,14 @@ a použitím konstrukce
 \item Také v~případě |\setbox\obrbox| je možné použít všechny výše uvedené syntaxe.
 \end{itemize}
 
-Pokud bychom kolem obrázku nechtěli kreslit rámeček, stačí předem provést následující nastavení.
+Pokud bychom kolem obrázku nechtěli kreslit rámeček, stačí předem provést následující nastavení:
 \begin{Verbatim}[numbers=none]
 \hodstup=0pt
 \vodstup=0pt
 \tloustkaramu=0pt
 \end{Verbatim}
 
-Makra jsou definována a odladěna v~OPmacu. Přitom byl soubor s~makry beze změny použit v~předchozím článku tohoto Zpravodaje, který je vysázen v~\LaTeX u. Soubor se jmenuje \soub{rezani.tex} a je ke stažení na adrese~\cite{rezaniweb}.
+Makra jsou definována a~odladěna v~OPmacu. Přitom byl soubor s~makry beze změny použit v~předchozím článku tohoto Zpravodaje, který je vysázen v~\LaTeX u. Soubor se jmenuje \soub{rezani.tex} a~je ke stažení online~\cite{rezaniweb}.
 
 
 \section{Implementace}
@@ -329,7 +329,7 @@ Přepínač |\ifladeni| určí, zda se v~rámečcích mají zobrazovat místa ř
 \newif\ifladeni
 \end{Verbatim}
 
-Makro |\svisleokraje| vycentruje svůj argument do |\hbox|u šířky |\hsize| a kolem něj vysází svislé linky.
+Makro |\svisleokraje| vycentruje svůj argument do |\hbox|u šířky |\hsize| a~kolem něj vysází svislé linky.
 \begin{Verbatim}
 \def\svisleokraje#1{\hbox to\hsize{\svisla\hss#1\hss\svisla}%
   \nointerlineskip}
@@ -338,14 +338,14 @@ Makro |\svisleokraje| vycentruje svůj argument do |\hbox|u šířky |\hsize| a 
 \def\svislekousky{\svisleokraje{\vbox to\vodstup{\vss}}}
 \end{Verbatim}
 
-Makro |\eitd| provede aritmetický výpočet, jehož výsledkem je délková hodnota v~jednotkách~|pt|, a na úrovni expand procesoru tuto hodnotu bez jednotky~|pt| vrátí.
+Makro |\eitd| provede aritmetický výpočet, jehož výsledkem je délková hodnota v~jednotkách~|pt|, a~na úrovni expand procesoru tuto hodnotu bez jednotky~|pt| vrátí.
 \begin{Verbatim}
 \def\eitd#1{\expandafter\ignorept\the\dimexpr#1\relax}
 \end{Verbatim}
 
-Makro |\nactirezy| načte seznam souřadnic oddělených čárkou a jednotlivá čísla uloží do maker |\csname rez:|$n$|\endcsname|. Formát souřadnic je následující.
+Makro |\nactirezy| načte seznam souřadnic oddělených čárkou a~jednotlivá čísla uloží do maker |\csname rez:|$n$|\endcsname|. Formát souřadnic je následující:
 \begin{itemize}
-\item Jestliže je |\dily|${}=0$, pak jsou hodnoty dány jako zlomkové části čísel z~intervalu~$(0,1)$, a to bez uvedení desetinné tečky.
+\item Jestliže je |\dily|${}=0$, pak jsou hodnoty dány jako zlomkové části čísel z~intervalu~$(0,1)$, a~to bez uvedení desetinné tečky.
 \item Jestliže je |\dily|${}>0$, pak jsou hodnoty dány jako čitatelé zlomků, jejichž jmenovatel je roven |\dily|.
 \end{itemize}
 
@@ -366,7 +366,7 @@ Makro |\nactirezy| načte seznam souřadnic oddělených čárkou a jednotlivá 
   \fi\next}
 \end{Verbatim}
 
-Makro |\ram{seznam}{obrázek}| vysází rámeček s~daným obrázkem. Rámeček je na celou šířku |\hsize|. Horizontální a vertikální odstup rámečku od obrázku jsou dány registry |\hodstup| a |\vodstup|. V~seznamu jsou čárkou oddělené hodnoty souřadnic, v~nichž je možné provést stránkový zlom.
+Makro |\ram{seznam}{obrázek}| vysází rámeček s~daným obrázkem. Rámeček je na celou šířku |\hsize|. Horizontální a~vertikální odstup rámečku od obrázku jsou dány registry |\hodstup| a~|\vodstup|. V~seznamu jsou čárkou oddělené hodnoty souřadnic, v~nichž je možné provést stránkový zlom.
 \begin{Verbatim}
 \def\ram#1#2{\ramA{#1}{}{#2}}
 \end{Verbatim}
@@ -375,8 +375,8 @@ Makro |\Ram{seznam}{obrázek}{strana}| funguje zcela stejně, přičemž se do r
 \def\Ram#1#2#3{\ramA{#1}{page#3}{#2}}
 \end{Verbatim}
 
-Makro |\ramA{seznam}{parametr}{obrázek}| je společným jádrem maker |\ram| a |\Ram|.
-V~registrech |\vyskaobrazkuBP| a |\sirkaobrazkuBP| je uvedena hodnota příslušného rozměru obrázku v~jednotkách~|bp|, pronásobená jednotkou~|pt|. V~makru se obrázek načte do registru |\obrbox|, pokud je tento registr prázdný. Pokud je neprázdný, pouze se zajistí, že |\obrbox| je |\hbox|. Pak se v~cyklu spočítají hodnoty potřebné uvnitř příkazů jazyka~pdf, které obrázek ořežou a posunou na správné místo. V~jednotlivých místech řezů je umožněn stránkový zlom s~penaltou~100.
+Makro |\ramA{seznam}{parametr}{obrázek}| je společným jádrem maker |\ram| a~|\Ram|.
+V~registrech |\vyskaobrazkuBP| a~|\sirkaobrazkuBP| je uvedena hodnota příslušného rozměru obrázku v~jednotkách~|bp| pronásobená jednotkou~|pt|. V~makru se obrázek načte do registru |\obrbox|, pokud je tento registr prázdný. Pokud je neprázdný, pouze se zajistí, že |\obrbox| je |\hbox|. Pak se v~cyklu spočítají hodnoty potřebné uvnitř příkazů jazyka~pdf, které obrázek ořežou a~posunou na správné místo. V~jednotlivých místech řezů je umožněn stránkový zlom s~penaltou~100.
 \begin{Verbatim}
 \newcount\pocetrezu
 \newbox\obrbox
@@ -497,7 +497,7 @@ Jan Šustek.
 %\JSbreak
 
 \begin{summary}
-The paper defines and describes \TeX\ macros for inserting objects which are so high that the page breaking is difficult. These objects can be images, text examples or generally a content of a box. The macros insert the object on the current position and they allow page break in the middle of the object.
-\keywords: Frames, images, cutting, page break
+The paper defines and describes \TeX\ macros for inserting objects which are so high that the page breaking is difficult. These objects can be images, text examples or generally a~content of a~box. The macros insert the object on the current position and they allow page break in the middle of the object.
+\keywords: frames, images, cutting, page break
 \end{summary}
 \end{document}
