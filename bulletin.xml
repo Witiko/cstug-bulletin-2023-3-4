@@ -12,7 +12,7 @@
       <surname>Starý Novotný</surname>
     </person_name>
   </editors>
-  <xi:include href="Sojka-uvodnik/article.xml"/>
+  <!-- <xi:include href="StaryNovotny-uvodnik/article.xml"/> -->
   <!-- <xi:include href="StaryNovotny-tug/article.xml"/> -->
   <!-- <xi:include href="Sustek-literate-rezani/literate/article.xml"/> -->
   <!-- <xi:include href="Sustek-literate-rezani/rezani/article.xml"/> -->
