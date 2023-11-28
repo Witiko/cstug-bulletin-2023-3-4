@@ -67,7 +67,7 @@ bul-margins-%.pdf: bul.pdf
 	mv bul-margins.pdf $@
 
 bul-obalka-margins-%.pdf: bul.pdf bul-margins-%.pdf
-	$(PDFTK) A=$< B=$(word 2,$^) cat A1 B1 Br2 Br1 output $@
+	$(PDFTK) A=$< B=$(word 2,$^) cat A1 B1 Br1 Ar1 output $@
 
 bul-blok-margins-%.pdf: bul-margins-%.pdf
 	$(PDFTK) $< cat 2-r2 output $@
