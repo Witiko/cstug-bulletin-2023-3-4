@@ -2,7 +2,12 @@ SHELL=/bin/bash
 
 .PHONY: all test test-preprint test-xml FORCE
 
-all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf
+all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf \
+	bul-obalka-margins-0.pdf bul-blok-margins-0.pdf \
+	bul-obalka-margins-10.pdf bul-blok-margins-10.pdf \
+	bul-obalka-margins-20.pdf bul-blok-margins-20.pdf \
+	bul-obalka-margins-30.pdf bul-blok-margins-30.pdf \
+	bul-obalka-margins-40.pdf bul-blok-margins-40.pdf
 
 DOCKER = docker
 DOCKER_RUN = $(DOCKER) run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
@@ -44,17 +49,27 @@ bul-web.pdf: bul-web.tex bul.tex $(FONTS) FORCE
 	$(typeset)
 	$(typeset)
 
-bul-obalka.pdf: bul.pdf
-	$(PDFTK) $< cat 1 2 r2 r1 output $@
-
 bul-engtoc.pdf: bul.pdf
 	$(PDFTK) $< cat end output $@
 
 bul-toc.pdf: bul.pdf
 	$(PDFTK) $< cat 2 output $@
 
+bul-obalka.pdf: bul.pdf
+	$(PDFTK) $< cat 1 2 r2 r1 output $@
+
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
+
+bul-margins-%.pdf: bul.pdf
+	$(PDFLATEX) '\def\offset{$(patsubst bul-margins-%.pdf, %, $@)}\input bul-margins.tex'
+	mv bul-margins.pdf $@
+
+bul-obalka-margins-%.pdf: bul.pdf bul-margins-%.pdf
+	$(PDFTK) A=$< B=$(word 2,$^) cat A1 B1 Br2 Br1 output $@
+
+bul-blok-margins-%.pdf: bul-margins-%.pdf
+	$(PDFTK) $< cat 2-r2 output $@
 
 PAGETOTAL = $$(( 2 + 3 + 36 + 9 + 14 + 14 + 14 + 12 ))
 COLORPAGES = 20
