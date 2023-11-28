@@ -75,18 +75,33 @@
 % definovaná v csbulobalka.sty
 %
 
-\Obalka[%
-  \centering
-  \begin{minipage}{64mm}%
-    \raisebox{0mm}{%
-      \includegraphics[
-        width=\linewidth,
-        trim={1.65cm 0 0.9cm 0},
-        clip,
-      ]{Sustek-literate-rezani/graf-1}%
-    }%
-  \end{minipage}%
-]
+\makeatletter
+\ifcsbul@web
+  \Obalka[%
+    \centering
+    \begin{minipage}{64mm}%
+      \raisebox{0mm}{%
+        \includegraphics[
+          width=\linewidth,
+          trim={1.65cm 0 0.9cm 0},
+          clip,
+        ]{Sustek-literate-rezani/graf-1.pdf}%
+      }%
+    \end{minipage}%
+  ]%
+\else
+  \Obalka[%
+    \centering
+    \begin{minipage}{64mm}%
+      \raisebox{0mm}{%
+        \includegraphics[
+          width=\linewidth,
+        ]{Sustek-literate-rezani/graf-1.png}%
+      }%
+    \end{minipage}%
+  ]%
+\fi
+\makeatother
 
 \begingroup
 \hyphenpenalty=10000

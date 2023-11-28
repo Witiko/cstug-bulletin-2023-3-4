@@ -116,7 +116,13 @@
 
 \begin{figure}[t]
 \fboxsep=0pt\relax
-\textcolor{Gray}{\fbox{\includegraphics[width=0.55\linewidth]{figs/talk-background}}}%
+\makeatletter
+\ifcsbul@web
+  \textcolor{Gray}{\fbox{\includegraphics[width=0.55\linewidth]{figs/talk-background.pdf}}}%
+\else
+  \textcolor{Gray}{\fbox{\includegraphics[width=0.55\linewidth]{figs/talk-background.png}}}%
+\fi
+\makeatother
 \hfill
 \includegraphics[width=0.425\linewidth]{figs/talk-foreground}%
 \caption*{Obrázek: Přednáškové slajdy (vlevo)~\cite{novotny2023markdowna} a videozáznam přednášky (vpravo)~\cite{novotny2023markdownb}.}
