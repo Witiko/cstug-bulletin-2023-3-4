@@ -270,7 +270,7 @@ Je možné použít některou z~následujících syntaxí:
 \item Podobně se pro makro |\Ram| použijí i~zbývající výše uvedené syntaxe.
 \item |\setbox\obrbox\vbox{...} \ram{1,23,4567,89}{}| nevloží do rámečku obrázek, ale obsah boxu |\obrbox|.\footnote{Aby mohl uživatel do rámečku vložit také verbatim výpisy nebo jiný delší text, je praktičtější i~přehlednější si tento obsah rámečku předem připravit do boxu a~ten pak použít.} V~tomto případě se samozřejmě název souboru nezadává, i~tak ale složené závorky ohraničující druhý argument makra |\ram| musejí zůstat.
 
-Pokud bychom chtěli mít vnitřek rámečku s~|\obrbox|em stejně široký jako u~rámečků s~obrázkem, musíme si zajistit, že uvnitř |\vbox|u bude správně nastavená šířka sazby, například pomocí následujících maker:
+Pokud bychom chtěli mít vnitřek rámečku s~|\obrbox|em stejně široký jako u~rámečků s~obrázkem, musíme si zajistit, že uvnitř |\vbox|u bude správně nastavena šířka sazby, například pomocí následujících maker:
 \begin{Verbatim}[numbers=none]
 \def\nastavobrbox{\setbox\obrbox\vbox\bgroup
   \hsize\dimexpr\hsize-2\hodstup\relax}

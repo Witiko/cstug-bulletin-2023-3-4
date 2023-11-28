@@ -163,7 +163,7 @@ Jsou ukázány další možnosti a~aplikace tohoto balíčku.
 Představme si, že píšeme počítačový program, který je delší než několik řádků. Potom nutně musíme k~jednotlivým částem programu psát také komentáře. V~opačném případě bude program špatně čitelný a~špatně pochopitelný, a~to jak pro druhou osobu, tak i~pro nás samotné, pokud se na program podíváme po nějakém čase.
 
 Zejména u~složitějších programů používajících hlubší myšlenky pak musí být dokumentace k~programu důkladnější.
-V~následující ukázce je část zdrojového kódu programu\footnote{Z~důvodu jednoduššího vyjadřování budu nadále namísto pojmu \uv{zdrojový kód programu} psát pouze \uv{program}. Přitom vůbec není nutné, aby výsledkem byl nějaký program -- může se jednat o~libovolný text, který chceme vygenerovat.} a~příslušná část souboru s~dokumentací.
+V~následující ukázce je část zdrojového kódu programu\footnote{Z~důvodu jednoduššího vyjadřování budeme nadále namísto pojmu \uv{zdrojový kód programu} psát pouze \uv{program}. Přitom vůbec není nutné, aby výsledkem byl nějaký program -- může se jednat o~libovolný text, který chceme vygenerovat.} a~příslušná část souboru s~dokumentací.
 
 \dily13
 \Ram{3,8}{\zdr}{1}
@@ -203,14 +203,14 @@ Dále se vstupní soubor
 Původní varianta jazyka \WEB\ byla vytvořena pro jazyky \TeX\ a~Pascal.
 Později byly vytvořeny varianty i~pro jiné kombinace dokumentačního a~programovacího jazyka.
 
-Pro ukázku použití Knuthova literárního programování jsem použil dokumentovaný zdrojový kód \TeX u\footnote{Autor tohoto článku předpokládá, že by uživateli \TeX u mohlo přijít zajímavé vidět takovéto vnitřnosti svého oblíbeného programu. :-)}~\cite{DEKtp}, konkrétně kód jeho nejdůležitější procedury |main_control|. Tato procedura řídí celý běh \TeX u a~v~\emph{\TeX booku naruby}~\cite{tbn} se označuje jako \uv{hlavní procesor}. Procedura se spouští ihned po spuštění \TeX u po úvodních formalitách (inicializace interních proměnných, inicializace tabulky primitivů, kontrola konzistence atd.). Po dokončení této procedury už následují pouze závěrečné formality (kontrola neuzavřených skupin při ukončení, závěrečný zápis do souboru \soub{\p{jobname}.log}, uzavření souborů atd.) a~samotné ukončení \TeX u.
+Pro ukázku použití Knuthova literárního programování jsem použil dokumentovaný zdrojový kód \TeX u\footnote{Autor tohoto článku předpokládá, že by se uživateli \TeX u mohlo zdát zajímavé vidět vnitřnosti svého oblíbeného programu. :-)}~\cite{DEKtp}, konkrétně kód jeho nejdůležitější procedury |main_control|. Tato procedura řídí celý běh \TeX u a~v~\emph{\TeX booku naruby}~\cite{tbn} se označuje jako \uv{hlavní procesor}. Procedura se spouští ihned po spuštění \TeX u po úvodních formalitách (inicializace interních proměnných, inicializace tabulky primitivů, kontrola konzistence atd.). Po dokončení této procedury už následují pouze formality závěrečné (kontrola neuzavřených skupin při ukončení, závěrečný zápis do souboru \soub{\p{jobname}.log}, uzavření souborů atd.) a~samotné ukončení \TeX u.
 
 \Ram{111,137,163,189,215,272,326,43,456,534,612,742,794,873,899}{\uka}{5}
 
 Pro zpřehlednění logické struktury procedury jsou použity \<bloky>, které jsou definovány v~dalších sekcích dokumentace.
 Procedura |main_control| je definována v~sekci~1030 a~v~jejím těle se používají některé další procedury, které musejí být (dle syntaxe jazyka Pascal) definovány dříve než procedura |main_control|.
 Proto bylo nutné blok \blok{Declare}{1043} vložit před definici procedury |main_control|.
-Na druhou stranu: kvůli logickým návaznostem v~dokumentaci tyto další procedury mohou být definovány až v~sekci~1043.
+Na druhou stranu: kvůli logickým návaznostem v~dokumentaci mohou být tyto další procedury definovány až v~sekci~1043.
 
 Uvedený blok není definován celý najednou, ale postupně v~57~částech, jedna procedura po druhé. Jedna z~těchto částí je v~sekci~1075 a~jak je vidět, i~uvnitř bloku se mohou vyskytovat další vnořené bloky.
 
@@ -244,7 +244,7 @@ Balíček má i~další dovednosti.
 
 \subsection{Základní použití}
 
-Program a~dokumentace se zapisují do textového souboru, který mívá příponu~\soub{dtx}. V~tomto souboru jsou řádky programu vloženy do prostředí |macrocode|, které musí začínat a~končit na řádcích, které na začátku mají znak procenta a~přesně čtyři mezery. Řádky mimo toto prostředí tvoří dokumentaci a~musí začínat znakem procenta. Pokud si odmyslíme tato procenta, píše se dokumentace stejně jako libovolný jiný \LaTeX ový dokument.\footnote{V~ukázkách je použita část programu používaného při Mezinárodní matematické soutěži Vojtěcha Jarníka. Soutěž je pořádaná Ostravskou univerzitou a~bližší informace k~ní lze nalézt na stránkách~\url{https://vjimc.osu.cz/}.}
+Program a~dokumentace se zapisují do textového souboru, který mívá příponu~\soub{dtx}. V~tomto souboru jsou řádky programu vloženy do prostředí |macrocode|, které musí začínat a~končit na řádcích, které na začátku mají znak procenta a~přesně čtyři mezery. Řádky mimo toto prostředí tvoří dokumentaci a~musí začínat znakem procenta. Pokud si odmyslíme tato procenta, píše se dokumentace stejně jako libovolný jiný \LaTeX ový dokument.\footnote{V~ukázkách je použita část programu používaného při Mezinárodní matematické soutěži Vojtěcha Jarníka. Soutěž je pořádána Ostravskou univerzitou a~bližší informace k~ní lze nalézt na stránkách~\url{https://vjimc.osu.cz/}.}
 
 \dily16
 \Ram{2,8,11}{\zdr}{3}
@@ -262,7 +262,7 @@ Detaily jednotlivých \LaTeX ových souborů a~maker se čtenář dozví v~dokum
 
 \subsection{Další funkce}
 
-V~souboru \soub{dtx} mimo prostředí |macrocode| lze využít další funkce balíčku \soub{docstrip}. Prostředí |macro| označuje, že část programu a~dokumentace se týká definice konkrétního příkazu.\footnote{Balíček \soub{docstrip} je uzpůsoben ke generování \LaTeX ových balíčků a~zřejmě proto jsou pro účely tohoto balíčku části programu označeny jako \uv{macro}. Zde, opět z~důvodu srozumitelnosti, budu používat pojem \uv{příkaz}.}
+V~souboru \soub{dtx} mimo prostředí |macrocode| lze využít další funkce balíčku \soub{docstrip}. Prostředí |macro| označuje, že část programu a~dokumentace se týká definice konkrétního příkazu.\footnote{Balíček \soub{docstrip} je uzpůsoben ke generování \LaTeX ových balíčků a~zřejmě proto jsou pro účely tohoto balíčku části programu označeny jako \uv{macro}. Zde, opět z~důvodu srozumitelnosti, budeme používat pojem \uv{příkaz}.}
 Makro |\changes| označuje, že na daném místě došlo v~dané verzi programu k~určité změně.
 
 \dily16
@@ -318,7 +318,7 @@ Součástí dokumentace jsou i~části programu. Proto není divu, že základem
 Jednoduchými úpravami výše uvedených maker lze vytvořit makro |\BEGSRC|. Konkrétně se jedná o~následující kosmetické úpravy, přičemž pouze první dva body jsou opravdu potřebné.
 \begin{itemize}
 \item Řídicí sekvence |\begtt|, |\setverb|, |\tthook|, |\ttline|, |\startverb|, |\endtt| jsou přejmenovány.
-\item Registr |\everypar| se nastaví nezávisle na podmínce |\SRCline<0|. Toto nastavení je lokální uvnitř prostředí |\BEGSRC|\penalty0 |...\ENDSRC|.\footnote{Pro přehlednost budu dále používat text \uv{prostředí \p{BEGSRC}}.}
+\item Registr |\everypar| se nastaví nezávisle na podmínce |\SRCline<0|. Toto nastavení je lokální uvnitř prostředí |\BEGSRC|\penalty0 |...\ENDSRC|.\footnote{Pro přehlednost budeme dále používat text \uv{prostředí \p{BEGSRC}}.}
 \item Makro |\wipeepar| globálně promazává registr |\everypar|. Toto není potřeba, a~proto zde makro |\wipeepar| není nutné.
 \item Je použito |\csname| pro případ, že by háček |\SRChook| nebyl definován.
 \item Namísto makra |\leavevmode| je použit primitiv |\quitvmode|, který v~daném místě neexpanduje registr |\everypar|. Navíc příkaz |\expandafter| zajistí, že \TeX\ na token |\fi| narazí ještě ve vertikálním módu.
@@ -396,7 +396,7 @@ Soubor je ke stažení online~\cite{gensrcweb}.
 \subsection{Syntaxe}
 \label{pripravaukazka}
 
-Makro |\BEGSRC| je možné volat následujícími způsoby.\footnote{V~dalším textu se často budu na uvedené číslování odkazovat.}
+Makro |\BEGSRC| je možné volat následujícími způsoby.\footnote{V~dalším textu se často budeme na uvedené číslování odkazovat.}
 \begin{enumerate}
 \item \label{bsiz}|\BEGSRC<InterniNazev>{Zobrazený název}|
 \item \label{bsi}|\BEGSRC<InterniNazev>|
@@ -424,7 +424,7 @@ Z~podobného důvodu jsou nutné dva průchody \TeX em pro správné vygenerová
 
 \subsection{Přenos informací}
 
-Dále v~textu budu předpokládat, že máme vstupní soubor \soub{dokumentace.tex}, ze kterého chceme vytvořit dokumentaci v~souboru \soub{dokumentace.pdf} a vygenerovat program v~souboru \soub{program.txt}. Makra budou využívat soubor \soub{\p{jobname}.ds},\footnote{Písmena \uv{ds} vznikla ze slov \uv{dočasný soubor}.} v~našem případě tedy soubor \soub{dokumentace.ds}.\footnote{Pro zpřehlednění textu budu dále jednotlivé soubory označovat pouze jako \uv{\soub{tex}}, \uv{\soub{pdf}}, \uv{\soub{ds}}, \uv{\soub{txt}}, přičemž budu vynechávat i~slovo \uv{soubor}.} Graf\label{s15o}
+Dále v~textu budeme předpokládat, že máme vstupní soubor \soub{dokumentace.tex}, ze kterého chceme vytvořit dokumentaci v~souboru \soub{dokumentace.pdf} a vygenerovat program v~souboru \soub{program.txt}. Makra budou využívat soubor \soub{\p{jobname}.ds},\footnote{Písmena \uv{ds} vznikla ze slov \uv{dočasný soubor}.} v~našem případě tedy soubor \soub{dokumentace.ds}.\footnote{Pro zpřehlednění textu budeme dále jednotlivé soubory označovat pouze jako \uv{\soub{tex}}, \uv{\soub{pdf}}, \uv{\soub{ds}}, \uv{\soub{txt}}, přičemž budeme vynechávat i~slovo \uv{soubor}.} Graf\label{s15o}
 {\expandafter\def\csname @secondoftwo\endcsname#1#2#3#4#5{#2}%
 \ifnum 
     \the\numexpr 0\csname @secondoftwo\expandafter\expandafter\expandafter\endcsname
@@ -545,7 +545,7 @@ Stejně jako dříve se název generovaného souboru zadá makrem |\SRCFILENAME|
 
 Prostředí |\BEGSRC| interně používá přepínače |\ifsaveSRC|, |\ifaddingSRC| a~|\ifprintSRC|, aby se v~různých situacích chovalo správně.
 
-Pokud je nastaveno |\saveSRCtrue|, znamená to, že se definuje blok a~ten se zapíše do~\soub{ds}. Pokud je nastaveno |\saveSRCfalse|, pak se přímo zapisuje do~\soub{txt}.
+Pokud je nastaveno |\saveSRCtrue|, znamená to, že se definuje blok a~ten se zapíše do~\soub{ds}. Pokud je nastaveno |\saveSRCfalse|, pak se zapisuje přímo do~\soub{txt}.
 
 Pokud je nastaveno |\addingSRCtrue|, znamená to, že se přidávají řádky k~již definovanému bloku. Pokud je nastaveno |\addingSRCfalse|, je příslušný blok vynulován a~řádky jsou uloženy přidáním k~takto vynulovanému bloku.
 
@@ -557,7 +557,7 @@ Pokud je nastaveno |\printSRCtrue|, bude se aktuální prostředí |\BEGSRC| sá
 \newbox\nonprintbox
 \end{Verbatim}
 
-Makro |\SRCensurehmode\token| zajistí, že se ve vertikálním módu bude |\token| chovat tak, že bezpečně přejde do horizontálního módu a tam zůstane neexpandovaný.
+Makro |\SRCensurehmode\token| zajistí, že se ve vertikálním módu bude |\token| chovat tak, že bezpečně přejde do módu horizontálního a tam zůstane neexpandovaný.
 \begin{Verbatim}
 \def\SRCensurehmode#1{\def#1{\quitvmode\noexpand#1}}
 \end{Verbatim}
@@ -622,7 +622,7 @@ Makro |\BEGSRCd| uloží |Zobrazený název| bloku pro další použití do makr
 \end{Verbatim}
 
 Makro |\BEGSRCz| je analogií makra |\BEGSRC| z~řádků \ref{gs1} až~\ref{gs8}, přičemž již respektuje nastavené přepínače.
-Na začátku prostředí |\BEGSRC| je možné použít háček |\SRChook|, na konci prostředí háček |\endSRChook|. Na začátku každého řádku je možné použít háček |\SRClinehook|. Každý řádek je načten a zpracován makrem |\SRCgetline|. Makro |\<| mimo |\SRCgetline| nedělá nic a v~horizontálním módu na něj expand procesor nenarazí. Je však třeba makro |\<| nadefinovat, ať ve vertikálním módu bezpečně přejde do horizontálního módu a v~něm ať zůstane neexpandované.
+Na začátku prostředí |\BEGSRC| je možné použít háček |\SRChook|, na konci prostředí háček |\endSRChook|. Na začátku každého řádku je možné použít háček |\SRClinehook|. Každý řádek je načten a zpracován makrem |\SRCgetline|. Makro |\<| mimo |\SRCgetline| nedělá nic a v~horizontálním módu na něj expand procesor nenarazí. Je však třeba makro |\<| nadefinovat, ať ve vertikálním módu bezpečně přejde do módu horizontálního a v~něm ať zůstane neexpandované.
 
 \begin{Verbatim}[commandchars=/()]
 \def\BEGSRCz{\ifprintSRC\else\setbox\nonprintbox\vbox\bgroup\fi
@@ -668,7 +668,7 @@ Uvnitř prostředí |\BEGSRC| se navíc tabulátor expanduje na posloupnost meze
 \subsection{Makro \p{SRCgetline}}
 \label{getline}
 
-Makro |\SRCscan| zjistí, zda argument makra |\SRCgetline| obsahuje |\<popisek>| a jaké je před ním odsazení.\footnote{Jako odsazení se chápe text (zpravidla posloupnost mezer) před prvním výskytem \p{<...>}.} Oboje uloží do příslušných maker. V~argumentu mají mezery kategorii~13 a vlnky kategorii~12. V~níže použitém testu mají vlnky kategorii~13, proto nemůže dojít k~chybnému testu. Jestliže je odsazení nulové, platí |#1=\noexpand| dle definice makra |\SRCensurehmode|. V~tom případě se |\SRCods| opraví na nic.
+Makro |\SRCscan| zjistí, zda argument makra |\SRCgetline| obsahuje |\<popisek>| a jaké je před ním odsazení.\footnote{Jako odsazení se chápe text (zpravidla posloupnost mezer) před prvním výskytem \p{<...>}.} Oboje uloží do příslušných maker. V~argumentu mají mezery kategorii~13 a vlnovky kategorii~12. V~níže použitém testu mají vlnovky kategorii~13, proto nemůže dojít k~chybnému testu. Jestliže je odsazení nulové, platí |#1=\noexpand| dle definice makra |\SRCensurehmode|. V~tom případě se |\SRCods| opraví na nic.
 \begin{Verbatim}
 \def\SRCnoex{\noexpand}
 \def\SRCscan#1\<#2>#3\SRCend{%
@@ -1017,7 +1017,7 @@ Při sazbě dokumentace se makro |\LL(#1)| chová stejně jako |\label[S:#1]|, p
   \def\RR(##1){{\sevenrm\ref[S:##1]}}}
 \end{Verbatim}
 
-Při zápisu do~\soub{ds} se makra pouze přepíšou s~uvozujícím znakem~\texttt{\char`\|}. Ten má při zápisu do~\soub{ds} kategorii~12 a při opětovném načtení~\soub{ds} kategorii~0. Obě makra tak budou i~nadále fungovat jako makra.
+Při zápisu do~\soub{ds} se makra pouze přepíšou s~uvozujícím znakem~\texttt{\char`\|}. Ten má při zápisu do~\soub{ds} kategorii~12 a při opětovném načtení~\soub{ds} kategorii~0. Obě makra tak budou i~nadále jako makra fungovat.
 
 \begin{Verbatim}
 \def\SRCdshook{\def\LL(##1){|LL(##1)}%
@@ -1083,7 +1083,7 @@ Dále nadefinujeme samotná makra s~jejich expanzí v~jednotlivých dialektech.
     {(row_number() over (order by :Nowe[#1]))}}
 \end{Verbatim}
 
-Uvnitř prostředí |\BEGSRC| můžeme makra volat s~uvozujícím znakem~\texttt{\char`\|}. Nicméně si ukážeme, jak je možné pro volání maker využít znak kategorie~13. Znak~|@| nadefinujeme tak, aby načítal název makra až po další znak~|@| a pak načítal argument makra až po třetí znak~|@|. Znak musí být aktivní v~okamžiku definování i~uvnitř prostředí |\BEGSRC|. Případné vysázení znaku~|@| se provede pomocí~|@@@|.
+Uvnitř prostředí |\BEGSRC| můžeme makra volat s~uvozujícím znakem~\texttt{\char`\|}. Nicméně ukážeme si, jak je možné pro volání maker využít znak kategorie~13. Znak~|@| nadefinujeme tak, aby načítal název makra až po další znak~|@| a pak načítal argument makra až po třetí znak~|@|. Znak musí být aktivní v~okamžiku definování i~uvnitř prostředí |\BEGSRC|. Případné vysázení znaku~|@| se provede pomocí~|@@@|.
 
 \begin{Verbatim}[commandchars=:!?]
 {\catcode`\@=13 \gdef@:Nove[#1]@:Nowe[#2]@{\csname:Nove[#1]\endcsname{:Nowe[#2]}}}
