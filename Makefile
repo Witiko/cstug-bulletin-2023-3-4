@@ -3,6 +3,11 @@ SHELL=/bin/bash
 .PHONY: all test test-preprint test-xml FORCE
 
 all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf \
+	bul-obalka-margins-5mm.pdf  bul-blok-margins-5mm.pdf \
+	bul-obalka-margins-6mm.pdf  bul-blok-margins-6mm.pdf \
+	bul-obalka-margins-7mm.pdf  bul-blok-margins-7mm.pdf \
+	bul-obalka-margins-8mm.pdf  bul-blok-margins-8mm.pdf \
+	bul-obalka-margins-9mm.pdf  bul-blok-margins-9mm.pdf \
 	bul-obalka-margins-10mm.pdf bul-blok-margins-10mm.pdf \
 	bul-obalka-margins-11mm.pdf bul-blok-margins-11mm.pdf \
 	bul-obalka-margins-12mm.pdf bul-blok-margins-12mm.pdf \
