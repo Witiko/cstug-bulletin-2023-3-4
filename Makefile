@@ -2,11 +2,16 @@ SHELL=/bin/bash
 
 .PHONY: all test test-preprint test-xml FORCE
 
-all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf
+all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf \
+	bul-obalka-margins-10mm.pdf bul-blok-margins-10mm.pdf \
+	bul-obalka-margins-11mm.pdf bul-blok-margins-11mm.pdf \
+	bul-obalka-margins-12mm.pdf bul-blok-margins-12mm.pdf \
+	bul-obalka-margins-13mm.pdf bul-blok-margins-13mm.pdf \
 
 DOCKER = docker
 DOCKER_RUN = $(DOCKER) run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
-PDFLATEX = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache pdflatex
+PDFLATEX_2020 = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache pdflatex
+PDFLATEX_2023 = $(DOCKER_RUN) texlive/texlive:TL2023-historic-with-cache pdflatex
 LATEXMK = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache latexmk
 PDFTK = $(DOCKER_RUN) mnuessler/pdftk
 PARALLEL = parallel --joblog joblog --halt now,fail=1 --jobs 0 --
@@ -19,12 +24,12 @@ math%.pfb:
 
 define clear-and-typeset
 $(PARALLEL) 'make -C {} clear all' ::: */
-$(PDFLATEX) $<
+$(PDFLATEX_2020) $<
 endef
 
 define typeset
 $(PARALLEL) 'make -C {} all' ::: */
-$(PDFLATEX) $<
+$(PDFLATEX_2020) $<
 endef
 
 images: FORCE
@@ -44,17 +49,27 @@ bul-web.pdf: bul-web.tex bul.tex $(FONTS) FORCE
 	$(typeset)
 	$(typeset)
 
-bul-obalka.pdf: bul.pdf
-	$(PDFTK) $< cat 1 2 r2 r1 output $@
-
 bul-engtoc.pdf: bul.pdf
 	$(PDFTK) $< cat end output $@
 
 bul-toc.pdf: bul.pdf
 	$(PDFTK) $< cat 2 output $@
 
+bul-obalka.pdf: bul.pdf
+	$(PDFTK) $< cat 1 2 r2 r1 output $@
+
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
+
+bul-margins-%mm.pdf: bul.pdf
+	$(PDFLATEX_2023) '\def\outsidemargin{$(patsubst bul-margins-%mm.pdf,%,$@)}\input bul-margins.tex'
+	mv bul-margins.pdf $@
+
+bul-obalka-margins-%mm.pdf: bul.pdf bul-margins-%mm.pdf
+	$(PDFTK) A=$< B=$(word 2,$^) cat A1 B1 Br1 Ar1 output $@
+
+bul-blok-margins-%mm.pdf: bul-margins-%mm.pdf
+	$(PDFTK) $< cat 2-r2 output $@
 
 PAGETOTAL = $$(( 2 + 3 + 36 + 9 + 14 + 14 + 14 + 12 ))
 COLORPAGES = 20

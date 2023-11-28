@@ -1,0 +1,53 @@
+\documentclass{minimal}
+\usepackage[a5paper]{geometry}
+\usepackage{pdfpages}
+\begin{document}
+\ExplSyntaxOn
+\cs_if_exist:NF
+  \outsidemargin
+  {
+    \tl_new:N
+      \outsidemargin
+    \tl_gset:Nn
+      \outsidemargin
+      { 10 }
+  }
+\pdfximage
+  { bul.pdf }
+\int_new:N
+  \g_csbulletin_last_page_int
+\int_gset:Nn
+  \g_csbulletin_last_page_int
+  { \the\pdflastximagepages }
+\cs_new:Nn
+  \csbulletin_include_page:n
+  {
+    \int_set:Nn
+      \l_tmpa_int
+      { 13 - \outsidemargin }
+    \tl_set:No
+      \l_tmpa_tl
+      { mm~0 }
+    \tl_put_left:NV
+      \l_tmpa_tl
+      \l_tmpa_int
+    \int_if_odd:nF
+      { #1 }
+      {
+        \tl_put_left:Nn
+          \l_tmpa_tl
+          { - }
+      }
+    \includepdf
+      [
+        pages = #1,
+        offset = \l_tmpa_tl,
+      ]
+      { bul.pdf }
+  }
+\int_step_function:nnN
+  { 2 }
+  { \g_csbulletin_last_page_int - 1 }
+  \csbulletin_include_page:n
+\ExplSyntaxOff
+\end{document}
