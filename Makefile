@@ -11,7 +11,8 @@ all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf 
 
 DOCKER = docker
 DOCKER_RUN = $(DOCKER) run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
-PDFLATEX = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache pdflatex
+PDFLATEX_2020 = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache pdflatex
+PDFLATEX_2023 = $(DOCKER_RUN) texlive/texlive:TL2023-historic-with-cache pdflatex
 LATEXMK = $(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache latexmk
 PDFTK = $(DOCKER_RUN) mnuessler/pdftk
 PARALLEL = parallel --joblog joblog --halt now,fail=1 --jobs 0 --
@@ -24,12 +25,12 @@ math%.pfb:
 
 define clear-and-typeset
 $(PARALLEL) 'make -C {} clear all' ::: */
-$(PDFLATEX) $<
+$(PDFLATEX_2020) $<
 endef
 
 define typeset
 $(PARALLEL) 'make -C {} all' ::: */
-$(PDFLATEX) $<
+$(PDFLATEX_2020) $<
 endef
 
 images: FORCE
@@ -62,7 +63,7 @@ bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
 bul-margins-%.pdf: bul.pdf
-	$(PDFLATEX) '\def\offset{$(patsubst bul-margins-%.pdf, %, $@)}\input bul-margins.tex'
+	$(PDFLATEX_2023) '\def\offset{$(patsubst bul-margins-%.pdf, %, $@)}\input bul-margins.tex'
 	mv bul-margins.pdf $@
 
 bul-obalka-margins-%.pdf: bul.pdf bul-margins-%.pdf
