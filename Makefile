@@ -3,11 +3,12 @@ SHELL=/bin/bash
 .PHONY: all test test-preprint test-xml FORCE
 
 all: bul.pdf bul-obalka.pdf bul-engtoc.pdf bul-toc.pdf bul-blok.pdf bul-web.pdf \
-	bul-obalka-margins-0.pdf bul-blok-margins-0.pdf \
-	bul-obalka-margins-10.pdf bul-blok-margins-10.pdf \
-	bul-obalka-margins-20.pdf bul-blok-margins-20.pdf \
-	bul-obalka-margins-30.pdf bul-blok-margins-30.pdf \
-	bul-obalka-margins-40.pdf bul-blok-margins-40.pdf
+	bul-obalka-margins-8mm.pdf bul-blok-margins-8mm.pdf \
+	bul-obalka-margins-9mm.pdf bul-blok-margins-9mm.pdf \
+	bul-obalka-margins-10mm.pdf bul-blok-margins-10mm.pdf \
+	bul-obalka-margins-11mm.pdf bul-blok-margins-11mm.pdf \
+	bul-obalka-margins-12mm.pdf bul-blok-margins-12mm.pdf \
+	bul-obalka-margins-13mm.pdf bul-blok-margins-13mm.pdf \
 
 DOCKER = docker
 DOCKER_RUN = $(DOCKER) run --rm -u $(shell id -u):$(shell id -g) --env TEXMFVAR=/var/tmp/texmf-var -v "$$PWD":/workdir -w /workdir
@@ -62,14 +63,14 @@ bul-obalka.pdf: bul.pdf
 bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
-bul-margins-%.pdf: bul.pdf
-	$(PDFLATEX_2023) '\def\offset{$(patsubst bul-margins-%.pdf,%,$@)}\input bul-margins.tex'
+bul-margins-%mm.pdf: bul.pdf
+	$(PDFLATEX_2023) '\def\outsidemargin{$(patsubst bul-margins-%mm.pdf,%,$@)}\input bul-margins.tex'
 	mv bul-margins.pdf $@
 
-bul-obalka-margins-%.pdf: bul.pdf bul-margins-%.pdf
+bul-obalka-margins-%mm.pdf: bul.pdf bul-margins-%mm.pdf
 	$(PDFTK) A=$< B=$(word 2,$^) cat A1 B1 Br1 Ar1 output $@
 
-bul-blok-margins-%.pdf: bul-margins-%.pdf
+bul-blok-margins-%mm.pdf: bul-margins-%mm.pdf
 	$(PDFTK) $< cat 2-r2 output $@
 
 PAGETOTAL = $$(( 2 + 3 + 36 + 9 + 14 + 14 + 14 + 12 ))

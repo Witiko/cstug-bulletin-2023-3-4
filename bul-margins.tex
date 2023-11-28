@@ -1,15 +1,15 @@
-\documentclass{article}
+\documentclass{minimal}
 \usepackage{pdfpages}
 \begin{document}
 \ExplSyntaxOn
 \cs_if_exist:NF
-  \offset
+  \outsidemargin
   {
     \tl_new:N
-      \offset
+      \outsidemargin
     \tl_gset:Nn
-      \offset
-      { 40 }
+      \outsidemargin
+      { 8 }
   }
 \pdfximage
   { bul.pdf }
@@ -21,9 +21,15 @@
 \cs_new:Nn
   \csbulletin_include_page:n
   {
+    \int_set:Nn
+      \l_tmpa_int
+      { 13 - \outsidemargin }
     \tl_set:No
       \l_tmpa_tl
-      { \offset pt~0 }
+      { mm~0 }
+    \tl_put_left:NV
+      \l_tmpa_tl
+      \l_tmpa_int
     \int_if_odd:nF
       { #1 }
       {
