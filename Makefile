@@ -63,7 +63,7 @@ bul-blok.pdf: bul.pdf
 	$(PDFTK) $< cat 3-r3 output $@
 
 bul-margins-%.pdf: bul.pdf
-	$(PDFLATEX_2023) '\def\offset{$(patsubst bul-margins-%.pdf, %, $@)}\input bul-margins.tex'
+	$(PDFLATEX_2023) '\def\offset{$(patsubst bul-margins-%.pdf,%,$@)}\input bul-margins.tex'
 	mv bul-margins.pdf $@
 
 bul-obalka-margins-%.pdf: bul.pdf bul-margins-%.pdf
