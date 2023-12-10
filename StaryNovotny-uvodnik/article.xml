@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="61" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>Úvodník</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Vít</given_name>
+      <surname>Starý Novotný</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>61</first_page>
+    <last_page>62</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        Úvodník shrnuje obsah čísla a oznamuje, že konference TUG 2024 se bude konat v Praze.
+      </para>
+    </abstract>
+    <title>Editorial</title>
+    <abstract>
+      <para>
+        The editorial presents an overview of the articles from this issue and announces TUG 2024, which will be held in Prague.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="citations.xml"/>
+</article>

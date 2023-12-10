@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="102" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>Jak umožnit stránkový zlom uvnitř vložených obrázků</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Jan</given_name>
+      <surname>Šustek</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>102</first_page>
+    <last_page>110</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        V článku jsou definována a popsána makra <TeX/>u pro vložení objektů, které jsou natolik vysoké, že
+        komplikují stránkový zlom. Může se jednat o obrázky, vysázený text nebo obecně o obsah boxu. Makra
+        vloží objekt na aktuální místo sazby a umožní uvnitř objektu provést stránkový zlom.
+      </para>
+    </abstract>
+    <title>How to Enable Page Breaks in Embedded Images</title>
+    <abstract>
+      <para>
+        The paper defines and describes <TeX/> macros for inserting objects which are so high that the page
+        breaking is difficult. These objects can be images, text examples or generally a content of a box. The
+        macros insert the object on the current position and they allow page break in the middle of the object.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="rezani-citations.xml"/>
+</article>

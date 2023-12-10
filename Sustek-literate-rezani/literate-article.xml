@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="66" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>Generování dokumentovaného zdrojového souboru po blocích v <TeX/>u</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Jan</given_name>
+      <surname>Šustek</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>66</first_page>
+    <last_page>101</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        Článek popisuje problematiku psaní programů a dokumentace k nim. Ukazuje autorův balíček gensrc nad OPmacem,
+        který umožňuje psát program i dokumentaci k němu v jediném <TeX/>ovém souboru. Jsou ukázány další možnosti
+        a aplikace tohoto balíčku.
+      </para>
+    </abstract>
+    <title>On Generating Documented Source Code by Blocks in <TeX/></title>
+    <abstract>
+      <para>
+        This paper concerns writing programs and their documentation. We show author's package gensrc running on
+        OPmac, which allows to write both program and its documentation in one <TeX/> file. We also show more
+        possibilities and applications of this package.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="literate-citations.xml"/>
+</article>

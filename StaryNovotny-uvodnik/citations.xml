@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Vít</given_name>
+        <surname>
+          Starý
+          Novotný
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Valná hromada CSTUG 2023</article_title>
+    <additionalcontent>
+      <url cited="2023-11-27">https://www.cstug.cz/informace/zpravy/2023-11-12-valna-hromada-2023/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <article_title>TeX Users Group</article_title>
+    <additionalcontent>
+      <url cited="2023-11-27">https://tug.org/</url>
+    </additionalcontent>
+  </citation>
+</citation_list>

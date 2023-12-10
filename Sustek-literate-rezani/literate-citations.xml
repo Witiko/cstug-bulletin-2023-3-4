@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Olšák</surname>
+      </person_name>
+    </contributors>
+    <article_title>OPmac: Rozšiřující makra plain TeXu</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://petr.olsak.net/opmac.html</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>
+          Donald
+          E.
+        </given_name>
+        <surname>Knuth</surname>
+      </person_name>
+    </contributors>
+    <cYear>1983</cYear>
+    <article_title>Literate Programming</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">http://www.literateprogramming.com/knuthweb.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>
+          Donald
+          E.
+        </given_name>
+        <surname>Knuth</surname>
+      </person_name>
+    </contributors>
+    <volume>B</volume>
+    <cYear>1986</cYear>
+    <isbn media_type="print">0-201-13437-3</isbn>
+    <series_title>Computers &amp; Typesetting</series_title>
+    <article_title>TeX: The Program</article_title>
+    <additionalcontent>
+      <url>https://tug.ctan.org/systems/knuth/dist/tex/tex.web</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Olšák</surname>
+      </person_name>
+    </contributors>
+    <cYear>2001</cYear>
+    <isbn media_type="print">80-7302-007-6</isbn>
+    <edition_number>2</edition_number>
+    <article_title>TeXbook naruby</article_title>
+    <additionalcontent>
+      <url>http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <surname>
+          The
+          LaTeX
+          Project
+          Team
+        </surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Frank</given_name>
+        <surname>Mittelbach</surname>
+      </person_name>
+    </contributors>
+    <cYear>2022</cYear>
+    <article_title>docstrip: Remove comments from file</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://ctan.org/pkg/docstrip</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Frank</given_name>
+        <surname>Mittelbach</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>The doc and shortvrb Packages</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://mirrors.ctan.org/macros/latex/base/doc.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Frank</given_name>
+        <surname>Mittelbach</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Denys</given_name>
+        <surname>Duchier</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Johannes</given_name>
+        <surname>Braams</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Marcin</given_name>
+        <surname>Woliński</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Mark</given_name>
+        <surname>Wooding</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>The DocStrip program</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">http://mirrors.ctan.org/macros/latex/base/docstrip.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Jan</given_name>
+        <surname>Šustek</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>gensrc.tex</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://github.com/jsustek/gensrc/blob/main/gensrc.tex</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <article_title>C64 online emulator</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://virtualconsoles.com/online-emulators/c64/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <article_title>VICE: The Versatile Commodore Emulator</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://vice-emu.sourceforge.io/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Tom</given_name>
+        <surname>
+          the
+          Dragon
+        </surname>
+      </person_name>
+    </contributors>
+    <article_title>prg2wav: C64 PRG to Turbo Tape 64</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://github.com/tomdwaggy/prg2wav</url>
+    </additionalcontent>
+  </citation>
+</citation_list>

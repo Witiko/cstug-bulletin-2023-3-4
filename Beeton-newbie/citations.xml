@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <doi>10.47397/tb/44-2/tb137beeton-basic</doi>
+  </citation>
+  <citation>
+    <article_title>TeX StackExchange</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://tex.stackexchange.com</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Martin</given_name>
+        <surname>Scharrer</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Often referenced questions</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://tex.meta.stackexchange.com/q/2419</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <journal_title>TUGboat</journal_title>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Barbara</given_name>
+        <surname>Beeton</surname>
+      </person_name>
+    </contributors>
+    <volume>38</volume>
+    <issue>2</issue>
+    <first_page>159</first_page>
+    <cYear>2017</cYear>
+    <article_title>Debugging LaTeX files – Illegitimi non carborundum</article_title>
+  </citation>
+  <citation>
+    <doi>10.5300/2021-1-4/63</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Olšák</surname>
+      </person_name>
+    </contributors>
+    <cYear>2001</cYear>
+    <isbn media_type="print">80-7302-007-6</isbn>
+    <edition_number>2</edition_number>
+    <article_title>TeXbook naruby</article_title>
+    <additionalcontent>
+      <url>http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Frank</given_name>
+        <surname>Mittelbach</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Ulrike</given_name>
+        <surname>Fischer</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <isbn media_type="print">978-0-13-816648-9</isbn>
+    <edition_number>3</edition_number>
+    <article_title>The LaTeX Companion</article_title>
+  </citation>
+  <citation>
+    <article_title>CTAN: Search</article_title>
+    <additionalcontent>
+      <url cited="2023-11-13">https://ctan.org/search</url>
+    </additionalcontent>
+  </citation>
+</citation_list>

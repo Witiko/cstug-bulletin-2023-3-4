@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="63" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title><CSTUG/> na konferenci TUG 2023</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Vít</given_name>
+      <surname>Starý Novotný</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>63</first_page>
+    <last_page>65</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        Článek pojednává o účasti členů sdružení <CSTUG/> na konferenci TUG 2023 v Bonnu.
+      </para>
+    </abstract>
+    <title><CSTUG/> at the TUG 2023 Conference</title>
+    <abstract>
+      <para>
+        This article reports on the participation of <CSTUG/> members at TUG 2023 in Bonn.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="citations.xml"/>
+</article>
