@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <doi>10.47397/tb/44-2/tb137sojka-syllabic</doi>
+  </citation>
+  <citation>
+    <journal_title>TUGboat</journal_title>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Yannis</given_name>
+        <surname>Haralambous</surname>
+      </person_name>
+    </contributors>
+    <volume>27</volume>
+    <issue>1</issue>
+    <first_page>98</first_page>
+    <cYear>2006</cYear>
+    <article_title>New hyphenation techniques in Ω₂</article_title>
+    <additionalcontent>
+      <url>https://tug.org/TUGboat/tb27-1/tb86haralambous-hyph.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Susan</given_name>
+        <surname>Bartlett</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Grzegorz</given_name>
+        <surname>Kondrak</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Colin</given_name>
+        <surname>Cherry</surname>
+      </person_name>
+    </contributors>
+    <first_page>568</first_page>
+    <cYear>2008</cYear>
+    <volume_title>Proceedings of ACL-08: HLT</volume_title>
+    <article_title>Automatic Syllabification with Structured SVMs for Letter-to-Phoneme Conversion</article_title>
+    <additionalcontent>
+      <url>https://aclweb.org/anthology/P08-1065</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <doi>10.1177/0023830908099881</doi>
+  </citation>
+  <citation>
+    <doi>10.1162/tacl_a_00033</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Nikolaos</given_name>
+        <surname>Trogkanis</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Charles</given_name>
+        <surname>Elkan</surname>
+      </person_name>
+    </contributors>
+    <first_page>366</first_page>
+    <cYear>2010</cYear>
+    <volume_title>Proceedings of the 48th Annual Meeting of the ACL</volume_title>
+    <article_title>Conditional Random Fields for Word Hyphenation</article_title>
+    <additionalcontent>
+      <url>https://aclweb.org/anthology/P10-1038</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <journal_title>CoRR</journal_title>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Jacob</given_name>
+        <surname>Krantz</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Maxwell</given_name>
+        <surname>Dulin</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>
+          Paul
+          De
+        </given_name>
+        <surname>Palma</surname>
+      </person_name>
+    </contributors>
+    <volume>abs/1909.13362</volume>
+    <cYear>2019</cYear>
+    <article_title>Language-Agnostic Syllabification with Neural Sequence Labeling</article_title>
+    <additionalcontent>
+      <url>https://arxiv.org/abs/1909.13362</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <surname>
+          The
+          Unicode
+          Consortium
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <isbn media_type="print">978-1-936213-32-0</isbn>
+    <article_title>The Unicode Standard: Worldwide Character Encoding. Version 15.1.</article_title>
+    <additionalcontent>
+      <url>https://unicode.org/versions/Unicode15.1.0</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Ian</given_name>
+        <surname>Maddieson</surname>
+      </person_name>
+      <person_name contributor_role="editor" sequence="additional">
+        <given_name>
+          Matthew
+          S.
+        </given_name>
+        <surname>Dryer</surname>
+      </person_name>
+      <person_name contributor_role="editor" sequence="additional">
+        <given_name>Martin</given_name>
+        <surname>Haspelmath</surname>
+      </person_name>
+    </contributors>
+    <cYear>2013</cYear>
+    <volume_title>The World Atlas of Language Structures Online</volume_title>
+    <article_title>Syllable Structure</article_title>
+    <additionalcontent>
+      <url>https://wals.info/chapter/12</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <article_title>Online Etymology Dictionary. "syllable"</article_title>
+    <additionalcontent>
+      <url cited="2023-07-23">https://www.etymonline.com/word/syllable</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <cYear>2023</cYear>
+    <article_title>Internetová jazyková příručka (Internet Language Reference Book)</article_title>
+    <additionalcontent>
+      <url cited="2023-07-06">https://prirucka.ujc.cas.cz/?id=135</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>
+          Franklin
+          M.
+        </given_name>
+        <surname>Liang</surname>
+      </person_name>
+    </contributors>
+    <issue>STAN-CS-83-977</issue>
+    <cYear>1983</cYear>
+    <article_title>Word Hy-phen-a-tion by Com-put-er</article_title>
+    <additionalcontent>
+      <url>https://tug.org/docs/liang/liang-thesis.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <doi>10.47397/tb/42-2/tb131sojka-czech</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Arthur</given_name>
+        <surname>Rosendahl</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Mojca</given_name>
+        <surname>Miklavec</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>TeX hyphenation patterns</article_title>
+    <additionalcontent>
+      <url>http://hyphenation.org/tex</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Miloš</given_name>
+        <surname>Jakubíček</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Adam</given_name>
+        <surname>Kilgarriff</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Vojtěch</given_name>
+        <surname>Kovář</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Pavel</given_name>
+        <surname>Rychlý</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Vít</given_name>
+        <surname>Suchomel</surname>
+      </person_name>
+    </contributors>
+    <first_page>125</first_page>
+    <cYear>2013</cYear>
+    <volume_title>Proc. of the 7th International Corpus Linguistics Conference (CL)</volume_title>
+    <article_title>The TenTen Corpus Family</article_title>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>
+          Donald
+          E.
+        </given_name>
+        <surname>Knuth</surname>
+      </person_name>
+    </contributors>
+    <cYear>1991</cYear>
+    <isbn media_type="print">0-89579-252-4</isbn>
+    <article_title>3:16 Bible Texts Illuminated</article_title>
+  </citation>
+  <citation>
+    <journal_title>TUGboat</journal_title>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Pavel</given_name>
+        <surname>Ševeček</surname>
+      </person_name>
+    </contributors>
+    <volume>16</volume>
+    <issue>3</issue>
+    <first_page>280</first_page>
+    <cYear>1995</cYear>
+    <article_title>Hyphenation in TeX – Quo Vadis?</article_title>
+    <additionalcontent>
+      <url>https://tug.org/TUGboat/tb16-3/tb48soj1.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>
+          Franklin
+          M.
+        </given_name>
+        <surname>Liang</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Peter</given_name>
+        <surname>Breitenlohner</surname>
+      </person_name>
+    </contributors>
+    <cYear>1999</cYear>
+    <article_title>PATtern GENeration Program for the TeX82 Hyphenator</article_title>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+    </contributors>
+    <cYear>2005</cYear>
+    <article_title>Competing Patterns in Language Engineering and Computer Typesetting</article_title>
+    <additionalcontent>
+      <url>https://researchgate.net/publication/265246931_Competing_Patterns_in_Language_Engineering_and_Computer_Typesetting/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <journal_title>TUGboat</journal_title>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Ondřej</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+    </contributors>
+    <volume>40</volume>
+    <issue>2</issue>
+    <first_page>187</first_page>
+    <cYear>2019</cYear>
+    <article_title>The Unreasonable Effectiveness of Pattern Generation</article_title>
+    <additionalcontent>
+      <url>https://tug.org/TUGboat/tb40-2/tb125sojka-patgen.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <doi>10.1007/3-540-45323-7_27</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Ondřej</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="editor" sequence="additional">
+        <given_name>Aleš</given_name>
+        <surname>Horák</surname>
+      </person_name>
+      <person_name contributor_role="editor" sequence="additional">
+        <given_name>Pavel</given_name>
+        <surname>Rychlý</surname>
+      </person_name>
+      <person_name contributor_role="editor" sequence="additional">
+        <given_name>Adam</given_name>
+        <surname>Rambousek</surname>
+      </person_name>
+    </contributors>
+    <first_page>63</first_page>
+    <cYear>2019</cYear>
+    <volume_title>Proceedings of Recent Advances in Slavonic Natural Language Processing – RASLAN 2019</volume_title>
+    <article_title>Towards Universal Hyphenation Patterns</article_title>
+    <additionalcontent>
+      <url>https://nlp.fi.muni.cz/raslan/2019/paper13-sojka.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Jakub</given_name>
+        <surname>Máca</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Judy</article_title>
+    <additionalcontent>
+      <url>https://is.muni.cz/th/kru3j</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Werner</given_name>
+        <surname>Lemberg</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>A database of German words with hyphenation information</article_title>
+    <additionalcontent>
+      <url>https://repo.or.cz/wortliste.git</url>
+    </additionalcontent>
+  </citation>
+</citation_list>

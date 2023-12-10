@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="125" language="en" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>A Roadmap for Universal Syllabic Segmentation</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Ondřej</given_name>
+      <surname>Sojka</surname>
+    </person_name>
+    <person_name contributor_role="author" sequence="additional">
+      <given_name>Petr</given_name>
+      <surname>Sojka</surname>
+    </person_name>
+    <person_name contributor_role="author" sequence="additional">
+      <given_name>Jakub</given_name>
+      <surname>Máca</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>125</first_page>
+    <last_page>138</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        Space- and time-effective segmentation (word hyphenation) of natural languages
+        remains at the core of every document rendering system, be it <TeX/>, web browser,
+        or mobile operating system. In most languages, segmentation mimicking syllabic
+        pronunciation is a pragmatic preference today.
+      </para>
+      <para>
+        As language switching is often not marked in rendered texts, the typesetting
+        engine needs universal syllabic segmentation. In this article, we show the
+        feasibility of this idea by offering a prototype solution to two main problems:
+        A) Using Patgen to generate patterns for several languages at once; and
+        B) lack of Unicode support in tools like Patgen or <TeX/> (patterns in UTF-16
+        encoding) is missing.
+      </para>
+      <para>
+        For A), we have applied it to generating universal syllabic patterns from
+        wordlists of nine syllabic, as opposed to etymology-based, languages (namely,
+        Czech, Slovak, Georgian, Greek, Polish, Russian, Turkish, Turkmen, and Ukrainian).
+        For B), we have created a version of Patgen that uses the Judy array data
+        structure and compared its effectiveness with the trie implementation.
+      </para>
+      <para>
+        With the data from these nine languages, we show that:
+        A) developing universal, up-to-date, high-coverage, and highly generalized
+        universal syllabic segmentation patterns is possible, with a high impact on
+        virtually all typesetting engines, including web page renderers; and
+        B) bringing wide character support into the hyphenation part of the <TeX/> suite
+        of programs is possible by using Judy arrays.
+      </para>
+    </abstract>
+    <title>Plán pro univerzální slabičnou segmentaci</title>
+    <abstract>
+      <para>
+        Prostorově a časově efektivní segmentace (dělení slov) přirozených jazyků zůstává
+        jádrem každého sázecího systému, ať už jde o <TeX/>, webový prohlížeč nebo mobilní
+        operační systém. Ve většině jazyků je dnes pragmaticky preferováno slabičné dělení
+        reflektující výslovnost při čtení.
+      </para>
+      <para>
+        Vzhledem k tomu, že přepínání jazyků často není v textech označeno, renderovací
+        stroj (webový prohlížeč či <TeX/>) potřebuje univerzální slabikovou segmentaci.
+        V předloženém článku ukazujeme proveditelnost této myšlenky tím, že nabízíme
+        prototypové řešení dvou hlavních problémů:
+        A) použití Patgenu ke generování vzorů pro několik jazyků najednou; a
+        B) neexistence podpory Unicode v nástrojích jako Patgen nebo <TeX/> (vzory
+        v kódování UTF-16).
+      </para>
+      <para>
+        Pro A) jsme ke generování univerzálních slabičných vzorů použili seznamy
+        slov devíti slabičných jazyků (čeština, slovenština, gruzínština, řečtina, polština,
+        ruština, turečtina, turkmenština a ukrajinština). Pro B) jsme vytvořili verzi
+        Patgen, která používá datovou strukturu Judy array, a porovnali její efektivitu
+        s implementací trie.
+      </para>
+      <para>
+        S údaji z těchto devíti jazyků ukazujeme, že:
+        A) vyvinutí univerzálních, obecných slabičných vzorů s vysokým pokrytím je
+        možné, a to s velkým dopadem na prakticky všechny sázecí stroje včetně
+        webových prohlížečů; a
+        B) podpora Unicode znaků ve vzorech dělení slov v programech <TeX/> a Patgen je
+        možná pomocí Judy array.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="citations.xml"/>
+</article>

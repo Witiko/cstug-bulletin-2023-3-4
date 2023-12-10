@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <doi>10.5300/2022-1-4/35</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <surname>
+          The
+          LaTeX
+          Project
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>The expl3 package and LaTeX3 programming</article_title>
+    <additionalcontent>
+      <url cited="2023-10-05">https://tug.ctan.org/macros/latex/contrib/l3kernel/expl3.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <surname>
+          The
+          LaTeX
+          Project
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>The LaTeX3 interfaces</article_title>
+    <additionalcontent>
+      <url cited="2023-10-05">https://tug.ctan.org/macros/latex/contrib/l3kernel/interface3.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <doi>10.5300/2023-1-2/3</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Eva</given_name>
+        <surname>Hroudová</surname>
+      </person_name>
+    </contributors>
+    <cYear>2015</cYear>
+    <article_title>Když jsem já sloužil</article_title>
+    <additionalcontent>
+      <url cited="2023-08-13">https://www.promaminky.cz/pisnicky/lidove-36/kdyz-jsem-ja-slouzil-287</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Vít</given_name>
+        <surname>
+          Starý
+          Novotný
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Sazba textu české lidové písně „Když jsem já sloužil“ pomocí modulu l3seq jazyka expl3: Release The latest version</article_title>
+    <additionalcontent>
+      <url cited="2023-09-10">https://github.com/Witiko/typesetting-czech-folksong-with-l3seq/releases/tag/latest</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Petr</given_name>
+        <surname>Olšák</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>OpTeX: Format Based on Plain TeX and OPmac</article_title>
+    <additionalcontent>
+      <url cited="2023-09-18">https://mirrors.ctan.org/macros/optex/doc/optex-doc.pdf</url>
+    </additionalcontent>
+  </citation>
+</citation_list>

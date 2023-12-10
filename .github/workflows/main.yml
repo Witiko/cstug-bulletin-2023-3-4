@@ -18,7 +18,6 @@ jobs:
           sudo apt update
           sudo apt install -y ghostscript libxml2-utils moreutils parallel poppler-utils python3-pdfminer
       - name: Validate metadata
-        if: false
         run: make test-xml
       - name: Build Docker images
         run: make images

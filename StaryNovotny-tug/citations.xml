@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citation_list xmlns:bltx="http://biblatex-biber.sourceforge.net/biblatexml">
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Vít</given_name>
+        <surname>
+          Starý
+          Novotný
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>CSTUG na konferenci TUG 2023</article_title>
+    <additionalcontent>
+      <url cited="2023-11-12">https://www.cstug.cz/informace/zpravy/2023-07-16-tug-2023/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Jan</given_name>
+        <surname>Šustek</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>On generating documented source code by blocks in TeX</article_title>
+    <additionalcontent>
+      <url cited="2023-11-12">https://tug.org/tug2023/files/fr-03-sustek-literate/sustek-literate-slides.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Ondřej</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Petr</given_name>
+        <surname>Sojka</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Jakub</given_name>
+        <surname>Máca</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>A roadmap for universal syllabic segmentation</article_title>
+    <additionalcontent>
+      <url cited="2023-11-12">https://tug.org/tug2023/files/fr-14-maca-syllabic/maca-syllabic-slides.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <doi>10.47397/tb/44-2/tb137sojka-syllabic</doi>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Jakub</given_name>
+        <surname>Máca</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Judy</article_title>
+    <additionalcontent>
+      <url cited="2023-11-12">https://is.muni.cz/th/kru3j/</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Vít</given_name>
+        <surname>
+          Starý
+          Novotný
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>Markdown 3: What's new, what's next?</article_title>
+    <additionalcontent>
+      <url cited="2023-09-15">https://tug.org/tug2023/files/sa-03-novotny-markdown3/novotny-markdown3-slides.pdf</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Vít</given_name>
+        <surname>
+          Starý
+          Novotný
+        </surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <article_title>TUG 2023 – Markdown 3: Co je nového a co se chystá?</article_title>
+    <additionalcontent>
+      <url cited="2023-09-15">https://youtu.be/U8XjTOhJkg0</url>
+    </additionalcontent>
+  </citation>
+  <citation>
+    <contributors>
+      <person_name contributor_role="author" sequence="first">
+        <given_name>Frank</given_name>
+        <surname>Mittelbach</surname>
+      </person_name>
+      <person_name contributor_role="author" sequence="additional">
+        <given_name>Ulrike</given_name>
+        <surname>Fischer</surname>
+      </person_name>
+    </contributors>
+    <cYear>2023</cYear>
+    <isbn media_type="print">978-0-13-816648-9</isbn>
+    <edition_number>3</edition_number>
+    <article_title>The LaTeX Companion</article_title>
+  </citation>
+</citation_list>

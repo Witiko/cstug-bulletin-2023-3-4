@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="111" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>Markdown 3: Co je nového a co se chystá?</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Vít</given_name>
+      <surname>Starý Novotný</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>111</first_page>
+    <last_page>124</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        <TeX/>ový balíček Markdown poskytuje posledních osm let rozšiřitelný a formátově
+        agnostický značkovací jazyk. V článku představuji třetí verzi balíčku Markdown
+        a změny, které přináší ve srovnání s verzí 2.10.0. Zaměřuji se na tři hlavní
+        skupiny uživatelů balíčku Markdown. Spisovatelé se dozvědí o nových prvcích,
+        které mohou používat ve svých dokumentech, <TeX/>perti se naučí určovat styl
+        prvků jazyka markdown v různých formátech <TeX/>u a vývojáři nahlédnou pod
+        pokličku správy a vývoje balíčku Markdown a naučí se přidávat podporu pro nové
+        prvky jazyka markdown. Článek je překlad mé přednášky na TUGu 2023.
+      </para>
+    </abstract>
+    <title>Markdown 3: What's New, What's Next?</title>
+    <abstract>
+      <para>
+        The Markdown package for <TeX/> has provided an extensible and format-agnostic
+        markup language for the past seven years. In this article, I present the third
+        major release of the Markdown package and the changes it brings compared
+        to version 2.10.0. In the article, I target the three major stakeholders of the
+        Markdown package. Writers will learn about the new elements, which they can
+        type in their Markdown documents, <TeX/>perts will learn how they can style
+        Markdown documents in different <TeX/> formats, and developers will learn about
+        the governance and the development of the Markdown package and how they can
+        extend Markdown with new elements. The article is a Czech translation of my
+        talk at TUG 2023.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="citations.xml"/>
+</article>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article doi="139" language="cs" publication_type="full_text"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <titles>
+    <title>Co by každý (La)<TeX/>ový nováček měl znát</title>
+  </titles>
+  <contributors>
+    <person_name contributor_role="author" sequence="first">
+      <given_name>Barbara</given_name>
+      <surname>Beeton</surname>
+    </person_name>
+    <person_name contributor_role="translator" sequence="additional">
+      <given_name>Jan</given_name>
+      <surname>Šustek</surname>
+    </person_name>
+  </contributors>
+  <pages>
+    <first_page>139</first_page>
+    <last_page>152</last_page>
+  </pages>
+  <additional-content>
+    <abstract>
+      <para>
+        O <LaTeX/>u se říká, že se v něm dají vytvořit kvalitně vypadající dokumenty, ale
+        za cenu toho, že je složitější se jej naučit. To je sice pravda, nicméně tyto obavy
+        je možné zmírnit, když pochopíme několik základních principů a naučíme se
+        vyhýbat některým technikám, které se mohou zdát jasné, avšak nevedou k cíli.
+        Cílem tohoto článku je ukázat začínajícím uživatelům dobré <LaTeX/>ové návyky
+        dříve, než se začnou projevovat ty špatné.
+      </para>
+    </abstract>
+    <title>What Every (La)<TeX/> Newbie Should Know</title>
+    <abstract>
+      <para>
+        <LaTeX/> has a reputation for producing excellent results, but at the cost of a steep
+        learning curve. That’s true, but by understanding a few basic principles, and
+        learning how to avoid some techniques that may seem obvious but often lead
+        one into the weeds, it’s possible to avoid some of that pain. Our goal here is to
+        encourage good habits before bad habits have had a chance to develop.
+      </para>
+    </abstract>
+  </additional-content>
+  <xi:include href="citations.xml"/>
+</article>
