@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <title lang="cze">Jak umožnit stránkový zlom uvnitř vložených obrázků</title>
+  <title lang="eng">How to Enable Page Breaks in Embedded Images</title>
+  <author order="1">Šustek, Jan</author>
+  <language>cze</language>
+  <summary lang="cze">V článku jsou definována a popsána makra TeXu pro vložení objektů, které jsou natolik vysoké, že komplikují stránkový zlom. Může se jednat o obrázky, vysázený text nebo obecně o obsah boxu. Makra vloží objekt na aktuální místo sazby a umožní uvnitř objektu provést stránkový zlom.</summary>
+  <summary lang="eng">The paper defines and describes TeX macros for inserting objects which are so high that the page breaking is difficult. These objects can be images, text examples or generally a content of a box. The macros insert the object on the current position and they allow page break in the middle of the object.</summary>
+  <lang_summary>cze</lang_summary>
+  <doi>10.5300/2023-3-4/102</doi>
+  <category>informatics</category>
+  <range_pages>102-110</range_pages>
+</article>

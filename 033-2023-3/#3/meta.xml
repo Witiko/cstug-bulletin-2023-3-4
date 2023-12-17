@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <title lang="cze">Generování dokumentovaného zdrojového souboru po blocích v TeXu</title>
+  <title lang="eng">On Generating Documented Source Code by Blocks in TeX</title>
+  <author order="1">Šustek, Jan</author>
+  <language>cze</language>
+  <summary lang="cze">Článek popisuje problematiku psaní programů a dokumentace k nim. Ukazuje autorův balíček gensrc nad OPmacem, který umožňuje psát program i dokumentaci k němu v jediném TeXovém souboru. Jsou ukázány další možnosti a aplikace tohoto balíčku.</summary>
+  <summary lang="eng">This paper concerns writing programs and their documentation. We show author's package gensrc running on OPmac, which allows to write both program and its documentation in one TeX file. We also show more possibilities and applications of this package.</summary>
+  <lang_summary>cze</lang_summary>
+  <doi>10.5300/2023-3-4/66</doi>
+  <category>informatics</category>
+  <range_pages>66-101</range_pages>
+</article>

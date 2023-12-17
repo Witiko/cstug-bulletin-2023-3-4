@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>Markdown 3: What's new, what's next?</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://tug.org/tug2023/files/sa-03-novotny-markdown3/novotny-markdown3-slides.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. TUG, 2023-07-15 [cit. 2023-09-15]. Dostupné z: https://tug.org/tug2023/files/sa-03-novotny-markdown3/novotny-markdown3-slides.pdf.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>TUG 2023 – Markdown 3: Co je nového a co se chystá?</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://youtu.be/U8XjTOhJkg0</URL>
+    <year>2023</year>
+    <suffix>[online]. YouTube, 2023-07-15 [cit. 2023-09-15]. Dostupné z: https://youtu.be/U8XjTOhJkg0.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>Re: Error in “cabal install pandoc”</title>
+    <authors>
+      <author>Thompson, Michael</author>
+    </authors>
+    <URL>https://groups.google.com/g/pandoc-discuss/c/tKB4E7y6H2E/m/OiieKAuWsl4J</URL>
+    <suffix>[online]. Google Groups [cit. 2022-10-04]. Dostupné z: https://groups.google.com/g/pandoc-discuss/c/tKB4E7y6H2E/m/OiieKAuWsl4J.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>Rendering Markdown inside TeX Documents</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <ISSN>1211-6661</ISSN>
+    <URL>https://dx.doi.org/10.5300/2016-1-4/78</URL>
+    <number>1</number>
+    <pages>78-93</pages>
+    <publisher>Czech and Slovak TeX Users Group</publisher>
+    <year>2016</year>
+    <suffix>Zpravodaj CSTUGu. 2016, 26(1–4), 78–93.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>Markdown 2.17.1: What's new, what's next?</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/43-3/tb135novotny-markdown</URL>
+    <number>3</number>
+    <pages>276-278</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>43</volume>
+    <year>2022</year>
+    <suffix>TUGboat. 2022, 43(3), 276–278.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>An implementation of the CommonMark standard into the Markdown package for TeX</title>
+    <authors>
+      <author>Genčur, Andrej</author>
+    </authors>
+    <URL>https://is.muni.cz/th/r7z7l/</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023. [cit. 2023-09-15]. Dostupné z: https://is.muni.cz/th/r7z7l/. Bakalářská práce. Masarykova univerzita. Vedoucí práce Vít STARÝ NOVOTNÝ.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>Markdown 2.15.0: What's new?</title>
+    <authors>
+      <author>Novotný, Vít</author>
+      <author>Rehák, Dominik</author>
+      <author>Hoftich, Michal</author>
+      <author>Vrabcová, Tereza</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/43-1/tb133novotny-markdown</URL>
+    <number>1</number>
+    <pages>10-15</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>43</volume>
+    <year>2022</year>
+    <suffix>TUGboat. 2022, 43(1), 10–15.</suffix>
+  </reference>
+  <reference id="8">
+    <prefix>[8]</prefix>
+    <title>Attributes in Markdown</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/44-1/tb136novotny-markdown-attr</URL>
+    <number>1</number>
+    <pages>99-101</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>44</volume>
+    <year>2023</year>
+    <suffix>TUGboat. 2023, 44(1), 99–101.</suffix>
+  </reference>
+  <reference id="9">
+    <prefix>[9]</prefix>
+    <title>Side-by-side images</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/discussions/302#discussioncomment-5902455</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-05-15 [cit. 2023-09-15]. Dostupné z: https://github.com/Witiko/markdown/discussions/302#discussioncomment-5902455.</suffix>
+  </reference>
+  <reference id="10">
+    <prefix>[10]</prefix>
+    <title>Markdown package user manual</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://mirrors.ctan.org/macros/generic/markdown/markdown.html</URL>
+    <year>2023</year>
+    <suffix>[online]. CTAN, 2023-04-27 [cit. 2023-09-15]. Dostupné z: https://mirrors.ctan.org/macros/generic/markdown/markdown.html. Verze 2.23.0-0-g0b22f91.</suffix>
+  </reference>
+  <reference id="11">
+    <prefix>[11]</prefix>
+    <title>markdown/examples at main</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/tree/main/examples</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-09-15 [cit. 2023-09-15]. Dostupné z: https://github.com/Witiko/markdown/tree/main/examples.</suffix>
+  </reference>
+  <reference id="12">
+    <prefix>[12]</prefix>
+    <title>Generic TeX writer for the Pandoc document converter</title>
+    <authors>
+      <author>Rehák, Dominik</author>
+    </authors>
+    <URL>https://is.muni.cz/th/umhg5/</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023. [cit. 2023-09-15]. Dostupné z: https://is.muni.cz/th/umhg5/. Bakalářská práce. Masarykova univerzita. Vedoucí práce Vít STARÝ NOVOTNÝ.</suffix>
+  </reference>
+  <reference id="13">
+    <prefix>[13]</prefix>
+    <title>lua-tinyyaml: A tiny YAML (subset) parser for pure Lua</title>
+    <authors>
+      <author>Lee, Zeping</author>
+    </authors>
+    <URL>https://ctan.org/pkg/lua-tinyyaml</URL>
+    <year>2023</year>
+    <suffix>[online]. CTAN, 2023-04-05 [cit. 2023-09-15]. Dostupné z: https://ctan.org/pkg/lua-tinyyaml. Verze 0.4.3.</suffix>
+  </reference>
+  <reference id="14">
+    <prefix>[14]</prefix>
+    <title>lt3luabridge: Execute Lua code in any TeX engine that exposes the shell</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://ctan.org/pkg/lt3luabridge</URL>
+    <year>2022</year>
+    <suffix>[online]. CTAN, 2022-10-24 [cit. 2023-09-15]. Dostupné z: https://ctan.org/pkg/lt3luabridge. Verze 2.0.2.</suffix>
+  </reference>
+  <reference id="15">
+    <prefix>[15]</prefix>
+    <title>The Markdown package for TeX</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://discord.gg/8xJsPghzSH</URL>
+    <year>2022</year>
+    <suffix>[online]. Discord, 2022-08-23 [cit. 2023-09-15]. Dostupné z: https://discord.gg/8xJsPghzSH.</suffix>
+  </reference>
+  <reference id="16">
+    <prefix>[16]</prefix>
+    <title>The Markdown package for TeX</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://matrix.to/#/%23witiko-markdown:matrix.org</URL>
+    <year>2022</year>
+    <suffix>[online]. Matrix.org, 2022-08-23 [cit. 2023-09-15]. Dostupné z: https://matrix.to/#/#witiko-markdown:matrix.org.</suffix>
+  </reference>
+  <reference id="17">
+    <prefix>[17]</prefix>
+    <title>Markdown: Release 3.0.0</title>
+    <authors>
+      <author>Novotný, Vít Starý</author>
+      <author>Prentice, Lloyd</author>
+      <author>Peischl, Marei</author>
+      <author>Willis, Didier</author>
+      <author>Vrabcová, Tereza</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/releases/tag/3.0.0</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-08-25 [cit. 2023-09-27]. Dostupné z: https://github.com/Witiko/markdown/releases/tag/3.0.0.</suffix>
+  </reference>
+  <reference id="18">
+    <prefix>[18]</prefix>
+    <title>Fix memory leak in CommonMark implementation</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/308</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-06-26 [cit. 2023-09-15]. Dostupné z: https://github.com/Witiko/markdown/issues/308.</suffix>
+  </reference>
+  <reference id="19">
+    <prefix>[19]</prefix>
+    <title>Implement batching and summarization to unit tests</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/245</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-01-09 [cit. 2023-09-15]. Dostupné z: https://github.com/Witiko/markdown/issues/245.</suffix>
+  </reference>
+  <reference id="20">
+    <prefix>[20]</prefix>
+    <title>Make our implementation of attributes compatible with jgm/pandoc</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/304</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-05-15 [cit. 2023-09-15]. Dostupné z: https://github.com/Witiko/markdown/issues/304.</suffix>
+  </reference>
+  <reference id="21">
+    <prefix>[21]</prefix>
+    <title>Add support for attributes on tables</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/310</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-06-26 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/310.</suffix>
+  </reference>
+  <reference id="22">
+    <prefix>[22]</prefix>
+    <title>Add support for TeX-like rich paragraphs</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/30</URL>
+    <year>2018</year>
+    <suffix>[online]. GitHub, 2018-02-28 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/30.</suffix>
+  </reference>
+  <reference id="23">
+    <prefix>[23]</prefix>
+    <title>Add support for Pandoc auto_identifiers syntax extension</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/237</URL>
+    <year>2022</year>
+    <suffix>[online]. GitHub, 2022-12-29 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/237.</suffix>
+  </reference>
+  <reference id="24">
+    <prefix>[24]</prefix>
+    <title>Add support for Pandoc gfm_auto_identifiers syntax extension</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/238</URL>
+    <year>2022</year>
+    <suffix>[online]. GitHub, 2022-12-29 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/238.</suffix>
+  </reference>
+  <reference id="25">
+    <prefix>[25]</prefix>
+    <title>Markdown: Release 3.2.0</title>
+    <authors>
+      <author>Novotný, Vít Starý</author>
+      <author>Genčur, Andrej</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/releases/tag/3.2.0</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-10-21 [cit. 2023-10-21]. Dostupné z: https://github.com/Witiko/markdown/releases/tag/3.2.0.</suffix>
+  </reference>
+  <reference id="26">
+    <prefix>[26]</prefix>
+    <title>Add contentLevel Lua option and a \markinline plain TeX command</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/300</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-04-28 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/300.</suffix>
+  </reference>
+  <reference id="27">
+    <prefix>[27]</prefix>
+    <title>Support OpTeX</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/215</URL>
+    <year>2022</year>
+    <suffix>[online]. GitHub, 2022-11-12 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/215.</suffix>
+  </reference>
+  <reference id="28">
+    <prefix>[28]</prefix>
+    <title>Markdown 2.10.0: LaTeX Themes &amp; Snippets</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <ISSN>1211-6661</ISSN>
+    <URL>https://dx.doi.org/10.5300/2021-1-4/76</URL>
+    <number>1</number>
+    <pages>76-82</pages>
+    <publisher>Czech and Slovak TeX Users Group</publisher>
+    <year>2021</year>
+    <suffix>Zpravodaj CSTUGu. 2021, 31(1–4), 76–82.</suffix>
+  </reference>
+  <reference id="29">
+    <prefix>[29]</prefix>
+    <title>Add support for universal (cross-format) themes</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/markdown/issues/276</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-03-08 [cit. 2023-06-26]. Dostupné z: https://github.com/Witiko/markdown/issues/276.</suffix>
+  </reference>
+  <reference id="30">
+    <prefix>[30]</prefix>
+    <title>Markdown 3 at TUG 2023: Reflections from the Q&amp;A session</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <booktitle>TUGboat</booktitle>
+    <number>3</number>
+    <volume>44</volume>
+    <year>2023</year>
+    <URL>https://www.overleaf.com/read/mjghwhrbgmfj</URL>
+    <suffix>TUGboat. 2023, 44(3). Preprint dostupný z: https://www.overleaf.com/read/mjghwhrbgmfj.</suffix>
+  </reference>
+</references>

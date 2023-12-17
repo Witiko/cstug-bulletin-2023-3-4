@@ -1,4 +1,4 @@
-SHELL=/bin/bash
+SHELL=/bin/bash -O extglob
 
 .PHONY: all test test-preprint test-xml FORCE
 
@@ -28,12 +28,12 @@ math%.pfb:
 	$(DOCKER_RUN) texlive/texlive:TL2020-historic-with-cache t1asm -b $@ | sponge $@
 
 define clear-and-typeset
-$(PARALLEL) 'make -C {} clear all' ::: */
+$(PARALLEL) 'make -C {} clear all' ::: !(033-2023-3)/
 $(PDFLATEX_2020) $<
 endef
 
 define typeset
-$(PARALLEL) 'make -C {} all' ::: */
+$(PARALLEL) 'make -C {} all' ::: !(033-2023-3)/
 $(PDFLATEX_2020) $<
 endef
 

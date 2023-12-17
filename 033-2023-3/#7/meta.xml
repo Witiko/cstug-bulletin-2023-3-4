@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <title lang="cze">Co by každý (La)TeXový nováček měl znát</title>
+  <title lang="eng">What Every (La)TeX Newbie Should Know</title>
+  <author order="1">Beeton, Barbara</author>
+  <language>cze</language>
+  <summary lang="cze">O LaTeXu se říká, že se v něm dají vytvořit kvalitně vypadající dokumenty, ale za cenu toho, že je složitější se jej naučit. To je sice pravda, nicméně tyto obavy je možné zmírnit, když pochopíme několik základních principů a naučíme se vyhýbat některým technikám, které se mohou zdát jasné, avšak nevedou k cíli. Cílem tohoto článku je ukázat začínajícím uživatelům dobré LaTeXové návyky dříve, než se začnou projevovat ty špatné.</summary>
+  <summary lang="eng">LaTeX has a reputation for producing excellent results, but at the cost of a steep learning curve. That’s true, but by understanding a few basic principles, and learning how to avoid some techniques that may seem obvious but often lead one into the weeds, it’s possible to avoid some of that pain. Our goal here is to encourage good habits before bad habits have had a chance to develop.</summary>
+  <lang_summary>cze</lang_summary>
+  <doi>10.5300/2023-3-4/139</doi>
+  <category>informatics</category>
+  <range_pages>139-152</range_pages>
+</article>

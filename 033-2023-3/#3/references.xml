@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>OPmac: Rozšiřující makra plain TeXu</title>
+    <authors>
+      <author>Olšák, Petr</author>
+    </authors>
+    <URL>https://petr.olsak.net/opmac.html</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://petr.olsak.net/opmac.html.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>Literate Programming</title>
+    <authors>
+      <author>Knuth, Donald E.</author>
+    </authors>
+    <URL>http://www.literateprogramming.com/knuthweb.pdf</URL>
+    <year>1983</year>
+    <suffix>[online]. 1983-09. [cit. 2023-11-13]. Dostupné z: http://www.literateprogramming.com/knuthweb.pdf. Submitted to The Computer Journal.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>TeX: The Program</title>
+    <authors>
+      <author>Knuth, Donald E.</author>
+    </authors>
+    <ISBN>0-201-13437-3</ISBN>
+    <URL>https://tug.ctan.org/systems/knuth/dist/tex/tex.web</URL>
+    <series>Computers &amp; Typesetting</series>
+    <volume>B</volume>
+    <year>1986</year>
+    <suffix>Sv. B. Reading, MA: Addison-Wesley, 1986. Computers &amp; Typesetting. Dostupné také z: https://tug.ctan.org/systems/knuth/dist/tex/tex.web.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>TeXbook naruby</title>
+    <authors>
+      <author>Olšák, Petr</author>
+    </authors>
+    <ISBN>80-7302-007-6</ISBN>
+    <URL>http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf</URL>
+    <edition>2</edition>
+    <year>2001</year>
+    <suffix>2. vyd. Konvoj, 2001. Dostupné také z: http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>docstrip: Remove comments from file</title>
+    <authors>
+      <author>The LaTeX Project Team</author>
+      <author>Mittelbach, Frank</author>
+    </authors>
+    <URL>https://ctan.org/pkg/docstrip</URL>
+    <year>2022</year>
+    <suffix>[online]. 2022-09-03. [cit. 2023-11-13]. Dostupné z: https://ctan.org/pkg/docstrip.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>The doc and shortvrb Packages</title>
+    <authors>
+      <author>Mittelbach, Frank</author>
+    </authors>
+    <URL>https://mirrors.ctan.org/macros/latex/base/doc.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-11-01. [cit. 2023-11-13]. Dostupné z: https://mirrors.ctan.org/macros/latex/base/doc.pdf.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>The DocStrip program</title>
+    <authors>
+      <author>Mittelbach, Frank</author>
+      <author>Duchier, Denys</author>
+      <author>Braams, Johannes</author>
+      <author>Woliński, Marcin</author>
+      <author>Wooding, Mark</author>
+    </authors>
+    <URL>http://mirrors.ctan.org/macros/latex/base/docstrip.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-11-01. [cit. 2023-11-13]. Dostupné z: http://mirrors.ctan.org/macros/latex/base/docstrip.pdf.</suffix>
+  </reference>
+  <reference id="8">
+    <prefix>[8]</prefix>
+    <title>gensrc.tex</title>
+    <authors>
+      <author>Šustek, Jan</author>
+    </authors>
+    <URL>https://github.com/jsustek/gensrc/blob/main/gensrc.tex</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-11-07. [cit. 2023-11-13]. Dostupné z: https://github.com/jsustek/gensrc/blob/main/gensrc.tex.</suffix>
+  </reference>
+  <reference id="9">
+    <prefix>[9]</prefix>
+    <title>C64 online emulator</title>
+    <authors>
+      <author>virtualconsoles.com</author>
+    </authors>
+    <URL>https://virtualconsoles.com/online-emulators/c64/</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://virtualconsoles.com/online-emulators/c64/.</suffix>
+  </reference>
+  <reference id="10">
+    <prefix>[10]</prefix>
+    <authors>
+      <author>VICE</author>
+    </authors>
+    <title>VICE: The Versatile Commodore Emulator</title>
+    <URL>https://vice-emu.sourceforge.io/</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://vice-emu.sourceforge.io/.</suffix>
+  </reference>
+  <reference id="11">
+    <prefix>[11]</prefix>
+    <title>prg2wav: C64 PRG to Turbo Tape 64</title>
+    <authors>
+      <author>the Dragon, Tom</author>
+    </authors>
+    <URL>https://github.com/tomdwaggy/prg2wav</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://github.com/tomdwaggy/prg2wav.</suffix>
+  </reference>
+</references>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <title lang="cze">Sazba textu české lidové písně „Když jsem já sloužil“ pomocí modulu l3seq jazyka expl3</title>
+  <title lang="eng">Typesetting Lyrics of Czech Folksong “Když jsem já sloužil” using the l3seq Module of Expl3 Language</title>
+  <author order="1">Starý Novotný, Vít</author>
+  <language>cze</language>
+  <summary lang="cze">Jazyk plain TeX vznikl pro sazbu knih a turingovsky úplným programovacím jazykem se stal až na konci svého vývoje. Zatímco příprava textu dokumentů a úpravy vzhledu jsou v plain TeXu přímočaré, programování naráží na chybějící základní datové struktury a na odloženou expanzi maker, která neodpovídá běžnému vyhodnocování v moderních imperativních jazycích.
+
+Ve stroji LuaTeX je možné programovat také v imperativním programovacím jazyce Lua. Jazyk Lua sice zmíněnými neduhy plain TeXu netrpí, ale komunikace mezi TeXem a Luou není přímočará a při předávání dat dochází ke ztrátě důležitých informací, jako jsou kategorie TeXových znaků.
+
+Programovací jazyk expl3 nabízí zlatou střední cestu a umožňuje uživatelům programovat v TeXu způsobem, na který jsou zvyklí z moderních imperativních programovacích jazyků.
+
+V tomto článku představuji modul l3seq jazyka expl3, který poskytuje datovou strukturu seznamu. Možnosti modulu demonstruji na sazbě textu české lidové písně Když jsem já sloužil. Implementaci v jazyce expl3 porovnávám s implementací v plain TeXu.</summary>
+  <summary lang="eng">The language of plain TeX was developed for typesetting books and only became a Turing-complete programming language at the end of its development. Whereas writing and designing documents is straightforward in plain TeX, programming is difficult due to a lack of basic data structures and the delayed macro expansion, which is different from modern imperative programming languages.
+
+In the LuaTeX engine, authors can also program in the imperative programming language of Lua. Although Lua does not share the limitations of plain TeX, passing data between TeX and Lua is not straightforward and important information such as token category codes are lost in transit.
+
+The expl3 programming language combines the best of both worlds and allows authors to program in TeX in a way that is similar to modern imperative programming languages.
+
+In this article, I introduce the l3seq module of the expl3 language that provides the list data structure. Using l3seq, I typeset the lyrics of the Czech folksong Když jsem já sloužil. I also compare the l3seq implementation with plain TeX.</summary>
+  <lang_summary>cze</lang_summary>
+  <doi>10.5300/2023-3-4/153</doi>
+  <category>informatics</category>
+  <range_pages>153-164</range_pages>
+</article>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>CSTUG na konferenci TUG 2023</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://www.cstug.cz/informace/zpravy/2023-07-16-tug-2023/</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-07-16. [cit. 2023-11-12]. Dostupné z: https://www.cstug.cz/informace/zpravy/2023-07-16-tug-2023/.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>On generating documented source code by blocks in TeX</title>
+    <authors>
+      <author>Šustek, Jan</author>
+    </authors>
+    <URL>https://tug.org/tug2023/files/fr-03-sustek-literate/sustek-literate-slides.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-07-14. [cit. 2023-11-12]. Dostupné z: https://tug.org/tug2023/files/fr-03-sustek-literate/sustek-literate-slides.pdf.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>A roadmap for universal syllabic segmentation</title>
+    <authors>
+      <author>Sojka, Ondřej</author>
+      <author>Sojka, Petr</author>
+      <author>Máca, Jakub</author>
+    </authors>
+    <URL>https://tug.org/tug2023/files/fr-14-maca-syllabic/maca-syllabic-slides.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-07-14. [cit. 2023-11-12]. Dostupné z: https://tug.org/tug2023/files/fr-14-maca-syllabic/maca-syllabic-slides.pdf.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>A roadmap for universal syllabic segmentation</title>
+    <authors>
+      <author>Sojka, Ondřej</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/44-2/tb137sojka-syllabic</URL>
+    <number>2</number>
+    <pages>289-296</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>44</volume>
+    <year>2023</year>
+    <suffix>TUGboat. 2023, 44(2), 289–296.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>Judy</title>
+    <authors>
+      <author>Máca, Jakub</author>
+    </authors>
+    <URL>https://is.muni.cz/th/kru3j/</URL>
+    <year>2023</year>
+    <suffix>[online]. Brno, 2023 [cit. 2023-11-12]. Dostupné z: https://is.muni.cz/th/kru3j/. Bakalářská práce. Fakulta informatiky Masarykovy univerzity. Vedoucí práce Petr SOJKA.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>Markdown 3: What's new, what's next?</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://tug.org/tug2023/files/sa-03-novotny-markdown3/novotny-markdown3-slides.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-07-15. [cit. 2023-09-15]. Dostupné z: https://tug.org/tug2023/files/sa-03-novotny-markdown3/novotny-markdown3-slides.pdf.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>TUG 2023 – Markdown 3: Co je nového a co se chystá?</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://youtu.be/U8XjTOhJkg0</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-07-15. [cit. 2023-09-15]. Dostupné z: https://youtu.be/U8XjTOhJkg0.</suffix>
+  </reference>
+  <reference id="8">
+    <prefix>[8]</prefix>
+    <title>The LaTeX Companion</title>
+    <authors>
+      <author>Mittelbach, Frank</author>
+      <author>Fischer, Ulrike</author>
+    </authors>
+    <ISBN>978-0-13-816648-9</ISBN>
+    <edition>3</edition>
+    <year>2023</year>
+    <suffix>3. vyd. Addison-Wesley Professional, 2023.</suffix>
+  </reference>
+</references>

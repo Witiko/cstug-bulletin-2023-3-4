@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>A roadmap for universal syllabic segmentation</title>
+    <authors>
+      <author>Sojka, Ondřej</author>
+      <author>Sojka, Petr</author>
+      <author>Máca, Jakub</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/44-2/tb137sojka-syllabic</URL>
+    <number>2</number>
+    <pages>289-296</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>44</volume>
+    <year>2023</year>
+    <suffix>TUGboat. 2023, vol. 44, no. 2. ISSN 0896-3207. Dostupné také z: https://doi.org/10.47397/tb/44-2/tb137sojka-syllabic.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>New hyphenation techniques in Ω₂</title>
+    <authors>
+      <author>Haralambous, Yannis</author>
+    </authors>
+    <URL>https://tug.org/TUGboat/tb27-1/tb86haralambous-hyph.pdf</URL>
+    <booktitle>TUGboat</booktitle>
+    <number>1</number>
+    <volume>27</volume>
+    <year>2006</year>
+    <suffix>TUGboat. 2006, vol. 27, no. 1, s. 98–103. Dostupné také z: https://tug.org/TUGboat/tb27-1/tb86haralambous-hyph.pdf.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>Automatic Syllabification with Structured SVMs for Letter-to-Phoneme Conversion</title>
+    <authors>
+      <author>Bartlett, Susan</author>
+      <author>Kondrak, Grzegorz</author>
+      <author>Cherry, Colin</author>
+    </authors>
+    <URL>https://aclweb.org/anthology/P08-1065</URL>
+    <year>2008</year>
+    <suffix>In: Proceedings of ACL-08: HLT. Columbus, Ohio: Assoc. for Computational Linguistics, 2008, s. 568–576. Dostupné také z: https://aclweb.org/anthology/P08-1065.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>Automatic Syllabification in English: A Comparison of Different Algorithms</title>
+    <authors>
+      <author>Marchand, Yannick</author>
+      <author>Adsett, Connie R.</author>
+      <author>Damper, Robert I.</author>
+    </authors>
+    <ISSN>0023-8309</ISSN>
+    <URL>https://dx.doi.org/10.1177/0023830908099881</URL>
+    <number>1</number>
+    <pages>1-27</pages>
+    <publisher>SAGE Publications</publisher>
+    <volume>52</volume>
+    <year>2009</year>
+    <suffix>Language and Speech. 2009, vol. 52, no. 1, s. 1–27. Dostupné z DOI: 10.1177/0023830908099881.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>Universal Word Segmentation: Implementation and Interpretation</title>
+    <authors>
+      <author>Shao, Yan</author>
+      <author>Hardmeier, Christian</author>
+      <author>Nivre, Joakim</author>
+    </authors>
+    <ISSN>2307-387X</ISSN>
+    <URL>https://dx.doi.org/10.1162/tacl_a_00033</URL>
+    <pages>421-435</pages>
+    <publisher>MIT Press - Journals</publisher>
+    <volume>6</volume>
+    <year>2018</year>
+    <suffix>Transactions of the Association for Computational Linguistics. 2018, vol. 6, s. 421–435. Dostupné z DOI: 10.1162/tacl_a_00033.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>Conditional Random Fields for Word Hyphenation</title>
+    <authors>
+      <author>Trogkanis, Nikolaos</author>
+      <author>Elkan, Charles</author>
+    </authors>
+    <URL>https://aclweb.org/anthology/P10-1038</URL>
+    <year>2010</year>
+    <suffix>In: Proceedings of the 48th Annual Meeting of the ACL. Uppsala, Sweden: ACL, 2010, s. 366–374. Dostupné také z: https://aclweb.org/anthology/P10-1038.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>Language-Agnostic Syllabification with Neural Sequence Labeling</title>
+    <authors>
+      <author>Krantz, Jacob</author>
+      <author>Dulin, Maxwell</author>
+      <author>Palma, Paul De</author>
+    </authors>
+    <URL>https://arxiv.org/abs/1909.13362</URL>
+    <booktitle>CoRR</booktitle>
+    <volume>abs/1909.13362</volume>
+    <year>2019</year>
+    <suffix>CoRR. 2019, vol. abs/1909.13362. Dostupné také z: https://arxiv.org/abs/1909.13362.</suffix>
+  </reference>
+  <reference id="8">
+    <prefix>[8]</prefix>
+    <title>The Unicode Standard: Worldwide Character Encoding. Version 15.1.</title>
+    <authors>
+      <author>The Unicode Consortium</author>
+    </authors>
+    <ISBN>978-1-936213-32-0</ISBN>
+    <URL>https://unicode.org/versions/Unicode15.1.0</URL>
+    <year>2023</year>
+    <suffix>Mountain View, CA, USA: Unicode, Inc., 2023. ISBN 978-1-936213-32-0. Dostupné také z: https://unicode.org/versions/Unicode15.1.0.</suffix>
+  </reference>
+  <reference id="9">
+    <prefix>[9]</prefix>
+    <title>Syllable Structure</title>
+    <authors>
+      <author>Maddieson, Ian</author>
+    </authors>
+    <URL>https://wals.info/chapter/12</URL>
+    <year>2013</year>
+    <suffix>In: DRYER, Matthew S.; HASPELMATH, Martin (eds.). The World Atlas of Language Structures Online. Leipzig: Max Planck Institute for Evolutionary Anthropology, 2013. Dostupné také z: https://wals.info/chapter/12.</suffix>
+  </reference>
+  <reference id="10">
+    <prefix>[10]</prefix>
+    <title>Online Etymology Dictionary. "syllable"</title>
+    <authors>
+      <author>Etymonline.com</author>
+    </authors>
+    <URL>https://www.etymonline.com/word/syllable</URL>
+    <suffix>[online]. [N.d.]. [cit. 2023-07-23]. Dostupné z: https://www.etymonline.com/word/syllable.</suffix>
+  </reference>
+  <reference id="11">
+    <prefix>[11]</prefix>
+    <title>Internetová jazyková příručka (Internet Language Reference Book)</title>
+    <authors>
+      <author>Ústav pro jazyk český Akademie věd České republiky</author>
+    </authors>
+    <URL>https://prirucka.ujc.cas.cz/?id=135</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023. [cit. 2023-07-06]. Dostupné z: https://prirucka.ujc.cas.cz/?id=135.</suffix>
+  </reference>
+  <reference id="12">
+    <prefix>[12]</prefix>
+    <title>Word Hy-phen-a-tion by Com-put-er</title>
+    <authors>
+      <author>Liang, Franklin M.</author>
+    </authors>
+    <URL>https://tug.org/docs/liang/liang-thesis.pdf</URL>
+    <number>STAN-CS-83-977</number>
+    <year>1983</year>
+    <suffix>1983. Dostupné také z: https://tug.org/docs/liang/liang-thesis.pdf. Dis. pr. Stanford University.</suffix>
+  </reference>
+  <reference id="13">
+    <prefix>[13]</prefix>
+    <title>New Czechoslovak hyphenation patterns, word lists, and workflow</title>
+    <authors>
+      <author>Sojka, Petr</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/42-2/tb131sojka-czech</URL>
+    <number>2</number>
+    <pages>152-158</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>42</volume>
+    <year>2021</year>
+    <suffix>TUGboat. 2021, vol. 42, no. 2. ISSN 0896-3207. Dostupné také z: https://doi.org/10.47397/tb/42-2/tb131sojka-czech.</suffix>
+  </reference>
+  <reference id="14">
+    <prefix>[14]</prefix>
+    <title>TeX hyphenation patterns</title>
+    <authors>
+      <author>Rosendahl, Arthur</author>
+      <author>Miklavec, Mojca</author>
+    </authors>
+    <URL>http://hyphenation.org/tex</URL>
+    <year>2023</year>
+    <suffix>TUG, 2023. Dostupné také z: http://hyphenation.org/tex. Accessed 2023-07-05.</suffix>
+  </reference>
+  <reference id="15">
+    <prefix>[15]</prefix>
+    <title>The TenTen Corpus Family</title>
+    <authors>
+      <author>Jakubíček, Miloš</author>
+      <author>Kilgarriff, Adam</author>
+      <author>Kovář, Vojtěch</author>
+      <author>Rychlý, Pavel</author>
+      <author>Suchomel, Vít</author>
+    </authors>
+    <year>2013</year>
+    <suffix>In: Proc. of the 7th International Corpus Linguistics Conference (CL). Lancaster, 2013, s. 125–127.</suffix>
+  </reference>
+  <reference id="16">
+    <prefix>[16]</prefix>
+    <title>3:16 Bible Texts Illuminated</title>
+    <authors>
+      <author>Knuth, Donald E.</author>
+    </authors>
+    <ISBN>0-89579-252-4</ISBN>
+    <year>1991</year>
+    <suffix>A-R Editions, Inc., 1991. ISBN 0-89579-252-4.</suffix>
+  </reference>
+  <reference id="17">
+    <prefix>[17]</prefix>
+    <title>Hyphenation in TeX – Quo Vadis?</title>
+    <authors>
+      <author>Sojka, Petr</author>
+      <author>Ševeček, Pavel</author>
+    </authors>
+    <URL>https://tug.org/TUGboat/tb16-3/tb48soj1.pdf</URL>
+    <booktitle>TUGboat</booktitle>
+    <number>3</number>
+    <volume>16</volume>
+    <year>1995</year>
+    <suffix>TUGboat. 1995, vol. 16, no. 3, 280–289. Dostupné také z: https://tug.org/TUGboat/tb16-3/tb48soj1.pdf.</suffix>
+  </reference>
+  <reference id="18">
+    <prefix>[18]</prefix>
+    <title>PATtern GENeration Program for the TeX82 Hyphenator</title>
+    <authors>
+      <author>Liang, Franklin M.</author>
+      <author>Breitenlohner, Peter</author>
+    </authors>
+    <year>1999</year>
+    <suffix>[Electronic documentation of PATGEN program version 2.4 on CTAN. https://ctan.org/pkg/patgen]. 1999.</suffix>
+  </reference>
+  <reference id="19">
+    <prefix>[19]</prefix>
+    <title>Competing Patterns in Language Engineering and Computer Typesetting</title>
+    <authors>
+      <author>Sojka, Petr</author>
+    </authors>
+    <URL>https://researchgate.net/publication/265246931_Competing_Patterns_in_Language_Engineering_and_Computer_Typesetting/</URL>
+    <year>2005</year>
+    <suffix>2005. Dostupné také z: https://researchgate.net/publication/265246931_Competing_Patterns_in_Language_Engineering_and_Computer_Typesetting/. Dis. pr. Faculty of Informatics.</suffix>
+  </reference>
+  <reference id="20">
+    <prefix>[20]</prefix>
+    <title>The Unreasonable Effectiveness of Pattern Generation</title>
+    <authors>
+      <author>Sojka, Petr</author>
+      <author>Sojka, Ondřej</author>
+    </authors>
+    <URL>https://tug.org/TUGboat/tb40-2/tb125sojka-patgen.pdf</URL>
+    <booktitle>TUGboat</booktitle>
+    <number>2</number>
+    <volume>40</volume>
+    <year>2019</year>
+    <suffix>TUGboat. 2019, vol. 40, no. 2, s. 187–193. Dostupné také z: https://tug.org/TUGboat/tb40-2/tb125sojka-patgen.pdf.</suffix>
+  </reference>
+  <reference id="21">
+    <prefix>[21]</prefix>
+    <title>Competing Patterns for Language Engineering</title>
+    <authors>
+      <author>Sojka, Petr</author>
+    </authors>
+    <ISSN>0302-9743</ISSN>
+    <URL>https://dx.doi.org/10.1007/3-540-45323-7_27</URL>
+    <pages>157-162</pages>
+    <publisher>Springer Berlin Heidelberg</publisher>
+    <year>2000</year>
+    <suffix>In: SOJKA, Petr; KOPEČEK, Ivan; PALA, Karel (eds.). Proceedings of the Third International Workshop on Text, Speech and Dialogue—TSD 2000. Brno, Czech Republic: Springer-Verlag, 2000, s. 157–162. LNAI 1902. Dostupné z DOI: 10.1007/3-540-45323-7_27.</suffix>
+  </reference>
+  <reference id="22">
+    <prefix>[22]</prefix>
+    <title>Towards Universal Hyphenation Patterns</title>
+    <authors>
+      <author>Sojka, Petr</author>
+      <author>Sojka, Ondřej</author>
+    </authors>
+    <URL>https://nlp.fi.muni.cz/raslan/2019/paper13-sojka.pdf</URL>
+    <year>2019</year>
+    <suffix>In: HORÁK, Aleš; RYCHLÝ, Pavel; RAMBOUSEK, Adam (eds.). Proceedings of Recent Advances in Slavonic Natural Language Processing—RASLAN 2019. Karlova Studánka, Czech Republic: Tribun EU, 2019, 63–68. Dostupné také z: https://nlp.fi.muni.cz/raslan/2019/paper13-sojka.pdf. https://is.muni.cz/publication/1585259/?lang=en.</suffix>
+  </reference>
+  <reference id="23">
+    <prefix>[23]</prefix>
+    <title>Judy</title>
+    <authors>
+      <author>Máca, Jakub</author>
+    </authors>
+    <URL>https://is.muni.cz/th/kru3j</URL>
+    <year>2023</year>
+    <suffix>Brno, Czech Republic, 2023. Dostupné také z: https://is.muni.cz/th/kru3j. Bachelor Thesis supervised by Petr Sojka and defended at Masaryk University, Faculty of Informatics.</suffix>
+  </reference>
+  <reference id="24">
+    <prefix>[24]</prefix>
+    <title>A database of German words with hyphenation information</title>
+    <authors>
+      <author>Lemberg, Werner</author>
+    </authors>
+    <URL>https://repo.or.cz/wortliste.git</URL>
+    <year>2023</year>
+    <suffix>2023. Dostupné také z: https://repo.or.cz/wortliste.git.</suffix>
+  </reference>
+</references>
