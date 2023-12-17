@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>Valná hromada CSTUG 2023</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://www.cstug.cz/informace/zpravy/2023-11-12-valna-hromada-2023/</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-11-12. [cit. 2023-11-27]. Dostupné z: https://www.cstug.cz/informace/zpravy/2023-11-12-valna-hromada-2023/.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>TeX Users Group</title>
+    <authors>
+      <author>TeX Users Group</author>
+    </authors>
+    <URL>https://tug.org/</URL>
+    <suffix>[online]. [cit. 2023-11-27]. Dostupné z: https://tug.org/.</suffix>
+  </reference>
+</references>

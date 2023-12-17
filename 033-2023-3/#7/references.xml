@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>What every (La)TeX newbie should know</title>
+    <authors>
+      <author>Beeton, Barbara</author>
+    </authors>
+    <ISSN>0896-3207</ISSN>
+    <URL>https://dx.doi.org/10.47397/tb/44-2/tb137beeton-basic</URL>
+    <number>2</number>
+    <pages>164-169</pages>
+    <publisher>TeX Users Group</publisher>
+    <volume>44</volume>
+    <year>2023</year>
+    <suffix>TUGboat. 2023, 44(2), 164–169.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>TeX StackExchange</title>
+    <authors>
+      <author>StackExchange</author>
+    </authors>
+    <URL>https://tex.stackexchange.com</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://tex.stackexchange.com.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>Often referenced questions</title>
+    <authors>
+      <author>Scharrer, Martin</author>
+    </authors>
+    <URL>https://tex.meta.stackexchange.com/q/2419</URL>
+    <year>2023</year>
+    <suffix>[online]. 2023-05-09. [cit. 2023-11-13]. Dostupné z: https://tex.meta.stackexchange.com/q/2419.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>Debugging LaTeX files – Illegitimi non carborundum</title>
+    <authors>
+      <author>Beeton, Barbara</author>
+    </authors>
+    <booktitle>TUGboat</booktitle>
+    <number>2</number>
+    <volume>38</volume>
+    <year>2017</year>
+    <suffix>TUGboat. 2017, 38(2), 159–164.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>Ladění LaTeXových souborů</title>
+    <authors>
+      <author>Beeton, Barbara</author>
+    </authors>
+    <ISSN>1211-6661</ISSN>
+    <URL>https://dx.doi.org/10.5300/2021-1-4/63</URL>
+    <number>1</number>
+    <pages>63-75</pages>
+    <publisher>Czech and Slovak TeX Users Group</publisher>
+    <year>2021</year>
+    <suffix>Zpravodaj CSTUGu. 2021, 31(1), 63–75.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>TeXbook naruby</title>
+    <authors>
+      <author>Olšák, Petr</author>
+    </authors>
+    <ISBN>80-7302-007-6</ISBN>
+    <URL>http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf</URL>
+    <edition>2</edition>
+    <year>2001</year>
+    <suffix>2. vyd. Konvoj, 2001. Dostupné také z: http://petr.olsak.net/ftp/olsak/tbn/tbn.pdf.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>The LaTeX Companion</title>
+    <authors>
+      <author>Mittelbach, Frank</author>
+      <author>Fischer, Ulrike</author>
+    </authors>
+    <ISBN>978-0-13-816648-9</ISBN>
+    <edition>3</edition>
+    <year>2023</year>
+    <suffix>3. vyd. Addison-Wesley Professional, 2023.</suffix>
+  </reference>
+  <reference id="8">
+    <prefix>[8]</prefix>
+    <title>CTAN: Search</title>
+    <authors>
+      <author>CTAN</author>
+    </authors>
+    <URL>https://ctan.org/search</URL>
+    <suffix>[online]. [cit. 2023-11-13]. Dostupné z: https://ctan.org/search.</suffix>
+  </reference>
+</references>

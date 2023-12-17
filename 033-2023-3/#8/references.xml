@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<references>
+  <reference id="1">
+    <prefix>[1]</prefix>
+    <title>Vysokoúrovňové jazyky pro TeX</title>
+    <authors>
+      <author>Novotný, Vít</author>
+    </authors>
+    <ISSN>1211-6661</ISSN>
+    <URL>https://dx.doi.org/10.5300/2022-1-4/35</URL>
+    <number>1</number>
+    <pages>35-48</pages>
+    <publisher>Czech and Slovak TeX Users Group</publisher>
+    <year>2022</year>
+    <suffix>Zpravodaj CSTUGu. 2022, 32(1–4), 35–48. Dostupné z DOI: 10.5300/2022-1-4/35.</suffix>
+  </reference>
+  <reference id="2">
+    <prefix>[2]</prefix>
+    <title>The expl3 package and LaTeX3 programming</title>
+    <authors>
+      <author>The LaTeX Project</author>
+    </authors>
+    <URL>https://tug.ctan.org/macros/latex/contrib/l3kernel/expl3.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. CTAN, 2023-08-29 [cit. 2023-10-05]. Dostupné z: https://tug.ctan.org/macros/latex/contrib/l3kernel/expl3.pdf.</suffix>
+  </reference>
+  <reference id="3">
+    <prefix>[3]</prefix>
+    <title>The LaTeX3 interfaces</title>
+    <authors>
+      <author>The LaTeX Project</author>
+    </authors>
+    <URL>https://tug.ctan.org/macros/latex/contrib/l3kernel/interface3.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. CTAN, 2023-08-29 [cit. 2023-10-05]. Dostupné z: https://tug.ctan.org/macros/latex/contrib/l3kernel/interface3.pdf.</suffix>
+  </reference>
+  <reference id="4">
+    <prefix>[4]</prefix>
+    <title>Nápadovník jmen pro tvůrčí psaní v LuaTeXu</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <ISSN>1211-6661</ISSN>
+    <URL>https://dx.doi.org/10.5300/2023-1-2/3</URL>
+    <number>1</number>
+    <pages>3-38</pages>
+    <publisher>Czech and Slovak TeX Users Group</publisher>
+    <year>2023</year>
+    <suffix>Zpravodaj CSTUGu. 2023, 33(1–2), 3–38. Dostupné z DOI: 10.5300/2023-1-2/3.</suffix>
+  </reference>
+  <reference id="5">
+    <prefix>[5]</prefix>
+    <title>Když jsem já sloužil</title>
+    <authors>
+      <author>Hroudová, Eva</author>
+    </authors>
+    <URL>https://www.promaminky.cz/pisnicky/lidove-36/kdyz-jsem-ja-slouzil-287</URL>
+    <year>2015</year>
+    <suffix>[online]. ProMaminky.cz, 2015-06-20 [cit. 2023-08-13]. Dostupné z: https://www.promaminky.cz/pisnicky/lidove-36/kdyz-jsem-ja-slouzil-287.</suffix>
+  </reference>
+  <reference id="6">
+    <prefix>[6]</prefix>
+    <title>Sazba textu české lidové písně „Když jsem já sloužil“ pomocí modulu l3seq jazyka expl3: Release The latest version</title>
+    <authors>
+      <author>Starý Novotný, Vít</author>
+    </authors>
+    <URL>https://github.com/Witiko/typesetting-czech-folksong-with-l3seq/releases/tag/latest</URL>
+    <year>2023</year>
+    <suffix>[online]. GitHub, 2023-09-10 [cit. 2023-09-10]. Dostupné z: https://github.com/Witiko/typesetting-czech-folksong-with-l3seq/releases/tag/latest.</suffix>
+  </reference>
+  <reference id="7">
+    <prefix>[7]</prefix>
+    <title>OpTeX: Format Based on Plain TeX and OPmac</title>
+    <authors>
+      <author>Olšák, Petr</author>
+    </authors>
+    <URL>https://mirrors.ctan.org/macros/optex/doc/optex-doc.pdf</URL>
+    <year>2023</year>
+    <suffix>[online]. CTAN, 2023-05-25 [cit. 2023-09-18]. Dostupné z: https://mirrors.ctan.org/macros/optex/doc/optex-doc.pdf. Verze 1.12.</suffix>
+  </reference>
+</references>
